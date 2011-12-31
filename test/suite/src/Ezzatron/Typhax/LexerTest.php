@@ -31,7 +31,7 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
     $source = 'type<subType>';
     $expected = array(
       new Token(Token::TOKEN_STRING, 'type'),
-      new Token(Token::TOKEN_SUBTYPE_START, '<'),
+      new Token(Token::TOKEN_SUBTYPE_OPEN, '<'),
       new Token(Token::TOKEN_STRING, 'subType'),
       new Token(Token::TOKEN_SUBTYPE_CLOSE, '>'),
     );
@@ -41,7 +41,7 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
     $source = 'type<keyType, subType>';
     $expected = array(
       new Token(Token::TOKEN_STRING, 'type'),
-      new Token(Token::TOKEN_SUBTYPE_START, '<'),
+      new Token(Token::TOKEN_SUBTYPE_OPEN, '<'),
       new Token(Token::TOKEN_STRING, 'keyType'),
       new Token(Token::TOKEN_SEPARATOR, ','),
       new Token(Token::TOKEN_WHITESPACE, ' '),
@@ -68,12 +68,18 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
     );
     $data[] = array($expected, $source);
 
+    // #5: Treatment of unsupported tokens as strings
+    $source = 'type-type';
+    $expected = array(
+      new Token(Token::TOKEN_STRING, 'type-type'),
+    );
+    $data[] = array($expected, $source);
+
     return $data;
   }
 
   /**
-   * @covers Ezzatron\Typhax\Lexer
-   * @covers Ezzatron\Typhax\Token
+   * @covers Ezzatron\Typhax\Lexer::tokens
    * @dataProvider tokenData
    * @group lexer
    * @group core

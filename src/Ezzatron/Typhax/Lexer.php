@@ -29,12 +29,35 @@ class Lexer
     {
       if (is_array($token))
       {
-        $tokens[] = Token::fromArray($token);
+        $token = Token::fromArray($token);
       }
       else
       {
-        $tokens[] = Token::fromCharacter($token);
+        $token = Token::fromCharacter($token);
       }
+
+      if (!$token->supported())
+      {
+        $token = new Token(Token::TOKEN_STRING, $token->content());
+      }
+
+      if (Token::TOKEN_STRING === $token->type())
+      {
+        $numTokens = count($tokens);
+        if (array_key_exists($numTokens - 1, $tokens))
+        {
+          $previousToken = $tokens[$numTokens - 1];
+
+          if (Token::TOKEN_STRING === $previousToken->type())
+          {
+            $previousToken->append($token->content());
+
+            continue;
+          }
+        }
+      }
+
+      $tokens[] = $token;
     }
 
     return $tokens;

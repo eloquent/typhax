@@ -11,6 +11,8 @@
 
 namespace Ezzatron\Typhax;
 
+use ReflectionClass;
+
 class Token
 {
   /**
@@ -20,7 +22,7 @@ class Token
    */
   static public function fromArray(array $token)
   {
-    return new self($token[0], $token[1]);
+    return new static($token[0], $token[1]);
   }
 
   /**
@@ -30,7 +32,7 @@ class Token
    */
   static public function fromCharacter($token)
   {
-    return new self($token, $token);
+    return new static($token, $token);
   }
 
   /**
@@ -43,13 +45,106 @@ class Token
     $this->content = $content;
   }
 
+  /**
+   * @return integer|string
+   */
+  public function type()
+  {
+    return $this->type;
+  }
+
+  /**
+   * @param string $content
+   */
+  public function append($content)
+  {
+    $this->content .= $content;
+  }
+
+  /**
+   * @return string
+   */
+  public function content()
+  {
+    return $this->content;
+  }
+
+  /**
+   * @return string|null
+   */
+  public function name()
+  {
+    foreach (static::types() as $name => $value)
+    {
+      if ($value === $this->type)
+      {
+        return $name;
+      }
+    }
+
+    return null;
+  }
+
+  /**
+   * @return boolean
+   */
+  public function supported()
+  {
+    return null !== $this->name();
+  }
+
+  /**
+   * @return string
+   */
+  public function string()
+  {
+    return $this->content();
+  }
+
+  /**
+   * @return string
+   */
+  public function __toString()
+  {
+    return $this->string();
+  }
+
+  /**
+   * @return array
+   */
+  static protected function types()
+  {
+    if (null !== static::$types)
+    {
+      return static::$types;
+    }
+
+    static::$types = array();
+    $reflector = new ReflectionClass(get_called_class());
+
+    foreach ($reflector->getConstants() as $name => $value)
+    {
+      if ('TOKEN_' == substr($name, 0, 6))
+      {
+        static::$types[substr($name, 6)] = $value;
+      }
+    }
+
+    return static::$types;
+  }
+
   const TOKEN_AND = '&';
   const TOKEN_OR = '|';
   const TOKEN_SEPARATOR = ',';
   const TOKEN_STRING = T_STRING;
   const TOKEN_SUBTYPE_CLOSE = '>';
-  const TOKEN_SUBTYPE_START = '<';
+  const TOKEN_SUBTYPE_OPEN = '<';
   const TOKEN_WHITESPACE = T_WHITESPACE;
+
+  /**
+   * @var array
+   */
+  static protected $types;
 
   /**
    * @var integer|string
