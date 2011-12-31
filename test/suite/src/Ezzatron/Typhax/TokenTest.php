@@ -102,6 +102,14 @@ class TokenTest extends \Ezzatron\Typhax\Test\TestCase
   {
     return array(
       array('AND', Token::TOKEN_AND),
+      array('ARRAY_CLOSE', Token::TOKEN_ARRAY_CLOSE),
+      array('ARRAY_OPEN', Token::TOKEN_ARRAY_OPEN),
+      array('ASSIGNMENT', Token::TOKEN_ASSIGNMENT),
+      array('ATTRIBUTES_CLOSE', Token::TOKEN_ATTRIBUTES_CLOSE),
+      array('ATTRIBUTES_OPEN', Token::TOKEN_ATTRIBUTES_OPEN),
+      array('CONSTANT', Token::TOKEN_CONSTANT),
+      array('HASH_CLOSE', Token::TOKEN_HASH_CLOSE),
+      array('HASH_OPEN', Token::TOKEN_HASH_OPEN),
       array('OR', Token::TOKEN_OR),
       array('SEPARATOR', Token::TOKEN_SEPARATOR),
       array('STRING', Token::TOKEN_STRING),

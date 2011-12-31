@@ -149,6 +149,14 @@ class Token
   }
 
   const TOKEN_AND = '&';
+  const TOKEN_ARRAY_CLOSE = ']';
+  const TOKEN_ARRAY_OPEN = '[';
+  const TOKEN_ASSIGNMENT = ':';
+  const TOKEN_ATTRIBUTES_CLOSE = ')';
+  const TOKEN_ATTRIBUTES_OPEN = '(';
+  const TOKEN_CONSTANT = T_CONSTANT_ENCAPSED_STRING;
+  const TOKEN_HASH_CLOSE = '}';
+  const TOKEN_HASH_OPEN = '{';
   const TOKEN_OR = '|';
   const TOKEN_SEPARATOR = ',';
   const TOKEN_STRING = T_STRING;
