@@ -146,7 +146,7 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
     );
     $data[] = array($expected, $source);
 
-    // #8: Nested hash
+    // #9: Nested hash
     $source = '{foo: bar, {bar: baz, qux: doom}}';
     $expected = array(
       new Token(Token::TOKEN_HASH_OPEN, '{'),
@@ -172,7 +172,7 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
     );
     $data[] = array($expected, $source);
 
-    // #9: Treatment of numbers
+    // #10: Treatment of numbers
     $source = '1, 1.0';
     $expected = array(
       new Token(Token::TOKEN_INTEGER, '1'),
@@ -182,7 +182,7 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
     );
     $data[] = array($expected, $source);
 
-    // #10: Treatment of keywords
+    // #11: Treatment of keywords
     $source = 'true, TRUE, True, false, null';
     $expected = array(
       new Token(Token::TOKEN_KEYWORD, 'true'),
@@ -198,6 +198,102 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
       new Token(Token::TOKEN_SEPARATOR, ','),
       new Token(Token::TOKEN_WHITESPACE, ' '),
       new Token(Token::TOKEN_KEYWORD, 'null'),
+    );
+    $data[] = array($expected, $source);
+
+    // #12: Treatment of unsupported tokens containing supported tokens
+    $source = '&= && || ?> %> {$ ${ => >= <> <= isset($var) (string) -> <?php <? <% <?= <%= |= :: << <<= >> >>= <<<';
+    $expected = array(
+      new Token(Token::TOKEN_AND, '&'),
+      new Token(Token::TOKEN_STRING, '='),
+      new Token(Token::TOKEN_WHITESPACE, ' '),
+      new Token(Token::TOKEN_AND, '&'),
+      new Token(Token::TOKEN_AND, '&'),
+      new Token(Token::TOKEN_WHITESPACE, ' '),
+      new Token(Token::TOKEN_OR, '|'),
+      new Token(Token::TOKEN_OR, '|'),
+      new Token(Token::TOKEN_WHITESPACE, ' '),
+      new Token(Token::TOKEN_STRING, '?'),
+      new Token(Token::TOKEN_SUBTYPE_CLOSE, '>'),
+      new Token(Token::TOKEN_WHITESPACE, ' '),
+      new Token(Token::TOKEN_STRING, '%'),
+      new Token(Token::TOKEN_SUBTYPE_CLOSE, '>'),
+      new Token(Token::TOKEN_WHITESPACE, ' '),
+      new Token(Token::TOKEN_HASH_OPEN, '{'),
+      new Token(Token::TOKEN_STRING, '$'),
+      new Token(Token::TOKEN_WHITESPACE, ' '),
+      new Token(Token::TOKEN_STRING, '$'),
+      new Token(Token::TOKEN_HASH_OPEN, '{'),
+      new Token(Token::TOKEN_WHITESPACE, ' '),
+      new Token(Token::TOKEN_STRING, '='),
+      new Token(Token::TOKEN_SUBTYPE_CLOSE, '>'),
+      new Token(Token::TOKEN_WHITESPACE, ' '),
+      new Token(Token::TOKEN_SUBTYPE_CLOSE, '>'),
+      new Token(Token::TOKEN_STRING, '='),
+      new Token(Token::TOKEN_WHITESPACE, ' '),
+      new Token(Token::TOKEN_SUBTYPE_OPEN, '<'),
+      new Token(Token::TOKEN_SUBTYPE_CLOSE, '>'),
+      new Token(Token::TOKEN_WHITESPACE, ' '),
+      new Token(Token::TOKEN_SUBTYPE_OPEN, '<'),
+      new Token(Token::TOKEN_STRING, '='),
+      new Token(Token::TOKEN_WHITESPACE, ' '),
+      new Token(Token::TOKEN_STRING, 'isset'),
+      new Token(Token::TOKEN_ATTRIBUTES_OPEN, '('),
+      new Token(Token::TOKEN_STRING, '$var'),
+      new Token(Token::TOKEN_ATTRIBUTES_CLOSE, ')'),
+      new Token(Token::TOKEN_WHITESPACE, ' '),
+      new Token(Token::TOKEN_ATTRIBUTES_OPEN, '('),
+      new Token(Token::TOKEN_STRING, 'string'),
+      new Token(Token::TOKEN_ATTRIBUTES_CLOSE, ')'),
+      new Token(Token::TOKEN_WHITESPACE, ' '),
+      new Token(Token::TOKEN_STRING, '-'),
+      new Token(Token::TOKEN_SUBTYPE_CLOSE, '>'),
+      new Token(Token::TOKEN_WHITESPACE, ' '),
+      new Token(Token::TOKEN_SUBTYPE_OPEN, '<'),
+      new Token(Token::TOKEN_STRING, '?php'),
+      new Token(Token::TOKEN_WHITESPACE, ' '),
+      new Token(Token::TOKEN_SUBTYPE_OPEN, '<'),
+      new Token(Token::TOKEN_STRING, '?'),
+      new Token(Token::TOKEN_WHITESPACE, ' '),
+      new Token(Token::TOKEN_SUBTYPE_OPEN, '<'),
+      new Token(Token::TOKEN_STRING, '%'),
+      new Token(Token::TOKEN_WHITESPACE, ' '),
+      new Token(Token::TOKEN_SUBTYPE_OPEN, '<'),
+      new Token(Token::TOKEN_STRING, '?='),
+      new Token(Token::TOKEN_WHITESPACE, ' '),
+      new Token(Token::TOKEN_SUBTYPE_OPEN, '<'),
+      new Token(Token::TOKEN_STRING, '%='),
+      new Token(Token::TOKEN_WHITESPACE, ' '),
+      new Token(Token::TOKEN_OR, '|'),
+      new Token(Token::TOKEN_STRING, '='),
+      new Token(Token::TOKEN_WHITESPACE, ' '),
+      new Token(Token::TOKEN_ASSIGNMENT, ':'),
+      new Token(Token::TOKEN_ASSIGNMENT, ':'),
+      new Token(Token::TOKEN_WHITESPACE, ' '),
+      new Token(Token::TOKEN_SUBTYPE_OPEN, '<'),
+      new Token(Token::TOKEN_SUBTYPE_OPEN, '<'),
+      new Token(Token::TOKEN_WHITESPACE, ' '),
+      new Token(Token::TOKEN_SUBTYPE_OPEN, '<'),
+      new Token(Token::TOKEN_SUBTYPE_OPEN, '<'),
+      new Token(Token::TOKEN_STRING, '='),
+      new Token(Token::TOKEN_WHITESPACE, ' '),
+      new Token(Token::TOKEN_SUBTYPE_CLOSE, '>'),
+      new Token(Token::TOKEN_SUBTYPE_CLOSE, '>'),
+      new Token(Token::TOKEN_WHITESPACE, ' '),
+      new Token(Token::TOKEN_SUBTYPE_CLOSE, '>'),
+      new Token(Token::TOKEN_SUBTYPE_CLOSE, '>'),
+      new Token(Token::TOKEN_STRING, '='),
+      new Token(Token::TOKEN_WHITESPACE, ' '),
+      new Token(Token::TOKEN_SUBTYPE_OPEN, '<'),
+      new Token(Token::TOKEN_SUBTYPE_OPEN, '<'),
+      new Token(Token::TOKEN_SUBTYPE_OPEN, '<'),
+    );
+    $data[] = array($expected, $source);
+
+    // #13: Treatment of quoted strings containing variables etc.
+    $source = '"foo $bar $baz[0] $qux->doom {$great} ${great} {$square->width} {$arr[\'key\']} {$arr[4][3]} {$arr[\'foo\'][3]} {$obj->values[3]->name} {${$name}} {${getName()}} {${$object->getName()}} \\\\\\""';
+    $expected = array(
+      new Token(Token::TOKEN_STRING_QUOTED, $source),
     );
     $data[] = array($expected, $source);
 
