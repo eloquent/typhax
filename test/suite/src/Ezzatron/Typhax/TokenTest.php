@@ -14,39 +14,46 @@ namespace Ezzatron\Typhax;
 class TokenTest extends \Ezzatron\Typhax\Test\TestCase
 {
   /**
-   * @covers Ezzatron\Typhax\Token::fromArray
-   * @group lexer
-   * @group core
+   * @return array
    */
-  public function testFromArray()
+  public function tokenData()
   {
+    $data = array();
+    
+    // #0: Array token
     $token = array(T_STRING, 'foo', 0);
     $expected = new Token(Token::TOKEN_STRING, 'foo');
-
-    $this->assertEquals($expected, Token::fromArray($token));
-
+    $data[] = array($expected, $token);
+    
+    // #1: Array token
     $token = array(T_STRING, 'bar', 666);
     $expected = new Token(Token::TOKEN_STRING, 'bar');
+    $data[] = array($expected, $token);
+    
+    // #2: Character token
+    $token = '&';
+    $expected = new Token(Token::TOKEN_AND, '&');
+    $data[] = array($expected, $token);
 
-    $this->assertEquals($expected, Token::fromArray($token));
+    // #3: Character token
+    $token = '|';
+    $expected = new Token(Token::TOKEN_OR, '|');
+    $data[] = array($expected, $token);
+    
+    return $data;
   }
 
   /**
+   * @covers Ezzatron\Typhax\Token::fromToken
+   * @covers Ezzatron\Typhax\Token::fromArray
    * @covers Ezzatron\Typhax\Token::fromCharacter
+   * @dataProvider tokenData
    * @group lexer
    * @group core
    */
-  public function testFromCharacter()
+  public function testFromToken(Token $expected, $token)
   {
-    $token = '&';
-    $expected = new Token(Token::TOKEN_AND, '&');
-
-    $this->assertEquals($expected, Token::fromCharacter($token));
-
-    $token = '|';
-    $expected = new Token(Token::TOKEN_OR, '|');
-
-    $this->assertEquals($expected, Token::fromCharacter($token));
+    $this->assertEquals($expected, Token::fromToken($token));
   }
 
   /**

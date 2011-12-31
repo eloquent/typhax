@@ -16,6 +16,21 @@ use ReflectionClass;
 class Token
 {
   /**
+   * @param array|string $token
+   *
+   * @return Token
+   */
+  static public function fromToken($token)
+  {
+    if (is_string($token))
+    {
+      return static::fromCharacter($token);
+    }
+
+    return static::fromArray($token);
+  }
+
+  /**
    * @param array $token
    *
    * @return Token

@@ -80,6 +80,8 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
 
   /**
    * @covers Ezzatron\Typhax\Lexer::tokens
+   * @covers Ezzatron\Typhax\Lexer::normalizeToken
+   * @covers Ezzatron\Typhax\Lexer::concatenateStrings
    * @dataProvider tokenData
    * @group lexer
    * @group core

@@ -27,39 +27,55 @@ class Lexer
     
     foreach ($rawTokens as $token)
     {
-      if (is_array($token))
-      {
-        $token = Token::fromArray($token);
-      }
-      else
-      {
-        $token = Token::fromCharacter($token);
-      }
-
-      if (!$token->supported())
-      {
-        $token = new Token(Token::TOKEN_STRING, $token->content());
-      }
-
-      if (Token::TOKEN_STRING === $token->type())
-      {
-        $numTokens = count($tokens);
-        if (array_key_exists($numTokens - 1, $tokens))
-        {
-          $previousToken = $tokens[$numTokens - 1];
-
-          if (Token::TOKEN_STRING === $previousToken->type())
-          {
-            $previousToken->append($token->content());
-
-            continue;
-          }
-        }
-      }
-
-      $tokens[] = $token;
+      $tokens[] = $this->normalizeToken($token);
     }
 
-    return $tokens;
+    return $this->concatenateStrings($tokens);
+  }
+
+  /**
+   * @param string|array $token
+   *
+   * @return Token
+   */
+  protected function normalizeToken($token)
+  {
+    $token = Token::fromToken($token);
+    if (!$token->supported())
+    {
+      $token = new Token(Token::TOKEN_STRING, $token->content());
+    }
+
+    return $token;
+  }
+
+  /**
+   * @param array $tokens
+   *
+   * @return array
+   */
+  protected function concatenateStrings(array $tokens)
+  {
+    $concatenated = array();
+    $numTokens = 0;
+
+    foreach ($tokens as $token)
+    {
+      if (
+        Token::TOKEN_STRING === $token->type()
+        && array_key_exists($numTokens - 1, $concatenated)
+        && Token::TOKEN_STRING === $concatenated[$numTokens - 1]->type()
+      )
+      {
+        $concatenated[$numTokens - 1]->append($token->content());
+
+        continue;
+      }
+
+      $concatenated[] = $token;
+      $numTokens ++;
+    }
+
+    return $concatenated;
   }
 }
