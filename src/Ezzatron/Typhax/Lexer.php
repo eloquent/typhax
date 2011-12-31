@@ -46,6 +46,11 @@ class Lexer
       $token = new Token(Token::TOKEN_STRING, $token->content());
     }
 
+    if (in_array(strtolower($token->content()), $this->keywords()))
+    {
+      $token = new Token(Token::TOKEN_KEYWORD, $token->content());
+    }
+
     return $token;
   }
 
@@ -77,5 +82,17 @@ class Lexer
     }
 
     return $concatenated;
+  }
+
+  /**
+   * @return array
+   */
+  protected function keywords()
+  {
+    return array(
+      'true',
+      'false',
+      'null',
+    );
   }
 }

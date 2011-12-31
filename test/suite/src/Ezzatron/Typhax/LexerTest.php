@@ -76,7 +76,7 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
     $data[] = array($expected, $source);
 
     // #6: Dynamic type with basic attributes and quoted strings
-    $source = "type(foo: bar, 'baz': \"qux\")";
+    $source = 'type(foo: bar, \'baz\': "qux")';
     $expected = array(
       new Token(Token::TOKEN_STRING, 'type'),
       new Token(Token::TOKEN_ATTRIBUTES_OPEN, '('),
@@ -86,16 +86,16 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
       new Token(Token::TOKEN_STRING, 'bar'),
       new Token(Token::TOKEN_SEPARATOR, ','),
       new Token(Token::TOKEN_WHITESPACE, ' '),
-      new Token(Token::TOKEN_CONSTANT, "'baz'"),
+      new Token(Token::TOKEN_STRING_QUOTED, "'baz'"),
       new Token(Token::TOKEN_ASSIGNMENT, ':'),
       new Token(Token::TOKEN_WHITESPACE, ' '),
-      new Token(Token::TOKEN_CONSTANT, '"qux"'),
+      new Token(Token::TOKEN_STRING_QUOTED, '"qux"'),
       new Token(Token::TOKEN_ATTRIBUTES_CLOSE, ')'),
     );
     $data[] = array($expected, $source);
 
     // #7: Dynamic type with array attributes
-    $source = "type(foo: [bar, baz], qux: {doom: splat, pip: pop})";
+    $source = 'type(foo: [bar, baz], qux: {doom: splat, pip: pop})';
     $expected = array(
       new Token(Token::TOKEN_STRING, 'type'),
       new Token(Token::TOKEN_ATTRIBUTES_OPEN, '('),
@@ -130,7 +130,7 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
     $data[] = array($expected, $source);
 
     // #8: Nested array
-    $source = "[foo, [bar, baz]]";
+    $source = '[foo, [bar, baz]]';
     $expected = array(
       new Token(Token::TOKEN_ARRAY_OPEN, '['),
       new Token(Token::TOKEN_STRING, 'foo'),
@@ -147,7 +147,7 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
     $data[] = array($expected, $source);
 
     // #8: Nested hash
-    $source = "{foo: bar, {bar: baz, qux: doom}}";
+    $source = '{foo: bar, {bar: baz, qux: doom}}';
     $expected = array(
       new Token(Token::TOKEN_HASH_OPEN, '{'),
       new Token(Token::TOKEN_STRING, 'foo'),
@@ -172,13 +172,40 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
     );
     $data[] = array($expected, $source);
 
+    // #9: Treatment of numbers
+    $source = '1, 1.0';
+    $expected = array(
+      new Token(Token::TOKEN_INTEGER, '1'),
+      new Token(Token::TOKEN_SEPARATOR, ','),
+      new Token(Token::TOKEN_WHITESPACE, ' '),
+      new Token(Token::TOKEN_FLOAT, '1.0'),
+    );
+    $data[] = array($expected, $source);
+
+    // #10: Treatment of keywords
+    $source = 'true, TRUE, True, false, null';
+    $expected = array(
+      new Token(Token::TOKEN_KEYWORD, 'true'),
+      new Token(Token::TOKEN_SEPARATOR, ','),
+      new Token(Token::TOKEN_WHITESPACE, ' '),
+      new Token(Token::TOKEN_KEYWORD, 'TRUE'),
+      new Token(Token::TOKEN_SEPARATOR, ','),
+      new Token(Token::TOKEN_WHITESPACE, ' '),
+      new Token(Token::TOKEN_KEYWORD, 'True'),
+      new Token(Token::TOKEN_SEPARATOR, ','),
+      new Token(Token::TOKEN_WHITESPACE, ' '),
+      new Token(Token::TOKEN_KEYWORD, 'false'),
+      new Token(Token::TOKEN_SEPARATOR, ','),
+      new Token(Token::TOKEN_WHITESPACE, ' '),
+      new Token(Token::TOKEN_KEYWORD, 'null'),
+    );
+    $data[] = array($expected, $source);
+
     return $data;
   }
 
   /**
-   * @covers Ezzatron\Typhax\Lexer::tokens
-   * @covers Ezzatron\Typhax\Lexer::normalizeToken
-   * @covers Ezzatron\Typhax\Lexer::concatenateStrings
+   * @covers Ezzatron\Typhax\Lexer
    * @dataProvider tokenData
    * @group lexer
    * @group core
