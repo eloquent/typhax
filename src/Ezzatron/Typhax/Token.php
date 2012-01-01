@@ -154,11 +154,13 @@ class Token
   const TOKEN_ASSIGNMENT = ':';
   const TOKEN_ATTRIBUTES_CLOSE = ')';
   const TOKEN_ATTRIBUTES_OPEN = '(';
+  const TOKEN_BOOLEAN_FALSE = 'false';
+  const TOKEN_BOOLEAN_TRUE = 'true';
   const TOKEN_FLOAT = T_DNUMBER;
   const TOKEN_HASH_CLOSE = '}';
   const TOKEN_HASH_OPEN = '{';
   const TOKEN_INTEGER = T_LNUMBER;
-  const TOKEN_KEYWORD = 'keyword';
+  const TOKEN_NULL = 'null';
   const TOKEN_OR = '|';
   const TOKEN_SEPARATOR = ',';
   const TOKEN_STRING = T_STRING;

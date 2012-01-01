@@ -51,10 +51,12 @@ class Lexer
       $token = new Token(Token::TOKEN_STRING, $token->content());
     }
 
-    // check for keywords
-    if (in_array(strtolower($token->content()), $this->keywords()))
+    // check for custom tokens
+    $tokenContentLowercase = strtolower($token->content());
+    $customTokens = $this->customTokens();
+    if (array_key_exists($tokenContentLowercase, $customTokens))
     {
-      $token = new Token(Token::TOKEN_KEYWORD, $token->content());
+      $token = new Token($customTokens[$tokenContentLowercase], $token->content());
     }
 
     // split unsupported PHP tokens that contain supported Typhax tokens
@@ -180,12 +182,12 @@ class Lexer
   /**
    * @return array
    */
-  protected function keywords()
+  protected function customTokens()
   {
     return array(
-      'true',
-      'false',
-      'null',
+      'true' => Token::TOKEN_BOOLEAN_TRUE,
+      'false' => Token::TOKEN_BOOLEAN_FALSE,
+      'null' => Token::TOKEN_NULL,
     );
   }
 }

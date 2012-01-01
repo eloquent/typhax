@@ -182,22 +182,22 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
     );
     $data[] = array($expected, $source);
 
-    // #11: Treatment of keywords
+    // #11: Treatment of booleans and nulls
     $source = 'true, TRUE, True, false, null';
     $expected = array(
-      new Token(Token::TOKEN_KEYWORD, 'true'),
+      new Token(Token::TOKEN_BOOLEAN_TRUE, 'true'),
       new Token(Token::TOKEN_SEPARATOR, ','),
       new Token(Token::TOKEN_WHITESPACE, ' '),
-      new Token(Token::TOKEN_KEYWORD, 'TRUE'),
+      new Token(Token::TOKEN_BOOLEAN_TRUE, 'TRUE'),
       new Token(Token::TOKEN_SEPARATOR, ','),
       new Token(Token::TOKEN_WHITESPACE, ' '),
-      new Token(Token::TOKEN_KEYWORD, 'True'),
+      new Token(Token::TOKEN_BOOLEAN_TRUE, 'True'),
       new Token(Token::TOKEN_SEPARATOR, ','),
       new Token(Token::TOKEN_WHITESPACE, ' '),
-      new Token(Token::TOKEN_KEYWORD, 'false'),
+      new Token(Token::TOKEN_BOOLEAN_FALSE, 'false'),
       new Token(Token::TOKEN_SEPARATOR, ','),
       new Token(Token::TOKEN_WHITESPACE, ' '),
-      new Token(Token::TOKEN_KEYWORD, 'null'),
+      new Token(Token::TOKEN_NULL, 'null'),
     );
     $data[] = array($expected, $source);
 
@@ -294,6 +294,25 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
     $source = '"foo $bar $baz[0] $qux->doom {$great} ${great} {$square->width} {$arr[\'key\']} {$arr[4][3]} {$arr[\'foo\'][3]} {$obj->values[3]->name} {${$name}} {${getName()}} {${$object->getName()}} \\\\\\""';
     $expected = array(
       new Token(Token::TOKEN_STRING_QUOTED, $source),
+    );
+    $data[] = array($expected, $source);
+
+    // #14: Nested traversables
+    $source = 'type<keyType, type<keyType, subType>>';
+    $expected = array(
+      new Token(Token::TOKEN_STRING, 'type'),
+      new Token(Token::TOKEN_SUBTYPE_OPEN, '<'),
+      new Token(Token::TOKEN_STRING, 'keyType'),
+      new Token(Token::TOKEN_SEPARATOR, ','),
+      new Token(Token::TOKEN_WHITESPACE, ' '),
+      new Token(Token::TOKEN_STRING, 'type'),
+      new Token(Token::TOKEN_SUBTYPE_OPEN, '<'),
+      new Token(Token::TOKEN_STRING, 'keyType'),
+      new Token(Token::TOKEN_SEPARATOR, ','),
+      new Token(Token::TOKEN_WHITESPACE, ' '),
+      new Token(Token::TOKEN_STRING, 'subType'),
+      new Token(Token::TOKEN_SUBTYPE_CLOSE, '>'),
+      new Token(Token::TOKEN_SUBTYPE_CLOSE, '>'),
     );
     $data[] = array($expected, $source);
 
