@@ -116,7 +116,7 @@ class Lexer
    */
   protected function collapseQuotedStrings(array $tokens)
   {
-    $concatenated = array();
+    $collapsed = array();
     $numTokens = 0;
     $inQuotes = false;
 
@@ -124,7 +124,7 @@ class Lexer
     {
       if ($inQuotes)
       {
-        $concatenated[$numTokens - 1]->append($token->content());
+        $collapsed[$numTokens - 1]->append($token->content());
 
         if ('"' === $token->content())
         {
@@ -136,17 +136,17 @@ class Lexer
       elseif ('"' == $token->content())
       {
         $inQuotes = true;
-        $concatenated[] = new Token(Token::TOKEN_STRING_QUOTED, $token->content());
+        $collapsed[] = new Token(Token::TOKEN_STRING_QUOTED, $token->content());
         $numTokens ++;
 
         continue;
       }
 
-      $concatenated[] = $token;
+      $collapsed[] = $token;
       $numTokens ++;
     }
 
-    return $concatenated;
+    return $collapsed;
   }
 
   /**
@@ -156,27 +156,27 @@ class Lexer
    */
   protected function collapseConsecutiveStrings(array $tokens)
   {
-    $concatenated = array();
+    $collapsed = array();
     $numTokens = 0;
 
     foreach ($tokens as $token)
     {
       if (
         Token::TOKEN_STRING === $token->type()
-        && array_key_exists($numTokens - 1, $concatenated)
-        && Token::TOKEN_STRING === $concatenated[$numTokens - 1]->type()
+        && array_key_exists($numTokens - 1, $collapsed)
+        && Token::TOKEN_STRING === $collapsed[$numTokens - 1]->type()
       )
       {
-        $concatenated[$numTokens - 1]->append($token->content());
+        $collapsed[$numTokens - 1]->append($token->content());
 
         continue;
       }
 
-      $concatenated[] = $token;
+      $collapsed[] = $token;
       $numTokens ++;
     }
 
-    return $concatenated;
+    return $collapsed;
   }
 
   /**
