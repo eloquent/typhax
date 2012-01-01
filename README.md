@@ -12,4 +12,3 @@ available, and code coverage is closely monitored.
 
 ### Latest revision test suite coverage
 <http://ci.ezzatron.com/report/typhax/coverage/>
-
