@@ -149,24 +149,24 @@ class Token
   }
 
   const TOKEN_AND = '&';
-  const TOKEN_ARRAY_CLOSE = ']';
-  const TOKEN_ARRAY_OPEN = '[';
-  const TOKEN_ASSIGNMENT = ':';
-  const TOKEN_ATTRIBUTES_CLOSE = ')';
-  const TOKEN_ATTRIBUTES_OPEN = '(';
   const TOKEN_BOOLEAN_FALSE = 'false';
   const TOKEN_BOOLEAN_TRUE = 'true';
+  const TOKEN_BRACE_CLOSE = '}';
+  const TOKEN_BRACE_OPEN = '{';
+  const TOKEN_COLON = ':';
+  const TOKEN_COMMA = ',';
   const TOKEN_FLOAT = T_DNUMBER;
-  const TOKEN_HASH_CLOSE = '}';
-  const TOKEN_HASH_OPEN = '{';
+  const TOKEN_GREATER_THAN = '>';
   const TOKEN_INTEGER = T_LNUMBER;
+  const TOKEN_LESS_THAN = '<';
   const TOKEN_NULL = 'null';
-  const TOKEN_OR = '|';
-  const TOKEN_SEPARATOR = ',';
+  const TOKEN_PARENTHESIS_CLOSE = ')';
+  const TOKEN_PARENTHESIS_OPEN = '(';
+  const TOKEN_PIPE = '|';
+  const TOKEN_SQUARE_BRACKET_CLOSE = ']';
+  const TOKEN_SQUARE_BRACKET_OPEN = '[';
   const TOKEN_STRING = T_STRING;
   const TOKEN_STRING_QUOTED = T_CONSTANT_ENCAPSED_STRING;
-  const TOKEN_SUBTYPE_CLOSE = '>';
-  const TOKEN_SUBTYPE_OPEN = '<';
   const TOKEN_WHITESPACE = T_WHITESPACE;
 
   /**

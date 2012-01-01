@@ -64,17 +64,17 @@ class Lexer
     {
       $candidates = array(
         Token::TOKEN_AND,
-        Token::TOKEN_ARRAY_CLOSE,
-        Token::TOKEN_ARRAY_OPEN,
-        Token::TOKEN_ASSIGNMENT,
-        Token::TOKEN_ATTRIBUTES_CLOSE,
-        Token::TOKEN_ATTRIBUTES_OPEN,
-        Token::TOKEN_HASH_CLOSE,
-        Token::TOKEN_HASH_OPEN,
-        Token::TOKEN_OR,
-        Token::TOKEN_SEPARATOR,
-        Token::TOKEN_SUBTYPE_CLOSE,
-        Token::TOKEN_SUBTYPE_OPEN,
+        Token::TOKEN_SQUARE_BRACKET_CLOSE,
+        Token::TOKEN_SQUARE_BRACKET_OPEN,
+        Token::TOKEN_COLON,
+        Token::TOKEN_PARENTHESIS_CLOSE,
+        Token::TOKEN_PARENTHESIS_OPEN,
+        Token::TOKEN_BRACE_CLOSE,
+        Token::TOKEN_BRACE_OPEN,
+        Token::TOKEN_PIPE,
+        Token::TOKEN_COMMA,
+        Token::TOKEN_GREATER_THAN,
+        Token::TOKEN_LESS_THAN,
       );
 
       foreach ($candidates as $candidate)

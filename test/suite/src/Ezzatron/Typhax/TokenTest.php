@@ -37,7 +37,7 @@ class TokenTest extends \Ezzatron\Typhax\Test\TestCase
 
     // #3: Character token
     $token = '|';
-    $expected = new Token(Token::TOKEN_OR, '|');
+    $expected = new Token(Token::TOKEN_PIPE, '|');
     $data[] = array($expected, $token);
     
     return $data;
@@ -102,24 +102,24 @@ class TokenTest extends \Ezzatron\Typhax\Test\TestCase
   {
     return array(
       array('AND', Token::TOKEN_AND),
-      array('ARRAY_CLOSE', Token::TOKEN_ARRAY_CLOSE),
-      array('ARRAY_OPEN', Token::TOKEN_ARRAY_OPEN),
-      array('ASSIGNMENT', Token::TOKEN_ASSIGNMENT),
-      array('ATTRIBUTES_CLOSE', Token::TOKEN_ATTRIBUTES_CLOSE),
-      array('ATTRIBUTES_OPEN', Token::TOKEN_ATTRIBUTES_OPEN),
       array('BOOLEAN_FALSE', Token::TOKEN_BOOLEAN_FALSE),
       array('BOOLEAN_TRUE', Token::TOKEN_BOOLEAN_TRUE),
+      array('BRACE_CLOSE', Token::TOKEN_BRACE_CLOSE),
+      array('BRACE_OPEN', Token::TOKEN_BRACE_OPEN),
+      array('COLON', Token::TOKEN_COLON),
+      array('COMMA', Token::TOKEN_COMMA),
       array('FLOAT', Token::TOKEN_FLOAT),
-      array('HASH_CLOSE', Token::TOKEN_HASH_CLOSE),
-      array('HASH_OPEN', Token::TOKEN_HASH_OPEN),
+      array('GREATER_THAN', Token::TOKEN_GREATER_THAN),
       array('INTEGER', Token::TOKEN_INTEGER),
+      array('LESS_THAN', Token::TOKEN_LESS_THAN),
       array('NULL', Token::TOKEN_NULL),
-      array('OR', Token::TOKEN_OR),
-      array('SEPARATOR', Token::TOKEN_SEPARATOR),
+      array('PARENTHESIS_CLOSE', Token::TOKEN_PARENTHESIS_CLOSE),
+      array('PARENTHESIS_OPEN', Token::TOKEN_PARENTHESIS_OPEN),
+      array('PIPE', Token::TOKEN_PIPE),
+      array('SQUARE_BRACKET_CLOSE', Token::TOKEN_SQUARE_BRACKET_CLOSE),
+      array('SQUARE_BRACKET_OPEN', Token::TOKEN_SQUARE_BRACKET_OPEN),
       array('STRING', Token::TOKEN_STRING),
       array('STRING_QUOTED', Token::TOKEN_STRING_QUOTED),
-      array('SUBTYPE_CLOSE', Token::TOKEN_SUBTYPE_CLOSE),
-      array('SUBTYPE_OPEN', Token::TOKEN_SUBTYPE_OPEN),
       array('WHITESPACE', Token::TOKEN_WHITESPACE),
 
       array(null, T_FUNCTION),
