@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Ezzatron\Typhax;
+namespace Ezzatron\Typhax\Lexer;
 
 class Lexer
 {
@@ -20,11 +20,24 @@ class Lexer
    */
   public function tokens($source)
   {
+    $tokens = $this->sourceTokens($source);
+    $tokens[] = new Token(Token::TOKEN_END, '');
+
+    return $tokens;
+  }
+
+  /**
+   * @param string $source
+   *
+   * @return array
+   */
+  protected function sourceTokens($source)
+  {
     $tokens = array();
 
     $rawTokens = token_get_all('<?php '.$source);
     array_shift($rawTokens);
-    
+
     foreach ($rawTokens as $token)
     {
       $tokens = array_merge($tokens, $this->normalizeToken($token));
@@ -89,16 +102,16 @@ class Lexer
           if ($candidatePosition > 0)
           {
             $preSource = substr($token->content(), 0, $candidatePosition);
-            $normalized = array_merge($normalized, $this->tokens($preSource));
+            $normalized = array_merge($normalized, $this->sourceTokens($preSource));
           }
 
           $candidateSource = substr($token->content(), $candidatePosition, $candidateLength);
-          $normalized = array_merge($normalized, $this->tokens($candidateSource));
+          $normalized = array_merge($normalized, $this->sourceTokens($candidateSource));
 
           if ($candidatePosition < strlen($token->content()) + $candidateLength - 2)
           {
             $postSource = substr($token->content(), $candidatePosition + $candidateLength);
-            $normalized = array_merge($normalized, $this->tokens($postSource));
+            $normalized = array_merge($normalized, $this->sourceTokens($postSource));
           }
 
           return $normalized;

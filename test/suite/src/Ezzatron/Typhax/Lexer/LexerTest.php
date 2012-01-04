@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Ezzatron\Typhax;
+namespace Ezzatron\Typhax\Lexer;
 
 class LexerTest extends \Ezzatron\Typhax\Test\TestCase
 {
@@ -24,6 +24,7 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
     $source = 'type';
     $expected = array(
       new Token(Token::TOKEN_STRING, 'type'),
+      new Token(Token::TOKEN_END, ''),
     );
     $data[] = array($expected, $source);
 
@@ -34,6 +35,7 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
       new Token(Token::TOKEN_LESS_THAN, '<'),
       new Token(Token::TOKEN_STRING, 'subType'),
       new Token(Token::TOKEN_GREATER_THAN, '>'),
+      new Token(Token::TOKEN_END, ''),
     );
     $data[] = array($expected, $source);
 
@@ -50,6 +52,7 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
       new Token(Token::TOKEN_WHITESPACE, ' '),
       new Token(Token::TOKEN_STRING, 'subType'),
       new Token(Token::TOKEN_GREATER_THAN, '>'),
+      new Token(Token::TOKEN_END, ''),
     );
     $data[] = array($expected, $source);
 
@@ -59,6 +62,7 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
       new Token(Token::TOKEN_STRING, 'type'),
       new Token(Token::TOKEN_PIPE, '|'),
       new Token(Token::TOKEN_STRING, 'type'),
+      new Token(Token::TOKEN_END, ''),
     );
     $data[] = array($expected, $source);
 
@@ -68,6 +72,7 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
       new Token(Token::TOKEN_STRING, 'type'),
       new Token(Token::TOKEN_AND, '&'),
       new Token(Token::TOKEN_STRING, 'type'),
+      new Token(Token::TOKEN_END, ''),
     );
     $data[] = array($expected, $source);
 
@@ -75,6 +80,7 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
     $source = 'type-type';
     $expected = array(
       new Token(Token::TOKEN_STRING, 'type-type'),
+      new Token(Token::TOKEN_END, ''),
     );
     $data[] = array($expected, $source);
 
@@ -94,6 +100,7 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
       new Token(Token::TOKEN_WHITESPACE, ' '),
       new Token(Token::TOKEN_STRING_QUOTED, '"qux"'),
       new Token(Token::TOKEN_PARENTHESIS_CLOSE, ')'),
+      new Token(Token::TOKEN_END, ''),
     );
     $data[] = array($expected, $source);
 
@@ -129,6 +136,7 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
       new Token(Token::TOKEN_STRING, 'pop'),
       new Token(Token::TOKEN_BRACE_CLOSE, '}'),
       new Token(Token::TOKEN_PARENTHESIS_CLOSE, ')'),
+      new Token(Token::TOKEN_END, ''),
     );
     $data[] = array($expected, $source);
 
@@ -146,6 +154,7 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
       new Token(Token::TOKEN_STRING, 'baz'),
       new Token(Token::TOKEN_SQUARE_BRACKET_CLOSE, ']'),
       new Token(Token::TOKEN_SQUARE_BRACKET_CLOSE, ']'),
+      new Token(Token::TOKEN_END, ''),
     );
     $data[] = array($expected, $source);
 
@@ -172,6 +181,7 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
       new Token(Token::TOKEN_STRING, 'doom'),
       new Token(Token::TOKEN_BRACE_CLOSE, '}'),
       new Token(Token::TOKEN_BRACE_CLOSE, '}'),
+      new Token(Token::TOKEN_END, ''),
     );
     $data[] = array($expected, $source);
 
@@ -182,6 +192,7 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
       new Token(Token::TOKEN_COMMA, ','),
       new Token(Token::TOKEN_WHITESPACE, ' '),
       new Token(Token::TOKEN_FLOAT, '1.0'),
+      new Token(Token::TOKEN_END, ''),
     );
     $data[] = array($expected, $source);
 
@@ -201,6 +212,7 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
       new Token(Token::TOKEN_COMMA, ','),
       new Token(Token::TOKEN_WHITESPACE, ' '),
       new Token(Token::TOKEN_NULL, 'null'),
+      new Token(Token::TOKEN_END, ''),
     );
     $data[] = array($expected, $source);
 
@@ -290,6 +302,7 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
       new Token(Token::TOKEN_LESS_THAN, '<'),
       new Token(Token::TOKEN_LESS_THAN, '<'),
       new Token(Token::TOKEN_LESS_THAN, '<'),
+      new Token(Token::TOKEN_END, ''),
     );
     $data[] = array($expected, $source);
 
@@ -297,6 +310,7 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
     $source = '"foo $bar $baz[0] $qux->doom {$great} ${great} {$square->width} {$arr[\'key\']} {$arr[4][3]} {$arr[\'foo\'][3]} {$obj->values[3]->name} {${$name}} {${getName()}} {${$object->getName()}} \\\\\\""';
     $expected = array(
       new Token(Token::TOKEN_STRING_QUOTED, $source),
+      new Token(Token::TOKEN_END, ''),
     );
     $data[] = array($expected, $source);
 
@@ -316,6 +330,7 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
       new Token(Token::TOKEN_STRING, 'subSubType'),
       new Token(Token::TOKEN_GREATER_THAN, '>'),
       new Token(Token::TOKEN_GREATER_THAN, '>'),
+      new Token(Token::TOKEN_END, ''),
     );
     $data[] = array($expected, $source);
 
@@ -335,6 +350,7 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
       new Token(Token::TOKEN_WHITESPACE, ' '),
       new Token(Token::TOKEN_STRING, 'subType'),
       new Token(Token::TOKEN_GREATER_THAN, '>'),
+      new Token(Token::TOKEN_END, ''),
     );
     $data[] = array($expected, $source);
 
@@ -342,6 +358,7 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
     $source = 'Foo\Bar\Baz';
     $expected = array(
       new Token(Token::TOKEN_STRING, 'Foo\Bar\Baz'),
+      new Token(Token::TOKEN_END, ''),
     );
     $data[] = array($expected, $source);
 
@@ -349,7 +366,7 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
   }
 
   /**
-   * @covers Ezzatron\Typhax\Lexer
+   * @covers Ezzatron\Typhax\Lexer\Lexer
    * @dataProvider tokenData
    * @group lexer
    * @group core

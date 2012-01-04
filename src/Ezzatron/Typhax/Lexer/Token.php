@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Ezzatron\Typhax;
+namespace Ezzatron\Typhax\Lexer;
 
 use ReflectionClass;
 
@@ -52,6 +52,24 @@ class Token
 
   /**
    * @param integer|string $type
+   *
+   * @return string|null
+   */
+  static public function nameByType($type)
+  {
+    foreach (static::types() as $name => $value)
+    {
+      if ($value === $type)
+      {
+        return $name;
+      }
+    }
+
+    return null;
+  }
+
+  /**
+   * @param integer|string $type
    * @param string $content
    */
   public function __construct($type, $content)
@@ -89,15 +107,7 @@ class Token
    */
   public function name()
   {
-    foreach (static::types() as $name => $value)
-    {
-      if ($value === $this->type)
-      {
-        return $name;
-      }
-    }
-
-    return null;
+    return static::nameByType($this->type);
   }
 
   /**
@@ -155,6 +165,7 @@ class Token
   const TOKEN_BRACE_OPEN = '{';
   const TOKEN_COLON = ':';
   const TOKEN_COMMA = ',';
+  const TOKEN_END = 'end';
   const TOKEN_FLOAT = T_DNUMBER;
   const TOKEN_GREATER_THAN = '>';
   const TOKEN_INTEGER = T_LNUMBER;

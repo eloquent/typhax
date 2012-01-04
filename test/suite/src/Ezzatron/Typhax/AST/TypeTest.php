@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Ezzatron\Typhax;
+namespace Ezzatron\Typhax\AST;
 
 class TypeTest extends \Ezzatron\Typhax\Test\TestCase
 {
   /**
-   * @covers Ezzatron\Typhax\Type::__construct
-   * @covers Ezzatron\Typhax\Type::name
+   * @covers Ezzatron\Typhax\AST\Type::__construct
+   * @covers Ezzatron\Typhax\AST\Type::name
    * @group ast
    * @group core
    */
@@ -31,19 +31,8 @@ class TypeTest extends \Ezzatron\Typhax\Test\TestCase
   }
 
   /**
-   * @covers Ezzatron\Typhax\Type::__construct
-   * @group ast
-   * @group core
-   */
-  public function testTypeFailure()
-  {
-    $this->setExpectedException('\InvalidArgumentException');
-    $type = new Type(null);
-  }
-
-  /**
-   * @covers Ezzatron\Typhax\Type::setAttribute
-   * @covers Ezzatron\Typhax\Type::attributes
+   * @covers Ezzatron\Typhax\AST\Type::setAttribute
+   * @covers Ezzatron\Typhax\AST\Type::attributes
    * @group ast
    * @group core
    */
@@ -70,21 +59,8 @@ class TypeTest extends \Ezzatron\Typhax\Test\TestCase
   }
 
   /**
-   * @covers Ezzatron\Typhax\Type::setAttribute
-   * @group ast
-   * @group core
-   */
-  public function testSetAttributeFailure()
-  {
-    $type = new Type('foo');
-
-    $this->setExpectedException('\InvalidArgumentException');
-    $type->setAttribute(null, 'bar');
-  }
-
-  /**
-   * @covers Ezzatron\Typhax\Type::addSubType
-   * @covers Ezzatron\Typhax\Type::subTypes
+   * @covers Ezzatron\Typhax\AST\Type::addSubType
+   * @covers Ezzatron\Typhax\AST\Type::subTypes
    * @group ast
    * @group core
    */
@@ -101,7 +77,7 @@ class TypeTest extends \Ezzatron\Typhax\Test\TestCase
       $subTypeBar,
     ), $type->subTypes());
 
-    $subTypeBaz = new Type('baz');
+    $subTypeBaz = new Composite('baz');
     $type->addSubType($subTypeBaz);
     $subTypeQux = new Type('qux');
     $type->addSubType($subTypeQux);

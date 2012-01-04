@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Ezzatron\Typhax;
+namespace Ezzatron\Typhax\Lexer;
 
 class TokenTest extends \Ezzatron\Typhax\Test\TestCase
 {
@@ -44,9 +44,9 @@ class TokenTest extends \Ezzatron\Typhax\Test\TestCase
   }
 
   /**
-   * @covers Ezzatron\Typhax\Token::fromToken
-   * @covers Ezzatron\Typhax\Token::fromArray
-   * @covers Ezzatron\Typhax\Token::fromCharacter
+   * @covers Ezzatron\Typhax\Lexer\Token::fromToken
+   * @covers Ezzatron\Typhax\Lexer\Token::fromArray
+   * @covers Ezzatron\Typhax\Lexer\Token::fromCharacter
    * @dataProvider tokenData
    * @group lexer
    * @group core
@@ -57,11 +57,11 @@ class TokenTest extends \Ezzatron\Typhax\Test\TestCase
   }
 
   /**
-   * @covers Ezzatron\Typhax\Token::__construct
-   * @covers Ezzatron\Typhax\Token::type
-   * @covers Ezzatron\Typhax\Token::content
-   * @covers Ezzatron\Typhax\Token::string
-   * @covers Ezzatron\Typhax\Token::__toString
+   * @covers Ezzatron\Typhax\Lexer\Token::__construct
+   * @covers Ezzatron\Typhax\Lexer\Token::type
+   * @covers Ezzatron\Typhax\Lexer\Token::content
+   * @covers Ezzatron\Typhax\Lexer\Token::string
+   * @covers Ezzatron\Typhax\Lexer\Token::__toString
    * @group lexer
    * @group core
    */
@@ -76,7 +76,7 @@ class TokenTest extends \Ezzatron\Typhax\Test\TestCase
   }
 
   /**
-   * @covers Ezzatron\Typhax\Token::append
+   * @covers Ezzatron\Typhax\Lexer\Token::append
    * @group lexer
    * @group core
    */
@@ -108,6 +108,7 @@ class TokenTest extends \Ezzatron\Typhax\Test\TestCase
       array('BRACE_OPEN', Token::TOKEN_BRACE_OPEN),
       array('COLON', Token::TOKEN_COLON),
       array('COMMA', Token::TOKEN_COMMA),
+      array('END', Token::TOKEN_END),
       array('FLOAT', Token::TOKEN_FLOAT),
       array('GREATER_THAN', Token::TOKEN_GREATER_THAN),
       array('INTEGER', Token::TOKEN_INTEGER),
@@ -128,15 +129,18 @@ class TokenTest extends \Ezzatron\Typhax\Test\TestCase
   }
 
   /**
-   * @covers Ezzatron\Typhax\Token::name
-   * @covers Ezzatron\Typhax\Token::supported
-   * @covers Ezzatron\Typhax\Token::types
+   * @covers Ezzatron\Typhax\Lexer\Token::nameByType
+   * @covers Ezzatron\Typhax\Lexer\Token::name
+   * @covers Ezzatron\Typhax\Lexer\Token::supported
+   * @covers Ezzatron\Typhax\Lexer\Token::types
    * @dataProvider nameData
    * @group lexer
    * @group core
    */
   public function testNameAndSupported($expected, $type)
   {
+    $this->assertSame($expected, Token::nameByType($type));
+
     $reflector = new \ReflectionClass(__NAMESPACE__.'\Token');
     $property = $reflector->getProperty('types');
     $property->setAccessible(true);

@@ -9,20 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Ezzatron\Typhax;
+namespace Ezzatron\Typhax\AST;
 
-class Type
+class Type implements Node
 {
   /**
    * @param string $name
    */
   public function __construct($name)
   {
-    if (!is_string($name))
-    {
-      throw new \InvalidArgumentException('Type name must be a string.');
-    }
-
     $this->name = $name;
   }
 
@@ -40,11 +35,6 @@ class Type
    */
   public function setAttribute($name, $value)
   {
-    if (!is_string($name))
-    {
-      throw new \InvalidArgumentException('Attribute name must be a string.');
-    }
-
     $this->attributes[$name] = $value;
   }
 
@@ -57,15 +47,15 @@ class Type
   }
 
   /**
-   * @param Type $type
+   * @param Node $type
    */
-  public function addSubType(self $type)
+  public function addSubType(Node $type)
   {
     $this->subTypes[] = $type;
   }
 
   /**
-   * @return array<integer,Ezzatron\Typhax\Type>
+   * @return array<integer,Node>
    */
   public function subTypes()
   {
@@ -83,7 +73,7 @@ class Type
   protected $attributes = array();
 
   /**
-   * @var array<integer,Ezzatron\Typhax\Type>
+   * @var array<integer,Node>
    */
   protected $subTypes = array();
 }
