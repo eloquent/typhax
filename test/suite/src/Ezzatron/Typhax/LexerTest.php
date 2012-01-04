@@ -338,6 +338,13 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
     );
     $data[] = array($expected, $source);
 
+    // #16: Namespaced type name
+    $source = 'Foo\Bar\Baz';
+    $expected = array(
+      new Token(Token::TOKEN_STRING, 'Foo\Bar\Baz'),
+    );
+    $data[] = array($expected, $source);
+
     return $data;
   }
 
