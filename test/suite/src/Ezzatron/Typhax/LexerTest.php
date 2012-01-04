@@ -27,7 +27,7 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
     );
     $data[] = array($expected, $source);
 
-    // #1: Traversable with sub-type
+    // #1: Type with sub-type
     $source = 'type<subType>';
     $expected = array(
       new Token(Token::TOKEN_STRING, 'type'),
@@ -37,12 +37,15 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
     );
     $data[] = array($expected, $source);
 
-    // #2: Traversable with key type and sub-type
-    $source = 'type<keyType, subType>';
+    // #2: Type with multiple sub-types
+    $source = 'type<subType, subType, subType>';
     $expected = array(
       new Token(Token::TOKEN_STRING, 'type'),
       new Token(Token::TOKEN_LESS_THAN, '<'),
-      new Token(Token::TOKEN_STRING, 'keyType'),
+      new Token(Token::TOKEN_STRING, 'subType'),
+      new Token(Token::TOKEN_COMMA, ','),
+      new Token(Token::TOKEN_WHITESPACE, ' '),
+      new Token(Token::TOKEN_STRING, 'subType'),
       new Token(Token::TOKEN_COMMA, ','),
       new Token(Token::TOKEN_WHITESPACE, ' '),
       new Token(Token::TOKEN_STRING, 'subType'),
@@ -297,21 +300,40 @@ class LexerTest extends \Ezzatron\Typhax\Test\TestCase
     );
     $data[] = array($expected, $source);
 
-    // #14: Nested traversables
-    $source = 'type<keyType, type<keyType, subType>>';
+    // #14: Nested sub-types
+    $source = 'type<subType, subType<subSubType, subSubType>>';
     $expected = array(
       new Token(Token::TOKEN_STRING, 'type'),
       new Token(Token::TOKEN_LESS_THAN, '<'),
-      new Token(Token::TOKEN_STRING, 'keyType'),
-      new Token(Token::TOKEN_COMMA, ','),
-      new Token(Token::TOKEN_WHITESPACE, ' '),
-      new Token(Token::TOKEN_STRING, 'type'),
-      new Token(Token::TOKEN_LESS_THAN, '<'),
-      new Token(Token::TOKEN_STRING, 'keyType'),
+      new Token(Token::TOKEN_STRING, 'subType'),
       new Token(Token::TOKEN_COMMA, ','),
       new Token(Token::TOKEN_WHITESPACE, ' '),
       new Token(Token::TOKEN_STRING, 'subType'),
+      new Token(Token::TOKEN_LESS_THAN, '<'),
+      new Token(Token::TOKEN_STRING, 'subSubType'),
+      new Token(Token::TOKEN_COMMA, ','),
+      new Token(Token::TOKEN_WHITESPACE, ' '),
+      new Token(Token::TOKEN_STRING, 'subSubType'),
       new Token(Token::TOKEN_GREATER_THAN, '>'),
+      new Token(Token::TOKEN_GREATER_THAN, '>'),
+    );
+    $data[] = array($expected, $source);
+
+    // #15: Type with attributes and subtypes
+    $source = 'type(foo: bar)<subType, subType>';
+    $expected = array(
+      new Token(Token::TOKEN_STRING, 'type'),
+      new Token(Token::TOKEN_PARENTHESIS_OPEN, '('),
+      new Token(Token::TOKEN_STRING, 'foo'),
+      new Token(Token::TOKEN_COLON, ':'),
+      new Token(Token::TOKEN_WHITESPACE, ' '),
+      new Token(Token::TOKEN_STRING, 'bar'),
+      new Token(Token::TOKEN_PARENTHESIS_CLOSE, ')'),
+      new Token(Token::TOKEN_LESS_THAN, '<'),
+      new Token(Token::TOKEN_STRING, 'subType'),
+      new Token(Token::TOKEN_COMMA, ','),
+      new Token(Token::TOKEN_WHITESPACE, ' '),
+      new Token(Token::TOKEN_STRING, 'subType'),
       new Token(Token::TOKEN_GREATER_THAN, '>'),
     );
     $data[] = array($expected, $source);
