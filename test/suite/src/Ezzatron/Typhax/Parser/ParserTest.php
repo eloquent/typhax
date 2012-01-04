@@ -54,13 +54,13 @@ class ParserTest extends \Ezzatron\Typhax\Test\TestCase
     // #0: Empty string
     $source = '';
     $expectedClass = __NAMESPACE__.'\Exception\UnexpectedTokenException';
-    $expectedMessage = "Unexpected END at position 0. Expected STRING.";
+    $expectedMessage = 'Unexpected END at position 0. Expected STRING.';
     $data[] = array($expectedClass, $expectedMessage, $source);
 
     // #1: Type followed by non-attributes, non-subtypes
     $source = 'type{';
     $expectedClass = __NAMESPACE__.'\Exception\UnexpectedTokenException';
-    $expectedMessage = "Unexpected BRACE_OPEN at position 4. Expected END.";
+    $expectedMessage = 'Unexpected BRACE_OPEN at position 5. Expected one of PARENTHESIS_OPEN, LESS_THAN, PIPE, AND, END.';
     $data[] = array($expectedClass, $expectedMessage, $source);
 
     return $data;

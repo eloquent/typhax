@@ -21,6 +21,12 @@ class Parser
   public function __construct()
   {
     $this->lexer = new Lexer;
+
+    $this->typeTerminators = array(
+      Token::TOKEN_PIPE,
+      Token::TOKEN_AND,
+      Token::TOKEN_END,
+    );
   }
 
   /**
@@ -33,7 +39,7 @@ class Parser
     $this->tokens = $this->lexer->tokens($source);
     
     $type = $this->type();
-    $this->accept(Token::TOKEN_END);
+    $this->assert(Token::TOKEN_END);
 
     return $type;
   }
@@ -43,7 +49,23 @@ class Parser
    */
   protected function type()
   {
-    $type = new Type($this->accept(Token::TOKEN_STRING));
+    $type = new Type(
+      $this->assert(Token::TOKEN_STRING)->content()
+    );
+    next($this->tokens);
+
+    $token = $this->assert(array(
+      Token::TOKEN_PARENTHESIS_OPEN,
+      Token::TOKEN_LESS_THAN,
+      Token::TOKEN_PIPE,
+      Token::TOKEN_AND,
+      Token::TOKEN_END,
+    ));
+ 
+    if (in_array($token->type(), $this->typeTerminators, true))
+    {
+      return $type;
+    }
 
     return $type;
   }
@@ -53,36 +75,23 @@ class Parser
    *
    * @return Token|null
    */
-  protected function accept($types, $require = null)
+  protected function assert($types)
   {
     if (!is_array($types))
     {
       $types = array($types);
-    }
-    if (null === $require)
-    {
-      $require = true;
     }
 
     $token = current($this->tokens);
 
     if (!in_array($token->type(), $types, true))
     {
-      if ($require)
-      {
-        throw new Exception\UnexpectedTokenException(
-          $token->name()
-          , $this->position()
-          , $this->tokenNames($types)
-        );
-      }
-      else
-      {
-        return null;
-      }
+      throw new Exception\UnexpectedTokenException(
+        $token->name()
+        , $this->position()
+        , $this->tokenNames($types)
+      );
     }
-
-    next($this->tokens);
 
     return $token;
   }
@@ -95,7 +104,7 @@ class Parser
     $index = key($this->tokens);
 
     $source = '';
-    for ($i = 0; $i < $index; $i ++) {
+    for ($i = 0; $i <= $index; $i ++) {
       $source .= $this->tokens[$i]->content();
     }
 
@@ -122,6 +131,11 @@ class Parser
    * @var Lexer
    */
   protected $lexer;
+
+  /**
+   * @var array<integer|string>
+   */
+  protected $typeTerminators;
 
   /**
    * @var array<integer,Token>
