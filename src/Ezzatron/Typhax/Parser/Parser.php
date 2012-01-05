@@ -27,6 +27,11 @@ class Parser
       Token::TOKEN_AND,
       Token::TOKEN_END,
     );
+
+    $this->compositePrecedence = array(
+      Token::TOKEN_AND,
+      Token::TOKEN_PIPE,
+    );
   }
 
   /**
@@ -38,10 +43,121 @@ class Parser
   {
     $this->tokens = $this->lexer->tokens($source);
     
-    $type = $this->type();
+    $root = $this->typeOrComposite();
     $this->assert(Token::TOKEN_END);
 
-    return $type;
+    return $root;
+  }
+
+  /**
+   * @return Type|Composite
+   */
+  protected function typeOrComposite()
+  {
+    $types = array();
+    $separators = array();
+
+    while (true)
+    {
+      $types[] = $this->type();
+
+      $token = $this->assert(array(
+        Token::TOKEN_PIPE,
+        Token::TOKEN_AND,
+        Token::TOKEN_END,
+      ));
+      if (Token::TOKEN_END === $token->type())
+      {
+        break;
+      }
+      next($this->tokens);
+      
+      $separators[] = $token->type();
+    }
+
+    if (1 === count($types))
+    {
+      return array_pop($types);
+    }
+
+    return $this->resolveComposite($types, $separators);
+  }
+
+  /**
+   * @param array<Type> $types
+   * @param array<integer|string> $separators
+   *
+   * @return Composite
+   */
+  protected function resolveComposite(array $types, array $separators)
+  {
+    foreach ($this->compositePrecedence as $currentSeparator)
+    {
+//      echo 'Starting separator '.$currentSeparator.PHP_EOL;
+
+      $numTypes = count($types);
+      $newTypes = array();
+      $newSeparators = array();
+      $composite = null;
+
+      for ($i = 0; $i < $numTypes; $i ++)
+      {
+        $type = current($types);
+        next($types);
+        $separator = current($separators);
+        next($separators);
+
+//        echo 'This separator is '.var_export($separator, true).PHP_EOL;
+
+        if (
+          !$composite
+          && $separator === $currentSeparator
+        )
+        {
+//          echo 'Starting a new composite of separator '.$currentSeparator.PHP_EOL;
+
+          $composite = new Composite($currentSeparator);
+        }
+
+        if ($composite)
+        {
+//          echo 'Adding '.get_class($type).' to composite'.PHP_EOL;
+
+          $composite->addType($type);
+        }
+        else
+        {
+//          echo 'Adding '.get_class($type).' to new types'.PHP_EOL;
+
+          $newTypes[] = $type;
+          $newSeparators[] = $separator;
+        }
+
+        if (
+          $composite
+          && $separator !== $currentSeparator
+        )
+        {
+//          echo 'Closing composite of type '.get_class($composite).' and adding to new types'.PHP_EOL;
+
+          $newTypes[] = $composite;
+          $newSeparators[] = $separator;
+          $composite = null;
+        }
+      }
+
+//      echo 'Setting new types'.PHP_EOL;
+
+      $types = $newTypes;
+      $separators = $newSeparators;
+    }
+
+//    echo 'Done'.PHP_EOL;
+//    ob_flush();
+
+    $composite = array_pop($types);
+
+    return $composite;
   }
 
   /**
@@ -136,6 +252,11 @@ class Parser
    * @var array<integer|string>
    */
   protected $typeTerminators;
+
+  /**
+   * @var array<integer|string>
+   */
+  protected $compositePrecedence;
 
   /**
    * @var array<integer,Token>
