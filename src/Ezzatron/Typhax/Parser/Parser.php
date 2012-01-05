@@ -12,178 +12,197 @@
 namespace Ezzatron\Typhax\Parser;
 
 use Ezzatron\Typhax\AST\Composite;
+use Ezzatron\Typhax\AST\Node;
 use Ezzatron\Typhax\AST\Type;
 use Ezzatron\Typhax\Lexer\Lexer;
 use Ezzatron\Typhax\Lexer\Token;
 
 class Parser
 {
-  public function __construct()
+  public function __construct(Lexer $lexer = NULL)
   {
-    $this->lexer = new Lexer;
+    $this->lexer = $lexer ?: new Lexer;
 
-    $this->typeTerminators = array(
-      Token::TOKEN_PIPE,
-      Token::TOKEN_AND,
-      Token::TOKEN_END,
-    );
-
+    //
+    // You can add any new operators here easily, highest precedence at the end.
+    //
     $this->compositePrecedence = array(
-      Token::TOKEN_AND,
       Token::TOKEN_PIPE,
+      Token::TOKEN_AND,
     );
   }
 
   /**
    * @param string $source
-   * 
-   * @return Type
+   *
+   * @return Node
    */
   public function parse($source)
   {
     $this->tokens = $this->lexer->tokens($source);
-    
-    $root = $this->typeOrComposite();
+
+    $node = $this->parseType();
+
+    //
+    // This assertion is only here to provide some useful error reporting and to make the tests pass without changing them.
+    // The assertion is NOT needed to guarantee successful parsing.
+    //
+    // I think it would be a good idea to move away from an "expected token" style of error reporting.
+    //
+    $this->assert(
+      array(
+        Token::TOKEN_AND,
+        Token::TOKEN_PIPE,
+        Token::TOKEN_END
+      )
+    );
+
+    if (Token::TOKEN_END !== current($this->tokens)->type()) {
+      $node = $this->parseComposite($node);
+    }
+
     $this->assert(Token::TOKEN_END);
 
-    return $root;
-  }
-
-  /**
-   * @return Type|Composite
-   */
-  protected function typeOrComposite()
-  {
-    $types = array();
-    $separators = array();
-
-    while (true)
-    {
-      $types[] = $this->type();
-
-      $token = $this->assert(array(
-        Token::TOKEN_PIPE,
-        Token::TOKEN_AND,
-        Token::TOKEN_END,
-      ));
-      if (Token::TOKEN_END === $token->type())
-      {
-        break;
-      }
-      next($this->tokens);
-      
-      $separators[] = $token->type();
-    }
-
-    if (1 === count($types))
-    {
-      return array_pop($types);
-    }
-
-    return $this->resolveComposite($types, $separators);
-  }
-
-  /**
-   * @param array<Type> $types
-   * @param array<integer|string> $separators
-   *
-   * @return Composite
-   */
-  protected function resolveComposite(array $types, array $separators)
-  {
-    foreach ($this->compositePrecedence as $currentSeparator)
-    {
-//      echo 'Starting separator '.$currentSeparator.PHP_EOL;
-
-      $numTypes = count($types);
-      $newTypes = array();
-      $newSeparators = array();
-      $composite = null;
-
-      for ($i = 0; $i < $numTypes; $i ++)
-      {
-        $type = current($types);
-        next($types);
-        $separator = current($separators);
-        next($separators);
-
-//        echo 'This separator is '.var_export($separator, true).PHP_EOL;
-
-        if (
-          !$composite
-          && $separator === $currentSeparator
-        )
-        {
-//          echo 'Starting a new composite of separator '.$currentSeparator.PHP_EOL;
-
-          $composite = new Composite($currentSeparator);
-        }
-
-        if ($composite)
-        {
-//          echo 'Adding '.get_class($type).' to composite'.PHP_EOL;
-
-          $composite->addType($type);
-        }
-        else
-        {
-//          echo 'Adding '.get_class($type).' to new types'.PHP_EOL;
-
-          $newTypes[] = $type;
-          $newSeparators[] = $separator;
-        }
-
-        if (
-          $composite
-          && $separator !== $currentSeparator
-        )
-        {
-//          echo 'Closing composite of type '.get_class($composite).' and adding to new types'.PHP_EOL;
-
-          $newTypes[] = $composite;
-          $newSeparators[] = $separator;
-          $composite = null;
-        }
-      }
-
-//      echo 'Setting new types'.PHP_EOL;
-
-      $types = $newTypes;
-      $separators = $newSeparators;
-    }
-
-//    echo 'Done'.PHP_EOL;
-//    ob_flush();
-
-    $composite = array_pop($types);
-
-    return $composite;
+    return $node;
   }
 
   /**
    * @return Type
    */
-  protected function type()
+  protected function parseType()
   {
     $type = new Type(
       $this->assert(Token::TOKEN_STRING)->content()
     );
-    next($this->tokens);
 
-    $token = $this->assert(array(
-      Token::TOKEN_PARENTHESIS_OPEN,
-      Token::TOKEN_LESS_THAN,
-      Token::TOKEN_PIPE,
-      Token::TOKEN_AND,
-      Token::TOKEN_END,
-    ));
- 
-    if (in_array($token->type(), $this->typeTerminators, true))
+    $token = next($this->tokens);
+
+    //
+    // As above, this assertion is only here to provide some useful error reporting and to make the tests pass without changing them.
+    // The assertion is NOT needed to guarantee successful parsing of a type.
+    //
+    // It would generally be considered poor form to do this assertion here because it requires
+    // the parseType() method to know what tokens are part of a "completely" unrelated grammar production
+    // namely the "composite".
+    //
+    $this->assert(
+      array(
+        Token::TOKEN_PARENTHESIS_OPEN,
+        Token::TOKEN_LESS_THAN,
+        Token::TOKEN_PIPE,
+        Token::TOKEN_AND,
+        Token::TOKEN_END,
+      )
+    );
+
+    if (Token::TOKEN_LESS_THAN === $token->type())
     {
-      return $type;
+      $this->parseSubTypes($type);
+    }
+
+    //
+    // See notes as above ...
+    //
+    $this->assert(
+      array(
+        Token::TOKEN_PARENTHESIS_OPEN,
+        Token::TOKEN_PIPE,
+        Token::TOKEN_AND,
+        Token::TOKEN_END,
+      )
+    );
+
+    if (Token::TOKEN_PARENTHESIS_OPEN === $token->type())
+    {
+      $this->parseAttributes($type);
     }
 
     return $type;
+  }
+
+  /**
+   * @param Node $types
+   * @param integer $minimum_precedence
+   *
+   * @return Node
+   */
+  protected function parseComposite(Node $left, $minimum_precedence = 0)
+  {
+    while ($minimum_precedence <= ($precedence = $this->getPrecedence()))
+    {
+      $operator = current($this->tokens)->content();
+
+      next($this->tokens);
+
+      $right = $this->parseType();
+
+      if ($precedence < $this->getPrecedence())
+      {
+        $right = $this->parseComposite($right, $precedence + 1);
+      }
+
+      $left = $this->makeComposite($operator, $left, $right);
+    }
+
+    return $left;
+  }
+  
+  protected function parseSubTypes(Type $type)
+  {
+    throw new \Exception('Not implemented.');
+  }
+
+  protected function parseAttributes(Type $type)
+  {
+    throw new \Exception('Not implemented.');
+  }
+
+  /**
+   * Construct a Composite instance from left and right type expressions.
+   *
+   * Re-uses an existing left-hand-side composite if the operator matches, otherwise
+   * a new composite AST node is created.
+   *
+   * @param string $operator
+   * @param Node $left
+   * @param Node $right
+   *
+   * @return Composite
+   */
+  protected function makeComposite($operator, Node $left, Node $right)
+  {
+    if ($left instanceof Composite && $left->separator() === $operator)
+    {
+      $left->addType($right);
+      return $left;
+    }
+
+    $composite = new Composite($operator);
+    $composite->addType($left);
+    $composite->addType($right);
+    return $composite;
+  }
+
+  /**
+   * @return integer
+   */
+  protected function getPrecedence() {
+    $token = current($this->tokens);
+    if ($token)
+    {
+      $precedence = array_search(
+        current($this->tokens)->type(),
+        $this->compositePrecedence,
+        TRUE
+      );
+
+      if (FALSE !== $precedence)
+      {
+        return $precedence;
+      }
+    }
+
+    return -1;
   }
 
   /**
@@ -247,11 +266,6 @@ class Parser
    * @var Lexer
    */
   protected $lexer;
-
-  /**
-   * @var array<integer|string>
-   */
-  protected $typeTerminators;
 
   /**
    * @var array<integer|string>
