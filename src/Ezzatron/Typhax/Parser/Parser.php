@@ -138,7 +138,7 @@ class Parser
     if ($token)
     {
       $precedence = array_search(
-        current($this->tokens)->type()
+        $token->type()
         , $this->compositePrecedence
         , true
       );
