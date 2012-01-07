@@ -73,6 +73,14 @@ class Parser
 
     $token = next($this->tokens);
 
+    if (Token::TOKEN_LESS_THAN === current($this->tokens)->type())
+    {
+      foreach ($this->parseSubTypes() as $subType)
+      {
+        $type->addSubType($subType);
+      }
+    }
+
     if (Token::TOKEN_PARENTHESIS_OPEN === current($this->tokens)->type())
     {
       foreach ($this->parseAttributes() as $name => $value)
@@ -105,6 +113,39 @@ class Parser
     next($this->tokens);
 
     return $attributes;
+  }
+
+  /**
+   * @return array<Node>
+   */
+  protected function parseSubTypes()
+  {
+    $this->assert(Token::TOKEN_LESS_THAN);
+    next($this->tokens);
+
+    if (Token::TOKEN_GREATER_THAN === current($this->tokens)->type())
+    {
+      next($this->tokens);
+
+      return array();
+    }
+
+    $types = array();
+    while (true)
+    {
+      $types[] = $this->parseType();
+
+      if (Token::TOKEN_COMMA !== current($this->tokens)->type())
+      {
+        break;
+      }
+      next($this->tokens);
+    }
+
+    $this->assert(Token::TOKEN_GREATER_THAN);
+    next($this->tokens);
+
+    return $types;
   }
 
   /**

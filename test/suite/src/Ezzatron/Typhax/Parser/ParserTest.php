@@ -138,6 +138,36 @@ class ParserTest extends \Ezzatron\Typhax\Test\TestCase
     $expected->setAttribute('baz', array());
     $data[] = array($expected, $source);
 
+    // #12: Empty subtypes
+    $source = 'foo<>';
+    $expected = new Type('foo');
+    $data[] = array($expected, $source);
+
+    // #13: Basic subtypes
+    $source = 'foo<bar,baz>';
+    $expected = new Type('foo');
+    $expected->addSubType(new Type('bar'));
+    $expected->addSubType(new Type('baz'));
+    $data[] = array($expected, $source);
+
+    // #14: Nested subtypes
+    $source = 'foo<bar,baz<qux,doom>>';
+    $expectedBaz = new Type('baz');
+    $expectedBaz->addSubType(new Type('qux'));
+    $expectedBaz->addSubType(new Type('doom'));
+    $expected = new Type('foo');
+    $expected->addSubType(new Type('bar'));
+    $expected->addSubType($expectedBaz);
+    $data[] = array($expected, $source);
+
+    // #15: Mixed subtypes and attributes
+    $source = 'foo<bar,baz>(qux:doom)';
+    $expected = new Type('foo');
+    $expected->addSubType(new Type('bar'));
+    $expected->addSubType(new Type('baz'));
+    $expected->setAttribute('qux', 'doom');
+    $data[] = array($expected, $source);
+
     return $data;
   }
 
