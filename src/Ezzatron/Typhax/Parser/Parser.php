@@ -19,17 +19,26 @@ use Ezzatron\Typhax\Lexer\Token;
 
 class Parser
 {
-  public function __construct(Lexer $lexer = NULL)
+  public function __construct(Lexer $lexer = null)
   {
-    $this->lexer = $lexer ?: new Lexer;
+    if (null === $lexer)
+    {
+      $lexer = new Lexer;
+    }
+    $this->lexer = $lexer;
 
-    //
-    // You can add any new operators here easily, highest precedence at the end.
-    //
     $this->compositePrecedence = array(
       Token::TOKEN_PIPE,
       Token::TOKEN_AND,
     );
+  }
+
+  /**
+   * @return Lexer
+   */
+  public function lexer()
+  {
+    return $this->lexer;
   }
 
   /**
@@ -42,20 +51,6 @@ class Parser
     $this->tokens = $this->lexer->tokens($source);
 
     $node = $this->parseType();
-
-    //
-    // This assertion is only here to provide some useful error reporting and to make the tests pass without changing them.
-    // The assertion is NOT needed to guarantee successful parsing.
-    //
-    // I think it would be a good idea to move away from an "expected token" style of error reporting.
-    //
-    $this->assert(
-      array(
-        Token::TOKEN_AND,
-        Token::TOKEN_PIPE,
-        Token::TOKEN_END
-      )
-    );
 
     if (Token::TOKEN_END !== current($this->tokens)->type()) {
       $node = $this->parseComposite($node);
@@ -76,46 +71,6 @@ class Parser
     );
 
     $token = next($this->tokens);
-
-    //
-    // As above, this assertion is only here to provide some useful error reporting and to make the tests pass without changing them.
-    // The assertion is NOT needed to guarantee successful parsing of a type.
-    //
-    // It would generally be considered poor form to do this assertion here because it requires
-    // the parseType() method to know what tokens are part of a "completely" unrelated grammar production
-    // namely the "composite".
-    //
-    $this->assert(
-      array(
-        Token::TOKEN_PARENTHESIS_OPEN,
-        Token::TOKEN_LESS_THAN,
-        Token::TOKEN_PIPE,
-        Token::TOKEN_AND,
-        Token::TOKEN_END,
-      )
-    );
-
-    if (Token::TOKEN_LESS_THAN === $token->type())
-    {
-      $this->parseSubTypes($type);
-    }
-
-    //
-    // See notes as above ...
-    //
-    $this->assert(
-      array(
-        Token::TOKEN_PARENTHESIS_OPEN,
-        Token::TOKEN_PIPE,
-        Token::TOKEN_AND,
-        Token::TOKEN_END,
-      )
-    );
-
-    if (Token::TOKEN_PARENTHESIS_OPEN === $token->type())
-    {
-      $this->parseAttributes($type);
-    }
 
     return $type;
   }
@@ -146,16 +101,6 @@ class Parser
 
     return $left;
   }
-  
-  protected function parseSubTypes(Type $type)
-  {
-    throw new \Exception('Not implemented.');
-  }
-
-  protected function parseAttributes(Type $type)
-  {
-    throw new \Exception('Not implemented.');
-  }
 
   /**
    * Construct a Composite instance from left and right type expressions.
@@ -174,12 +119,14 @@ class Parser
     if ($left instanceof Composite && $left->separator() === $operator)
     {
       $left->addType($right);
+
       return $left;
     }
 
     $composite = new Composite($operator);
     $composite->addType($left);
     $composite->addType($right);
+
     return $composite;
   }
 
@@ -191,12 +138,12 @@ class Parser
     if ($token)
     {
       $precedence = array_search(
-        current($this->tokens)->type(),
-        $this->compositePrecedence,
-        TRUE
+        current($this->tokens)->type()
+        , $this->compositePrecedence
+        , true
       );
 
-      if (FALSE !== $precedence)
+      if (false !== $precedence)
       {
         return $precedence;
       }

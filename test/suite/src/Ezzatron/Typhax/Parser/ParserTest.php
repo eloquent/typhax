@@ -14,6 +14,7 @@ namespace Ezzatron\Typhax\Parser;
 use Ezzatron\Typhax\AST\Composite;
 use Ezzatron\Typhax\AST\Node;
 use Ezzatron\Typhax\AST\Type;
+use Ezzatron\Typhax\Lexer\Lexer;
 use Ezzatron\Typhax\Lexer\Token;
 
 class ParserTest extends \Ezzatron\Typhax\Test\TestCase
@@ -124,7 +125,7 @@ class ParserTest extends \Ezzatron\Typhax\Test\TestCase
     // #1: Type followed by non-attributes, non-subtypes
     $source = 'type{';
     $expectedClass = __NAMESPACE__.'\Exception\UnexpectedTokenException';
-    $expectedMessage = 'Unexpected BRACE_OPEN at position 5. Expected one of PARENTHESIS_OPEN, LESS_THAN, PIPE, AND, END.';
+    $expectedMessage = 'Unexpected BRACE_OPEN at position 5. Expected END.';
     $data[] = array($expectedClass, $expectedMessage, $source);
 
     return $data;
@@ -142,5 +143,17 @@ class ParserTest extends \Ezzatron\Typhax\Test\TestCase
 
     $this->setExpectedException($expectedClass, $expectedMessage);
     $parser->parse($source);
+  }
+
+  /**
+   * @covers Ezzatron\Typhax\Parser\Parser::__construct
+   * @covers Ezzatron\Typhax\Parser\Parser::lexer
+   */
+  public function testLexer()
+  {
+    $lexer = new Lexer;
+    $parser = new Parser($lexer);
+
+    $this->assertSame($lexer, $parser->lexer());
   }
 }
