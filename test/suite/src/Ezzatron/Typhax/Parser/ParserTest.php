@@ -93,6 +93,51 @@ class ParserTest extends \Ezzatron\Typhax\Test\TestCase
     $expected->addType($expectedDoomSplat);
     $data[] = array($expected, $source);
 
+    // #7: Empty attributes
+    $source = 'foo()';
+    $expected = new Type('foo');
+    $data[] = array($expected, $source);
+
+    // #8: Basic attributes
+    $source = 'foo(bar:"baz",\'qux\':666,doom:.666,splat:null,pip:true,pop:false)';
+    $expected = new Type('foo');
+    $expected->setAttribute('bar', 'baz');
+    $expected->setAttribute('qux', 666);
+    $expected->setAttribute('doom', .666);
+    $expected->setAttribute('splat', null);
+    $expected->setAttribute('pip', true);
+    $expected->setAttribute('pop', false);
+    $data[] = array($expected, $source);
+
+    // #9: Nested hash attribute
+    $source = 'foo(bar:{baz:{qux:doom}})';
+    $expected = new Type('foo');
+    $expected->setAttribute('bar', array(
+      'baz' => array(
+        'qux' => 'doom',
+      ),
+    ));
+    $data[] = array($expected, $source);
+
+    // #10: Nested array attribute
+    $source = 'foo(bar:[baz,[qux,doom]])';
+    $expected = new Type('foo');
+    $expected->setAttribute('bar', array(
+      'baz',
+      array(
+        'qux',
+        'doom',
+      ),
+    ));
+    $data[] = array($expected, $source);
+
+    // #11: Empty hash and array
+    $source = 'foo(bar:{},baz:[])';
+    $expected = new Type('foo');
+    $expected->setAttribute('bar', array());
+    $expected->setAttribute('baz', array());
+    $data[] = array($expected, $source);
+
     return $data;
   }
 
@@ -105,8 +150,14 @@ class ParserTest extends \Ezzatron\Typhax\Test\TestCase
   public function testParser(Node $expected, $source)
   {
     $parser = new Parser;
+    $actual = $parser->parse($source);
 
-    $this->assertEquals($expected, $parser->parse($source));
+    $this->assertEquals($expected, $actual);
+
+    if ($expected instanceof Type)
+    {
+      $this->assertSame($expected->attributes(), $actual->attributes());
+    }
   }
 
   /**
