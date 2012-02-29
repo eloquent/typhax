@@ -16,7 +16,7 @@ require dirname(__DIR__).DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'paths.ph
 // typhax
 require TYPHAX_SRC_DIR.DIRECTORY_SEPARATOR.'include.php';
 
-$parser = new Ezzatron\Typhax\Parser\Parser;
+$parser = new Eloquent\Typhax\Parser\Parser;
 $iterations = 1000;
 $startTime = microtime(true);
 
