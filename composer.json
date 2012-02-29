@@ -1,0 +1,32 @@
+/*
+ * This file is part of the Typhax package.
+ *
+ * Copyright © 2011 Erin Millard
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+{
+    "name": "eloquent/typhax",
+    "type": "library",
+    "description": "A flexible PHP type hinting syntax.",
+    "keywords": ["type","hint","hinting","syntax","parser"],
+    "homepage": "https://github.com/eloquent/typhax",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Erin Millard",
+            "email": "ezzatron@gmail.com",
+            "homepage": "http://ezzatron.com/"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "Eloquent": "src"
+        }
+    }
+}
