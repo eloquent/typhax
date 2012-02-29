@@ -1,0 +1,8 @@
+language: php
+before_script:
+  - pyrus install pear.digitalsandwich.com/Phake
+  - phpenv rehash
+script: test/bin/run
+php:
+  - 5.3
+  - 5.4
