@@ -14,11 +14,11 @@
 require dirname(__DIR__).DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'paths.php';
 
 // get Composer
-$composerPath = TYPHAX_TEST_BIN_DIR.DIRECTORY_SEPARATOR.'composer.phar';
+$composerPath = LQNT_TEST_BIN_DIR.DIRECTORY_SEPARATOR.'composer.phar';
 file_put_contents($composerPath, file_get_contents('http://getcomposer.org/composer.phar'));
 
 // install vendors
 $oldWorkingPath = getcwd();
-chdir(TYPHAX_ROOT_DIR);
+chdir(LQNT_ROOT_DIR);
 passthru('php '.escapeshellarg($composerPath).' install');
 chdir($oldWorkingPath);

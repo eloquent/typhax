@@ -13,5 +13,5 @@
 // path constants
 require dirname(__DIR__).DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'paths.php';
 
-passthru(TYPHAX_TEST_BIN_DIR.DIRECTORY_SEPARATOR.'install-vendors');
-passthru(TYPHAX_TEST_BIN_DIR.DIRECTORY_SEPARATOR.'run');
+passthru(LQNT_TEST_BIN_DIR.DIRECTORY_SEPARATOR.'install-vendors');
+passthru(LQNT_TEST_BIN_DIR.DIRECTORY_SEPARATOR.'run');
