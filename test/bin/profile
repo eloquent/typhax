@@ -13,8 +13,8 @@
 // path constants
 require dirname(__DIR__).DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'paths.php';
 
-// typhax
-require TYPHAX_SRC_DIR.DIRECTORY_SEPARATOR.'include.php';
+// use Composer for autoloading
+$autoloader = require TYPHAX_VENDOR_DIR.DIRECTORY_SEPARATOR.'.composer'.DIRECTORY_SEPARATOR.'autoload.php';
 
 $parser = new Eloquent\Typhax\Parser\Parser;
 $iterations = 1000;
