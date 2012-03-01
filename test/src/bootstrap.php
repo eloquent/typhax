@@ -18,8 +18,6 @@ require __DIR__.'/paths.php';
 require 'Phake.php';
 Phake::setClient(Phake::CLIENT_PHPUNIT);
 
-// include Typhax
-require TYPHAX_SRC_DIR.DIRECTORY_SEPARATOR.'include.php';
-
-// include test fixtures
-require TYPHAX_TEST_SRC_DIR.DIRECTORY_SEPARATOR.'include.php';
+// use Composer for autoloading
+$autoloader = require TYPHAX_VENDOR_DIR.DIRECTORY_SEPARATOR.'.composer'.DIRECTORY_SEPARATOR.'autoload.php';
+$autoloader->add('Eloquent', TYPHAX_TEST_SRC_DIR);
