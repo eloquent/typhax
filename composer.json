@@ -19,6 +19,5 @@
         "psr-0": {
             "Eloquent": "src"
         }
-    },
-    "dist": "https://github.com/eloquent/typhax/zipball/master"
+    }
 }
