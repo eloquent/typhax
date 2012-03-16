@@ -17,6 +17,7 @@ class LogicExceptionTest extends \Eloquent\Typhax\Test\TestCase
 {
   /**
    * @covers Eloquent\Typhax\Exception\LogicException
+   * @covers Eloquent\Typhax\Exception\Exception
    * @group exceptions
    * @group core
    */
