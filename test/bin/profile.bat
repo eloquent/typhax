@@ -1,7 +1,7 @@
 @echo off
 
 REM
-REM  This file is part of the Typhoon package.
+REM  This file is part of the Typhax package.
 REM
 REM  Copyright © 2011 Erin Millard
 REM
