@@ -1,5 +1,11 @@
 {
-    "hash": "fbfc78061426b53150062bf9c24f4da7",
-    "packages": [],
+    "hash": "106444ccfbd44270f57a891e498f565a",
+    "packages": [
+        {
+            "package": "eloquent/enumeration",
+            "version": "dev-master",
+            "source-reference": "9897833001529704facbdf9720b79e90bef000c8"
+        }
+    ],
     "aliases": []
 }
