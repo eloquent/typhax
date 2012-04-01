@@ -41,5 +41,6 @@ final class IntrinsicTypeName extends Enumeration
   const NAME_STRING = 'string';
   const NAME_STRINGABLE = 'stringable';
   const NAME_TRAVERSABLE = 'traversable';
+  const NAME_TUPLE = 'tuple';
   const NAME_TYPE_NAME = 'type_name';
 }

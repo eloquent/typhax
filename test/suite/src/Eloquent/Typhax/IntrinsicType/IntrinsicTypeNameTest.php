@@ -46,6 +46,7 @@ class IntrinsicTypeNameTest extends \Eloquent\Typhax\Test\TestCase
       'NAME_STRING' => IntrinsicTypeName::NAME_STRING(),
       'NAME_STRINGABLE' => IntrinsicTypeName::NAME_STRINGABLE(),
       'NAME_TRAVERSABLE' => IntrinsicTypeName::NAME_TRAVERSABLE(),
+      'NAME_TUPLE' => IntrinsicTypeName::NAME_TUPLE(),
       'NAME_TYPE_NAME' => IntrinsicTypeName::NAME_TYPE_NAME(),
     );
 
@@ -84,6 +85,7 @@ class IntrinsicTypeNameTest extends \Eloquent\Typhax\Test\TestCase
       array('NAME_STRING', 'string'),
       array('NAME_STRINGABLE', 'stringable'),
       array('NAME_TRAVERSABLE', 'traversable'),
+      array('NAME_TUPLE', 'tuple'),
       array('NAME_TYPE_NAME', 'type_name'),
     );
   }
