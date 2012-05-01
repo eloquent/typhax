@@ -18,21 +18,21 @@ final class IntrinsicTypeAlias extends Multiton
   /**
    * @return string
    */
-  public function value()
+  public function _value()
   {
-    return $this->value;
+    return $this->_value;
   }
   /**
    * @return string
    */
-  public function typeName()
+  public function _typeName()
   {
-    return $this->typeName;
+    return $this->_typeName;
   }
 
-  protected static function initialize()
+  protected static function _initialize()
   {
-    parent::initialize();
+    parent::_initialize();
 
     new static('ALIAS_BOOL', 'bool', 'boolean');
     new static('ALIAS_CALLABLE', 'callable', 'callback');
@@ -53,17 +53,17 @@ final class IntrinsicTypeAlias extends Multiton
   {
     parent::__construct($key);
 
-    $this->value = $value;
-    $this->typeName = $typeName;
+    $this->_value = $value;
+    $this->_typeName = $typeName;
   }
 
   /**
    * @var string
    */
-  protected $value;
+  protected $_value;
 
   /**
    * @var string
    */
-  protected $typeName;
+  protected $_typeName;
 }

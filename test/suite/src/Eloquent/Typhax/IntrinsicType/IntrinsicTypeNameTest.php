@@ -50,7 +50,7 @@ class IntrinsicTypeNameTest extends \Eloquent\Typhax\Test\TestCase
       'NAME_TYPE_NAME' => IntrinsicTypeName::NAME_TYPE_NAME(),
     );
 
-    $this->assertSame($expected, IntrinsicTypeName::instances());
+    $this->assertSame($expected, IntrinsicTypeName::_instances());
   }
 
   /**
@@ -97,6 +97,6 @@ class IntrinsicTypeNameTest extends \Eloquent\Typhax\Test\TestCase
    */
   public function testValues($key, $value)
   {
-    $this->assertSame($value, IntrinsicTypeName::get($key)->value());
+    $this->assertSame($value, IntrinsicTypeName::_get($key)->_value());
   }
 }

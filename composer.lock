@@ -4,8 +4,11 @@
         {
             "package": "eloquent/enumeration",
             "version": "dev-master",
-            "source-reference": "9897833001529704facbdf9720b79e90bef000c8"
+            "source-reference": "355baeca34cba8c0ea82d7a0cf397a2a825d7c37"
         }
     ],
-    "aliases": []
+    "packages-dev": null,
+    "aliases": [
+
+    ]
 }
