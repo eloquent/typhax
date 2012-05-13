@@ -14,19 +14,12 @@ namespace Eloquent\Typhax\Parser;
 use Eloquent\Typhax\AST\Composite;
 use Eloquent\Typhax\AST\Node;
 use Eloquent\Typhax\AST\Type;
-use Eloquent\Typhax\Lexer\Lexer;
 use Eloquent\Typhax\Lexer\Token;
 
 class Parser
 {
-  public function __construct(Lexer $lexer = null)
+  public function __construct()
   {
-    if (null === $lexer)
-    {
-      $lexer = new Lexer;
-    }
-    $this->lexer = $lexer;
-
     $this->compositePrecedence = array(
       Token::TOKEN_PIPE,
       Token::TOKEN_AND,
@@ -34,56 +27,48 @@ class Parser
   }
 
   /**
-   * @return Lexer
-   */
-  public function lexer()
-  {
-    return $this->lexer;
-  }
-
-  /**
-   * @param string $source
+   * @param array<integer,Token> &$tokens
    *
    * @return Node
    */
-  public function parse($source)
+  public function parse(array &$tokens)
   {
-    $this->tokens = $this->lexer->tokens($source);
+    $node = $this->parseType($tokens);
 
-    $node = $this->parseType();
-
-    if (Token::TOKEN_END !== current($this->tokens)->type())
+    if (Token::TOKEN_END !== current($tokens)->type())
     {
-      $node = $this->parseComposite($node);
+      $node = $this->parseComposite($tokens, $node);
     }
 
-    $this->assert(Token::TOKEN_END);
+    $this->assert($tokens, Token::TOKEN_END);
 
     return $node;
   }
 
   /**
+   * @param array<integer,Token> &$tokens
+   *
    * @return Type
    */
-  protected function parseType()
+  protected function parseType(array &$tokens)
   {
     $type = new Type(
-      $this->assert(Token::TOKEN_STRING)->content()
+      $this->assert($tokens, Token::TOKEN_STRING)->content()
     );
 
-    $token = next($this->tokens);
+    $token = next($tokens);
 
-    if (Token::TOKEN_LESS_THAN === current($this->tokens)->type())
+    if (Token::TOKEN_LESS_THAN === current($tokens)->type())
     {
-      foreach ($this->parseSubTypes() as $subType)
+      foreach ($this->parseSubTypes($tokens) as $subType)
       {
         $type->addSubType($subType);
       }
     }
 
-    if (Token::TOKEN_PARENTHESIS_OPEN === current($this->tokens)->type())
+    if (Token::TOKEN_PARENTHESIS_OPEN === current($tokens)->type())
     {
-      foreach ($this->parseAttributes() as $name => $value)
+      foreach ($this->parseAttributes($tokens) as $name => $value)
       {
         $type->setAttribute($name, $value);
       }
@@ -93,39 +78,43 @@ class Parser
   }
 
   /**
+   * @param array<integer,Token> &$tokens
+   *
    * @return array
    */
-  protected function parseAttributes()
+  protected function parseAttributes(array &$tokens)
   {
-    $this->assert(Token::TOKEN_PARENTHESIS_OPEN);
-    next($this->tokens);
+    $this->assert($tokens, Token::TOKEN_PARENTHESIS_OPEN);
+    next($tokens);
 
-    if (Token::TOKEN_PARENTHESIS_CLOSE === current($this->tokens)->type())
+    if (Token::TOKEN_PARENTHESIS_CLOSE === current($tokens)->type())
     {
-      next($this->tokens);
+      next($tokens);
 
       return array();
     }
 
-    $attributes = $this->parseHashContents();
+    $attributes = $this->parseHashContents($tokens);
 
-    $this->assert(Token::TOKEN_PARENTHESIS_CLOSE);
-    next($this->tokens);
+    $this->assert($tokens, Token::TOKEN_PARENTHESIS_CLOSE);
+    next($tokens);
 
     return $attributes;
   }
 
   /**
+   * @param array<integer,Token> &$tokens
+   *
    * @return array<Node>
    */
-  protected function parseSubTypes()
+  protected function parseSubTypes(array &$tokens)
   {
-    $this->assert(Token::TOKEN_LESS_THAN);
-    next($this->tokens);
+    $this->assert($tokens, Token::TOKEN_LESS_THAN);
+    next($tokens);
 
-    if (Token::TOKEN_GREATER_THAN === current($this->tokens)->type())
+    if (Token::TOKEN_GREATER_THAN === current($tokens)->type())
     {
-      next($this->tokens);
+      next($tokens);
 
       return array();
     }
@@ -133,27 +122,29 @@ class Parser
     $types = array();
     while (true)
     {
-      $types[] = $this->parseType();
+      $types[] = $this->parseType($tokens);
 
-      if (Token::TOKEN_COMMA !== current($this->tokens)->type())
+      if (Token::TOKEN_COMMA !== current($tokens)->type())
       {
         break;
       }
-      next($this->tokens);
+      next($tokens);
     }
 
-    $this->assert(Token::TOKEN_GREATER_THAN);
-    next($this->tokens);
+    $this->assert($tokens, Token::TOKEN_GREATER_THAN);
+    next($tokens);
 
     return $types;
   }
 
   /**
+   * @param array<integer,Token> &$tokens
+   *
    * @return mixed
    */
-  protected function parseValue()
+  protected function parseValue(array &$tokens)
   {
-    $token = $this->assert(array(
+    $token = $this->assert($tokens, array(
       Token::TOKEN_STRING,
       Token::TOKEN_STRING_QUOTED,
       Token::TOKEN_INTEGER,
@@ -164,18 +155,18 @@ class Parser
       Token::TOKEN_BRACE_OPEN,
       Token::TOKEN_SQUARE_BRACKET_OPEN,
     ));
-    
+
     if (Token::TOKEN_BRACE_OPEN === $token->type())
     {
-      return $this->parseHash();
+      return $this->parseHash($tokens);
     }
 
     if (Token::TOKEN_SQUARE_BRACKET_OPEN === $token->type())
     {
-      return $this->parseArray();
+      return $this->parseArray($tokens);
     }
 
-    next($this->tokens);
+    next($tokens);
 
     switch ($token->type())
     {
@@ -195,66 +186,72 @@ class Parser
 
     return $token->content();
   }
-  
+
   /**
+   * @param array<integer,Token> &$tokens
+   *
    * @return array
    */
-  protected function parseHash()
+  protected function parseHash(array &$tokens)
   {
-    $this->assert(Token::TOKEN_BRACE_OPEN);
-    next($this->tokens);
+    $this->assert($tokens, Token::TOKEN_BRACE_OPEN);
+    next($tokens);
 
-    if (Token::TOKEN_BRACE_CLOSE === current($this->tokens)->type())
+    if (Token::TOKEN_BRACE_CLOSE === current($tokens)->type())
     {
-      next($this->tokens);
+      next($tokens);
 
       return array();
     }
 
-    $hash = $this->parseHashContents();
+    $hash = $this->parseHashContents($tokens);
 
-    $this->assert(Token::TOKEN_BRACE_CLOSE);
-    next($this->tokens);
+    $this->assert($tokens, Token::TOKEN_BRACE_CLOSE);
+    next($tokens);
 
     return $hash;
   }
 
   /**
+   * @param array<integer,Token> &$tokens
+   *
    * @return array
    */
-  protected function parseHashContents()
+  protected function parseHashContents(array &$tokens)
   {
     $hash = array();
     while (true)
     {
-      $key = $this->parseValue();
-      
-      $this->assert(Token::TOKEN_COLON);
-      next($this->tokens);
+      $key = $this->parseValue($tokens);
 
-      $hash[$key] = $this->parseValue();
+      $this->assert($tokens, Token::TOKEN_COLON);
+      next($tokens);
 
-      if (Token::TOKEN_COMMA !== current($this->tokens)->type())
+      $hash[$key] = $this->parseValue($tokens);
+
+      if (Token::TOKEN_COMMA !== current($tokens)->type())
       {
         break;
       }
-      next($this->tokens);
+      next($tokens);
     }
 
     return $hash;
   }
 
   /**
+   * @param array<integer,Token> &$tokens
+   *
    * @return array
    */
-  protected function parseArray()
+  protected function parseArray(array &$tokens)
   {
-    $this->assert(Token::TOKEN_SQUARE_BRACKET_OPEN);
-    next($this->tokens);
+    $this->assert($tokens, Token::TOKEN_SQUARE_BRACKET_OPEN);
+    next($tokens);
 
-    if (Token::TOKEN_SQUARE_BRACKET_CLOSE === current($this->tokens)->type())
+    if (Token::TOKEN_SQUARE_BRACKET_CLOSE === current($tokens)->type())
     {
-      next($this->tokens);
+      next($tokens);
 
       return array();
     }
@@ -262,40 +259,41 @@ class Parser
     $array = array();
     while (true)
     {
-      $array[] = $this->parseValue();
+      $array[] = $this->parseValue($tokens);
 
-      if (Token::TOKEN_COMMA !== current($this->tokens)->type())
+      if (Token::TOKEN_COMMA !== current($tokens)->type())
       {
         break;
       }
-      next($this->tokens);
+      next($tokens);
     }
 
-    $this->assert(Token::TOKEN_SQUARE_BRACKET_CLOSE);
-    next($this->tokens);
+    $this->assert($tokens, Token::TOKEN_SQUARE_BRACKET_CLOSE);
+    next($tokens);
 
     return $array;
   }
 
   /**
+   * @param array<integer,Token> &$tokens
    * @param Node $types
    * @param integer $minimum_precedence
    *
    * @return Node
    */
-  protected function parseComposite(Node $left, $minimum_precedence = 0)
+  protected function parseComposite(array &$tokens, Node $left, $minimum_precedence = 0)
   {
-    while ($minimum_precedence <= ($precedence = $this->getCompositePrecedence()))
+    while ($minimum_precedence <= ($precedence = $this->getCompositePrecedence($tokens)))
     {
-      $operator = current($this->tokens)->content();
+      $operator = current($tokens)->content();
 
-      next($this->tokens);
+      next($tokens);
 
-      $right = $this->parseType();
+      $right = $this->parseType($tokens);
 
-      if ($precedence < $this->getCompositePrecedence())
+      if ($precedence < $this->getCompositePrecedence($tokens))
       {
-        $right = $this->parseComposite($right, $precedence + 1);
+        $right = $this->parseComposite($tokens, $right, $precedence + 1);
       }
 
       $left = $this->makeComposite($operator, $left, $right);
@@ -333,10 +331,12 @@ class Parser
   }
 
   /**
+   * @param array<integer,Token> &$tokens
+   *
    * @return integer
    */
-  protected function getCompositePrecedence() {
-    $token = current($this->tokens);
+  protected function getCompositePrecedence(array &$tokens) {
+    $token = current($tokens);
     if ($token)
     {
       $precedence = array_search(
@@ -355,24 +355,25 @@ class Parser
   }
 
   /**
+   * @param array<integer,Token> &$tokens
    * @param integer|string|array<integer|string> $types
    *
    * @return Token|null
    */
-  protected function assert($types)
+  protected function assert(array &$tokens, $types)
   {
     if (!is_array($types))
     {
       $types = array($types);
     }
 
-    $token = current($this->tokens);
+    $token = current($tokens);
 
     if (!in_array($token->type(), $types, true))
     {
       throw new Exception\UnexpectedTokenException(
         $token->name()
-        , $this->position()
+        , $this->position($tokens)
         , $this->tokenNames($types)
       );
     }
@@ -381,15 +382,17 @@ class Parser
   }
 
   /**
+   * @param array<integer,Token> &$tokens
+   *
    * @return integer
    */
-  protected function position()
+  protected function position(array &$tokens)
   {
-    $index = key($this->tokens);
+    $index = key($tokens);
 
     $source = '';
     for ($i = 0; $i <= $index; $i ++) {
-      $source .= $this->tokens[$i]->content();
+      $source .= $tokens[$i]->content();
     }
 
     return mb_strlen($source);
@@ -412,17 +415,7 @@ class Parser
   }
 
   /**
-   * @var Lexer
-   */
-  protected $lexer;
-
-  /**
    * @var array<integer|string>
    */
   protected $compositePrecedence;
-
-  /**
-   * @var array<integer,Token>
-   */
-  protected $tokens;
 }

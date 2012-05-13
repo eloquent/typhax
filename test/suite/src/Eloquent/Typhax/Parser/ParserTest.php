@@ -19,6 +19,13 @@ use Eloquent\Typhax\Lexer\Token;
 
 class ParserTest extends \Eloquent\Typhax\Test\TestCase
 {
+  protected function setUp()
+  {
+    parent::setUp();
+
+    $this->_lexer = new Lexer;
+  }
+
   /**
    * @return array
    */
@@ -179,8 +186,9 @@ class ParserTest extends \Eloquent\Typhax\Test\TestCase
    */
   public function testParser(Node $expected, $source)
   {
+    $tokens = $this->_lexer->tokens($source);
     $parser = new Parser;
-    $actual = $parser->parse($source);
+    $actual = $parser->parse($tokens);
 
     $this->assertEquals($expected, $actual);
 
@@ -220,21 +228,10 @@ class ParserTest extends \Eloquent\Typhax\Test\TestCase
    */
   public function testParserFailure($expectedClass, $expectedMessage, $source)
   {
+    $tokens = $this->_lexer->tokens($source);
     $parser = new Parser;
 
     $this->setExpectedException($expectedClass, $expectedMessage);
-    $parser->parse($source);
-  }
-
-  /**
-   * @covers Eloquent\Typhax\Parser\Parser::__construct
-   * @covers Eloquent\Typhax\Parser\Parser::lexer
-   */
-  public function testLexer()
-  {
-    $lexer = new Lexer;
-    $parser = new Parser($lexer);
-
-    $this->assertSame($lexer, $parser->lexer());
+    $parser->parse($tokens);
   }
 }

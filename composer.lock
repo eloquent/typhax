@@ -4,7 +4,7 @@
         {
             "package": "eloquent/enumeration",
             "version": "dev-master",
-            "source-reference": "355baeca34cba8c0ea82d7a0cf397a2a825d7c37"
+            "source-reference": "0.2.0"
         }
     ],
     "packages-dev": null,
