@@ -188,7 +188,7 @@ class ParserTest extends \Eloquent\Typhax\Test\TestCase
   {
     $tokens = $this->_lexer->tokens($source);
     $parser = new Parser;
-    $actual = $parser->parse($tokens);
+    $actual = $parser->parseNode($tokens);
 
     $this->assertEquals($expected, $actual);
 
@@ -196,6 +196,63 @@ class ParserTest extends \Eloquent\Typhax\Test\TestCase
     {
       $this->assertSame($expected->attributes(), $actual->attributes());
     }
+  }
+
+  /**
+   * @return array
+   */
+  public function parseHashData()
+  {
+    $data = array();
+
+    // #0: Empty hash
+    $source = '{}';
+    $expected = array();
+    $data[] = array($expected, $source);
+
+    // #1: Basic hash
+    $source = '{bar:"baz",\'qux\':666,doom:.666,splat:null,pip:true,pop:false}';
+    $expected = array(
+      'bar' => 'baz',
+      'qux' => 666,
+      'doom' => .666,
+      'splat' => null,
+      'pip' => true,
+      'pop' => false,
+    );
+    $data[] = array($expected, $source);
+
+    // #2: Nested hashes and arrays
+    $source = '{bar:{baz:{qux:doom}},splat:[pip,[pop,pep]]}';
+    $expected = array(
+      'bar' => array(
+        'baz' => array(
+          'qux' => 'doom',
+        ),
+      ),
+      'splat' => array(
+        'pip',
+        array('pop', 'pep'),
+      ),
+    );
+    $data[] = array($expected, $source);
+
+    return $data;
+  }
+
+  /**
+   * @covers Eloquent\Typhax\Parser\Parser
+   * @dataProvider parseHashData
+   * @group parser
+   * @group core
+   */
+  public function testParseHash(array $expected, $source)
+  {
+    $tokens = $this->_lexer->tokens($source);
+    $parser = new Parser;
+    $actual = $parser->parseHash($tokens);
+
+    $this->assertSame($expected, $actual);
   }
 
   /**
@@ -232,6 +289,6 @@ class ParserTest extends \Eloquent\Typhax\Test\TestCase
     $parser = new Parser;
 
     $this->setExpectedException($expectedClass, $expectedMessage);
-    $parser->parse($tokens);
+    $parser->parseNode($tokens);
   }
 }

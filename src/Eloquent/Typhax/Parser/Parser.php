@@ -18,20 +18,12 @@ use Eloquent\Typhax\Lexer\Token;
 
 class Parser
 {
-  public function __construct()
-  {
-    $this->compositePrecedence = array(
-      Token::TOKEN_PIPE,
-      Token::TOKEN_AND,
-    );
-  }
-
   /**
    * @param array<integer,Token> &$tokens
    *
    * @return Node
    */
-  public function parse(array &$tokens)
+  public function parseNode(array &$tokens)
   {
     $node = $this->parseType($tokens);
 
@@ -43,6 +35,31 @@ class Parser
     $this->assert($tokens, Token::TOKEN_END);
 
     return $node;
+  }
+
+  /**
+   * @param array<integer,Token> &$tokens
+   *
+   * @return array
+   */
+  public function parseHash(array &$tokens)
+  {
+    $this->assert($tokens, Token::TOKEN_BRACE_OPEN);
+    next($tokens);
+
+    if (Token::TOKEN_BRACE_CLOSE === current($tokens)->type())
+    {
+      next($tokens);
+
+      return array();
+    }
+
+    $hash = $this->parseHashContents($tokens);
+
+    $this->assert($tokens, Token::TOKEN_BRACE_CLOSE);
+    next($tokens);
+
+    return $hash;
   }
 
   /**
@@ -185,31 +202,6 @@ class Parser
     }
 
     return $token->content();
-  }
-
-  /**
-   * @param array<integer,Token> &$tokens
-   *
-   * @return array
-   */
-  protected function parseHash(array &$tokens)
-  {
-    $this->assert($tokens, Token::TOKEN_BRACE_OPEN);
-    next($tokens);
-
-    if (Token::TOKEN_BRACE_CLOSE === current($tokens)->type())
-    {
-      next($tokens);
-
-      return array();
-    }
-
-    $hash = $this->parseHashContents($tokens);
-
-    $this->assert($tokens, Token::TOKEN_BRACE_CLOSE);
-    next($tokens);
-
-    return $hash;
   }
 
   /**
@@ -417,5 +409,8 @@ class Parser
   /**
    * @var array<integer|string>
    */
-  protected $compositePrecedence;
+  protected $compositePrecedence = array(
+    Token::TOKEN_PIPE,
+    Token::TOKEN_AND,
+  );
 }
