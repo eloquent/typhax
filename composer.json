@@ -36,7 +36,10 @@
                 },
                 "autoload": {
                     "classmap": ["src"]
-                }
+                },
+                "include-path": [
+                    "src"
+                ]
             }
         }
     ]
