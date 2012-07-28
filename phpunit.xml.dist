@@ -10,13 +10,14 @@
 -->
 
 <phpunit
-  bootstrap="test/src/bootstrap.php"
+  bootstrap="test/bootstrap.php"
   strict="true"
   forceCoversAnnotation="true"
   convertErrorsToExceptions="true"
   convertNoticesToExceptions="true"
   convertWarningsToExceptions="true"
   verbose="true"
+  colors="true"
 >
   <testsuites>
     <testsuite>

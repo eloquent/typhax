@@ -1,4 +1,3 @@
-#!/usr/bin/env php
 <?php
 
 /*
@@ -10,4 +9,7 @@
  * file that was distributed with this source code.
  */
 
-require __DIR__.DIRECTORY_SEPARATOR.'phpunit.php';
+$autoloader = require __DIR__.'/../vendor/autoload.php';
+$autoloader->add('Eloquent', __DIR__.'/src');
+
+Phake::setClient(Phake::CLIENT_PHPUNIT);
