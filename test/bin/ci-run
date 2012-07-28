@@ -10,6 +10,8 @@
  * file that was distributed with this source code.
  */
 
+var_dump(scandir(__DIR__));
+
 passthru(__DIR__.'/install-vendors', $code);
 if (0 !== $code) {
     exit($code);
