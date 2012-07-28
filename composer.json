@@ -14,7 +14,7 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "eloquent/enumeration": "dev-master"
+        "eloquent/enumeration": "2.*"
     },
     "autoload": {
         "psr-0": {

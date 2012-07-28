@@ -30,7 +30,7 @@ class IntrinsicTypeAliasTest extends \Eloquent\Typhax\Test\TestCase
       'ALIAS_REAL' => IntrinsicTypeAlias::ALIAS_REAL(),
     );
 
-    $this->assertSame($expected, IntrinsicTypeAlias::_instances());
+    $this->assertSame($expected, IntrinsicTypeAlias::multitonInstances());
   }
 
   /**
@@ -57,7 +57,7 @@ class IntrinsicTypeAliasTest extends \Eloquent\Typhax\Test\TestCase
    */
   public function testValues($key, $value, $typeName)
   {
-    $this->assertSame($value, IntrinsicTypeAlias::_get($key)->_value());
-    $this->assertSame($typeName, IntrinsicTypeAlias::_get($key)->_typeName());
+    $this->assertSame($value, IntrinsicTypeAlias::instanceByKey($key)->value());
+    $this->assertSame($typeName, IntrinsicTypeAlias::instanceByKey($key)->typeName());
   }
 }
