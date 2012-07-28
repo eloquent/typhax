@@ -172,6 +172,40 @@ class ParserTest extends \PHPUnit_Framework_TestCase
         $expected->setAttribute('qux', 'doom');
         $data[] = array($expected, $source);
 
+        // #16: Whitespace. Whitespace everywhere...
+        $source =
+            ' foo < spam , abraham > '.
+            '( bar : "baz" , \'qux\' : 666 , doom : .666 , splat : null , '.
+            'pip : true , pop : false ) '
+        ;
+        $expected = new Type('foo');
+        $expected->addSubType(new Type('spam'));
+        $expected->addSubType(new Type('abraham'));
+        $expected->setAttribute('bar', 'baz');
+        $expected->setAttribute('qux', 666);
+        $expected->setAttribute('doom', .666);
+        $expected->setAttribute('splat', null);
+        $expected->setAttribute('pip', true);
+        $expected->setAttribute('pop', false);
+        $data[] = array($expected, $source);
+
+        // #17: Whitespace in composites
+        $source = 'foo & bar | baz & qux | doom & splat';
+        $expectedFooBar = new Composite(Token::TOKEN_AND);
+        $expectedFooBar->addType(new Type('foo'));
+        $expectedFooBar->addType(new Type('bar'));
+        $expectedBazQux = new Composite(Token::TOKEN_AND);
+        $expectedBazQux->addType(new Type('baz'));
+        $expectedBazQux->addType(new Type('qux'));
+        $expectedDoomSplat = new Composite(Token::TOKEN_AND);
+        $expectedDoomSplat->addType(new Type('doom'));
+        $expectedDoomSplat->addType(new Type('splat'));
+        $expected = new Composite(Token::TOKEN_PIPE);
+        $expected->addType($expectedFooBar);
+        $expected->addType($expectedBazQux);
+        $expected->addType($expectedDoomSplat);
+        $data[] = array($expected, $source);
+
         return $data;
     }
 

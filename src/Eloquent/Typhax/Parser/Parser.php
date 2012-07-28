@@ -26,11 +26,13 @@ class Parser
     public function parseNode(array &$tokens)
     {
         $node = $this->parseType($tokens);
+        $this->consumeWhitespace($tokens);
 
         if (Token::TOKEN_END !== current($tokens)->type()) {
             $node = $this->parseComposite($tokens, $node);
         }
 
+        $this->consumeWhitespace($tokens);
         $this->assert($tokens, Token::TOKEN_END);
 
         return $node;
@@ -43,8 +45,10 @@ class Parser
      */
     public function parseHash(array &$tokens)
     {
+        $this->consumeWhitespace($tokens);
         $this->assert($tokens, Token::TOKEN_BRACE_OPEN);
         next($tokens);
+        $this->consumeWhitespace($tokens);
 
         if (Token::TOKEN_BRACE_CLOSE === current($tokens)->type()) {
             next($tokens);
@@ -54,6 +58,7 @@ class Parser
 
         $hash = $this->parseHashContents($tokens);
 
+        $this->consumeWhitespace($tokens);
         $this->assert($tokens, Token::TOKEN_BRACE_CLOSE);
         next($tokens);
 
@@ -67,17 +72,20 @@ class Parser
      */
     protected function parseType(array &$tokens)
     {
+        $this->consumeWhitespace($tokens);
         $type = new Type(
             $this->assert($tokens, Token::TOKEN_STRING)->content()
         );
-
-        $token = next($tokens);
+        next($tokens);
+        $this->consumeWhitespace($tokens);
 
         if (Token::TOKEN_LESS_THAN === current($tokens)->type()) {
             foreach ($this->parseSubTypes($tokens) as $subType) {
                 $type->addSubType($subType);
             }
         }
+
+        $this->consumeWhitespace($tokens);
 
         if (Token::TOKEN_PARENTHESIS_OPEN === current($tokens)->type()) {
             foreach ($this->parseAttributes($tokens) as $name => $value) {
@@ -95,8 +103,10 @@ class Parser
      */
     protected function parseAttributes(array &$tokens)
     {
+        $this->consumeWhitespace($tokens);
         $this->assert($tokens, Token::TOKEN_PARENTHESIS_OPEN);
         next($tokens);
+        $this->consumeWhitespace($tokens);
 
         if (Token::TOKEN_PARENTHESIS_CLOSE === current($tokens)->type()) {
             next($tokens);
@@ -106,6 +116,7 @@ class Parser
 
         $attributes = $this->parseHashContents($tokens);
 
+        $this->consumeWhitespace($tokens);
         $this->assert($tokens, Token::TOKEN_PARENTHESIS_CLOSE);
         next($tokens);
 
@@ -119,8 +130,10 @@ class Parser
      */
     protected function parseSubTypes(array &$tokens)
     {
+        $this->consumeWhitespace($tokens);
         $this->assert($tokens, Token::TOKEN_LESS_THAN);
         next($tokens);
+        $this->consumeWhitespace($tokens);
 
         if (Token::TOKEN_GREATER_THAN === current($tokens)->type()) {
             next($tokens);
@@ -131,6 +144,7 @@ class Parser
         $types = array();
         while (true) {
             $types[] = $this->parseType($tokens);
+            $this->consumeWhitespace($tokens);
 
             if (Token::TOKEN_COMMA !== current($tokens)->type()) {
                 break;
@@ -138,6 +152,7 @@ class Parser
             next($tokens);
         }
 
+        $this->consumeWhitespace($tokens);
         $this->assert($tokens, Token::TOKEN_GREATER_THAN);
         next($tokens);
 
@@ -151,6 +166,8 @@ class Parser
      */
     protected function parseValue(array &$tokens)
     {
+        $this->consumeWhitespace($tokens);
+
         $token = $this->assert($tokens, array(
             Token::TOKEN_STRING,
             Token::TOKEN_STRING_QUOTED,
@@ -201,12 +218,14 @@ class Parser
         $hash = array();
         while (true) {
             $key = $this->parseValue($tokens);
+            $this->consumeWhitespace($tokens);
 
             $this->assert($tokens, Token::TOKEN_COLON);
             next($tokens);
 
             $hash[$key] = $this->parseValue($tokens);
 
+            $this->consumeWhitespace($tokens);
             if (Token::TOKEN_COMMA !== current($tokens)->type()) {
                 break;
             }
@@ -223,8 +242,10 @@ class Parser
      */
     protected function parseArray(array &$tokens)
     {
+        $this->consumeWhitespace($tokens);
         $this->assert($tokens, Token::TOKEN_SQUARE_BRACKET_OPEN);
         next($tokens);
+        $this->consumeWhitespace($tokens);
 
         if (Token::TOKEN_SQUARE_BRACKET_CLOSE === current($tokens)->type()) {
             next($tokens);
@@ -235,6 +256,7 @@ class Parser
         $array = array();
         while (true) {
             $array[] = $this->parseValue($tokens);
+            $this->consumeWhitespace($tokens);
 
             if (Token::TOKEN_COMMA !== current($tokens)->type()) {
                 break;
@@ -242,6 +264,7 @@ class Parser
             next($tokens);
         }
 
+        $this->consumeWhitespace($tokens);
         $this->assert($tokens, Token::TOKEN_SQUARE_BRACKET_CLOSE);
         next($tokens);
 
@@ -378,6 +401,13 @@ class Parser
         }
 
         return $names;
+    }
+
+    protected function consumeWhitespace(array &$tokens)
+    {
+        if (Token::TOKEN_WHITESPACE === current($tokens)->type()) {
+            next($tokens);
+        }
     }
 
     /**
