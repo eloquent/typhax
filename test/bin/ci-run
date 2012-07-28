@@ -10,7 +10,7 @@
  * file that was distributed with this source code.
  */
 
-var_dump(scandir(__DIR__));
+var_dump(scandir(getcwd()));
 
 passthru(__DIR__.'/install-vendors', $code);
 if (0 !== $code) {
