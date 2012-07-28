@@ -13,12 +13,19 @@
 
 namespace Eloquent\Typhax\AST;
 
-interface Node
+interface Visitor
 {
     /**
-     * @param Visitor $visitor
+     * @param Composite
      *
      * @return mixed
      */
-    public function accept(Visitor $visitor);
+    public function visitComposite(Composite $composite);
+
+    /**
+     * @param Type
+     *
+     * @return mixed
+     */
+    public function visitType(Type $type);
 }

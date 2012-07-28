@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+// @codeCoverageIgnoreStart
+
 namespace Eloquent\Typhax\Exception;
 
 interface Exception {}

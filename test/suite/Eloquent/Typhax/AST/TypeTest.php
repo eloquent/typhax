@@ -11,14 +11,15 @@
 
 namespace Eloquent\Typhax\AST;
 
+use Phake;
+
+/**
+ * @covers Eloquent\Typhax\AST\Type
+ * @group ast
+ * @group core
+ */
 class TypeTest extends \Eloquent\Typhax\Test\TestCase
 {
-  /**
-   * @covers Eloquent\Typhax\AST\Type::__construct
-   * @covers Eloquent\Typhax\AST\Type::name
-   * @group ast
-   * @group core
-   */
   public function testType()
   {
     $type = new Type('foo');
@@ -30,12 +31,6 @@ class TypeTest extends \Eloquent\Typhax\Test\TestCase
     $this->assertSame('bar', $type->name());
   }
 
-  /**
-   * @covers Eloquent\Typhax\AST\Type::setAttribute
-   * @covers Eloquent\Typhax\AST\Type::attributes
-   * @group ast
-   * @group core
-   */
   public function testAttributes()
   {
     $type = new Type('foo');
@@ -58,12 +53,6 @@ class TypeTest extends \Eloquent\Typhax\Test\TestCase
     ), $type->attributes());
   }
 
-  /**
-   * @covers Eloquent\Typhax\AST\Type::addSubType
-   * @covers Eloquent\Typhax\AST\Type::subTypes
-   * @group ast
-   * @group core
-   */
   public function testSubTypes()
   {
     $type = new Type('foo');
@@ -87,5 +76,16 @@ class TypeTest extends \Eloquent\Typhax\Test\TestCase
       $subTypeBaz,
       $subTypeQux,
     ), $type->subTypes());
+  }
+
+  public function testAccept()
+  {
+    $type = new Type('foo');
+    $visitor = Phake::mock(__NAMESPACE__.'\Visitor');
+    $type->accept($visitor);
+
+    Phake::verify($visitor)->visitType(
+      $this->identicalTo($type)
+    );
   }
 }

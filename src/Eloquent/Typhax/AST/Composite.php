@@ -46,6 +46,16 @@ class Composite implements Node
   }
 
   /**
+   * @param Visitor $visitor
+   *
+   * @return mixed
+   */
+  public function accept(Visitor $visitor)
+  {
+    return $visitor->visitComposite($this);
+  }
+
+  /**
    * @var string
    */
   protected $separator;

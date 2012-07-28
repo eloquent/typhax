@@ -63,6 +63,16 @@ class Type implements Node
   }
 
   /**
+   * @param Visitor $visitor
+   *
+   * @return mixed
+   */
+  public function accept(Visitor $visitor)
+  {
+    return $visitor->visitType($this);
+  }
+
+  /**
    * @var string
    */
   protected $name;

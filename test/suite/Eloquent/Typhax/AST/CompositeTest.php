@@ -11,14 +11,15 @@
 
 namespace Eloquent\Typhax\AST;
 
+use Phake;
+
+/**
+ * @covers Eloquent\Typhax\AST\Composite
+ * @group ast
+ * @group core
+ */
 class CompositeTest extends \Eloquent\Typhax\Test\TestCase
 {
-  /**
-   * @covers Eloquent\Typhax\AST\Composite::__construct
-   * @covers Eloquent\Typhax\AST\Composite::separator
-   * @group ast
-   * @group core
-   */
   public function testComposite()
   {
     $composite = new Composite('foo');
@@ -30,12 +31,6 @@ class CompositeTest extends \Eloquent\Typhax\Test\TestCase
     $this->assertSame('bar', $composite->separator());
   }
 
-  /**
-   * @covers Eloquent\Typhax\AST\Composite::addType
-   * @covers Eloquent\Typhax\AST\Composite::types
-   * @group ast
-   * @group core
-   */
   public function testTypes()
   {
     $composite = new Composite('foo');
@@ -59,5 +54,16 @@ class CompositeTest extends \Eloquent\Typhax\Test\TestCase
       $typeBaz,
       $typeQux,
     ), $composite->types());
+  }
+
+  public function testAccept()
+  {
+    $composite = new Composite('foo');
+    $visitor = Phake::mock(__NAMESPACE__.'\Visitor');
+    $composite->accept($visitor);
+
+    Phake::verify($visitor)->visitComposite(
+      $this->identicalTo($composite)
+    );
   }
 }
