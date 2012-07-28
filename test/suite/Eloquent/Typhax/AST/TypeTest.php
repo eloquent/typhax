@@ -13,12 +13,7 @@ namespace Eloquent\Typhax\AST;
 
 use Phake;
 
-/**
- * @covers Eloquent\Typhax\AST\Type
- * @group ast
- * @group core
- */
-class TypeTest extends \Eloquent\Typhax\Test\TestCase
+class TypeTest extends \PHPUnit_Framework_TestCase
 {
   public function testType()
   {

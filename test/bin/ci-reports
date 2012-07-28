@@ -16,7 +16,7 @@ if (0 !== $code)
   exit($code);
 }
 
-passthru('phpunit --configuration phpunit.xml.reports', $code);
+passthru('phpunit --configuration phpunit.reports.xml', $code);
 if (0 !== $code)
 {
   exit($code);

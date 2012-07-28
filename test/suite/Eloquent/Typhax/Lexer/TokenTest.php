@@ -11,25 +11,22 @@
 
 namespace Eloquent\Typhax\Lexer;
 
-class TokenTest extends \Eloquent\Typhax\Test\TestCase
+class TokenTest extends \PHPUnit_Framework_TestCase
 {
-  /**
-   * @return array
-   */
   public function tokenData()
   {
     $data = array();
-    
+
     // #0: Array token
     $token = array(T_STRING, 'foo', 0);
     $expected = new Token(Token::TOKEN_STRING, 'foo');
     $data[] = array($expected, $token);
-    
+
     // #1: Array token
     $token = array(T_STRING, 'bar', 666);
     $expected = new Token(Token::TOKEN_STRING, 'bar');
     $data[] = array($expected, $token);
-    
+
     // #2: Character token
     $token = '&';
     $expected = new Token(Token::TOKEN_AND, '&');
@@ -39,32 +36,18 @@ class TokenTest extends \Eloquent\Typhax\Test\TestCase
     $token = '|';
     $expected = new Token(Token::TOKEN_PIPE, '|');
     $data[] = array($expected, $token);
-    
+
     return $data;
   }
 
   /**
-   * @covers Eloquent\Typhax\Lexer\Token::fromToken
-   * @covers Eloquent\Typhax\Lexer\Token::fromArray
-   * @covers Eloquent\Typhax\Lexer\Token::fromCharacter
    * @dataProvider tokenData
-   * @group lexer
-   * @group core
    */
   public function testFromToken(Token $expected, $token)
   {
     $this->assertEquals($expected, Token::fromToken($token));
   }
 
-  /**
-   * @covers Eloquent\Typhax\Lexer\Token::__construct
-   * @covers Eloquent\Typhax\Lexer\Token::type
-   * @covers Eloquent\Typhax\Lexer\Token::content
-   * @covers Eloquent\Typhax\Lexer\Token::string
-   * @covers Eloquent\Typhax\Lexer\Token::__toString
-   * @group lexer
-   * @group core
-   */
   public function testToken()
   {
     $token = new Token(Token::TOKEN_STRING, 'foo');
@@ -75,11 +58,6 @@ class TokenTest extends \Eloquent\Typhax\Test\TestCase
     $this->assertSame('foo', (string)$token);
   }
 
-  /**
-   * @covers Eloquent\Typhax\Lexer\Token::append
-   * @group lexer
-   * @group core
-   */
   public function testAppend()
   {
     $token = new Token(Token::TOKEN_STRING, 'foo');
@@ -94,10 +72,7 @@ class TokenTest extends \Eloquent\Typhax\Test\TestCase
 
     $this->assertSame('foobarbaz', $token->content());
   }
-  
-  /**
-   * @return array
-   */
+
   public function nameData()
   {
     return array(
@@ -129,13 +104,7 @@ class TokenTest extends \Eloquent\Typhax\Test\TestCase
   }
 
   /**
-   * @covers Eloquent\Typhax\Lexer\Token::nameByType
-   * @covers Eloquent\Typhax\Lexer\Token::name
-   * @covers Eloquent\Typhax\Lexer\Token::supported
-   * @covers Eloquent\Typhax\Lexer\Token::types
    * @dataProvider nameData
-   * @group lexer
-   * @group core
    */
   public function testNameAndSupported($expected, $type)
   {

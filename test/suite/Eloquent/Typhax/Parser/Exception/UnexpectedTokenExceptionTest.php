@@ -11,13 +11,8 @@
 
 namespace Eloquent\Typhax\Parser\Exception;
 
-class UnexpectedTokenTest extends \Eloquent\Typhax\Test\TestCase
+class UnexpectedTokenTest extends \PHPUnit_Framework_TestCase
 {
-  /**
-   * @covers Eloquent\Typhax\Parser\Exception\UnexpectedTokenException
-   * @group exceptions
-   * @group core
-   */
   public function testException()
   {
     $unexpected = 'foo';

@@ -17,7 +17,7 @@ use Eloquent\Typhax\AST\Type;
 use Eloquent\Typhax\Lexer\Lexer;
 use Eloquent\Typhax\Lexer\Token;
 
-class ParserTest extends \Eloquent\Typhax\Test\TestCase
+class ParserTest extends \PHPUnit_Framework_TestCase
 {
   protected function setUp()
   {
@@ -26,9 +26,6 @@ class ParserTest extends \Eloquent\Typhax\Test\TestCase
     $this->_lexer = new Lexer;
   }
 
-  /**
-   * @return array
-   */
   public function parserData()
   {
     $data = array();
@@ -179,10 +176,7 @@ class ParserTest extends \Eloquent\Typhax\Test\TestCase
   }
 
   /**
-   * @covers Eloquent\Typhax\Parser\Parser
    * @dataProvider parserData
-   * @group parser
-   * @group core
    */
   public function testParser(Node $expected, $source)
   {
@@ -198,9 +192,6 @@ class ParserTest extends \Eloquent\Typhax\Test\TestCase
     }
   }
 
-  /**
-   * @return array
-   */
   public function parseHashData()
   {
     $data = array();
@@ -241,10 +232,7 @@ class ParserTest extends \Eloquent\Typhax\Test\TestCase
   }
 
   /**
-   * @covers Eloquent\Typhax\Parser\Parser
    * @dataProvider parseHashData
-   * @group parser
-   * @group core
    */
   public function testParseHash(array $expected, $source)
   {
@@ -255,9 +243,6 @@ class ParserTest extends \Eloquent\Typhax\Test\TestCase
     $this->assertSame($expected, $actual);
   }
 
-  /**
-   * @return array
-   */
   public function parserFailureData()
   {
     $data = array();
@@ -278,10 +263,7 @@ class ParserTest extends \Eloquent\Typhax\Test\TestCase
   }
 
   /**
-   * @covers Eloquent\Typhax\Parser\Parser
    * @dataProvider parserFailureData
-   * @group parser
-   * @group core
    */
   public function testParserFailure($expectedClass, $expectedMessage, $source)
   {

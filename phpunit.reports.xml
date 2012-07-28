@@ -12,7 +12,7 @@
 <phpunit
   bootstrap="test/bootstrap.php"
   strict="true"
-  forceCoversAnnotation="true"
+  mapTestClassNameToCoveredClassName="true"
   convertErrorsToExceptions="true"
   convertNoticesToExceptions="true"
   convertWarningsToExceptions="true"

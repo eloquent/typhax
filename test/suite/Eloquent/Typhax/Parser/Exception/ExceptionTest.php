@@ -13,13 +13,8 @@ namespace Eloquent\Typhax\Parser\Exception;
 
 use Phake;
 
-class ExceptionTest extends \Eloquent\Typhax\Test\TestCase
+class ExceptionTest extends \PHPUnit_Framework_TestCase
 {
-  /**
-   * @covers Eloquent\Typhax\Parser\Exception\Exception
-   * @group exceptions
-   * @group core
-   */
   public function testException()
   {
     $message = 'foo';

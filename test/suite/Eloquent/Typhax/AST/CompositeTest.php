@@ -13,12 +13,7 @@ namespace Eloquent\Typhax\AST;
 
 use Phake;
 
-/**
- * @covers Eloquent\Typhax\AST\Composite
- * @group ast
- * @group core
- */
-class CompositeTest extends \Eloquent\Typhax\Test\TestCase
+class CompositeTest extends \PHPUnit_Framework_TestCase
 {
   public function testComposite()
   {

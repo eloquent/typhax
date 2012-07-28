@@ -11,11 +11,8 @@
 
 namespace Eloquent\Typhax\Lexer;
 
-class LexerTest extends \Eloquent\Typhax\Test\TestCase
+class LexerTest extends \PHPUnit_Framework_TestCase
 {
-  /**
-   * @return array
-   */
   public function tokenData()
   {
     $data = array();
@@ -366,10 +363,7 @@ class LexerTest extends \Eloquent\Typhax\Test\TestCase
   }
 
   /**
-   * @covers Eloquent\Typhax\Lexer\Lexer
    * @dataProvider tokenData
-   * @group lexer
-   * @group core
    */
   public function testTokens(array $expected, $source)
   {

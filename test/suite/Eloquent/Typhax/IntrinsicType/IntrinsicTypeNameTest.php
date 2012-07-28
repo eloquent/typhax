@@ -11,12 +11,8 @@
 
 namespace Eloquent\Typhax\IntrinsicType;
 
-class IntrinsicTypeNameTest extends \Eloquent\Typhax\Test\TestCase
+class IntrinsicTypeNameTest extends \PHPUnit_Framework_TestCase
 {
-  /**
-   * @covers Eloquent\Typhax\IntrinsicType\IntrinsicTypeName
-   * @group intrinsic-types
-   */
   public function testEnumeration()
   {
     $expected = array(
@@ -53,9 +49,6 @@ class IntrinsicTypeNameTest extends \Eloquent\Typhax\Test\TestCase
     $this->assertSame($expected, IntrinsicTypeName::multitonInstances());
   }
 
-  /**
-   * @return array
-   */
   public function valueData()
   {
     return array(
@@ -91,9 +84,7 @@ class IntrinsicTypeNameTest extends \Eloquent\Typhax\Test\TestCase
   }
 
   /**
-   * @covers Eloquent\Typhax\IntrinsicType\IntrinsicTypeName
    * @dataProvider valueData
-   * @group intrinsic-types
    */
   public function testValues($key, $value)
   {

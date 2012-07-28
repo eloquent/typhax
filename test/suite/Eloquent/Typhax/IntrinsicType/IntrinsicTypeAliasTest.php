@@ -11,12 +11,8 @@
 
 namespace Eloquent\Typhax\IntrinsicType;
 
-class IntrinsicTypeAliasTest extends \Eloquent\Typhax\Test\TestCase
+class IntrinsicTypeAliasTest extends \PHPUnit_Framework_TestCase
 {
-  /**
-   * @covers Eloquent\Typhax\IntrinsicType\IntrinsicTypeAlias
-   * @group intrinsic-types
-   */
   public function testMultiton()
   {
     $expected = array(
@@ -33,9 +29,6 @@ class IntrinsicTypeAliasTest extends \Eloquent\Typhax\Test\TestCase
     $this->assertSame($expected, IntrinsicTypeAlias::multitonInstances());
   }
 
-  /**
-   * @return array
-   */
   public function valueData()
   {
     return array(
@@ -51,9 +44,7 @@ class IntrinsicTypeAliasTest extends \Eloquent\Typhax\Test\TestCase
   }
 
   /**
-   * @covers Eloquent\Typhax\IntrinsicType\IntrinsicTypeAlias
    * @dataProvider valueData
-   * @group intrinsic-types
    */
   public function testValues($key, $value, $typeName)
   {
