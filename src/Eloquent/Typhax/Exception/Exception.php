@@ -13,4 +13,6 @@
 
 namespace Eloquent\Typhax\Exception;
 
-interface Exception {}
+interface Exception
+{
+}

@@ -17,9 +17,8 @@ $parser = new Eloquent\Typhax\Parser\Parser;
 $iterations = 1000;
 $startTime = microtime(true);
 
-for ($i = 0; $i < $iterations; $i ++)
-{
-  $parser->parse('foo<bar,baz<qux,doom(splat:{pip:[pop,pep]})>>(ping:pang,pong:[1,2,[3,4,5]])');
+for ($i = 0; $i < $iterations; $i ++) {
+    $parser->parse('foo<bar,baz<qux,doom(splat:{pip:[pop,pep]})>>(ping:pang,pong:[1,2,[3,4,5]])');
 }
 
 $elapsedTime = microtime(true) - $startTime;

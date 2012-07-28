@@ -13,33 +13,30 @@ namespace Eloquent\Typhax\Parser\Exception;
 
 final class UnexpectedTokenException extends Exception
 {
-  /**
-   * @param string $unexpected
-   * @param integer $position
-   * @param array<string> $expected
-   * @param \Exception $previous
-   */
-  public function __construct($unexpected, $position, array $expected, \Exception $previous = null)
-  {
-    if (count($expected) > 1)
+    /**
+     * @param string $unexpected
+     * @param integer $position
+     * @param array<string> $expected
+     * @param \Exception $previous
+     */
+    public function __construct($unexpected, $position, array $expected, \Exception $previous = null)
     {
-      $expected = 'one of '.implode(', ', $expected);
-    }
-    else
-    {
-      $expected = array_pop($expected);
-    }
+        if (count($expected) > 1) {
+            $expected = 'one of '.implode(', ', $expected);
+        } else {
+            $expected = array_pop($expected);
+        }
 
-    $message =
-      'Unexpected '
-      .$unexpected
-      .' at position '
-      .$position
-      .'. Expected '
-      .$expected
-      .'.'
-    ;
+        $message =
+            'Unexpected '
+            .$unexpected
+            .' at position '
+            .$position
+            .'. Expected '
+            .$expected
+            .'.'
+        ;
 
-    parent::__construct($message, $position, $previous);
-  }
+        parent::__construct($message, $position, $previous);
+    }
 }

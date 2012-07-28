@@ -15,16 +15,16 @@ use Phake;
 
 class ExceptionTest extends \PHPUnit_Framework_TestCase
 {
-  public function testException()
-  {
-    $message = 'foo';
-    $position = 666;
-    $previous = new \Exception;
-    $exception = Phake::partialMock(__NAMESPACE__.'\Exception', $message, $position, $previous);
+    public function testException()
+    {
+        $message = 'foo';
+        $position = 666;
+        $previous = new \Exception;
+        $exception = Phake::partialMock(__NAMESPACE__.'\Exception', $message, $position, $previous);
 
-    $this->assertSame($message, $exception->getMessage());
-    $this->assertSame(0, $exception->getCode());
-    $this->assertSame($previous, $exception->getPrevious());
-    $this->assertSame($position, $exception->position());
-  }
+        $this->assertSame($message, $exception->getMessage());
+        $this->assertSame(0, $exception->getCode());
+        $this->assertSame($previous, $exception->getPrevious());
+        $this->assertSame($position, $exception->position());
+    }
 }

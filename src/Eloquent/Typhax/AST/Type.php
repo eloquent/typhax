@@ -13,77 +13,77 @@ namespace Eloquent\Typhax\AST;
 
 class Type implements Node
 {
-  /**
-   * @param string $name
-   */
-  public function __construct($name)
-  {
-    $this->name = $name;
-  }
+    /**
+     * @param string $name
+     */
+    public function __construct($name)
+    {
+        $this->name = $name;
+    }
 
-  /**
-   * @return string
-   */
-  public function name()
-  {
-    return $this->name;
-  }
+    /**
+     * @return string
+     */
+    public function name()
+    {
+        return $this->name;
+    }
 
-  /**
-   * @param string $name
-   * @param mixed $value
-   */
-  public function setAttribute($name, $value)
-  {
-    $this->attributes[$name] = $value;
-  }
+    /**
+     * @param string $name
+     * @param mixed $value
+     */
+    public function setAttribute($name, $value)
+    {
+        $this->attributes[$name] = $value;
+    }
 
-  /**
-   * @return array<string,mixed>
-   */
-  public function attributes()
-  {
-    return $this->attributes;
-  }
+    /**
+     * @return array<string,mixed>
+     */
+    public function attributes()
+    {
+        return $this->attributes;
+    }
 
-  /**
-   * @param Node $type
-   */
-  public function addSubType(Node $type)
-  {
-    $this->subTypes[] = $type;
-  }
+    /**
+     * @param Node $type
+     */
+    public function addSubType(Node $type)
+    {
+        $this->subTypes[] = $type;
+    }
 
-  /**
-   * @return array<integer,Node>
-   */
-  public function subTypes()
-  {
-    return $this->subTypes;
-  }
+    /**
+     * @return array<integer,Node>
+     */
+    public function subTypes()
+    {
+        return $this->subTypes;
+    }
 
-  /**
-   * @param Visitor $visitor
-   *
-   * @return mixed
-   */
-  public function accept(Visitor $visitor)
-  {
-    return $visitor->visitType($this);
-  }
+    /**
+     * @param Visitor $visitor
+     *
+     * @return mixed
+     */
+    public function accept(Visitor $visitor)
+    {
+        return $visitor->visitType($this);
+    }
 
-  /**
-   * @var string
-   */
-  protected $name;
+    /**
+     * @var string
+     */
+    protected $name;
 
-  /**
-   * @var array<string,mixed>
-   */
-  protected $attributes = array();
+    /**
+     * @var array<string,mixed>
+     */
+    protected $attributes = array();
 
-  /**
-   * @var array<integer,Node>
-   */
-  protected $subTypes = array();
+    /**
+     * @var array<integer,Node>
+     */
+    protected $subTypes = array();
 }

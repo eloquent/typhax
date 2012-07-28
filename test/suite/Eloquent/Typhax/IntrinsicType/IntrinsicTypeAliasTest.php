@@ -13,42 +13,42 @@ namespace Eloquent\Typhax\IntrinsicType;
 
 class IntrinsicTypeAliasTest extends \PHPUnit_Framework_TestCase
 {
-  public function testMultiton()
-  {
-    $expected = array(
-      'ALIAS_BOOL' => IntrinsicTypeAlias::ALIAS_BOOL(),
-      'ALIAS_CALLABLE' => IntrinsicTypeAlias::ALIAS_CALLABLE(),
-      'ALIAS_DOUBLE' => IntrinsicTypeAlias::ALIAS_DOUBLE(),
-      'ALIAS_FLOATABLE' => IntrinsicTypeAlias::ALIAS_FLOATABLE(),
-      'ALIAS_INT' => IntrinsicTypeAlias::ALIAS_INT(),
-      'ALIAS_KEYABLE' => IntrinsicTypeAlias::ALIAS_KEYABLE(),
-      'ALIAS_LONG' => IntrinsicTypeAlias::ALIAS_LONG(),
-      'ALIAS_REAL' => IntrinsicTypeAlias::ALIAS_REAL(),
-    );
+    public function testMultiton()
+    {
+        $expected = array(
+            'ALIAS_BOOL' => IntrinsicTypeAlias::ALIAS_BOOL(),
+            'ALIAS_CALLABLE' => IntrinsicTypeAlias::ALIAS_CALLABLE(),
+            'ALIAS_DOUBLE' => IntrinsicTypeAlias::ALIAS_DOUBLE(),
+            'ALIAS_FLOATABLE' => IntrinsicTypeAlias::ALIAS_FLOATABLE(),
+            'ALIAS_INT' => IntrinsicTypeAlias::ALIAS_INT(),
+            'ALIAS_KEYABLE' => IntrinsicTypeAlias::ALIAS_KEYABLE(),
+            'ALIAS_LONG' => IntrinsicTypeAlias::ALIAS_LONG(),
+            'ALIAS_REAL' => IntrinsicTypeAlias::ALIAS_REAL(),
+        );
 
-    $this->assertSame($expected, IntrinsicTypeAlias::multitonInstances());
-  }
+        $this->assertSame($expected, IntrinsicTypeAlias::multitonInstances());
+    }
 
-  public function valueData()
-  {
-    return array(
-      array('ALIAS_BOOL', 'bool', 'boolean'),
-      array('ALIAS_CALLABLE', 'callable', 'callback'),
-      array('ALIAS_DOUBLE', 'double', 'float'),
-      array('ALIAS_FLOATABLE', 'floatable', 'numeric'),
-      array('ALIAS_INT', 'int', 'integer'),
-      array('ALIAS_KEYABLE', 'keyable', 'scalar'),
-      array('ALIAS_LONG', 'long', 'integer'),
-      array('ALIAS_REAL', 'real', 'float'),
-    );
-  }
+    public function valueData()
+    {
+        return array(
+            array('ALIAS_BOOL', 'bool', 'boolean'),
+            array('ALIAS_CALLABLE', 'callable', 'callback'),
+            array('ALIAS_DOUBLE', 'double', 'float'),
+            array('ALIAS_FLOATABLE', 'floatable', 'numeric'),
+            array('ALIAS_INT', 'int', 'integer'),
+            array('ALIAS_KEYABLE', 'keyable', 'scalar'),
+            array('ALIAS_LONG', 'long', 'integer'),
+            array('ALIAS_REAL', 'real', 'float'),
+        );
+    }
 
-  /**
-   * @dataProvider valueData
-   */
-  public function testValues($key, $value, $typeName)
-  {
-    $this->assertSame($value, IntrinsicTypeAlias::instanceByKey($key)->value());
-    $this->assertSame($typeName, IntrinsicTypeAlias::instanceByKey($key)->typeName());
-  }
+    /**
+     * @dataProvider valueData
+     */
+    public function testValues($key, $value, $typeName)
+    {
+        $this->assertSame($value, IntrinsicTypeAlias::instanceByKey($key)->value());
+        $this->assertSame($typeName, IntrinsicTypeAlias::instanceByKey($key)->typeName());
+    }
 }

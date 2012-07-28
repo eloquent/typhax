@@ -15,50 +15,50 @@ use Phake;
 
 class CompositeTest extends \PHPUnit_Framework_TestCase
 {
-  public function testComposite()
-  {
-    $composite = new Composite('foo');
+    public function testComposite()
+    {
+        $composite = new Composite('foo');
 
-    $this->assertSame('foo', $composite->separator());
+        $this->assertSame('foo', $composite->separator());
 
-    $composite = new Composite('bar');
+        $composite = new Composite('bar');
 
-    $this->assertSame('bar', $composite->separator());
-  }
+        $this->assertSame('bar', $composite->separator());
+    }
 
-  public function testTypes()
-  {
-    $composite = new Composite('foo');
+    public function testTypes()
+    {
+        $composite = new Composite('foo');
 
-    $this->assertSame(array(), $composite->types());
+        $this->assertSame(array(), $composite->types());
 
-    $typeBar = new Type('bar');
-    $composite->addType($typeBar);
+        $typeBar = new Type('bar');
+        $composite->addType($typeBar);
 
-    $this->assertSame(array(
-      $typeBar,
-    ), $composite->types());
+        $this->assertSame(array(
+            $typeBar,
+        ), $composite->types());
 
-    $typeBaz = new Composite('baz');
-    $composite->addType($typeBaz);
-    $typeQux = new Type('qux');
-    $composite->addType($typeQux);
+        $typeBaz = new Composite('baz');
+        $composite->addType($typeBaz);
+        $typeQux = new Type('qux');
+        $composite->addType($typeQux);
 
-    $this->assertSame(array(
-      $typeBar,
-      $typeBaz,
-      $typeQux,
-    ), $composite->types());
-  }
+        $this->assertSame(array(
+            $typeBar,
+            $typeBaz,
+            $typeQux,
+        ), $composite->types());
+    }
 
-  public function testAccept()
-  {
-    $composite = new Composite('foo');
-    $visitor = Phake::mock(__NAMESPACE__.'\Visitor');
-    $composite->accept($visitor);
+    public function testAccept()
+    {
+        $composite = new Composite('foo');
+        $visitor = Phake::mock(__NAMESPACE__.'\Visitor');
+        $composite->accept($visitor);
 
-    Phake::verify($visitor)->visitComposite(
-      $this->identicalTo($composite)
-    );
-  }
+        Phake::verify($visitor)->visitComposite(
+            $this->identicalTo($composite)
+        );
+    }
 }

@@ -13,55 +13,55 @@ namespace Eloquent\Typhax\AST;
 
 class Composite implements Node
 {
-  /**
-   * @param string $separator
-   */
-  public function __construct($separator)
-  {
-    $this->separator = $separator;
-  }
+    /**
+     * @param string $separator
+     */
+    public function __construct($separator)
+    {
+        $this->separator = $separator;
+    }
 
-  /**
-   * @return string
-   */
-  public function separator()
-  {
-    return $this->separator;
-  }
+    /**
+     * @return string
+     */
+    public function separator()
+    {
+        return $this->separator;
+    }
 
-  /**
-   * @param Node $type
-   */
-  public function addType(Node $type)
-  {
-    $this->types[] = $type;
-  }
+    /**
+     * @param Node $type
+     */
+    public function addType(Node $type)
+    {
+        $this->types[] = $type;
+    }
 
-  /**
-   * @return array<integer,Node>
-   */
-  public function types()
-  {
-    return $this->types;
-  }
+    /**
+     * @return array<integer,Node>
+     */
+    public function types()
+    {
+        return $this->types;
+    }
 
-  /**
-   * @param Visitor $visitor
-   *
-   * @return mixed
-   */
-  public function accept(Visitor $visitor)
-  {
-    return $visitor->visitComposite($this);
-  }
+    /**
+     * @param Visitor $visitor
+     *
+     * @return mixed
+     */
+    public function accept(Visitor $visitor)
+    {
+        return $visitor->visitComposite($this);
+    }
 
-  /**
-   * @var string
-   */
-  protected $separator;
+    /**
+     * @var string
+     */
+    protected $separator;
 
-  /**
-   * @var array<integer,Node>
-   */
-  protected $types = array();
+    /**
+     * @var array<integer,Node>
+     */
+    protected $types = array();
 }

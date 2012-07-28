@@ -13,12 +13,12 @@ namespace Eloquent\Typhax\Exception;
 
 abstract class LogicException extends \LogicException implements Exception
 {
-  /**
-   * @param string $message
-   * @param \Exception $previous
-   */
-  public function __construct($message, \Exception $previous = null)
-  {
-    parent::__construct((string)$message, 0, $previous);
-  }
+    /**
+     * @param string $message
+     * @param \Exception $previous
+     */
+    public function __construct($message, \Exception $previous = null)
+    {
+        parent::__construct((string) $message, 0, $previous);
+    }
 }

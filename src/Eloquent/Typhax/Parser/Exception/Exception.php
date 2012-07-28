@@ -13,28 +13,28 @@ namespace Eloquent\Typhax\Parser\Exception;
 
 abstract class Exception extends \Eloquent\Typhax\Exception\LogicException
 {
-  /**
-   * @param string $message
-   * @param integer $position
-   * @param \Exception $previous
-   */
-  public function __construct($message, $position, \Exception $previous = null)
-  {
-    $this->position = $position;
+    /**
+     * @param string $message
+     * @param integer $position
+     * @param \Exception $previous
+     */
+    public function __construct($message, $position, \Exception $previous = null)
+    {
+        $this->position = $position;
 
-    parent::__construct($message, $previous);
-  }
+        parent::__construct($message, $previous);
+    }
 
-  /**
-   * @return integer
-   */
-  public function position()
-  {
-    return $this->position;
-  }
+    /**
+     * @return integer
+     */
+    public function position()
+    {
+        return $this->position;
+    }
 
-  /**
-   * @var integer
-   */
-  protected $position;
+    /**
+     * @var integer
+     */
+    protected $position;
 }
