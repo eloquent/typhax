@@ -13,7 +13,7 @@ namespace Eloquent\Typhax\AST\Type;
 
 use Eloquent\Typhax\AST\Visitor;
 
-class ArrayType extends Type
+class BooleanType extends Type
 {
     /**
      * @param Visitor $visitor
@@ -22,6 +22,6 @@ class ArrayType extends Type
      */
     public function accept(Visitor $visitor)
     {
-        return $visitor->visitArrayType($this);
+        return $visitor->visitBooleanType($this);
     }
 }

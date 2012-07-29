@@ -15,18 +15,11 @@ use Phake;
 
 class ObjectTypeTest extends \PHPUnit_Framework_TestCase
 {
-    public function testDefaultName()
-    {
-        $type = new ObjectType;
-
-        $this->assertSame('object', $type->name());
-    }
-
-    public function testInstanceOfName()
+    public function testOfType()
     {
         $type = new ObjectType('foo');
 
-        $this->assertSame('foo', $type->name());
+        $this->assertSame('foo', $type->ofType());
     }
 
     public function testAccept()

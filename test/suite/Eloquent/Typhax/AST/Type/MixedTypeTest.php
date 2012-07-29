@@ -13,15 +13,15 @@ namespace Eloquent\Typhax\AST\Type;
 
 use Phake;
 
-class ArrayTypeTest extends \PHPUnit_Framework_TestCase
+class MixedTypeTest extends \PHPUnit_Framework_TestCase
 {
     public function testAccept()
     {
-        $type = new ArrayType;
+        $type = new MixedType;
         $visitor = Phake::mock('Eloquent\Typhax\AST\Visitor');
         $type->accept($visitor);
 
-        Phake::verify($visitor)->visitArrayType(
+        Phake::verify($visitor)->visitMixedType(
             $this->identicalTo($type)
         );
     }

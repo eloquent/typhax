@@ -49,11 +49,6 @@ abstract class Type implements Node
         return $this->subTypes;
     }
 
-    /**
-     * @return string
-     */
-    abstract public function name();
-
     private $attributes = array();
     private $subTypes = array();
 }

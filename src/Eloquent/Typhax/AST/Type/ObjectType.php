@@ -15,25 +15,19 @@ use Eloquent\Typhax\AST\Visitor;
 
 class ObjectType extends Type
 {
-    const TYPE_NAME = 'object';
-
     /**
-     * @param string|null $instanceOf
+     * @param string|null $ofType
      */
-    public function __construct($instanceOf = null)
+    public function __construct($ofType = null)
     {
-        $this->instanceOf = $instanceOf;
+        $this->ofType = $ofType;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function name() {
-        if (null === $this->instanceOf) {
-            return static::TYPE_NAME;
-        }
-
-        return $this->instanceOf;
+    public function ofType() {
+        return $this->ofType;
     }
 
     /**
@@ -46,5 +40,5 @@ class ObjectType extends Type
         return $visitor->visitObjectType($this);
     }
 
-    private $instanceOf;
+    private $ofType;
 }
