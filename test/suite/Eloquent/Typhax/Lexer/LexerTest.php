@@ -13,6 +13,44 @@ namespace Eloquent\Typhax\Lexer;
 
 class LexerTest extends \PHPUnit_Framework_TestCase
 {
+    protected function setUp()
+    {
+        parent::setUp();
+
+        $this->_lexer = new Lexer;
+    }
+
+    public function intrinsicTypeNameData()
+    {
+        return array(
+            array('string'),
+            array('array'),
+            array('boolean'),
+            array('callback'),
+            array('float'),
+            array('integer'),
+            array('mixed'),
+            array('number'),
+            array('numeric'),
+            array('object'),
+            array('resource'),
+            array('string'),
+        );
+    }
+
+    /**
+     * @dataProvider intrinsicTypeNameData
+     */
+    public function testIntrinsicTypesNames($typeName)
+    {
+        $expected = array(
+            new Token(Token::TOKEN_TYPE_NAME, $typeName),
+            new Token(Token::TOKEN_END, ''),
+        );
+
+        $this->assertEquals($expected, $this->_lexer->tokens($typeName));
+    }
+
     public function tokenData()
     {
         $data = array();
@@ -255,7 +293,7 @@ class LexerTest extends \PHPUnit_Framework_TestCase
             new Token(Token::TOKEN_PARENTHESIS_CLOSE, ')'),
             new Token(Token::TOKEN_WHITESPACE, ' '),
             new Token(Token::TOKEN_PARENTHESIS_OPEN, '('),
-            new Token(Token::TOKEN_STRING, 'string'),
+            new Token(Token::TOKEN_TYPE_NAME, 'string'),
             new Token(Token::TOKEN_PARENTHESIS_CLOSE, ')'),
             new Token(Token::TOKEN_WHITESPACE, ' '),
             new Token(Token::TOKEN_STRING, '-'),
@@ -367,8 +405,6 @@ class LexerTest extends \PHPUnit_Framework_TestCase
      */
     public function testTokens(array $expected, $source)
     {
-        $lexer = new Lexer;
-
-        $this->assertEquals($expected, $lexer->tokens($source));
+        $this->assertEquals($expected, $this->_lexer->tokens($source));
     }
 }

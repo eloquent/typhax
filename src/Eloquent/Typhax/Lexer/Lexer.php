@@ -186,6 +186,18 @@ class Lexer
             'true' => Token::TOKEN_BOOLEAN_TRUE,
             'false' => Token::TOKEN_BOOLEAN_FALSE,
             'null' => Token::TOKEN_NULL,
+
+            'array' => Token::TOKEN_TYPE_NAME,
+            'boolean' => Token::TOKEN_TYPE_NAME,
+            'callback' => Token::TOKEN_TYPE_NAME,
+            'float' => Token::TOKEN_TYPE_NAME,
+            'integer' => Token::TOKEN_TYPE_NAME,
+            'mixed' => Token::TOKEN_TYPE_NAME,
+            'number' => Token::TOKEN_TYPE_NAME,
+            'numeric' => Token::TOKEN_TYPE_NAME,
+            'object' => Token::TOKEN_TYPE_NAME,
+            'resource' => Token::TOKEN_TYPE_NAME,
+            'string' => Token::TOKEN_TYPE_NAME,
         );
     }
 }

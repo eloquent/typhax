@@ -96,6 +96,7 @@ class TokenTest extends \PHPUnit_Framework_TestCase
             array('SQUARE_BRACKET_OPEN', Token::TOKEN_SQUARE_BRACKET_OPEN),
             array('STRING', Token::TOKEN_STRING),
             array('STRING_QUOTED', Token::TOKEN_STRING_QUOTED),
+            array('TYPE_NAME', Token::TOKEN_TYPE_NAME),
             array('WHITESPACE', Token::TOKEN_WHITESPACE),
 
             array(null, T_FUNCTION),

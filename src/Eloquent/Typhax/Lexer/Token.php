@@ -172,6 +172,7 @@ class Token
     const TOKEN_SQUARE_BRACKET_OPEN = '[';
     const TOKEN_STRING = T_STRING;
     const TOKEN_STRING_QUOTED = T_CONSTANT_ENCAPSED_STRING;
+    const TOKEN_TYPE_NAME = 'typeName';
     const TOKEN_WHITESPACE = T_WHITESPACE;
 
     /**
