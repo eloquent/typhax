@@ -11,12 +11,25 @@
 
 namespace Eloquent\Typhax\Parser;
 
-use Eloquent\Typhax\AST\Composite;
-use Eloquent\Typhax\AST\Node;
-use Eloquent\Typhax\AST\Type\ObjectType;
-use Eloquent\Typhax\AST\Type\Type;
 use Eloquent\Typhax\Lexer\Lexer;
 use Eloquent\Typhax\Lexer\Token;
+use Eloquent\Typhax\Type\AndType;
+use Eloquent\Typhax\Type\ArrayType;
+use Eloquent\Typhax\Type\BooleanType;
+use Eloquent\Typhax\Type\CallbackType;
+use Eloquent\Typhax\Type\FloatType;
+use Eloquent\Typhax\Type\IntegerType;
+use Eloquent\Typhax\Type\MixedType;
+use Eloquent\Typhax\Type\NullType;
+use Eloquent\Typhax\Type\NumberType;
+use Eloquent\Typhax\Type\NumericType;
+use Eloquent\Typhax\Type\ObjectType;
+use Eloquent\Typhax\Type\OrType;
+use Eloquent\Typhax\Type\ResourceType;
+use Eloquent\Typhax\Type\StringType;
+use Eloquent\Typhax\Type\TraversableType;
+use Eloquent\Typhax\Type\TupleType;
+use Eloquent\Typhax\Type\Type;
 
 class ParserTest extends \PHPUnit_Framework_TestCase
 {
@@ -32,180 +45,161 @@ class ParserTest extends \PHPUnit_Framework_TestCase
         $data = array();
 
         // #0: Basic example
-        $source = 'foo';
+        $source = ' foo ';
         $expected = new ObjectType('foo');
         $data[] = array($expected, $source);
 
-        // #1: Basic composite OR
-        $source = 'foo|bar';
-        $expected = new Composite(Token::TOKEN_PIPE);
-        $expected->addType(new ObjectType('foo'));
-        $expected->addType(new ObjectType('bar'));
+        // #1: Simple traversable
+        $source = ' foo < bar > ';
+        $expected = new TraversableType(
+            new ObjectType('foo'),
+            new MixedType,
+            new ObjectType('bar')
+        );
         $data[] = array($expected, $source);
 
-        // #2: Basic composite AND
-        $source = 'foo&bar';
-        $expected = new Composite(Token::TOKEN_AND);
-        $expected->addType(new ObjectType('foo'));
-        $expected->addType(new ObjectType('bar'));
+        // #2: Simple traversable
+        $source = ' foo < bar , baz > ';
+        $expected = new TraversableType(
+            new ObjectType('foo'),
+            new ObjectType('bar'),
+            new ObjectType('baz')
+        );
         $data[] = array($expected, $source);
 
-        // #3: Composite precedence
-        $source = 'foo|bar&baz';
-        $expectedBarBaz = new Composite(Token::TOKEN_AND);
-        $expectedBarBaz->addType(new ObjectType('bar'));
-        $expectedBarBaz->addType(new ObjectType('baz'));
-        $expected = new Composite(Token::TOKEN_PIPE);
-        $expected->addType(new ObjectType('foo'));
-        $expected->addType($expectedBarBaz);
+        // #3: Nested subtypes
+        $source = ' foo < bar , baz < qux , doom > > ';
+        $expected = new TraversableType(
+            new ObjectType('foo'),
+            new ObjectType('bar'),
+            new TraversableType(
+                new ObjectType('baz'),
+                new ObjectType('qux'),
+                new ObjectType('doom')
+            )
+        );
         $data[] = array($expected, $source);
 
-        // #4: Composite precedence
-        $source = 'foo&bar|baz';
-        $expectedFooBar = new Composite(Token::TOKEN_AND);
-        $expectedFooBar->addType(new ObjectType('foo'));
-        $expectedFooBar->addType(new ObjectType('bar'));
-        $expected = new Composite(Token::TOKEN_PIPE);
-        $expected->addType($expectedFooBar);
-        $expected->addType(new ObjectType('baz'));
-        $data[] = array($expected, $source);
-
-        // #5: Composite precedence
-        $source = 'foo|bar&baz|qux';
-        $expectedBarBaz = new Composite(Token::TOKEN_AND);
-        $expectedBarBaz->addType(new ObjectType('bar'));
-        $expectedBarBaz->addType(new ObjectType('baz'));
-        $expected = new Composite(Token::TOKEN_PIPE);
-        $expected->addType(new ObjectType('foo'));
-        $expected->addType($expectedBarBaz);
-        $expected->addType(new ObjectType('qux'));
-        $data[] = array($expected, $source);
-
-        // #6: Composite precedence with multiple sub-composites
-        $source = 'foo&bar|baz&qux|doom&splat';
-        $expectedFooBar = new Composite(Token::TOKEN_AND);
-        $expectedFooBar->addType(new ObjectType('foo'));
-        $expectedFooBar->addType(new ObjectType('bar'));
-        $expectedBazQux = new Composite(Token::TOKEN_AND);
-        $expectedBazQux->addType(new ObjectType('baz'));
-        $expectedBazQux->addType(new ObjectType('qux'));
-        $expectedDoomSplat = new Composite(Token::TOKEN_AND);
-        $expectedDoomSplat->addType(new ObjectType('doom'));
-        $expectedDoomSplat->addType(new ObjectType('splat'));
-        $expected = new Composite(Token::TOKEN_PIPE);
-        $expected->addType($expectedFooBar);
-        $expected->addType($expectedBazQux);
-        $expected->addType($expectedDoomSplat);
-        $data[] = array($expected, $source);
-
-        // #7: Empty attributes
-        $source = 'foo()';
-        $expected = new ObjectType('foo');
-        $data[] = array($expected, $source);
-
-        // #8: Basic attributes
-        $source = 'foo(bar:"baz",\'qux\':666,doom:.666,splat:null,pip:true,pop:false)';
-        $expected = new ObjectType('foo');
-        $expected->setAttribute('bar', 'baz');
-        $expected->setAttribute('qux', 666);
-        $expected->setAttribute('doom', .666);
-        $expected->setAttribute('splat', null);
-        $expected->setAttribute('pip', true);
-        $expected->setAttribute('pop', false);
-        $data[] = array($expected, $source);
-
-        // #9: Nested hash attribute
-        $source = 'foo(bar:{baz:{qux:doom}})';
-        $expected = new ObjectType('foo');
-        $expected->setAttribute('bar', array(
-            'baz' => array(
-                'qux' => 'doom',
-            ),
+        // #4: Basic composite OR
+        $source = ' foo | bar ';
+        $expected = new OrType(array(
+            new ObjectType('foo'),
+            new ObjectType('bar'),
         ));
         $data[] = array($expected, $source);
 
-        // #10: Nested array attribute
-        $source = 'foo(bar:[baz,[qux,doom]])';
-        $expected = new ObjectType('foo');
-        $expected->setAttribute('bar', array(
-            'baz',
-            array(
-                'qux',
-                'doom',
-            ),
+        // #5: Basic composite AND
+        $source = ' foo & bar ';
+        $expected = new AndType(array(
+            new ObjectType('foo'),
+            new ObjectType('bar'),
         ));
         $data[] = array($expected, $source);
 
-        // #11: Empty hash and array
-        $source = 'foo(bar:{},baz:[])';
-        $expected = new ObjectType('foo');
-        $expected->setAttribute('bar', array());
-        $expected->setAttribute('baz', array());
+        // #6: Chained composite AND
+        $source = ' foo & bar & baz ';
+        $expected = new AndType(array(
+            new ObjectType('foo'),
+            new ObjectType('bar'),
+            new ObjectType('baz'),
+        ));
         $data[] = array($expected, $source);
 
-        // #12: Empty subtypes
-        $source = 'foo<>';
-        $expected = new ObjectType('foo');
+        // #7: Composite precedence
+        $source = ' foo | bar & baz ';
+        $expected = new OrType(array(
+            new ObjectType('foo'),
+            new AndType(array(
+                new ObjectType('bar'),
+                new ObjectType('baz'),
+            ))
+        ));
         $data[] = array($expected, $source);
 
-        // #13: Basic subtypes
-        $source = 'foo<bar,baz>';
-        $expected = new ObjectType('foo');
-        $expected->addSubType(new ObjectType('bar'));
-        $expected->addSubType(new ObjectType('baz'));
+        // #8: Test basic types
+        $source = ' array | boolean | callback | float | integer | null | number | numeric | object | string | mixed ';
+        $expected = new OrType(array(
+            new ArrayType,
+            new BooleanType,
+            new CallbackType,
+            new FloatType,
+            new IntegerType,
+            new NullType,
+            new NumberType,
+            new NumericType,
+            new ObjectType,
+            new StringType,
+            new MixedType,
+        ));
         $data[] = array($expected, $source);
 
-        // #14: Nested subtypes
-        $source = 'foo<bar,baz<qux,doom>>';
-        $expectedBaz = new ObjectType('baz');
-        $expectedBaz->addSubType(new ObjectType('qux'));
-        $expectedBaz->addSubType(new ObjectType('doom'));
-        $expected = new ObjectType('foo');
-        $expected->addSubType(new ObjectType('bar'));
-        $expected->addSubType($expectedBaz);
+        // #9: Test tuple type.
+        $source = ' tuple < foo , bar , baz > ';
+        $expected = new TupleType(array(
+            new ObjectType('foo'),
+            new ObjectType('bar'),
+            new ObjectType('baz'),
+        ));
         $data[] = array($expected, $source);
 
-        // #15: Mixed subtypes and attributes
-        $source = 'foo<bar,baz>(qux:doom)';
-        $expected = new ObjectType('foo');
-        $expected->addSubType(new ObjectType('bar'));
-        $expected->addSubType(new ObjectType('baz'));
-        $expected->setAttribute('qux', 'doom');
+        // #10: Test resource
+        $source = ' resource ';
+        $expected = new ResourceType;
         $data[] = array($expected, $source);
 
-        // #16: Whitespace. Whitespace everywhere...
-        $source =
-            ' foo < spam , abraham > '.
-            '( bar : "baz" , \'qux\' : 666 , doom : .666 , splat : null , '.
-            'pip : true , pop : false ) '
-        ;
-        $expected = new ObjectType('foo');
-        $expected->addSubType(new ObjectType('spam'));
-        $expected->addSubType(new ObjectType('abraham'));
-        $expected->setAttribute('bar', 'baz');
-        $expected->setAttribute('qux', 666);
-        $expected->setAttribute('doom', .666);
-        $expected->setAttribute('splat', null);
-        $expected->setAttribute('pip', true);
-        $expected->setAttribute('pop', false);
+        // #11: Test resource with ofType attribute.
+        $source = ' resource ( ofType : foo ) ';
+        $expected = new ResourceType('foo');
         $data[] = array($expected, $source);
 
-        // #17: Whitespace in composites
-        $source = 'foo & bar | baz & qux | doom & splat';
-        $expectedFooBar = new Composite(Token::TOKEN_AND);
-        $expectedFooBar->addType(new ObjectType('foo'));
-        $expectedFooBar->addType(new ObjectType('bar'));
-        $expectedBazQux = new Composite(Token::TOKEN_AND);
-        $expectedBazQux->addType(new ObjectType('baz'));
-        $expectedBazQux->addType(new ObjectType('qux'));
-        $expectedDoomSplat = new Composite(Token::TOKEN_AND);
-        $expectedDoomSplat->addType(new ObjectType('doom'));
-        $expectedDoomSplat->addType(new ObjectType('splat'));
-        $expected = new Composite(Token::TOKEN_PIPE);
-        $expected->addType($expectedFooBar);
-        $expected->addType($expectedBazQux);
-        $expected->addType($expectedDoomSplat);
-        $data[] = array($expected, $source);
+        // #9: Basic attributes
+        // $source = ' foo ( bar : "baz" , \'qux\' : 666 , doom : .666 , splat : null , pip : true , pop : false ) ';
+        // $expected = new ObjectType('foo');
+        // $expected->setAttribute('bar', 'baz');
+        // $expected->setAttribute('qux', 666);
+        // $expected->setAttribute('doom', .666);
+        // $expected->setAttribute('splat', null);
+        // $expected->setAttribute('pip', true);
+        // $expected->setAttribute('pop', false);
+        // $data[] = array($expected, $source);
+
+        // // #9: Nested hash attribute
+        // $source = 'foo(bar:{baz:{qux:doom}})';
+        // $expected = new ObjectType('foo');
+        // $expected->setAttribute('bar', array(
+        //     'baz' => array(
+        //         'qux' => 'doom',
+        //     ),
+        // ));
+        // $data[] = array($expected, $source);
+
+        // // #10: Nested array attribute
+        // $source = 'foo(bar:[baz,[qux,doom]])';
+        // $expected = new ObjectType('foo');
+        // $expected->setAttribute('bar', array(
+        //     'baz',
+        //     array(
+        //         'qux',
+        //         'doom',
+        //     ),
+        // ));
+        // $data[] = array($expected, $source);
+
+        // // #11: Empty hash and array
+        // $source = 'foo(bar:{},baz:[])';
+        // $expected = new ObjectType('foo');
+        // $expected->setAttribute('bar', array());
+        // $expected->setAttribute('baz', array());
+        // $data[] = array($expected, $source);
+
+
+        // // #15: Mixed subtypes and attributes
+        // $source = 'foo<bar,baz>(qux:doom)';
+        // $expected = new ObjectType('foo');
+        // $expected->addSubType(new ObjectType('bar'));
+        // $expected->addSubType(new ObjectType('baz'));
+        // $expected->setAttribute('qux', 'doom');
+        // $data[] = array($expected, $source);
 
         return $data;
     }
@@ -213,68 +207,13 @@ class ParserTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider parserData
      */
-    public function testParser(Node $expected, $source)
+    public function testParser(Type $expected, $source)
     {
         $tokens = $this->_lexer->tokens($source);
         $parser = new Parser;
-        $actual = $parser->parseNode($tokens);
+        $actual = $parser->parse($tokens);
 
         $this->assertEquals($expected, $actual);
-
-        if ($expected instanceof Type) {
-            $this->assertSame($expected->attributes(), $actual->attributes());
-        }
-    }
-
-    public function parseHashData()
-    {
-        $data = array();
-
-        // #0: Empty hash
-        $source = '{}';
-        $expected = array();
-        $data[] = array($expected, $source);
-
-        // #1: Basic hash
-        $source = '{bar:"baz",\'qux\':666,doom:.666,splat:null,pip:true,pop:false}';
-        $expected = array(
-            'bar' => 'baz',
-            'qux' => 666,
-            'doom' => .666,
-            'splat' => null,
-            'pip' => true,
-            'pop' => false,
-        );
-        $data[] = array($expected, $source);
-
-        // #2: Nested hashes and arrays
-        $source = '{bar:{baz:{qux:doom}},splat:[pip,[pop,pep]]}';
-        $expected = array(
-            'bar' => array(
-                'baz' => array(
-                    'qux' => 'doom',
-                ),
-            ),
-            'splat' => array(
-                'pip',
-                array('pop', 'pep'),
-            ),
-        );
-        $data[] = array($expected, $source);
-
-        return $data;
-    }
-
-    /**
-     * @dataProvider parseHashData
-     */
-    public function testParseHash(array $expected, $source)
-    {
-        $tokens = $this->_lexer->tokens($source);
-        $parser = new Parser;
-        $actual = $parser->parseHash($tokens);
-
-        $this->assertSame($expected, $actual);
     }
 
     public function parserFailureData()
@@ -293,18 +232,21 @@ class ParserTest extends \PHPUnit_Framework_TestCase
         $expectedMessage = 'Unexpected BRACE_OPEN at position 5. Expected END.';
         $data[] = array($expectedClass, $expectedMessage, $source);
 
+        // TODO: test for failure on empty type lists and attributes.
+
         return $data;
     }
 
-    /**
-     * @dataProvider parserFailureData
-     */
-    public function testParserFailure($expectedClass, $expectedMessage, $source)
-    {
-        $tokens = $this->_lexer->tokens($source);
-        $parser = new Parser;
+    // /**
+    //  * @dataProvider parserFailureData
+    //  */
+    // public function testParserFailure($expectedClass, $expectedMessage, $source)
+    // {
+    //     $tokens = $this->_lexer->tokens($source);
+    //     $parser = new Parser;
 
-        $this->setExpectedException($expectedClass, $expectedMessage);
-        $parser->parseNode($tokens);
-    }
+    //     $this->setExpectedException($expectedClass, $expectedMessage);
+    //     $parser->parse($tokens);
+    // }
+
 }

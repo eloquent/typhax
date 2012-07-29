@@ -35,6 +35,7 @@ class LexerTest extends \PHPUnit_Framework_TestCase
             array('object'),
             array('resource'),
             array('string'),
+            array('traversable'),
         );
     }
 

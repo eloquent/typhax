@@ -198,6 +198,8 @@ class Lexer
             'object' => Token::TOKEN_TYPE_NAME,
             'resource' => Token::TOKEN_TYPE_NAME,
             'string' => Token::TOKEN_TYPE_NAME,
+            'traversable' => Token::TOKEN_TYPE_NAME,
+            'tuple' => Token::TOKEN_TYPE_NAME,
         );
     }
 }
