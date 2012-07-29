@@ -27,5 +27,12 @@ interface Visitor
      *
      * @return mixed
      */
-    public function visitObjectType(Type\Type $type);
+    public function visitArrayType(Type\ArrayType $type);
+
+    /**
+     * @param Type
+     *
+     * @return mixed
+     */
+    public function visitObjectType(Type\ObjectType $type);
 }

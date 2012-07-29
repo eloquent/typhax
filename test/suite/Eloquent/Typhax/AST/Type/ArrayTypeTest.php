@@ -13,29 +13,22 @@ namespace Eloquent\Typhax\AST\Type;
 
 use Phake;
 
-class ObjectTypeTest extends \PHPUnit_Framework_TestCase
+class ArrayTypeTest extends \PHPUnit_Framework_TestCase
 {
-    public function testDefaultName()
+    public function testName()
     {
-        $type = new ObjectType;
+        $type = new ArrayType;
 
-        $this->assertSame('object', $type->name());
-    }
-
-    public function testInstanceOfName()
-    {
-        $type = new ObjectType('foo');
-
-        $this->assertSame('foo', $type->name());
+        $this->assertSame('array', $type->name());
     }
 
     public function testAccept()
     {
-        $type = new ObjectType;
+        $type = new ArrayType;
         $visitor = Phake::mock('Eloquent\Typhax\AST\Visitor');
         $type->accept($visitor);
 
-        Phake::verify($visitor)->visitObjectType(
+        Phake::verify($visitor)->visitArrayType(
             $this->identicalTo($type)
         );
     }

@@ -13,27 +13,15 @@ namespace Eloquent\Typhax\AST\Type;
 
 use Eloquent\Typhax\AST\Visitor;
 
-class ObjectType extends Type
+class ArrayType extends Type
 {
-    const TYPE_NAME = 'object';
-
-    /**
-     * @param string|null $instanceOf
-     */
-    public function __construct($instanceOf = null)
-    {
-        $this->instanceOf = $instanceOf;
-    }
+    const TYPE_NAME = 'array';
 
     /**
      * @return string
      */
     public function name() {
-        if (null === $this->instanceOf) {
-            return static::TYPE_NAME;
-        }
-
-        return $this->instanceOf;
+        return static::TYPE_NAME;
     }
 
     /**
@@ -43,8 +31,6 @@ class ObjectType extends Type
      */
     public function accept(Visitor $visitor)
     {
-        return $visitor->visitObjectType($this);
+        return $visitor->visitArrayType($this);
     }
-
-    private $instanceOf;
 }
