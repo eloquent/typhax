@@ -9,26 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Typhax\AST;
+namespace Eloquent\Typhax\AST\Type;
 
+use Eloquent\Typhax\AST\Composite;
 use Phake;
 
 class TypeTest extends \PHPUnit_Framework_TestCase
 {
-    public function testType()
-    {
-        $type = new Type('foo');
-
-        $this->assertSame('foo', $type->name());
-
-        $type = new Type('bar');
-
-        $this->assertSame('bar', $type->name());
-    }
-
     public function testAttributes()
     {
-        $type = new Type('foo');
+        $type = Phake::partialMock(__NAMESPACE__.'\Type');
 
         $this->assertSame(array(), $type->attributes());
 
@@ -50,11 +40,11 @@ class TypeTest extends \PHPUnit_Framework_TestCase
 
     public function testSubTypes()
     {
-        $type = new Type('foo');
+        $type = Phake::partialMock(__NAMESPACE__.'\Type');
 
         $this->assertSame(array(), $type->subTypes());
 
-        $subTypeBar = new Type('bar');
+        $subTypeBar = Phake::partialMock(__NAMESPACE__.'\Type');
         $type->addSubType($subTypeBar);
 
         $this->assertSame(array(
@@ -63,7 +53,7 @@ class TypeTest extends \PHPUnit_Framework_TestCase
 
         $subTypeBaz = new Composite('baz');
         $type->addSubType($subTypeBaz);
-        $subTypeQux = new Type('qux');
+        $subTypeQux = Phake::partialMock(__NAMESPACE__.'\Type');
         $type->addSubType($subTypeQux);
 
         $this->assertSame(array(
@@ -71,16 +61,5 @@ class TypeTest extends \PHPUnit_Framework_TestCase
             $subTypeBaz,
             $subTypeQux,
         ), $type->subTypes());
-    }
-
-    public function testAccept()
-    {
-        $type = new Type('foo');
-        $visitor = Phake::mock(__NAMESPACE__.'\Visitor');
-        $type->accept($visitor);
-
-        Phake::verify($visitor)->visitType(
-            $this->identicalTo($type)
-        );
     }
 }

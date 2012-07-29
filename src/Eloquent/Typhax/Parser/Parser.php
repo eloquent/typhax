@@ -13,7 +13,7 @@ namespace Eloquent\Typhax\Parser;
 
 use Eloquent\Typhax\AST\Composite;
 use Eloquent\Typhax\AST\Node;
-use Eloquent\Typhax\AST\Type;
+use Eloquent\Typhax\AST\Type\ObjectType;
 use Eloquent\Typhax\Lexer\Token;
 
 class Parser
@@ -73,7 +73,7 @@ class Parser
     protected function parseType(array &$tokens)
     {
         $this->consumeWhitespace($tokens);
-        $type = new Type(
+        $type = new ObjectType(
             $this->assert($tokens, Token::TOKEN_STRING)->content()
         );
         next($tokens);

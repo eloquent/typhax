@@ -9,26 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Typhax\AST;
+namespace Eloquent\Typhax\AST\Type;
 
-class Type implements Node
+use Eloquent\Typhax\AST\Node;
+use Eloquent\Typhax\AST\Visitor;
+
+abstract class Type implements Node
 {
-    /**
-     * @param string $name
-     */
-    public function __construct($name)
-    {
-        $this->name = $name;
-    }
-
-    /**
-     * @return string
-     */
-    public function name()
-    {
-        return $this->name;
-    }
-
     /**
      * @param string $name
      * @param mixed $value
@@ -63,27 +50,10 @@ class Type implements Node
     }
 
     /**
-     * @param Visitor $visitor
-     *
-     * @return mixed
+     * @return string
      */
-    public function accept(Visitor $visitor)
-    {
-        return $visitor->visitType($this);
-    }
+    abstract public function name();
 
-    /**
-     * @var string
-     */
-    protected $name;
-
-    /**
-     * @var array<string,mixed>
-     */
-    protected $attributes = array();
-
-    /**
-     * @var array<integer,Node>
-     */
-    protected $subTypes = array();
+    private $attributes = array();
+    private $subTypes = array();
 }

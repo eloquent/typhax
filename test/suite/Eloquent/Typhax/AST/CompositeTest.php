@@ -32,7 +32,7 @@ class CompositeTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(array(), $composite->types());
 
-        $typeBar = new Type('bar');
+        $typeBar = new Type\ObjectType('bar');
         $composite->addType($typeBar);
 
         $this->assertSame(array(
@@ -41,7 +41,7 @@ class CompositeTest extends \PHPUnit_Framework_TestCase
 
         $typeBaz = new Composite('baz');
         $composite->addType($typeBaz);
-        $typeQux = new Type('qux');
+        $typeQux = new Type\ObjectType('qux');
         $composite->addType($typeQux);
 
         $this->assertSame(array(
