@@ -21,6 +21,9 @@ final class UnexpectedTokenException extends Exception
      */
     public function __construct($unexpected, $position, array $expected, \Exception $previous = null)
     {
+        $this->unexpected = $unexpected;
+        $this->expected = $expected;
+
         if (count($expected) > 1) {
             $expected = 'one of '.implode(', ', $expected);
         } else {
@@ -28,15 +31,34 @@ final class UnexpectedTokenException extends Exception
         }
 
         $message =
-            'Unexpected '
-            .$unexpected
-            .' at position '
-            .$position
-            .'. Expected '
-            .$expected
-            .'.'
+            'Unexpected '.
+            $unexpected.
+            ' at position '.
+            $position.
+            '. Expected '.
+            $expected.
+            '.'
         ;
 
         parent::__construct($message, $position, $previous);
     }
+
+    /**
+     * @return string
+     */
+    public function unexpected()
+    {
+        return $this->unexpected;
+    }
+
+    /**
+     * @return array<string>
+     */
+    public function expected()
+    {
+        return $this->expected;
+    }
+
+    private $unexpected;
+    private $expected;
 }

@@ -17,6 +17,7 @@
         "eloquent/enumeration": "2.*"
     },
     "require-dev": {
+        "eloquent/pops": "2.*",
         "phake/phake": "1.*"
     },
     "autoload": {

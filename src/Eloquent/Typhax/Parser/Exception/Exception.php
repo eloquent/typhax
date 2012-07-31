@@ -36,5 +36,5 @@ abstract class Exception extends \Eloquent\Typhax\Exception\LogicException
     /**
      * @var integer
      */
-    protected $position;
+    private $position;
 }

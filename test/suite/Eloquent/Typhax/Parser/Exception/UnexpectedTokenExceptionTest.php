@@ -20,21 +20,26 @@ class UnexpectedTokenTest extends \PHPUnit_Framework_TestCase
         $expected = array('bar');
         $previous = new \Exception;
         $exception = new UnexpectedTokenException($unexpected, $position, $expected, $previous);
-
         $expectedMessage = 'Unexpected foo at position 666. Expected bar.';
 
         $this->assertSame($expectedMessage, $exception->getMessage());
-        $this->assertSame(0, $exception->getCode());
-        $this->assertSame($previous, $exception->getPrevious());
+        $this->assertSame($unexpected, $exception->unexpected());
+        $this->assertSame($expected, $exception->expected());
         $this->assertSame($position, $exception->position());
+        $this->assertSame($previous, $exception->getPrevious());
+
 
         $unexpected = 'foo';
         $position = 666;
         $expected = array('bar', 'baz');
-        $exception = new UnexpectedTokenException($unexpected, $position, $expected);
-
+        $previous = new \Exception;
+        $exception = new UnexpectedTokenException($unexpected, $position, $expected, $previous);
         $expectedMessage = 'Unexpected foo at position 666. Expected one of bar, baz.';
 
         $this->assertSame($expectedMessage, $exception->getMessage());
+        $this->assertSame($unexpected, $exception->unexpected());
+        $this->assertSame($expected, $exception->expected());
+        $this->assertSame($position, $exception->position());
+        $this->assertSame($previous, $exception->getPrevious());
     }
 }
