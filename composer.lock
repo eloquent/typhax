@@ -1,5 +1,5 @@
 {
-    "hash": "0c7f51eda071b9d185c3c815d23cc691",
+    "hash": "78ec8fb33f1245b234bb689b9a50389b",
     "packages": [
         {
             "package": "eloquent/enumeration",
@@ -7,10 +7,6 @@
         }
     ],
     "packages-dev": [
-        {
-            "package": "eloquent/pops",
-            "version": "2.0.1"
-        },
         {
             "package": "phake/phake",
             "version": "1.0.2"

@@ -30,6 +30,7 @@ use Eloquent\Typhax\Type\StringType;
 use Eloquent\Typhax\Type\TraversableType;
 use Eloquent\Typhax\Type\TupleType;
 use Eloquent\Typhax\Type\Type;
+use ReflectionObject;
 
 class ParserTest extends \PHPUnit_Framework_TestCase
 {
@@ -152,55 +153,6 @@ class ParserTest extends \PHPUnit_Framework_TestCase
         $expected = new ResourceType('foo');
         $data[] = array($expected, $source);
 
-        // #9: Basic attributes
-        // $source = ' foo ( bar : "baz" , \'qux\' : 666 , doom : .666 , splat : null , pip : true , pop : false ) ';
-        // $expected = new ObjectType('foo');
-        // $expected->setAttribute('bar', 'baz');
-        // $expected->setAttribute('qux', 666);
-        // $expected->setAttribute('doom', .666);
-        // $expected->setAttribute('splat', null);
-        // $expected->setAttribute('pip', true);
-        // $expected->setAttribute('pop', false);
-        // $data[] = array($expected, $source);
-
-        // // #9: Nested hash attribute
-        // $source = 'foo(bar:{baz:{qux:doom}})';
-        // $expected = new ObjectType('foo');
-        // $expected->setAttribute('bar', array(
-        //     'baz' => array(
-        //         'qux' => 'doom',
-        //     ),
-        // ));
-        // $data[] = array($expected, $source);
-
-        // // #10: Nested array attribute
-        // $source = 'foo(bar:[baz,[qux,doom]])';
-        // $expected = new ObjectType('foo');
-        // $expected->setAttribute('bar', array(
-        //     'baz',
-        //     array(
-        //         'qux',
-        //         'doom',
-        //     ),
-        // ));
-        // $data[] = array($expected, $source);
-
-        // // #11: Empty hash and array
-        // $source = 'foo(bar:{},baz:[])';
-        // $expected = new ObjectType('foo');
-        // $expected->setAttribute('bar', array());
-        // $expected->setAttribute('baz', array());
-        // $data[] = array($expected, $source);
-
-
-        // // #15: Mixed subtypes and attributes
-        // $source = 'foo<bar,baz>(qux:doom)';
-        // $expected = new ObjectType('foo');
-        // $expected->addSubType(new ObjectType('bar'));
-        // $expected->addSubType(new ObjectType('baz'));
-        // $expected->setAttribute('qux', 'doom');
-        // $data[] = array($expected, $source);
-
         return $data;
     }
 
@@ -287,6 +239,65 @@ class ParserTest extends \PHPUnit_Framework_TestCase
 
         $this->setExpectedException($expectedClass, $expectedMessage);
         $parser->parse($tokens);
+    }
+
+    public function hashData()
+    {
+        $data = array();
+
+        // #0: Basic hash
+        $source = ' { foo : "bar" , \'baz\' : 666 , qux : .666 , doom : null , splat : true , pop : false } ';
+        $expected = array(
+            'foo' => 'bar',
+            'baz' => 666,
+            'qux' => .666,
+            'doom' => null,
+            'splat' => true,
+            'pop' => false,
+        );
+        $data[] = array($expected, $source);
+
+        // #1: Nested hash and array
+        $source = ' { foo : { bar : baz } , qux : [ doom, [ splat , pop ] ] } ';
+        $expected = array(
+            'foo' => array(
+                'bar' => 'baz',
+            ),
+            'qux' => array(
+                'doom',
+                array(
+                    'splat',
+                    'pop',
+                ),
+            ),
+        );
+        $data[] = array($expected, $source);
+
+        // #2: Empty hash and array
+        $source = ' { foo : { } , bar : [ ] } ';
+        $expected = array(
+            'foo' => array(),
+            'bar' => array(),
+        );
+        $data[] = array($expected, $source);
+
+        return $data;
+    }
+
+    /**
+     * @dataProvider hashData
+     */
+    public function testParseHash(array $expected, $source)
+    {
+        $tokens = $this->_lexer->tokens($source);
+        $parser = new Parser;
+        $reflector = new ReflectionObject($parser);
+        $method = $reflector->getMethod('parseHash');
+        $method->setAccessible(true);
+        $arguments = array(&$tokens);
+        $actual = $method->invokeArgs($parser, $arguments);
+
+        $this->assertEquals($expected, $actual);
     }
 
 }
