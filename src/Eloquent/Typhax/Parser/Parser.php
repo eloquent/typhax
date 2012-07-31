@@ -96,15 +96,16 @@ class Parser
             }
 
             $count = 0;
+            $that = $this;
             $types = $this->parseTypeList(
                 $tokens,
-                function() use(&$tokens, &$count) {
+                function() use(&$tokens, &$count, $that) {
                     $count ++;
                     if ($count > 1) {
                         throw new Exception\UnexpectedTokenException(
                             Token::nameByType(Token::TOKEN_COMMA)
-                            , $this->position($tokens)
-                            , $this->tokenNames(array(
+                            , $that->position($tokens)
+                            , $that->tokenNames(array(
                                 Token::TOKEN_GREATER_THAN,
                             ))
                         );
@@ -263,14 +264,15 @@ class Parser
         next($tokens);
         $this->consumeWhitespace($tokens);
 
+        $that = $this;
         $attributes = $this->parseHashContents(
             $tokens,
-            function($attribute) use(&$tokens, $typeName, $supportedAttributes) {
+            function($attribute) use(&$tokens, $typeName, $supportedAttributes, $that) {
                 if (!in_array($attribute, $supportedAttributes)) {
                     throw new Exception\UnsupportedAttributeException(
                         $typeName,
                         $attribute,
-                        $this->position($tokens) - mb_strlen($attribute, 'UTF-8')
+                        $that->position($tokens) - mb_strlen($attribute, 'UTF-8')
                     );
                 }
             }
