@@ -174,7 +174,6 @@ class Token
     const TOKEN_BRACE_OPEN = '{';
     const TOKEN_COLON = ':';
     const TOKEN_COMMA = ',';
-    const TOKEN_END = 'end';
     const TOKEN_FLOAT = T_DNUMBER;
     const TOKEN_GREATER_THAN = '>';
     const TOKEN_INTEGER = T_LNUMBER;

@@ -21,7 +21,6 @@ class Lexer
     public function tokens($source)
     {
         $tokens = $this->sourceTokens($source);
-        $tokens[] = new Token(Token::TOKEN_END, '');
 
         return $tokens;
     }

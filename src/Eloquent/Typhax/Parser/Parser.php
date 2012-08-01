@@ -41,6 +41,10 @@ class Parser
      */
     public static function position(array &$tokens)
     {
+        if (!$tokens) {
+            return 0;
+        }
+
         $index = key($tokens);
 
         $source = '';
@@ -61,12 +65,9 @@ class Parser
         $type = $this->parseType($tokens);
         $this->consumeWhitespace($tokens);
 
-        if (Token::TOKEN_END !== current($tokens)->type()) {
+        if (!$this->endReached($tokens)) {
             $type = $this->parseComposite($tokens, $type);
         }
-
-        $this->consumeWhitespace($tokens);
-        $this->assert($tokens, Token::TOKEN_END);
 
         return $type;
     }
@@ -98,7 +99,7 @@ class Parser
 
         $this->consumeWhitespace($tokens);
 
-        if (Token::TOKEN_LESS_THAN === current($tokens)->type()) {
+        if ($this->currentTokenIsType($tokens, Token::TOKEN_LESS_THAN)) {
             if (!$type instanceof TraversablePrimaryType) {
                 throw new Exception\UnexpectedTokenException(
                     current($tokens)->name()
@@ -107,7 +108,6 @@ class Parser
                         Token::TOKEN_PARENTHESIS_OPEN,
                         Token::TOKEN_AND,
                         Token::TOKEN_PIPE,
-                        Token::TOKEN_END,
                     ))
                 );
             }
@@ -203,7 +203,7 @@ class Parser
 
         $this->consumeWhitespace($tokens);
         $ofType = null;
-        if (Token::TOKEN_PARENTHESIS_OPEN === current($tokens)->type()) {
+        if ($this->currentTokenIsType($tokens, Token::TOKEN_PARENTHESIS_OPEN)) {
             $attributes = $this->parseAttributes(
                 $tokens,
                 'resource',
@@ -250,7 +250,7 @@ class Parser
 
         $this->consumeWhitespace($tokens);
 
-        while (Token::TOKEN_COMMA === current($tokens)->type()) {
+        while ($this->currentTokenIsType($tokens, Token::TOKEN_COMMA)) {
             if ($commaCallback) {
                 $commaCallback();
             }
@@ -361,7 +361,7 @@ class Parser
         next($tokens);
         $this->consumeWhitespace($tokens);
 
-        if (Token::TOKEN_BRACE_CLOSE === current($tokens)->type()) {
+        if ($this->currentTokenIsType($tokens, Token::TOKEN_BRACE_CLOSE)) {
             next($tokens);
 
             return array();
@@ -398,7 +398,7 @@ class Parser
             $hash[$key] = $this->parseValue($tokens);
 
             $this->consumeWhitespace($tokens);
-            if (Token::TOKEN_COMMA !== current($tokens)->type()) {
+            if (!$this->currentTokenIsType($tokens, Token::TOKEN_COMMA)) {
                 break;
             }
             next($tokens);
@@ -419,7 +419,7 @@ class Parser
         next($tokens);
         $this->consumeWhitespace($tokens);
 
-        if (Token::TOKEN_SQUARE_BRACKET_CLOSE === current($tokens)->type()) {
+        if ($this->currentTokenIsType($tokens, Token::TOKEN_SQUARE_BRACKET_CLOSE)) {
             next($tokens);
 
             return array();
@@ -430,7 +430,7 @@ class Parser
             $array[] = $this->parseValue($tokens);
             $this->consumeWhitespace($tokens);
 
-            if (Token::TOKEN_COMMA !== current($tokens)->type()) {
+            if (!$this->currentTokenIsType($tokens, Token::TOKEN_COMMA)) {
                 break;
             }
             next($tokens);
@@ -507,15 +507,11 @@ class Parser
     protected function getCompositePrecedence(array &$tokens) {
         $token = current($tokens);
         if ($token) {
-            $precedence = array_search(
+            return array_search(
                 $token->type()
                 , $this->compositePrecedence
                 , true
             );
-
-            if (false !== $precedence) {
-                return $precedence;
-            }
         }
 
         return -1;
@@ -533,24 +529,58 @@ class Parser
             $types = array($types);
         }
 
-        $token = current($tokens);
-
-        if (!in_array($token->type(), $types, true)) {
-            throw new Exception\UnexpectedTokenException(
-                $token->name()
-                , $this->position($tokens)
-                , Token::typesToNames($types)
-            );
+        if ($this->endReached($tokens)) {
+            $valid = false;
+            $tokenName = 'END';
+        } else {
+            $token = current($tokens);
+            $valid = in_array($token->type(), $types, true);
+            $tokenName = $token->name();
         }
 
-        return $token;
+        if ($valid) {
+            return $token;
+        }
+
+        throw new Exception\UnexpectedTokenException(
+            $tokenName
+            , $this->position($tokens)
+            , Token::typesToNames($types)
+        );
     }
 
+    /**
+     * @param array<integer,Token> &$tokens
+     */
     protected function consumeWhitespace(array &$tokens)
     {
-        if (Token::TOKEN_WHITESPACE === current($tokens)->type()) {
+        if ($this->currentTokenIsType($tokens, Token::TOKEN_WHITESPACE)) {
             next($tokens);
         }
+    }
+
+    /**
+     * @param array<integer,Token> &$tokens
+     *
+     * @return boolean
+     */
+    protected function endReached(&$tokens)
+    {
+        return null === key($tokens);
+    }
+
+    /**
+     * @param array<integer,Token> &$tokens
+     * @param string $type
+     *
+     * @return boolean
+     */
+    protected function currentTokenIsType(&$tokens, $type)
+    {
+        return
+            !$this->endReached($tokens)
+            && current($tokens)->type() === $type
+        ;
     }
 
     /**

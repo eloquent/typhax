@@ -83,7 +83,6 @@ class TokenTest extends \PHPUnit_Framework_TestCase
             array('BRACE_OPEN', Token::TOKEN_BRACE_OPEN),
             array('COLON', Token::TOKEN_COLON),
             array('COMMA', Token::TOKEN_COMMA),
-            array('END', Token::TOKEN_END),
             array('FLOAT', Token::TOKEN_FLOAT),
             array('GREATER_THAN', Token::TOKEN_GREATER_THAN),
             array('INTEGER', Token::TOKEN_INTEGER),

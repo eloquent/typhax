@@ -184,43 +184,37 @@ class ParserTest extends \PHPUnit_Framework_TestCase
         $expectedMessage = 'Unexpected END at position 1. Expected one of STRING, TYPE_NAME, NULL.';
         $data[] = array($expectedClass, $expectedMessage, $source);
 
-        // #2: Type followed by non-attributes, non-subtypes
-        $source = ' foo { ';
-        $expectedClass = __NAMESPACE__.'\Exception\UnexpectedTokenException';
-        $expectedMessage = 'Unexpected BRACE_OPEN at position 6. Expected END.';
-        $data[] = array($expectedClass, $expectedMessage, $source);
-
-        // #3: Empty type list
+        // #2: Empty type list
         $source = ' foo < > ';
         $expectedClass = __NAMESPACE__.'\Exception\UnexpectedTokenException';
         $expectedMessage = 'Unexpected GREATER_THAN at position 8. Expected one of STRING, TYPE_NAME, NULL.';
         $data[] = array($expectedClass, $expectedMessage, $source);
 
-        // #4: Empty attributes
+        // #3: Empty attributes
         $source = ' resource ( ) ';
         $expectedClass = __NAMESPACE__.'\Exception\UnexpectedTokenException';
         $expectedMessage = 'Unexpected PARENTHESIS_CLOSE at position 13. Expected one of STRING, STRING_QUOTED, INTEGER, FLOAT, NULL, BOOLEAN_TRUE, BOOLEAN_FALSE, BRACE_OPEN, SQUARE_BRACKET_OPEN.';
         $data[] = array($expectedClass, $expectedMessage, $source);
 
-        // #5: Unsupported attributes
+        // #4: Unsupported attributes
         $source = ' resource ( foo : bar ) ';
         $expectedClass = __NAMESPACE__.'\Exception\UnsupportedAttributeException';
         $expectedMessage = "Unsupported attribute at position 13. Type 'resource' does not support attribute 'foo'.";
         $data[] = array($expectedClass, $expectedMessage, $source);
 
-        // #6: Unsupported attributes position calculation check
+        // #5: Unsupported attributes position calculation check
         $source = ' resource ( foobar : baz ) ';
         $expectedClass = __NAMESPACE__.'\Exception\UnsupportedAttributeException';
         $expectedMessage = "Unsupported attribute at position 13. Type 'resource' does not support attribute 'foobar'.";
         $data[] = array($expectedClass, $expectedMessage, $source);
 
-        // #7: Non-traversable as primary in a traversable
+        // #6: Non-traversable as primary in a traversable
         $source = ' string < foo > ';
         $expectedClass = __NAMESPACE__.'\Exception\UnexpectedTokenException';
-        $expectedMessage = 'Unexpected LESS_THAN at position 9. Expected one of PARENTHESIS_OPEN, AND, PIPE, END.';
+        $expectedMessage = 'Unexpected LESS_THAN at position 9. Expected one of PARENTHESIS_OPEN, AND, PIPE.';
         $data[] = array($expectedClass, $expectedMessage, $source);
 
-        // #8: Traversable with too many types in type list
+        // #7: Traversable with too many types in type list
         $source = ' foo < bar , baz , qux , doom , splat > ';
         $expectedClass = __NAMESPACE__.'\Exception\UnexpectedTokenException';
         $expectedMessage = 'Unexpected COMMA at position 18. Expected GREATER_THAN.';
