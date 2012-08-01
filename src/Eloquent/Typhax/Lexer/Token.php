@@ -66,6 +66,21 @@ class Token
     }
 
     /**
+     * @param array<integer|string> $types
+     *
+     * @return array<string|null>
+     */
+    static public function typesToNames(array $types)
+    {
+        $names = array();
+        foreach ($types as $type) {
+            $names[] = static::nameByType($type);
+        }
+
+        return $names;
+    }
+
+    /**
      * @param integer|string $type
      * @param string $content
      */

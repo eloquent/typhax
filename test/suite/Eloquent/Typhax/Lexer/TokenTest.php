@@ -121,4 +121,15 @@ class TokenTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, $token->name());
         $this->assertSame(null !== $expected, $token->supported());
     }
+
+    public function testTypesToNames()
+    {
+        $this->assertSame(array(
+            'NULL',
+            'AND',
+        ), Token::typesToNames(array(
+            Token::TOKEN_NULL,
+            Token::TOKEN_AND,
+        )));
+    }
 }

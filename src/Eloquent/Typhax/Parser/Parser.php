@@ -37,6 +37,23 @@ class Parser
     /**
      * @param array<integer,Token> &$tokens
      *
+     * @return integer
+     */
+    public static function position(array &$tokens)
+    {
+        $index = key($tokens);
+
+        $source = '';
+        for ($i = 0; $i <= $index; $i ++) {
+            $source .= $tokens[$i]->content();
+        }
+
+        return mb_strlen($source, 'UTF-8');
+    }
+
+    /**
+     * @param array<integer,Token> &$tokens
+     *
      * @return Type
      */
     public function parse(array &$tokens)
@@ -86,7 +103,7 @@ class Parser
                 throw new Exception\UnexpectedTokenException(
                     current($tokens)->name()
                     , $this->position($tokens)
-                    , $this->tokenNames(array(
+                    , Token::typesToNames(array(
                         Token::TOKEN_PARENTHESIS_OPEN,
                         Token::TOKEN_AND,
                         Token::TOKEN_PIPE,
@@ -96,16 +113,15 @@ class Parser
             }
 
             $count = 0;
-            $that = $this;
             $types = $this->parseTypeList(
                 $tokens,
-                function() use(&$tokens, &$count, $that) {
+                function() use(&$tokens, &$count) {
                     $count ++;
                     if ($count > 1) {
                         throw new Exception\UnexpectedTokenException(
                             Token::nameByType(Token::TOKEN_COMMA)
-                            , $that->position($tokens)
-                            , $that->tokenNames(array(
+                            , Parser::position($tokens)
+                            , Token::typesToNames(array(
                                 Token::TOKEN_GREATER_THAN,
                             ))
                         );
@@ -264,15 +280,14 @@ class Parser
         next($tokens);
         $this->consumeWhitespace($tokens);
 
-        $that = $this;
         $attributes = $this->parseHashContents(
             $tokens,
-            function($attribute) use(&$tokens, $typeName, $supportedAttributes, $that) {
+            function($attribute) use(&$tokens, $typeName, $supportedAttributes) {
                 if (!in_array($attribute, $supportedAttributes)) {
                     throw new Exception\UnsupportedAttributeException(
                         $typeName,
                         $attribute,
-                        $that->position($tokens) - mb_strlen($attribute, 'UTF-8')
+                        Parser::position($tokens) - mb_strlen($attribute, 'UTF-8')
                     );
                 }
             }
@@ -524,43 +539,11 @@ class Parser
             throw new Exception\UnexpectedTokenException(
                 $token->name()
                 , $this->position($tokens)
-                , $this->tokenNames($types)
+                , Token::typesToNames($types)
             );
         }
 
         return $token;
-    }
-
-    /**
-     * @param array<integer,Token> &$tokens
-     *
-     * @return integer
-     */
-    protected function position(array &$tokens)
-    {
-        $index = key($tokens);
-
-        $source = '';
-        for ($i = 0; $i <= $index; $i ++) {
-            $source .= $tokens[$i]->content();
-        }
-
-        return mb_strlen($source, 'UTF-8');
-    }
-
-    /**
-     * @param array<integer|string> $types
-     *
-     * @return array<string>
-     */
-    protected function tokenNames(array $types)
-    {
-        $names = array();
-        foreach ($types as $type) {
-            $names[] = Token::nameByType($type);
-        }
-
-        return $names;
     }
 
     protected function consumeWhitespace(array &$tokens)
