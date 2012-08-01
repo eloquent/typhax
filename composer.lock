@@ -1,10 +1,7 @@
 {
-    "hash": "0950d872ec168a85771e770f339faa01",
+    "hash": "2a329d55db24dcdec563342e180c65ec",
     "packages": [
-        {
-            "package": "eloquent/enumeration",
-            "version": "2.1.0"
-        }
+
     ],
     "packages-dev": [
         {
