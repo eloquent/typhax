@@ -23,24 +23,5 @@
         "psr-0": {
             "Eloquent": "src"
         }
-    },
-    "repositories": [
-        {
-            "type": "package",
-            "package": {
-                "name": "phake/phake",
-                "version": "1.0.2",
-                "dist": {
-                    "url": "https://github.com/mlively/Phake/zipball/v1.0.2",
-                    "type": "zip"
-                },
-                "autoload": {
-                    "classmap": ["src"]
-                },
-                "include-path": [
-                    "src"
-                ]
-            }
-        }
-    ]
+    }
 }
