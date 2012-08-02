@@ -1,6 +1,5 @@
 {
     "name": "eloquent/typhax",
-    "type": "library",
     "description": "A flexible PHP type hinting syntax.",
     "keywords": ["type","hint","hinting","check","checking","syntax","parser"],
     "homepage": "https://github.com/eloquent/typhax",
@@ -20,7 +19,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Eloquent": "src"
+            "Eloquent\\Typhax": "src"
         }
     }
 }
