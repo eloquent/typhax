@@ -30,8 +30,6 @@ class LexerTest extends \PHPUnit_Framework_TestCase
             array('float'),
             array('integer'),
             array('mixed'),
-            array('number'),
-            array('numeric'),
             array('object'),
             array('resource'),
             array('string'),

@@ -21,8 +21,6 @@ use Eloquent\Typhax\Type\FloatType;
 use Eloquent\Typhax\Type\IntegerType;
 use Eloquent\Typhax\Type\MixedType;
 use Eloquent\Typhax\Type\NullType;
-use Eloquent\Typhax\Type\NumberType;
-use Eloquent\Typhax\Type\NumericType;
 use Eloquent\Typhax\Type\ObjectType;
 use Eloquent\Typhax\Type\OrType;
 use Eloquent\Typhax\Type\ResourceType;
@@ -118,7 +116,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
         $data[] = array($expected, $source);
 
         // #8: Test basic types
-        $source = ' array | boolean | callback | float | integer | null | number | numeric | object | string | mixed ';
+        $source = ' array | boolean | callback | float | integer | null | object | string | mixed ';
         $expected = new OrType(array(
             new ArrayType,
             new BooleanType,
@@ -126,8 +124,6 @@ class ParserTest extends \PHPUnit_Framework_TestCase
             new FloatType,
             new IntegerType,
             new NullType,
-            new NumberType,
-            new NumericType,
             new ObjectType,
             new StringType,
             new MixedType,

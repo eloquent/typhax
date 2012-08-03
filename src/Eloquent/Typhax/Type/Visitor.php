@@ -79,20 +79,6 @@ interface Visitor
     public function visitNullType(NullType $type);
 
     /**
-     * @param NumberType
-     *
-     * @return mixed
-     */
-    public function visitNumberType(NumberType $type);
-
-    /**
-     * @param NumericType
-     *
-     * @return mixed
-     */
-    public function visitNumericType(NumericType $type);
-
-    /**
      * @param ObjectType
      *
      * @return mixed

@@ -21,8 +21,6 @@ use Eloquent\Typhax\Type\FloatType;
 use Eloquent\Typhax\Type\IntegerType;
 use Eloquent\Typhax\Type\MixedType;
 use Eloquent\Typhax\Type\NullType;
-use Eloquent\Typhax\Type\NumberType;
-use Eloquent\Typhax\Type\NumericType;
 use Eloquent\Typhax\Type\ObjectType;
 use Eloquent\Typhax\Type\OrType;
 use Eloquent\Typhax\Type\ResourceType;
@@ -177,10 +175,6 @@ class Parser
                 return new IntegerType;
             case 'null':
                 return new NullType;
-            case 'number':
-                return new NumberType;
-            case 'numeric':
-                return new NumericType;
             case 'object':
                 return new ObjectType;
             case 'string':

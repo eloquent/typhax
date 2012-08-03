@@ -190,8 +190,6 @@ class Lexer
             'float' => Token::TOKEN_TYPE_NAME,
             'integer' => Token::TOKEN_TYPE_NAME,
             'mixed' => Token::TOKEN_TYPE_NAME,
-            'number' => Token::TOKEN_TYPE_NAME,
-            'numeric' => Token::TOKEN_TYPE_NAME,
             'object' => Token::TOKEN_TYPE_NAME,
             'resource' => Token::TOKEN_TYPE_NAME,
             'string' => Token::TOKEN_TYPE_NAME,
