@@ -149,7 +149,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
         $data[] = array($expected, $source);
 
         // #11: Test resource with ofType attribute.
-        $source = ' resource ( ofType : foo ) ';
+        $source = ' resource { ofType : foo } ';
         $expected = new ResourceType('foo');
         $data[] = array($expected, $source);
 
@@ -191,19 +191,19 @@ class ParserTest extends \PHPUnit_Framework_TestCase
         $data[] = array($expectedClass, $expectedMessage, $source);
 
         // #3: Empty attributes
-        $source = ' resource ( ) ';
+        $source = ' resource { } ';
         $expectedClass = __NAMESPACE__.'\Exception\UnexpectedTokenException';
-        $expectedMessage = 'Unexpected PARENTHESIS_CLOSE at position 13. Expected one of STRING, STRING_QUOTED, INTEGER, FLOAT, NULL, BOOLEAN_TRUE, BOOLEAN_FALSE, BRACE_OPEN, SQUARE_BRACKET_OPEN.';
+        $expectedMessage = 'Unexpected BRACE_CLOSE at position 13. Expected one of STRING, STRING_QUOTED, INTEGER, FLOAT, NULL, BOOLEAN_TRUE, BOOLEAN_FALSE, BRACE_OPEN, SQUARE_BRACKET_OPEN.';
         $data[] = array($expectedClass, $expectedMessage, $source);
 
         // #4: Unsupported attributes
-        $source = ' resource ( foo : bar ) ';
+        $source = ' resource { foo : bar } ';
         $expectedClass = __NAMESPACE__.'\Exception\UnsupportedAttributeException';
         $expectedMessage = "Unsupported attribute at position 13. Type 'resource' does not support attribute 'foo'.";
         $data[] = array($expectedClass, $expectedMessage, $source);
 
         // #5: Unsupported attributes position calculation check
-        $source = ' resource ( foobar : baz ) ';
+        $source = ' resource { foobar : baz } ';
         $expectedClass = __NAMESPACE__.'\Exception\UnsupportedAttributeException';
         $expectedMessage = "Unsupported attribute at position 13. Type 'resource' does not support attribute 'foobar'.";
         $data[] = array($expectedClass, $expectedMessage, $source);
@@ -211,7 +211,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
         // #6: Non-traversable as primary in a traversable
         $source = ' string < foo > ';
         $expectedClass = __NAMESPACE__.'\Exception\UnexpectedTokenException';
-        $expectedMessage = 'Unexpected LESS_THAN at position 9. Expected one of PARENTHESIS_OPEN, AND, PIPE.';
+        $expectedMessage = 'Unexpected LESS_THAN at position 9. Expected one of BRACE_OPEN, AND, PIPE.';
         $data[] = array($expectedClass, $expectedMessage, $source);
 
         // #7: Traversable with too many types in type list

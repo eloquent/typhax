@@ -179,8 +179,6 @@ class Token
     const TOKEN_INTEGER = T_LNUMBER;
     const TOKEN_LESS_THAN = '<';
     const TOKEN_NULL = 'null';
-    const TOKEN_PARENTHESIS_CLOSE = ')';
-    const TOKEN_PARENTHESIS_OPEN = '(';
     const TOKEN_PIPE = '|';
     const TOKEN_SQUARE_BRACKET_CLOSE = ']';
     const TOKEN_SQUARE_BRACKET_OPEN = '[';

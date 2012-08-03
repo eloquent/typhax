@@ -75,8 +75,6 @@ class Lexer
                 Token::TOKEN_SQUARE_BRACKET_CLOSE,
                 Token::TOKEN_SQUARE_BRACKET_OPEN,
                 Token::TOKEN_COLON,
-                Token::TOKEN_PARENTHESIS_CLOSE,
-                Token::TOKEN_PARENTHESIS_OPEN,
                 Token::TOKEN_BRACE_CLOSE,
                 Token::TOKEN_BRACE_OPEN,
                 Token::TOKEN_PIPE,

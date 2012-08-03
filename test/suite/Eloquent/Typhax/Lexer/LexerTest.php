@@ -114,10 +114,10 @@ class LexerTest extends \PHPUnit_Framework_TestCase
         $data[] = array($expected, $source);
 
         // #6: Dynamic type with basic attributes and quoted strings
-        $source = 'type(foo: bar, \'baz\': "qux")';
+        $source = 'type{foo: bar, \'baz\': "qux"}';
         $expected = array(
             new Token(Token::TOKEN_STRING, 'type'),
-            new Token(Token::TOKEN_PARENTHESIS_OPEN, '('),
+            new Token(Token::TOKEN_BRACE_OPEN, '{'),
             new Token(Token::TOKEN_STRING, 'foo'),
             new Token(Token::TOKEN_COLON, ':'),
             new Token(Token::TOKEN_WHITESPACE, ' '),
@@ -128,15 +128,15 @@ class LexerTest extends \PHPUnit_Framework_TestCase
             new Token(Token::TOKEN_COLON, ':'),
             new Token(Token::TOKEN_WHITESPACE, ' '),
             new Token(Token::TOKEN_STRING_QUOTED, '"qux"'),
-            new Token(Token::TOKEN_PARENTHESIS_CLOSE, ')'),
+            new Token(Token::TOKEN_BRACE_CLOSE, '}'),
         );
         $data[] = array($expected, $source);
 
         // #7: Dynamic type with array attributes
-        $source = 'type(foo: [bar, baz], qux: {doom: splat, pip: pop})';
+        $source = 'type{foo: [bar, baz], qux: {doom: splat, pip: pop}}';
         $expected = array(
             new Token(Token::TOKEN_STRING, 'type'),
-            new Token(Token::TOKEN_PARENTHESIS_OPEN, '('),
+            new Token(Token::TOKEN_BRACE_OPEN, '{'),
             new Token(Token::TOKEN_STRING, 'foo'),
             new Token(Token::TOKEN_COLON, ':'),
             new Token(Token::TOKEN_WHITESPACE, ' '),
@@ -163,7 +163,7 @@ class LexerTest extends \PHPUnit_Framework_TestCase
             new Token(Token::TOKEN_WHITESPACE, ' '),
             new Token(Token::TOKEN_STRING, 'pop'),
             new Token(Token::TOKEN_BRACE_CLOSE, '}'),
-            new Token(Token::TOKEN_PARENTHESIS_CLOSE, ')'),
+            new Token(Token::TOKEN_BRACE_CLOSE, '}'),
         );
         $data[] = array($expected, $source);
 
@@ -240,7 +240,7 @@ class LexerTest extends \PHPUnit_Framework_TestCase
         $data[] = array($expected, $source);
 
         // #12: Treatment of unsupported tokens containing supported tokens
-        $source = '&= && || ?> %> {$ ${ => >= <> <= isset($var) (string) -> <?php <? <% <?= <%= |= :: << <<= >> >>= <<<';
+        $source = '&= && || ?> %> {$ ${ => >= <> <= -> <?php <? <% <?= <%= |= :: << <<= >> >>= <<<';
         $expected = array(
             new Token(Token::TOKEN_AND, '&'),
             new Token(Token::TOKEN_STRING, '='),
@@ -274,15 +274,6 @@ class LexerTest extends \PHPUnit_Framework_TestCase
             new Token(Token::TOKEN_WHITESPACE, ' '),
             new Token(Token::TOKEN_LESS_THAN, '<'),
             new Token(Token::TOKEN_STRING, '='),
-            new Token(Token::TOKEN_WHITESPACE, ' '),
-            new Token(Token::TOKEN_STRING, 'isset'),
-            new Token(Token::TOKEN_PARENTHESIS_OPEN, '('),
-            new Token(Token::TOKEN_STRING, '$var'),
-            new Token(Token::TOKEN_PARENTHESIS_CLOSE, ')'),
-            new Token(Token::TOKEN_WHITESPACE, ' '),
-            new Token(Token::TOKEN_PARENTHESIS_OPEN, '('),
-            new Token(Token::TOKEN_TYPE_NAME, 'string'),
-            new Token(Token::TOKEN_PARENTHESIS_CLOSE, ')'),
             new Token(Token::TOKEN_WHITESPACE, ' '),
             new Token(Token::TOKEN_STRING, '-'),
             new Token(Token::TOKEN_GREATER_THAN, '>'),
@@ -355,21 +346,21 @@ class LexerTest extends \PHPUnit_Framework_TestCase
         $data[] = array($expected, $source);
 
         // #15: Type with attributes and subtypes
-        $source = 'type(foo: bar)<subType, subType>';
+        $source = 'type<subType, subType>{foo: bar}';
         $expected = array(
             new Token(Token::TOKEN_STRING, 'type'),
-            new Token(Token::TOKEN_PARENTHESIS_OPEN, '('),
-            new Token(Token::TOKEN_STRING, 'foo'),
-            new Token(Token::TOKEN_COLON, ':'),
-            new Token(Token::TOKEN_WHITESPACE, ' '),
-            new Token(Token::TOKEN_STRING, 'bar'),
-            new Token(Token::TOKEN_PARENTHESIS_CLOSE, ')'),
             new Token(Token::TOKEN_LESS_THAN, '<'),
             new Token(Token::TOKEN_STRING, 'subType'),
             new Token(Token::TOKEN_COMMA, ','),
             new Token(Token::TOKEN_WHITESPACE, ' '),
             new Token(Token::TOKEN_STRING, 'subType'),
             new Token(Token::TOKEN_GREATER_THAN, '>'),
+            new Token(Token::TOKEN_BRACE_OPEN, '{'),
+            new Token(Token::TOKEN_STRING, 'foo'),
+            new Token(Token::TOKEN_COLON, ':'),
+            new Token(Token::TOKEN_WHITESPACE, ' '),
+            new Token(Token::TOKEN_STRING, 'bar'),
+            new Token(Token::TOKEN_BRACE_CLOSE, '}'),
         );
         $data[] = array($expected, $source);
 

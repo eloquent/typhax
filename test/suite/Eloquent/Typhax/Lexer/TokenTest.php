@@ -88,8 +88,6 @@ class TokenTest extends \PHPUnit_Framework_TestCase
             array('INTEGER', Token::TOKEN_INTEGER),
             array('LESS_THAN', Token::TOKEN_LESS_THAN),
             array('NULL', Token::TOKEN_NULL),
-            array('PARENTHESIS_CLOSE', Token::TOKEN_PARENTHESIS_CLOSE),
-            array('PARENTHESIS_OPEN', Token::TOKEN_PARENTHESIS_OPEN),
             array('PIPE', Token::TOKEN_PIPE),
             array('SQUARE_BRACKET_CLOSE', Token::TOKEN_SQUARE_BRACKET_CLOSE),
             array('SQUARE_BRACKET_OPEN', Token::TOKEN_SQUARE_BRACKET_OPEN),

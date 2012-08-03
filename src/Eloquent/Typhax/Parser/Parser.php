@@ -105,7 +105,7 @@ class Parser
                     current($tokens)->name()
                     , $this->position($tokens)
                     , Token::typesToNames(array(
-                        Token::TOKEN_PARENTHESIS_OPEN,
+                        Token::TOKEN_BRACE_OPEN,
                         Token::TOKEN_AND,
                         Token::TOKEN_PIPE,
                     ))
@@ -203,7 +203,7 @@ class Parser
 
         $this->consumeWhitespace($tokens);
         $ofType = null;
-        if ($this->currentTokenIsType($tokens, Token::TOKEN_PARENTHESIS_OPEN)) {
+        if ($this->currentTokenIsType($tokens, Token::TOKEN_BRACE_OPEN)) {
             $attributes = $this->parseAttributes(
                 $tokens,
                 'resource',
@@ -276,7 +276,7 @@ class Parser
     protected function parseAttributes(array &$tokens, $typeName, array $supportedAttributes)
     {
         $this->consumeWhitespace($tokens);
-        $this->assert($tokens, Token::TOKEN_PARENTHESIS_OPEN);
+        $this->assert($tokens, Token::TOKEN_BRACE_OPEN);
         next($tokens);
         $this->consumeWhitespace($tokens);
 
@@ -294,7 +294,7 @@ class Parser
         );
 
         $this->consumeWhitespace($tokens);
-        $this->assert($tokens, Token::TOKEN_PARENTHESIS_CLOSE);
+        $this->assert($tokens, Token::TOKEN_BRACE_CLOSE);
         next($tokens);
 
         return $attributes;
