@@ -44,13 +44,6 @@ interface Visitor
     public function visitCallbackType(CallbackType $type);
 
     /**
-     * @param CompositeType
-     *
-     * @return mixed
-     */
-    public function visitCompositeType(CompositeType $type);
-
-    /**
      * @param FloatType
      *
      * @return mixed
