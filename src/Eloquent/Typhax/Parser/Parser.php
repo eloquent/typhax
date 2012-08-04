@@ -45,22 +45,16 @@ class Parser
         }
 
         $index = key($tokens);
-        $end = null === $index;
-        if ($end) {
-            $index = count($tokens) - 1;
+        if (null === $index) {
+            $index = count($tokens);
         }
 
         $source = '';
-        for ($i = 0; $i <= $index; $i ++) {
+        for ($i = 0; $i < $index; $i ++) {
             $source .= $tokens[$i]->content();
         }
 
-        $position = mb_strlen($source, 'UTF-8');
-        if ($end) {
-            return $position + 1;
-        }
-
-        return $position;
+        return mb_strlen($source, 'UTF-8') + 1;
     }
 
     /**
