@@ -11,7 +11,9 @@
 
 namespace Eloquent\Typhax\Lexer;
 
-class TokenTest extends \PHPUnit_Framework_TestCase
+use PHPUnit_Framework_TestCase;
+
+class TokenTest extends PHPUnit_Framework_TestCase
 {
     public function tokenData()
     {

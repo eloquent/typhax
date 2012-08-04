@@ -11,7 +11,9 @@
 
 namespace Eloquent\Typhax\Lexer;
 
-class LexerTest extends \PHPUnit_Framework_TestCase
+use PHPUnit_Framework_TestCase;
+
+class LexerTest extends PHPUnit_Framework_TestCase
 {
     protected function setUp()
     {

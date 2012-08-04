@@ -12,8 +12,9 @@
 namespace Eloquent\Typhax\Type;
 
 use Phake;
+use PHPUnit_Framework_TestCase;
 
-class ArrayTypeTest extends \PHPUnit_Framework_TestCase
+class ArrayTypeTest extends PHPUnit_Framework_TestCase
 {
     public function testAccept()
     {

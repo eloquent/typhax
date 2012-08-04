@@ -11,15 +11,17 @@
 
 namespace Eloquent\Typhax\Parser\Exception;
 
-final class UnsupportedAttributeException extends Exception
+use Exception;
+
+final class UnsupportedAttributeException extends ParseException
 {
     /**
      * @param string $typeName
      * @param string $attribute
      * @param integer $position
-     * @param \Exception $previous
+     * @param Exception $previous
      */
-    public function __construct($typeName, $attribute, $position, \Exception $previous = null)
+    public function __construct($typeName, $attribute, $position, Exception $previous = null)
     {
         $this->typeName = $typeName;
         $this->attribute = $attribute;

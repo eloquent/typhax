@@ -11,7 +11,9 @@
 
 namespace Eloquent\Typhax\Parser\Exception;
 
-class UnexpectedTokenTest extends \PHPUnit_Framework_TestCase
+use PHPUnit_Framework_TestCase;
+
+class UnexpectedTokenTest extends PHPUnit_Framework_TestCase
 {
     public function testException()
     {

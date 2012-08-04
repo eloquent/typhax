@@ -11,15 +11,17 @@
 
 namespace Eloquent\Typhax\Parser\Exception;
 
-final class UnexpectedTokenException extends Exception
+use Exception;
+
+final class UnexpectedTokenException extends ParseException
 {
     /**
      * @param string $unexpected
      * @param integer $position
      * @param array<string> $expected
-     * @param \Exception $previous
+     * @param Exception $previous
      */
-    public function __construct($unexpected, $position, array $expected, \Exception $previous = null)
+    public function __construct($unexpected, $position, array $expected, Exception $previous = null)
     {
         $this->unexpected = $unexpected;
         $this->expected = $expected;

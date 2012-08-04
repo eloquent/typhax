@@ -11,18 +11,21 @@
 
 namespace Eloquent\Typhax\Parser\Exception;
 
-abstract class Exception extends \Eloquent\Typhax\Exception\LogicException
+use Exception;
+use LogicException;
+
+abstract class ParseException extends LogicException
 {
     /**
      * @param string $message
      * @param integer $position
-     * @param \Exception $previous
+     * @param Exception $previous
      */
-    public function __construct($message, $position, \Exception $previous = null)
+    public function __construct($message, $position, Exception $previous = null)
     {
         $this->position = $position;
 
-        parent::__construct($message, $previous);
+        parent::__construct($message, 0, $previous);
     }
 
     /**

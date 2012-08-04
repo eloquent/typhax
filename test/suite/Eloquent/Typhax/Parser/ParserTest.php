@@ -28,9 +28,10 @@ use Eloquent\Typhax\Type\StringType;
 use Eloquent\Typhax\Type\TraversableType;
 use Eloquent\Typhax\Type\TupleType;
 use Eloquent\Typhax\Type\Type;
+use PHPUnit_Framework_TestCase;
 use ReflectionObject;
 
-class ParserTest extends \PHPUnit_Framework_TestCase
+class ParserTest extends PHPUnit_Framework_TestCase
 {
     protected function setUp()
     {

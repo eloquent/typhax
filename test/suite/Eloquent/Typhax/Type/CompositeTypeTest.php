@@ -12,8 +12,9 @@
 namespace Eloquent\Typhax\Type;
 
 use Phake;
+use PHPUnit_Framework_TestCase;
 
-class CompositeTypeTest extends \PHPUnit_Framework_TestCase
+class CompositeTypeTest extends PHPUnit_Framework_TestCase
 {
     public function testTypes()
     {

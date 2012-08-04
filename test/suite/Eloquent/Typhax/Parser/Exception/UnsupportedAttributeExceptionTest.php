@@ -11,7 +11,9 @@
 
 namespace Eloquent\Typhax\Parser\Exception;
 
-class UnsupportedAttributeExceptionTest extends \PHPUnit_Framework_TestCase
+use PHPUnit_Framework_TestCase;
+
+class UnsupportedAttributeExceptionTest extends PHPUnit_Framework_TestCase
 {
     public function testException()
     {
