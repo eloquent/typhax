@@ -40,33 +40,47 @@ class Parser
      */
     public static function position(array &$tokens)
     {
-        if (!$tokens) {
+        if (count($tokens) < 1) {
             return 0;
         }
 
         $index = key($tokens);
+        $end = null === $index;
+        if ($end) {
+            $index = count($tokens) - 1;
+        }
 
         $source = '';
         for ($i = 0; $i <= $index; $i ++) {
             $source .= $tokens[$i]->content();
         }
 
-        return mb_strlen($source, 'UTF-8');
+        $position = mb_strlen($source, 'UTF-8');
+        if ($end) {
+            return $position + 1;
+        }
+
+        return $position;
     }
 
     /**
      * @param string $source
+     * @param integer &$position
      * @param Lexer $lexer
      *
      * @return Type
      */
-    public function parseSource($source, Lexer $lexer = null)
+    public function parseSource($source, &$position = 0, Lexer $lexer = null)
     {
         if (null === $lexer) {
             $lexer = new Lexer;
         }
 
-        return $this->parse($lexer->tokens($source));
+        $tokens = $lexer->tokens($source);
+        $type = $this->parse($tokens);
+        $position = static::position($tokens);
+
+        return $type;
     }
 
     /**
@@ -517,11 +531,16 @@ class Parser
     protected function getCompositePrecedence(array &$tokens) {
         $token = current($tokens);
         if ($token) {
-            return array_search(
+            $precedence = array_search(
                 $token->type()
                 , $this->compositePrecedence
                 , true
             );
+            if (false === $precedence) {
+                $precedence = -1;
+            }
+
+            return $precedence;
         }
 
         return -1;

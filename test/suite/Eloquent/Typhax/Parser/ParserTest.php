@@ -46,29 +46,33 @@ class ParserTest extends PHPUnit_Framework_TestCase
 
         // #0: Basic example
         $source = ' foo ';
+        $position = 6;
         $expected = new ObjectType('foo');
-        $data[] = array($expected, $source);
+        $data[] = array($expected, $position, $source);
 
         // #1: Simple traversable
         $source = ' foo < bar > ';
+        $position = 14;
         $expected = new TraversableType(
             new ObjectType('foo'),
             new MixedType,
             new ObjectType('bar')
         );
-        $data[] = array($expected, $source);
+        $data[] = array($expected, $position, $source);
 
         // #2: Simple traversable
         $source = ' foo < bar , baz > ';
+        $position = 20;
         $expected = new TraversableType(
             new ObjectType('foo'),
             new ObjectType('bar'),
             new ObjectType('baz')
         );
-        $data[] = array($expected, $source);
+        $data[] = array($expected, $position, $source);
 
         // #3: Nested subtypes
         $source = ' foo < bar , baz < qux , doom > > ';
+        $position = 35;
         $expected = new TraversableType(
             new ObjectType('foo'),
             new ObjectType('bar'),
@@ -78,35 +82,39 @@ class ParserTest extends PHPUnit_Framework_TestCase
                 new ObjectType('doom')
             )
         );
-        $data[] = array($expected, $source);
+        $data[] = array($expected, $position, $source);
 
         // #4: Basic composite OR
         $source = ' foo | bar ';
+        $position = 12;
         $expected = new OrType(array(
             new ObjectType('foo'),
             new ObjectType('bar'),
         ));
-        $data[] = array($expected, $source);
+        $data[] = array($expected, $position, $source);
 
         // #5: Basic composite AND
         $source = ' foo & bar ';
+        $position = 12;
         $expected = new AndType(array(
             new ObjectType('foo'),
             new ObjectType('bar'),
         ));
-        $data[] = array($expected, $source);
+        $data[] = array($expected, $position, $source);
 
         // #6: Chained composite AND
         $source = ' foo & bar & baz ';
+        $position = 18;
         $expected = new AndType(array(
             new ObjectType('foo'),
             new ObjectType('bar'),
             new ObjectType('baz'),
         ));
-        $data[] = array($expected, $source);
+        $data[] = array($expected, $position, $source);
 
         // #7: Composite precedence
         $source = ' foo | bar & baz ';
+        $position = 18;
         $expected = new OrType(array(
             new ObjectType('foo'),
             new AndType(array(
@@ -114,10 +122,11 @@ class ParserTest extends PHPUnit_Framework_TestCase
                 new ObjectType('baz'),
             ))
         ));
-        $data[] = array($expected, $source);
+        $data[] = array($expected, $position, $source);
 
         // #8: Test basic types
         $source = ' array | boolean | callback | float | integer | null | object | string | mixed ';
+        $position = 80;
         $expected = new OrType(array(
             new ArrayType,
             new BooleanType,
@@ -129,26 +138,35 @@ class ParserTest extends PHPUnit_Framework_TestCase
             new StringType,
             new MixedType,
         ));
-        $data[] = array($expected, $source);
+        $data[] = array($expected, $position, $source);
 
         // #9: Test tuple type.
         $source = ' tuple < foo , bar , baz > ';
+        $position = 28;
         $expected = new TupleType(array(
             new ObjectType('foo'),
             new ObjectType('bar'),
             new ObjectType('baz'),
         ));
-        $data[] = array($expected, $source);
+        $data[] = array($expected, $position, $source);
 
         // #10: Test resource
         $source = ' resource ';
+        $position = 11;
         $expected = new ResourceType;
-        $data[] = array($expected, $source);
+        $data[] = array($expected, $position, $source);
 
         // #11: Test resource with ofType attribute.
         $source = ' resource { ofType : foo } ';
+        $position = 28;
         $expected = new ResourceType('foo');
-        $data[] = array($expected, $source);
+        $data[] = array($expected, $position, $source);
+
+        // #12: Don't parse past end of type.
+        $source = ' foo bar ';
+        $position = 6;
+        $expected = new ObjectType('foo');
+        $data[] = array($expected, $position, $source);
 
         return $data;
     }
@@ -156,13 +174,14 @@ class ParserTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider parserData
      */
-    public function testParser(Type $expected, $source)
+    public function testParser(Type $expected, $position, $source)
     {
         $tokens = $this->_lexer->tokens($source);
         $parser = new Parser;
 
         $this->assertEquals($expected, $parser->parse($tokens));
-        $this->assertEquals($expected, $parser->parseSource($source));
+        $this->assertEquals($expected, $parser->parseSource($source, $actualPosition));
+        $this->assertSame($position, $actualPosition);
     }
 
     public function parserFailureData()
@@ -178,7 +197,7 @@ class ParserTest extends PHPUnit_Framework_TestCase
         // #1: Whitespace string
         $source = ' ';
         $expectedClass = __NAMESPACE__.'\Exception\UnexpectedTokenException';
-        $expectedMessage = 'Unexpected END at position 1. Expected one of STRING, TYPE_NAME, NULL.';
+        $expectedMessage = 'Unexpected END at position 2. Expected one of STRING, TYPE_NAME, NULL.';
         $data[] = array($expectedClass, $expectedMessage, $source);
 
         // #2: Empty type list
