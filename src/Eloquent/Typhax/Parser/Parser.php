@@ -12,6 +12,7 @@
 namespace Eloquent\Typhax\Parser;
 
 use Closure;
+use Eloquent\Typhax\Lexer\Lexer;
 use Eloquent\Typhax\Lexer\Token;
 use Eloquent\Typhax\Type\AndType;
 use Eloquent\Typhax\Type\ArrayType;
@@ -51,6 +52,21 @@ class Parser
         }
 
         return mb_strlen($source, 'UTF-8');
+    }
+
+    /**
+     * @param string $source
+     * @param Lexer $lexer
+     *
+     * @return Type
+     */
+    public function parseSource($source, Lexer $lexer = null)
+    {
+        if (null === $lexer) {
+            $lexer = new Lexer;
+        }
+
+        return $this->parse($lexer->tokens($source));
     }
 
     /**

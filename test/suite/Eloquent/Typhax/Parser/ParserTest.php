@@ -160,9 +160,9 @@ class ParserTest extends PHPUnit_Framework_TestCase
     {
         $tokens = $this->_lexer->tokens($source);
         $parser = new Parser;
-        $actual = $parser->parse($tokens);
 
-        $this->assertEquals($expected, $actual);
+        $this->assertEquals($expected, $parser->parse($tokens));
+        $this->assertEquals($expected, $parser->parseSource($source));
     }
 
     public function parserFailureData()
