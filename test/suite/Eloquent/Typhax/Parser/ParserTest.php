@@ -179,8 +179,7 @@ class ParserTest extends PHPUnit_Framework_TestCase
         $tokens = $this->_lexer->tokens($source);
         $parser = new Parser;
 
-        $this->assertEquals($expected, $parser->parse($tokens));
-        $this->assertEquals($expected, $parser->parseSource($source, $actualPosition));
+        $this->assertEquals($expected, $parser->parse($source, $actualPosition));
         $this->assertSame($position, $actualPosition);
     }
 
@@ -244,11 +243,10 @@ class ParserTest extends PHPUnit_Framework_TestCase
      */
     public function testParserFailure($expectedClass, $expectedMessage, $source)
     {
-        $tokens = $this->_lexer->tokens($source);
         $parser = new Parser;
 
         $this->setExpectedException($expectedClass, $expectedMessage);
-        $parser->parse($tokens);
+        $parser->parse($source);
     }
 
     public function hashData()

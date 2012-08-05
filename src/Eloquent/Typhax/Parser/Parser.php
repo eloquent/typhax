@@ -64,14 +64,14 @@ class Parser
      *
      * @return Type
      */
-    public function parseSource($source, &$position = 0, Lexer $lexer = null)
+    public function parse($source, &$position = 0, Lexer $lexer = null)
     {
         if (null === $lexer) {
             $lexer = new Lexer;
         }
 
         $tokens = $lexer->tokens($source);
-        $type = $this->parse($tokens);
+        $type = $this->parseTokens($tokens);
         $position = static::position($tokens);
 
         return $type;
@@ -82,7 +82,7 @@ class Parser
      *
      * @return Type
      */
-    public function parse(array &$tokens)
+    public function parseTokens(array &$tokens)
     {
         $type = $this->parseType($tokens);
         $this->consumeWhitespace($tokens);
