@@ -11,15 +11,8 @@
 
 namespace Eloquent\Typhax\Type;
 
-class BooleanType implements Type
+use Icecave\Visita\Host;
+
+class BooleanType extends Host implements Type
 {
-    /**
-     * @param Visitor $visitor
-     *
-     * @return mixed
-     */
-    public function accept(Visitor $visitor)
-    {
-        return $visitor->visitBooleanType($this);
-    }
 }

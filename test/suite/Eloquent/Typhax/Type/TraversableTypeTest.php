@@ -40,18 +40,4 @@ class TraversableTypeTest extends PHPUnit_Framework_TestCase
     public function testValueType() {
         $this->assertSame($this->_valueType, $this->_type->valueType());
     }
-
-    public function testAccept()
-    {
-        $visitor = Phake::mock(__NAMESPACE__.'\Visitor');
-        Phake::when($visitor)
-            ->visitTraversableType(Phake::anyParameters())
-            ->thenReturn('foo')
-        ;
-
-        $this->assertSame('foo', $this->_type->accept($visitor));
-        Phake::verify($visitor)->visitTraversableType(
-            $this->identicalTo($this->_type)
-        );
-    }
 }

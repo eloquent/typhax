@@ -11,15 +11,8 @@
 
 namespace Eloquent\Typhax\Type;
 
-class NullType implements Type
+use Icecave\Visita\Host;
+
+class NullType extends Host implements Type
 {
-    /**
-     * @param Visitor $visitor
-     *
-     * @return mixed
-     */
-    public function accept(Visitor $visitor)
-    {
-        return $visitor->visitNullType($this);
-    }
 }

@@ -11,7 +11,9 @@
 
 namespace Eloquent\Typhax\Type;
 
-abstract class CompositeType implements Type
+use Icecave\Visita\Host;
+
+abstract class CompositeType extends Host implements Type
 {
     /**
      * @param array<Type> $types

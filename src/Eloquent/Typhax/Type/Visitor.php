@@ -13,7 +13,9 @@
 
 namespace Eloquent\Typhax\Type;
 
-interface Visitor
+use Icecave\Visita\IVisitor;
+
+interface Visitor extends IVisitor
 {
     /**
      * @param AndType

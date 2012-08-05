@@ -11,17 +11,8 @@
 
 namespace Eloquent\Typhax\Type;
 
-use Eloquent\Typhax\Type\Visitor;
+use Icecave\Visita\Host;
 
-class StringType implements Type
+class StringType extends Host implements Type
 {
-    /**
-     * @param Visitor $visitor
-     *
-     * @return mixed
-     */
-    public function accept(Visitor $visitor)
-    {
-        return $visitor->visitStringType($this);
-    }
 }

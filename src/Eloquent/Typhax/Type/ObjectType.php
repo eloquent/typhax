@@ -11,7 +11,9 @@
 
 namespace Eloquent\Typhax\Type;
 
-class ObjectType implements TraversablePrimaryType
+use Icecave\Visita\Host;
+
+class ObjectType extends Host implements TraversablePrimaryType
 {
     /**
      * @param string|null $ofType
@@ -26,16 +28,6 @@ class ObjectType implements TraversablePrimaryType
      */
     public function ofType() {
         return $this->ofType;
-    }
-
-    /**
-     * @param Visitor $visitor
-     *
-     * @return mixed
-     */
-    public function accept(Visitor $visitor)
-    {
-        return $visitor->visitObjectType($this);
     }
 
     private $ofType;

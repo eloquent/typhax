@@ -1,9 +1,13 @@
 {
-    "hash": "f26ba6feb2f1b6c8e9e4f81479bff032",
+    "hash": "ee551f512e7a79d423d7f0db46dbc17d",
     "packages": [
         {
             "package": "eloquent/cosmos",
             "version": "1.0.0"
+        },
+        {
+            "package": "icecave/visita",
+            "version": "0.1.0"
         }
     ],
     "packages-dev": [

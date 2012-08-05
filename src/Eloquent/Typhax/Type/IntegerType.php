@@ -11,15 +11,8 @@
 
 namespace Eloquent\Typhax\Type;
 
-class IntegerType implements Type
+use Icecave\Visita\Host;
+
+class IntegerType extends Host implements Type
 {
-    /**
-     * @param Visitor $visitor
-     *
-     * @return mixed
-     */
-    public function accept(Visitor $visitor)
-    {
-        return $visitor->visitIntegerType($this);
-    }
 }

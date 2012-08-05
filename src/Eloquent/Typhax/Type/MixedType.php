@@ -11,15 +11,8 @@
 
 namespace Eloquent\Typhax\Type;
 
-class MixedType implements TraversablePrimaryType
+use Icecave\Visita\Host;
+
+class MixedType extends Host implements TraversablePrimaryType
 {
-    /**
-     * @param Visitor $visitor
-     *
-     * @return mixed
-     */
-    public function accept(Visitor $visitor)
-    {
-        return $visitor->visitMixedType($this);
-    }
 }

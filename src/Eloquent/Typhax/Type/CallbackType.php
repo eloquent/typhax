@@ -11,15 +11,8 @@
 
 namespace Eloquent\Typhax\Type;
 
-class CallbackType implements Type
+use Icecave\Visita\Host;
+
+class CallbackType extends Host implements Type
 {
-    /**
-     * @param Visitor $visitor
-     *
-     * @return mixed
-     */
-    public function accept(Visitor $visitor)
-    {
-        return $visitor->visitCallbackType($this);
-    }
 }

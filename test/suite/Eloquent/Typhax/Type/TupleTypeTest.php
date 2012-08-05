@@ -26,19 +26,4 @@ class TupleTypeTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame($types, $type->types());
     }
-
-    public function testAccept()
-    {
-        $type = new TupleType(array());
-        $visitor = Phake::mock(__NAMESPACE__.'\Visitor');
-        Phake::when($visitor)
-            ->visitTupleType(Phake::anyParameters())
-            ->thenReturn('foo')
-        ;
-
-        $this->assertSame('foo', $type->accept($visitor));
-        Phake::verify($visitor)->visitTupleType(
-            $this->identicalTo($type)
-        );
-    }
 }

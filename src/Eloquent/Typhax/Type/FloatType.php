@@ -11,15 +11,8 @@
 
 namespace Eloquent\Typhax\Type;
 
-class FloatType implements Type
+use Icecave\Visita\Host;
+
+class FloatType extends Host implements Type
 {
-    /**
-     * @param Visitor $visitor
-     *
-     * @return mixed
-     */
-    public function accept(Visitor $visitor)
-    {
-        return $visitor->visitFloatType($this);
-    }
 }

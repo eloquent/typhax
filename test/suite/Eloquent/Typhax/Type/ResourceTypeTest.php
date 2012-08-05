@@ -22,19 +22,4 @@ class ResourceTypeTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame('foo', $type->ofType());
     }
-
-    public function testAccept()
-    {
-        $type = new ResourceType;
-        $visitor = Phake::mock(__NAMESPACE__.'\Visitor');
-        Phake::when($visitor)
-            ->visitResourceType(Phake::anyParameters())
-            ->thenReturn('foo')
-        ;
-
-        $this->assertSame('foo', $type->accept($visitor));
-        Phake::verify($visitor)->visitResourceType(
-            $this->identicalTo($type)
-        );
-    }
 }

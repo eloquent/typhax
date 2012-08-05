@@ -13,13 +13,4 @@ namespace Eloquent\Typhax\Type;
 
 class AndType extends CompositeType
 {
-    /**
-     * @param Visitor $visitor
-     *
-     * @return mixed
-     */
-    public function accept(Visitor $visitor)
-    {
-        return $visitor->visitAndType($this);
-    }
 }

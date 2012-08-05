@@ -13,12 +13,8 @@
 
 namespace Eloquent\Typhax\Type;
 
-interface Type
+use Icecave\Visita\IHost;
+
+interface Type extends IHost
 {
-    /**
-     * @param Visitor $visitor
-     *
-     * @return mixed
-     */
-    public function accept(Visitor $visitor);
 }

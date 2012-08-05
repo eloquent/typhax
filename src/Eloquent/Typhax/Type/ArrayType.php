@@ -11,15 +11,8 @@
 
 namespace Eloquent\Typhax\Type;
 
-class ArrayType implements TraversablePrimaryType
+use Icecave\Visita\Host;
+
+class ArrayType extends Host implements TraversablePrimaryType
 {
-    /**
-     * @param Visitor $visitor
-     *
-     * @return mixed
-     */
-    public function accept(Visitor $visitor)
-    {
-        return $visitor->visitArrayType($this);
-    }
 }
