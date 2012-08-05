@@ -1,7 +1,10 @@
 {
-    "hash": "92073c46ad2cca8ad1200a20747d0fcc",
+    "hash": "f26ba6feb2f1b6c8e9e4f81479bff032",
     "packages": [
-
+        {
+            "package": "eloquent/cosmos",
+            "version": "1.0.0"
+        }
     ],
     "packages-dev": [
         {
