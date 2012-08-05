@@ -20,8 +20,12 @@ class StringTypeTest extends PHPUnit_Framework_TestCase
     {
         $type = new StringType;
         $visitor = Phake::mock(__NAMESPACE__.'\Visitor');
-        $type->accept($visitor);
+        Phake::when($visitor)
+            ->visitStringType(Phake::anyParameters())
+            ->thenReturn('foo')
+        ;
 
+        $this->assertSame('foo', $type->accept($visitor));
         Phake::verify($visitor)->visitStringType(
             $this->identicalTo($type)
         );

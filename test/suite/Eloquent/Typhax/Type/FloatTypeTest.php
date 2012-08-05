@@ -20,8 +20,12 @@ class FloatTypeTest extends PHPUnit_Framework_TestCase
     {
         $type = new FloatType;
         $visitor = Phake::mock(__NAMESPACE__.'\Visitor');
-        $type->accept($visitor);
+        Phake::when($visitor)
+            ->visitFloatType(Phake::anyParameters())
+            ->thenReturn('foo')
+        ;
 
+        $this->assertSame('foo', $type->accept($visitor));
         Phake::verify($visitor)->visitFloatType(
             $this->identicalTo($type)
         );

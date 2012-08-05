@@ -20,8 +20,12 @@ class NullTypeTest extends PHPUnit_Framework_TestCase
     {
         $type = new NullType;
         $visitor = Phake::mock(__NAMESPACE__.'\Visitor');
-        $type->accept($visitor);
+        Phake::when($visitor)
+            ->visitNullType(Phake::anyParameters())
+            ->thenReturn('foo')
+        ;
 
+        $this->assertSame('foo', $type->accept($visitor));
         Phake::verify($visitor)->visitNullType(
             $this->identicalTo($type)
         );

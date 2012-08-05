@@ -20,8 +20,12 @@ class AndTypeTest extends PHPUnit_Framework_TestCase
     {
         $type = new AndType(array());
         $visitor = Phake::mock(__NAMESPACE__.'\Visitor');
-        $type->accept($visitor);
+        Phake::when($visitor)
+            ->visitAndType(Phake::anyParameters())
+            ->thenReturn('foo')
+        ;
 
+        $this->assertSame('foo', $type->accept($visitor));
         Phake::verify($visitor)->visitAndType(
             $this->identicalTo($type)
         );

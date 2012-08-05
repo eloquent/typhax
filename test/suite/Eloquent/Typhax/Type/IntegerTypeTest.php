@@ -20,8 +20,12 @@ class IntegerTypeTest extends PHPUnit_Framework_TestCase
     {
         $type = new IntegerType;
         $visitor = Phake::mock(__NAMESPACE__.'\Visitor');
-        $type->accept($visitor);
+        Phake::when($visitor)
+            ->visitIntegerType(Phake::anyParameters())
+            ->thenReturn('foo')
+        ;
 
+        $this->assertSame('foo', $type->accept($visitor));
         Phake::verify($visitor)->visitIntegerType(
             $this->identicalTo($type)
         );

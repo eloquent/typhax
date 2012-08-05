@@ -20,8 +20,12 @@ class OrTypeTest extends PHPUnit_Framework_TestCase
     {
         $type = new OrType(array());
         $visitor = Phake::mock(__NAMESPACE__.'\Visitor');
-        $type->accept($visitor);
+        Phake::when($visitor)
+            ->visitOrType(Phake::anyParameters())
+            ->thenReturn('foo')
+        ;
 
+        $this->assertSame('foo', $type->accept($visitor));
         Phake::verify($visitor)->visitOrType(
             $this->identicalTo($type)
         );

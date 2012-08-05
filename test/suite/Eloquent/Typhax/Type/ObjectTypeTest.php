@@ -27,8 +27,12 @@ class ObjectTypeTest extends PHPUnit_Framework_TestCase
     {
         $type = new ObjectType;
         $visitor = Phake::mock(__NAMESPACE__.'\Visitor');
-        $type->accept($visitor);
+        Phake::when($visitor)
+            ->visitObjectType(Phake::anyParameters())
+            ->thenReturn('foo')
+        ;
 
+        $this->assertSame('foo', $type->accept($visitor));
         Phake::verify($visitor)->visitObjectType(
             $this->identicalTo($type)
         );

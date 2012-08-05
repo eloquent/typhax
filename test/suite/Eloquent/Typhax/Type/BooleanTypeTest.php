@@ -20,8 +20,12 @@ class BooleanTypeTest extends PHPUnit_Framework_TestCase
     {
         $type = new BooleanType;
         $visitor = Phake::mock(__NAMESPACE__.'\Visitor');
-        $type->accept($visitor);
+        Phake::when($visitor)
+            ->visitBooleanType(Phake::anyParameters())
+            ->thenReturn('foo')
+        ;
 
+        $this->assertSame('foo', $type->accept($visitor));
         Phake::verify($visitor)->visitBooleanType(
             $this->identicalTo($type)
         );
