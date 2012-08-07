@@ -107,7 +107,7 @@ The second form, `resource {ofType: resourceType}`, indicates a value that is a
 
  * `string`
 
-An [string](http://php.net/string). The value must be a true string, and not
+A [string](http://php.net/string). The value must be a true string, and not
 any other type that can be converted to a string.
 
 ### Tuple
@@ -128,6 +128,49 @@ integers, with the first key being 0, and subsequent keys incrementing by 1 for
 each element of the tuple.
 
 Tuples must have at least 1 element.
+
+## Types to be implemented
+
+### Stream
+
+ * `stream`
+ * `stream {readable: true, writable: true}`
+ * `stream {readable: true, writable: false}`
+ * `stream {readable: false, writable: true}`
+
+Represents a [stream](http://php.net/stream) resource. The **readable** and
+**writable** attributes determine the requirements for the **mode** of the
+stream.
+
+See the PHP documentation for [fopen()](http://php.net/fopen) for more
+information about stream modes.
+
+### Stringable
+
+ * `stringable`
+
+Represents a value of any type that can be silently converted to a string. This
+includes strings, integers, floats, and objects that have a `__toString()`
+method.
+
+Arrays, booleans, nulls, resources, and objects without a `__toString()` method
+do not qualify as 'stringable'.
+
+### Legacy shorthand types
+
+Support will be added for common aliases to existing type names. These should be
+considered deprecated immediately, and an effort should be made to translate
+these aliases to the correct type name:
+
+ * `bool` = `boolean`
+ * `callback` = `callable`
+ * `double` = `float`
+ * `int` = `integer`
+ * `long` = `integer`
+ * `number` = `integer|float`
+ * `numeric` = equivalent to [is_numeric()](http://php.net/is_numeric)
+ * `real` = `float`
+ * `scalar` = `integer|float|string|boolean`
 
 ## Traversable types
 
