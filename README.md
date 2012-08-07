@@ -14,29 +14,26 @@ In addition to support for scalar types and class type hints supported by
 PHPDoc, Typhax allows, amongst other things, the specification of key and value
 types of traversable parameters such as arrays and iterators.
 
-## Types supported by Typhax
-
-The following types are currently supported by Typhax. Others may be added in
-future.
+## Supported types
 
 ### Array
 
- * `array`
- * `array<keyType, valueType>`
+    array
+    array<keyType, valueType>
 
 An [array](http://php.net/array). The key type and value type can optionally
 be specified. See the section on [traversable types](#traversable-types) below.
 
 ### Boolean
 
- * `boolean`
+    boolean
 
 A [boolean](http://php.net/boolean) true or false value. The value must be an
 actual boolean, and not an equivalent integer.
 
 ### Callable
 
- * `callable`
+    callable
 
 A user-defined callback function. This is exactly equivalent to the
 [callable](http://php.net/manual/en/language.types.callable.php) type hint
@@ -48,39 +45,39 @@ A callable can be any of the following:
  * An array with an object at index 0 and the method name at index 1.
  * An array with a class name at index 0 and the method name at index 1.
  * A [closure](http://php.net/manual/en/functions.anonymous.php).
- * The result of a [create_user_func()](http://php.net/create_function) call.
+ * The result of a [create_function()](http://php.net/create_function) call.
 
 ### Float
 
- * `float`
+    float
 
 A [floating-point number](http://php.net/float). The value must be a true
 floating point number, and not an equivalent string or integer.
 
 ### Integer
 
- * `integer`
+    integer
 
 An [integer](http://php.net/integer). The value must be a true integer, and not
 an equivalent string, boolean, or any other kind of value.
 
 ### Mixed
 
- * `mixed`
+    mixed
 
 The mixed type accepts any value of any type.
 
 ### Null
 
- * `null`
+    null
 
 A [null](http://php.net/manual/en/language.types.null.php).
 
 ### Object
 
- * `object`
- * `ClassName`
- * `ClassName<keyType, valueType>`
+    object
+    ClassName
+    ClassName<keyType, valueType>
 
 The first form, `object`, indicates a value that is an
 [object](http://www.php.net/manual/en/language.oop5.php) of *any* class.
@@ -97,10 +94,23 @@ second form, with the addition that the object must implement the
 can optionally be specified. See the section on
 [traversable types](#traversable-types) below.
 
+#### Regarding namespaces
+
+Namespace resolution should follow the same rules as PHP source code. That is;
+if the class name is in the current namespace, or has a relevant use statement,
+it's okay to use the short version.
+
+In cases where the class name would not resolve correctly in, for example, an
+*instanceof* condition, the canonical (full) version of the class name must be
+used.
+
+If you need to resolve these at runtime, you can use the
+[Cosmos component](https://github.com/eloquent/cosmos).
+
 ### Resource
 
- * `resource`
- * `resource {ofType: resourceType}`
+    resource
+    resource {ofType: resourceType}
 
 The first form, `resource`, indicates a value that is a
 [resource](http://php.net/resource) of *any* type.
@@ -109,16 +119,41 @@ The second form, `resource {ofType: resourceType}`, indicates a value that is a
 [resource](http://php.net/resource) that returns a string equal to
 'resourceType' when passed to [get_resource_type()](http://php.net/get_resource_type).
 
+### Stream
+
+    stream
+    stream {readable: true, writable: true}
+    stream {readable: true, writable: false}
+    stream {readable: false, writable: true}
+
+Represents a [stream](http://php.net/stream) resource. The **readable** and
+**writable** attributes determine the requirements for the **mode** of the
+stream.
+
+See the PHP documentation for [fopen()](http://php.net/fopen) for more
+information about stream modes.
+
 ### String
 
- * `string`
+    string
 
 A [string](http://php.net/string). The value must be a true string, and not
 any other type that can be converted to a string.
 
+### Stringable
+
+    stringable
+
+Represents a value of any type that can be silently converted to a string. This
+includes strings, integers, floats, and objects that have a `__toString()`
+method.
+
+Arrays, booleans, nulls, resources, and objects without a `__toString()` method
+do not qualify as 'stringable'.
+
 ### Tuple
 
- * `tuple<typeA, typeB, typeC, ...>`
+    tuple<typeA, typeB, typeC, ...>
 
 A [tuple](http://en.wikipedia.org/wiki/Tuple) is an array value of a fixed size,
 with each element being of a specific type.
@@ -135,38 +170,11 @@ each element of the tuple.
 
 Tuples must have at least 1 element.
 
-## Types to be implemented
+### Legacy types
 
-### Stream
-
- * `stream`
- * `stream {readable: true, writable: true}`
- * `stream {readable: true, writable: false}`
- * `stream {readable: false, writable: true}`
-
-Represents a [stream](http://php.net/stream) resource. The **readable** and
-**writable** attributes determine the requirements for the **mode** of the
-stream.
-
-See the PHP documentation for [fopen()](http://php.net/fopen) for more
-information about stream modes.
-
-### Stringable
-
- * `stringable`
-
-Represents a value of any type that can be silently converted to a string. This
-includes strings, integers, floats, and objects that have a `__toString()`
-method.
-
-Arrays, booleans, nulls, resources, and objects without a `__toString()` method
-do not qualify as 'stringable'.
-
-### Legacy shorthand types
-
-Support will be added for common aliases to existing type names. These should be
-considered deprecated immediately, and an effort should be made to translate
-these aliases to the correct type name:
+The following types are also implemented, but are considered deprecated. They
+exist primarily for compatibility with types and pseudo-types used in the PHP
+manual, and an effort should be made to avoid their use:
 
  * `bool` = `boolean`
  * `callback` = `callable`
@@ -185,7 +193,7 @@ Typhax supports the specification of key and value types for arrays and
 
 The specification for key and value types is as follows:
 
-`primaryType<keyType, valueType>`
+    primaryType<keyType, valueType>
 
 This specification represents a value of type `primaryType` which, when iterated
 over, produces keys of type `keyType` and values of type `valueType`.
@@ -198,7 +206,7 @@ represents boolean AND.
 
 This specification:
 
-`typeA|typeB`
+    typeA|typeB
 
 Represents a type that is either of type `typeA` OR of type `typeB`. A
 real-world example might be `integer|float` to accept either an integer OR float
@@ -206,7 +214,7 @@ number.
 
 This specification:
 
-`typeA&typeB`
+    typeA&typeB
 
 Represents a type that is both of type `typeA` AND of type `typeB`. A
 real-world example might be `InterfaceA|InterfaceB` to accept either only an
