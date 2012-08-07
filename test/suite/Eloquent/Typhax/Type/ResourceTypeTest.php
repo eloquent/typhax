@@ -16,8 +16,13 @@ use PHPUnit_Framework_TestCase;
 
 class ResourceTypeTest extends PHPUnit_Framework_TestCase
 {
-    public function testOfType()
+    public function testResourceType()
     {
+        $type = new ResourceType;
+
+        $this->assertNull($type->ofType());
+
+
         $type = new ResourceType('foo');
 
         $this->assertSame('foo', $type->ofType());

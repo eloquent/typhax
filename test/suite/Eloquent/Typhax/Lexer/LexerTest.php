@@ -25,7 +25,6 @@ class LexerTest extends PHPUnit_Framework_TestCase
     public function intrinsicTypeNameData()
     {
         return array(
-            array('string'),
             array('array'),
             array('boolean'),
             array('callable'),
@@ -34,7 +33,20 @@ class LexerTest extends PHPUnit_Framework_TestCase
             array('mixed'),
             array('object'),
             array('resource'),
+            array('stream'),
             array('string'),
+            array('stringable'),
+            array('tuple'),
+
+            array('bool'),
+            array('callback'),
+            array('double'),
+            array('int'),
+            array('long'),
+            array('number'),
+            array('numeric'),
+            array('real'),
+            array('scalar'),
         );
     }
 

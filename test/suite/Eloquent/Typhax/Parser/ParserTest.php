@@ -21,10 +21,13 @@ use Eloquent\Typhax\Type\FloatType;
 use Eloquent\Typhax\Type\IntegerType;
 use Eloquent\Typhax\Type\MixedType;
 use Eloquent\Typhax\Type\NullType;
+use Eloquent\Typhax\Type\NumericType;
 use Eloquent\Typhax\Type\ObjectType;
 use Eloquent\Typhax\Type\OrType;
 use Eloquent\Typhax\Type\ResourceType;
+use Eloquent\Typhax\Type\StreamType;
 use Eloquent\Typhax\Type\StringType;
+use Eloquent\Typhax\Type\StringableType;
 use Eloquent\Typhax\Type\TraversableType;
 use Eloquent\Typhax\Type\TupleType;
 use Eloquent\Typhax\Type\Type;
@@ -125,8 +128,8 @@ class ParserTest extends PHPUnit_Framework_TestCase
         $data[] = array($expected, $position, $source);
 
         // #8: Test basic types
-        $source = ' array | boolean | callable | float | integer | null | object | string | mixed ';
-        $position = 80;
+        $source = ' array | boolean | callable | float | integer | null | numeric | object | string | stringable | mixed ';
+        $position = 103;
         $expected = new OrType(array(
             new ArrayType,
             new BooleanType,
@@ -134,13 +137,38 @@ class ParserTest extends PHPUnit_Framework_TestCase
             new FloatType,
             new IntegerType,
             new NullType,
+            new NumericType,
             new ObjectType,
             new StringType,
+            new StringableType,
             new MixedType,
         ));
         $data[] = array($expected, $position, $source);
 
-        // #9: Test tuple type.
+        // #9: Test basic aliases
+        $source = ' bool | callback | double | int | long | number | real | scalar ';
+        $position = 65;
+        $expected = new OrType(array(
+            new BooleanType,
+            new CallableType,
+            new FloatType,
+            new IntegerType,
+            new IntegerType,
+            new OrType(array(
+                new IntegerType,
+                new FloatType,
+            )),
+            new FloatType,
+            new OrType(array(
+                new IntegerType,
+                new FloatType,
+                new StringType,
+                new BooleanType,
+            )),
+        ));
+        $data[] = array($expected, $position, $source);
+
+        // #10: Test tuple type.
         $source = ' tuple < foo , bar , baz > ';
         $position = 28;
         $expected = new TupleType(array(
@@ -150,19 +178,31 @@ class ParserTest extends PHPUnit_Framework_TestCase
         ));
         $data[] = array($expected, $position, $source);
 
-        // #10: Test resource
+        // #11: Test resource
         $source = ' resource ';
         $position = 11;
         $expected = new ResourceType;
         $data[] = array($expected, $position, $source);
 
-        // #11: Test resource with ofType attribute.
+        // #12: Test resource with ofType attribute.
         $source = ' resource { ofType : foo } ';
         $position = 28;
         $expected = new ResourceType('foo');
         $data[] = array($expected, $position, $source);
 
-        // #12: Don't parse past end of type.
+        // #13: Test stream
+        $source = ' stream ';
+        $position = 9;
+        $expected = new StreamType;
+        $data[] = array($expected, $position, $source);
+
+        // #14: Test stream with readable & writable attributes
+        $source = ' stream { readable: true, writable: false } ';
+        $position = 45;
+        $expected = new StreamType(true, false);
+        $data[] = array($expected, $position, $source);
+
+        // #15: Don't parse past end of type.
         $source = ' foo bar ';
         $position = 6;
         $expected = new ObjectType('foo');

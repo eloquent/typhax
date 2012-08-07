@@ -192,8 +192,20 @@ class Lexer
             'mixed' => Token::TOKEN_TYPE_NAME,
             'object' => Token::TOKEN_TYPE_NAME,
             'resource' => Token::TOKEN_TYPE_NAME,
+            'stream' => Token::TOKEN_TYPE_NAME,
             'string' => Token::TOKEN_TYPE_NAME,
+            'stringable' => Token::TOKEN_TYPE_NAME,
             'tuple' => Token::TOKEN_TYPE_NAME,
+
+            'bool' => Token::TOKEN_TYPE_NAME,
+            'callback' => Token::TOKEN_TYPE_NAME,
+            'double' => Token::TOKEN_TYPE_NAME,
+            'int' => Token::TOKEN_TYPE_NAME,
+            'long' => Token::TOKEN_TYPE_NAME,
+            'number' => Token::TOKEN_TYPE_NAME,
+            'numeric' => Token::TOKEN_TYPE_NAME,
+            'real' => Token::TOKEN_TYPE_NAME,
+            'scalar' => Token::TOKEN_TYPE_NAME,
         );
     }
 }

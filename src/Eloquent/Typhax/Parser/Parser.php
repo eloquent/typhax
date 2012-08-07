@@ -22,10 +22,13 @@ use Eloquent\Typhax\Type\FloatType;
 use Eloquent\Typhax\Type\IntegerType;
 use Eloquent\Typhax\Type\MixedType;
 use Eloquent\Typhax\Type\NullType;
+use Eloquent\Typhax\Type\NumericType;
 use Eloquent\Typhax\Type\ObjectType;
 use Eloquent\Typhax\Type\OrType;
 use Eloquent\Typhax\Type\ResourceType;
+use Eloquent\Typhax\Type\StreamType;
 use Eloquent\Typhax\Type\StringType;
+use Eloquent\Typhax\Type\StringableType;
 use Eloquent\Typhax\Type\TraversablePrimaryType;
 use Eloquent\Typhax\Type\TraversableType;
 use Eloquent\Typhax\Type\TupleType;
@@ -180,6 +183,9 @@ class Parser
         if ('resource' === $token->content()) {
             return $this->parseResourceType($tokens);
         }
+        if ('stream' === $token->content()) {
+            return $this->parseStreamType($tokens);
+        }
         if ('tuple' === $token->content()) {
             return $this->parseTupleType($tokens);
         }
@@ -190,19 +196,41 @@ class Parser
             case 'array':
                 return new ArrayType;
             case 'boolean':
+            case 'bool':
                 return new BooleanType;
             case 'callable':
+            case 'callback':
                 return new CallableType;
             case 'float':
+            case 'double':
+            case 'real':
                 return new FloatType;
             case 'integer':
+            case 'int':
+            case 'long':
                 return new IntegerType;
             case 'null':
                 return new NullType;
+            case 'number':
+                return new OrType(array(
+                    new IntegerType,
+                    new FloatType,
+                ));
+            case 'numeric':
+                return new NumericType;
             case 'object':
                 return new ObjectType;
+            case 'scalar':
+                return new OrType(array(
+                    new IntegerType,
+                    new FloatType,
+                    new StringType,
+                    new BooleanType,
+                ));
             case 'string':
                 return new StringType;
+            case 'stringable':
+                return new StringableType;
         }
 
         return new MixedType;
@@ -231,6 +259,33 @@ class Parser
         }
 
         return new ResourceType($ofType);
+    }
+
+    /**
+     * array<integer,Token> &$tokens
+     *
+     * @return StreamType
+     */
+    protected function parseStreamType(array &$tokens)
+    {
+        $this->consumeWhitespace($tokens);
+        $this->assert($tokens, Token::TOKEN_TYPE_NAME);
+        next($tokens);
+
+        $this->consumeWhitespace($tokens);
+        $readable = null;
+        $writable = null;
+        if ($this->currentTokenIsType($tokens, Token::TOKEN_BRACE_OPEN)) {
+            $attributes = $this->parseAttributes(
+                $tokens,
+                'stream',
+                array('readable', 'writable')
+            );
+            $readable = $attributes['readable'];
+            $writable = $attributes['writable'];
+        }
+
+        return new StreamType($readable, $writable);
     }
 
     /**
