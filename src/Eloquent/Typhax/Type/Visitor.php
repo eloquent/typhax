@@ -74,6 +74,13 @@ interface Visitor extends IVisitor
     public function visitNullType(NullType $type);
 
     /**
+     * @param NumericType
+     *
+     * @return mixed
+     */
+    public function visitNumericType(NumericType $type);
+
+    /**
      * @param ObjectType
      *
      * @return mixed
@@ -95,11 +102,25 @@ interface Visitor extends IVisitor
     public function visitResourceType(ResourceType $type);
 
     /**
+     * @param StreamType
+     *
+     * @return mixed
+     */
+    public function visitStreamType(StreamType $type);
+
+    /**
      * @param StringType
      *
      * @return mixed
      */
     public function visitStringType(StringType $type);
+
+    /**
+     * @param StringableType
+     *
+     * @return mixed
+     */
+    public function visitStringableType(StringableType $type);
 
     /**
      * @param TraversableType

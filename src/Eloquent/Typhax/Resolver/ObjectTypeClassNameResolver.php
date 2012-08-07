@@ -20,10 +20,13 @@ use Eloquent\Typhax\Type\FloatType;
 use Eloquent\Typhax\Type\IntegerType;
 use Eloquent\Typhax\Type\MixedType;
 use Eloquent\Typhax\Type\NullType;
+use Eloquent\Typhax\Type\NumericType;
 use Eloquent\Typhax\Type\ObjectType;
 use Eloquent\Typhax\Type\OrType;
 use Eloquent\Typhax\Type\ResourceType;
+use Eloquent\Typhax\Type\StreamType;
 use Eloquent\Typhax\Type\StringType;
+use Eloquent\Typhax\Type\StringableType;
 use Eloquent\Typhax\Type\TraversableType;
 use Eloquent\Typhax\Type\TupleType;
 use Eloquent\Typhax\Type\Visitor;
@@ -129,6 +132,16 @@ class ObjectTypeClassNameResolver implements Visitor
     }
 
     /**
+     * @param NumericType
+     *
+     * @return Type
+     */
+    public function visitNumericType(NumericType $type)
+    {
+        return $type;
+    }
+
+    /**
      * @param ObjectType
      *
      * @return Type
@@ -172,11 +185,31 @@ class ObjectTypeClassNameResolver implements Visitor
     }
 
     /**
+     * @param StreamType
+     *
+     * @return Type
+     */
+    public function visitStreamType(StreamType $type)
+    {
+        return $type;
+    }
+
+    /**
      * @param StringType
      *
      * @return Type
      */
     public function visitStringType(StringType $type)
+    {
+        return $type;
+    }
+
+    /**
+     * @param StringableType
+     *
+     * @return Type
+     */
+    public function visitStringableType(StringableType $type)
     {
         return $type;
     }

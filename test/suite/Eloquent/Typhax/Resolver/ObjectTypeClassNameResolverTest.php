@@ -20,10 +20,13 @@ use Eloquent\Typhax\Type\FloatType;
 use Eloquent\Typhax\Type\IntegerType;
 use Eloquent\Typhax\Type\MixedType;
 use Eloquent\Typhax\Type\NullType;
+use Eloquent\Typhax\Type\NumericType;
 use Eloquent\Typhax\Type\ObjectType;
 use Eloquent\Typhax\Type\OrType;
 use Eloquent\Typhax\Type\ResourceType;
+use Eloquent\Typhax\Type\StreamType;
 use Eloquent\Typhax\Type\StringType;
+use Eloquent\Typhax\Type\StringableType;
 use Eloquent\Typhax\Type\TraversableType;
 use Eloquent\Typhax\Type\TupleType;
 use Phake;
@@ -95,10 +98,13 @@ class ObjectTypeClassNameResolverTest extends PHPUnit_Framework_TestCase
                 new IntegerType,
                 new MixedType,
                 new NullType,
+                new NumericType,
                 new TupleType(array(
                     new ObjectType,
                     new ResourceType,
+                    new StreamType,
                     new StringType,
+                    new StringableType,
                 )),
             ))
         );
