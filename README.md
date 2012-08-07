@@ -104,8 +104,8 @@ In cases where the class name would not resolve correctly in, for example, an
 *instanceof* condition, the canonical (full) version of the class name must be
 used.
 
-If you need to resolve these at runtime, you can use the
-[Cosmos component](https://github.com/eloquent/cosmos).
+The [Cosmos component](https://github.com/eloquent/cosmos) can be used to aid in
+resolving class names at runtime.
 
 ### Resource
 
