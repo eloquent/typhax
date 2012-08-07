@@ -28,14 +28,13 @@ class LexerTest extends PHPUnit_Framework_TestCase
             array('string'),
             array('array'),
             array('boolean'),
-            array('callback'),
+            array('callable'),
             array('float'),
             array('integer'),
             array('mixed'),
             array('object'),
             array('resource'),
             array('string'),
-            array('traversable'),
         );
     }
 

@@ -17,7 +17,7 @@ use Eloquent\Typhax\Lexer\Token;
 use Eloquent\Typhax\Type\AndType;
 use Eloquent\Typhax\Type\ArrayType;
 use Eloquent\Typhax\Type\BooleanType;
-use Eloquent\Typhax\Type\CallbackType;
+use Eloquent\Typhax\Type\CallableType;
 use Eloquent\Typhax\Type\FloatType;
 use Eloquent\Typhax\Type\IntegerType;
 use Eloquent\Typhax\Type\MixedType;
@@ -191,8 +191,8 @@ class Parser
                 return new ArrayType;
             case 'boolean':
                 return new BooleanType;
-            case 'callback':
-                return new CallbackType;
+            case 'callable':
+                return new CallableType;
             case 'float':
                 return new FloatType;
             case 'integer':

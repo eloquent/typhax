@@ -13,6 +13,6 @@ namespace Eloquent\Typhax\Type;
 
 use Icecave\Visita\Host;
 
-class CallbackType extends Host implements Type
+class CallableType extends Host implements Type
 {
 }

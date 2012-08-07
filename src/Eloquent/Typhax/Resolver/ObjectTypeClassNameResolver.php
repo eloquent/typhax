@@ -15,7 +15,7 @@ use Eloquent\Cosmos\ClassNameResolver;
 use Eloquent\Typhax\Type\AndType;
 use Eloquent\Typhax\Type\ArrayType;
 use Eloquent\Typhax\Type\BooleanType;
-use Eloquent\Typhax\Type\CallbackType;
+use Eloquent\Typhax\Type\CallableType;
 use Eloquent\Typhax\Type\FloatType;
 use Eloquent\Typhax\Type\IntegerType;
 use Eloquent\Typhax\Type\MixedType;
@@ -79,11 +79,11 @@ class ObjectTypeClassNameResolver implements Visitor
     }
 
     /**
-     * @param CallbackType
+     * @param CallableType
      *
      * @return Type
      */
-    public function visitCallbackType(CallbackType $type)
+    public function visitCallableType(CallableType $type)
     {
         return $type;
     }

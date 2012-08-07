@@ -186,14 +186,13 @@ class Lexer
 
             'array' => Token::TOKEN_TYPE_NAME,
             'boolean' => Token::TOKEN_TYPE_NAME,
-            'callback' => Token::TOKEN_TYPE_NAME,
+            'callable' => Token::TOKEN_TYPE_NAME,
             'float' => Token::TOKEN_TYPE_NAME,
             'integer' => Token::TOKEN_TYPE_NAME,
             'mixed' => Token::TOKEN_TYPE_NAME,
             'object' => Token::TOKEN_TYPE_NAME,
             'resource' => Token::TOKEN_TYPE_NAME,
             'string' => Token::TOKEN_TYPE_NAME,
-            'traversable' => Token::TOKEN_TYPE_NAME,
             'tuple' => Token::TOKEN_TYPE_NAME,
         );
     }

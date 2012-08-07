@@ -16,7 +16,7 @@ use Eloquent\Typhax\Lexer\Token;
 use Eloquent\Typhax\Type\AndType;
 use Eloquent\Typhax\Type\ArrayType;
 use Eloquent\Typhax\Type\BooleanType;
-use Eloquent\Typhax\Type\CallbackType;
+use Eloquent\Typhax\Type\CallableType;
 use Eloquent\Typhax\Type\FloatType;
 use Eloquent\Typhax\Type\IntegerType;
 use Eloquent\Typhax\Type\MixedType;
@@ -125,12 +125,12 @@ class ParserTest extends PHPUnit_Framework_TestCase
         $data[] = array($expected, $position, $source);
 
         // #8: Test basic types
-        $source = ' array | boolean | callback | float | integer | null | object | string | mixed ';
+        $source = ' array | boolean | callable | float | integer | null | object | string | mixed ';
         $position = 80;
         $expected = new OrType(array(
             new ArrayType,
             new BooleanType,
-            new CallbackType,
+            new CallableType,
             new FloatType,
             new IntegerType,
             new NullType,

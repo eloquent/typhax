@@ -39,11 +39,11 @@ interface Visitor extends IVisitor
     public function visitBooleanType(BooleanType $type);
 
     /**
-     * @param CallbackType
+     * @param CallableType
      *
      * @return mixed
      */
-    public function visitCallbackType(CallbackType $type);
+    public function visitCallableType(CallableType $type);
 
     /**
      * @param FloatType
