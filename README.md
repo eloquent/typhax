@@ -70,6 +70,12 @@ an equivalent string, boolean, or any other kind of value.
 
 The mixed type accepts any value of any type.
 
+### Null
+
+ * `null`
+
+A [null](http://php.net/manual/en/language.types.null.php).
+
 ### Object
 
  * `object`
