@@ -228,6 +228,11 @@ class ParserTest extends PHPUnit_Framework_TestCase
         $expected = new StreamType(true, false);
         $data['Stream type with attributes'] = array($expected, $position, $source);
 
+        $source = ' stream { writable: true } ';
+        $position = 28;
+        $expected = new StreamType(null, true);
+        $data['Stream type with only writable attribute'] = array($expected, $position, $source);
+
         $source = ' foo bar ';
         $position = 6;
         $expected = new ObjectType('foo');

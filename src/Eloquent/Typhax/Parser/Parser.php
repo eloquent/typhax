@@ -255,7 +255,9 @@ class Parser
                 'resource',
                 array('ofType')
             );
-            $ofType = $attributes['ofType'];
+            if (array_key_exists('ofType', $attributes)) {
+                $ofType = $attributes['ofType'];
+            }
         }
 
         return new ResourceType($ofType);
@@ -281,8 +283,12 @@ class Parser
                 'stream',
                 array('readable', 'writable')
             );
-            $readable = $attributes['readable'];
-            $writable = $attributes['writable'];
+            if (array_key_exists('readable', $attributes)) {
+                $readable = $attributes['readable'];
+            }
+            if (array_key_exists('writable', $attributes)) {
+                $writable = $attributes['writable'];
+            }
         }
 
         return new StreamType($readable, $writable);
