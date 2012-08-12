@@ -318,7 +318,7 @@ class Parser
         next($tokens);
 
         $types = array(
-            $this->parseType($tokens)
+            $this->parseTokens($tokens)
         );
 
         $this->consumeWhitespace($tokens);
@@ -329,7 +329,7 @@ class Parser
             }
 
             next($tokens);
-            $types[] = $this->parseType($tokens);
+            $types[] = $this->parseTokens($tokens);
             $this->consumeWhitespace($tokens);
         }
 
