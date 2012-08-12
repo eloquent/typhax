@@ -47,7 +47,7 @@ class ObjectTypeClassNameResolver implements Visitor
     }
 
     /**
-     * @param AndType
+     * @param AndType $type
      *
      * @return Type
      */
@@ -62,7 +62,7 @@ class ObjectTypeClassNameResolver implements Visitor
     }
 
     /**
-     * @param ArrayType
+     * @param ArrayType $type
      *
      * @return Type
      */
@@ -72,7 +72,7 @@ class ObjectTypeClassNameResolver implements Visitor
     }
 
     /**
-     * @param BooleanType
+     * @param BooleanType $type
      *
      * @return Type
      */
@@ -82,7 +82,7 @@ class ObjectTypeClassNameResolver implements Visitor
     }
 
     /**
-     * @param CallableType
+     * @param CallableType $type
      *
      * @return Type
      */
@@ -92,7 +92,7 @@ class ObjectTypeClassNameResolver implements Visitor
     }
 
     /**
-     * @param FloatType
+     * @param FloatType $type
      *
      * @return Type
      */
@@ -102,7 +102,7 @@ class ObjectTypeClassNameResolver implements Visitor
     }
 
     /**
-     * @param IntegerType
+     * @param IntegerType $type
      *
      * @return Type
      */
@@ -112,7 +112,7 @@ class ObjectTypeClassNameResolver implements Visitor
     }
 
     /**
-     * @param MixedType
+     * @param MixedType $type
      *
      * @return Type
      */
@@ -122,7 +122,7 @@ class ObjectTypeClassNameResolver implements Visitor
     }
 
     /**
-     * @param NullType
+     * @param NullType $type
      *
      * @return Type
      */
@@ -132,7 +132,7 @@ class ObjectTypeClassNameResolver implements Visitor
     }
 
     /**
-     * @param NumericType
+     * @param NumericType $type
      *
      * @return Type
      */
@@ -142,7 +142,7 @@ class ObjectTypeClassNameResolver implements Visitor
     }
 
     /**
-     * @param ObjectType
+     * @param ObjectType $type
      *
      * @return Type
      */
@@ -160,7 +160,7 @@ class ObjectTypeClassNameResolver implements Visitor
     }
 
     /**
-     * @param OrType
+     * @param OrType $type
      *
      * @return Type
      */
@@ -175,7 +175,7 @@ class ObjectTypeClassNameResolver implements Visitor
     }
 
     /**
-     * @param ResourceType
+     * @param ResourceType $type
      *
      * @return Type
      */
@@ -185,7 +185,7 @@ class ObjectTypeClassNameResolver implements Visitor
     }
 
     /**
-     * @param StreamType
+     * @param StreamType $type
      *
      * @return Type
      */
@@ -195,7 +195,7 @@ class ObjectTypeClassNameResolver implements Visitor
     }
 
     /**
-     * @param StringType
+     * @param StringType $type
      *
      * @return Type
      */
@@ -205,7 +205,7 @@ class ObjectTypeClassNameResolver implements Visitor
     }
 
     /**
-     * @param StringableType
+     * @param StringableType $type
      *
      * @return Type
      */
@@ -215,7 +215,7 @@ class ObjectTypeClassNameResolver implements Visitor
     }
 
     /**
-     * @param TraversableType
+     * @param TraversableType $type
      *
      * @return Type
      */
@@ -229,7 +229,7 @@ class ObjectTypeClassNameResolver implements Visitor
     }
 
     /**
-     * @param TupleType
+     * @param TupleType $type
      *
      * @return Type
      */

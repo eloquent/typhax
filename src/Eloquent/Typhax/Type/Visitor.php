@@ -18,119 +18,119 @@ use Icecave\Visita\IVisitor;
 interface Visitor extends IVisitor
 {
     /**
-     * @param AndType
+     * @param AndType $type
      *
      * @return mixed
      */
     public function visitAndType(AndType $type);
 
     /**
-     * @param ArrayType
+     * @param ArrayType $type
      *
      * @return mixed
      */
     public function visitArrayType(ArrayType $type);
 
     /**
-     * @param BooleanType
+     * @param BooleanType $type
      *
      * @return mixed
      */
     public function visitBooleanType(BooleanType $type);
 
     /**
-     * @param CallableType
+     * @param CallableType $type
      *
      * @return mixed
      */
     public function visitCallableType(CallableType $type);
 
     /**
-     * @param FloatType
+     * @param FloatType $type
      *
      * @return mixed
      */
     public function visitFloatType(FloatType $type);
 
     /**
-     * @param IntegerType
+     * @param IntegerType $type
      *
      * @return mixed
      */
     public function visitIntegerType(IntegerType $type);
 
     /**
-     * @param MixedType
+     * @param MixedType $type
      *
      * @return mixed
      */
     public function visitMixedType(MixedType $type);
 
     /**
-     * @param NullType
+     * @param NullType $type
      *
      * @return mixed
      */
     public function visitNullType(NullType $type);
 
     /**
-     * @param NumericType
+     * @param NumericType $type
      *
      * @return mixed
      */
     public function visitNumericType(NumericType $type);
 
     /**
-     * @param ObjectType
+     * @param ObjectType $type
      *
      * @return mixed
      */
     public function visitObjectType(ObjectType $type);
 
     /**
-     * @param OrType
+     * @param OrType $type
      *
      * @return mixed
      */
     public function visitOrType(OrType $type);
 
     /**
-     * @param ResourceType
+     * @param ResourceType $type
      *
      * @return mixed
      */
     public function visitResourceType(ResourceType $type);
 
     /**
-     * @param StreamType
+     * @param StreamType $type
      *
      * @return mixed
      */
     public function visitStreamType(StreamType $type);
 
     /**
-     * @param StringType
+     * @param StringType $type
      *
      * @return mixed
      */
     public function visitStringType(StringType $type);
 
     /**
-     * @param StringableType
+     * @param StringableType $type
      *
      * @return mixed
      */
     public function visitStringableType(StringableType $type);
 
     /**
-     * @param TraversableType
+     * @param TraversableType $type
      *
      * @return mixed
      */
     public function visitTraversableType(TraversableType $type);
 
     /**
-     * @param TupleType
+     * @param TupleType $type
      *
      * @return mixed
      */
