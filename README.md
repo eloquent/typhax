@@ -217,7 +217,7 @@ over, produces keys of type `keyType` and values of type `valueType`.
 ## Boolean type logic
 
 Typhax supports boolean logic in type specifications. There are two operators,
-the pipe symbol (|) which represents boolean OR, and the ampersand (&) which
+the pipe symbol (|) which represents boolean OR, and the plus symbol (+) which
 represents boolean AND.
 
 This specification:
@@ -230,7 +230,7 @@ number.
 
 This specification:
 
-    typeA&typeB
+    typeA+typeB
 
 represents a type that is both of type `typeA` AND of type `typeB`. A
 real-world example might be `InterfaceA|InterfaceB` to accept either only an

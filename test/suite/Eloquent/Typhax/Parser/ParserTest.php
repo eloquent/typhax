@@ -97,7 +97,7 @@ class ParserTest extends PHPUnit_Framework_TestCase
         $data[] = array($expected, $position, $source);
 
         // #5: Basic composite AND
-        $source = ' foo & bar ';
+        $source = ' foo + bar ';
         $position = 12;
         $expected = new AndType(array(
             new ObjectType('foo'),
@@ -106,7 +106,7 @@ class ParserTest extends PHPUnit_Framework_TestCase
         $data[] = array($expected, $position, $source);
 
         // #6: Chained composite AND
-        $source = ' foo & bar & baz ';
+        $source = ' foo + bar + baz ';
         $position = 18;
         $expected = new AndType(array(
             new ObjectType('foo'),
@@ -116,7 +116,7 @@ class ParserTest extends PHPUnit_Framework_TestCase
         $data[] = array($expected, $position, $source);
 
         // #7: Composite precedence
-        $source = ' foo | bar & baz ';
+        $source = ' foo | bar + baz ';
         $position = 18;
         $expected = new OrType(array(
             new ObjectType('foo'),
@@ -266,7 +266,7 @@ class ParserTest extends PHPUnit_Framework_TestCase
         // #6: Non-traversable as primary in a traversable
         $source = ' string < foo > ';
         $expectedClass = __NAMESPACE__.'\Exception\UnexpectedTokenException';
-        $expectedMessage = 'Unexpected LESS_THAN at position 9. Expected one of BRACE_OPEN, AND, PIPE.';
+        $expectedMessage = 'Unexpected LESS_THAN at position 9. Expected one of BRACE_OPEN, PLUS, PIPE.';
         $data[] = array($expectedClass, $expectedMessage, $source);
 
         // #7: Traversable with too many types in type list

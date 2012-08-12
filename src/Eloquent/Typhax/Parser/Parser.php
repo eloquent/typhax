@@ -131,7 +131,7 @@ class Parser
                     , $this->position($tokens)
                     , Token::typesToNames(array(
                         Token::TOKEN_BRACE_OPEN,
-                        Token::TOKEN_AND,
+                        Token::TOKEN_PLUS,
                         Token::TOKEN_PIPE,
                     ))
                 );
@@ -556,7 +556,7 @@ class Parser
      */
     protected function makeComposite($operator, Type $left, Type $right)
     {
-        if (Token::TOKEN_AND === $operator) {
+        if (Token::TOKEN_PLUS === $operator) {
             $compositeType = 'Eloquent\Typhax\Type\AndType';
         } else {
             $compositeType = 'Eloquent\Typhax\Type\OrType';
@@ -666,6 +666,6 @@ class Parser
      */
     protected $compositePrecedence = array(
         Token::TOKEN_PIPE,
-        Token::TOKEN_AND,
+        Token::TOKEN_PLUS,
     );
 }

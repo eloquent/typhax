@@ -30,8 +30,8 @@ class TokenTest extends PHPUnit_Framework_TestCase
         $data[] = array($expected, $token);
 
         // #2: Character token
-        $token = '&';
-        $expected = new Token(Token::TOKEN_AND, '&');
+        $token = '+';
+        $expected = new Token(Token::TOKEN_PLUS, '+');
         $data[] = array($expected, $token);
 
         // #3: Character token
@@ -78,7 +78,6 @@ class TokenTest extends PHPUnit_Framework_TestCase
     public function nameData()
     {
         return array(
-            array('AND', Token::TOKEN_AND),
             array('BOOLEAN_FALSE', Token::TOKEN_BOOLEAN_FALSE),
             array('BOOLEAN_TRUE', Token::TOKEN_BOOLEAN_TRUE),
             array('BRACE_CLOSE', Token::TOKEN_BRACE_CLOSE),
@@ -91,6 +90,7 @@ class TokenTest extends PHPUnit_Framework_TestCase
             array('LESS_THAN', Token::TOKEN_LESS_THAN),
             array('NULL', Token::TOKEN_NULL),
             array('PIPE', Token::TOKEN_PIPE),
+            array('PLUS', Token::TOKEN_PLUS),
             array('SQUARE_BRACKET_CLOSE', Token::TOKEN_SQUARE_BRACKET_CLOSE),
             array('SQUARE_BRACKET_OPEN', Token::TOKEN_SQUARE_BRACKET_OPEN),
             array('STRING', Token::TOKEN_STRING),
@@ -125,10 +125,10 @@ class TokenTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(array(
             'NULL',
-            'AND',
+            'PLUS',
         ), Token::typesToNames(array(
             Token::TOKEN_NULL,
-            Token::TOKEN_AND,
+            Token::TOKEN_PLUS,
         )));
     }
 }

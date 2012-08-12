@@ -167,7 +167,6 @@ class Token
         return static::$types;
     }
 
-    const TOKEN_AND = '&';
     const TOKEN_BOOLEAN_FALSE = 'false';
     const TOKEN_BOOLEAN_TRUE = 'true';
     const TOKEN_BRACE_CLOSE = '}';
@@ -180,6 +179,7 @@ class Token
     const TOKEN_LESS_THAN = '<';
     const TOKEN_NULL = 'null';
     const TOKEN_PIPE = '|';
+    const TOKEN_PLUS = '+';
     const TOKEN_SQUARE_BRACKET_CLOSE = ']';
     const TOKEN_SQUARE_BRACKET_OPEN = '[';
     const TOKEN_STRING = T_STRING;

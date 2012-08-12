@@ -71,13 +71,13 @@ class Lexer
         // split unsupported PHP tokens that contain supported Typhax tokens
         if (Token::TOKEN_STRING === $token->type()) {
             $candidates = array(
-                Token::TOKEN_AND,
                 Token::TOKEN_SQUARE_BRACKET_CLOSE,
                 Token::TOKEN_SQUARE_BRACKET_OPEN,
                 Token::TOKEN_COLON,
                 Token::TOKEN_BRACE_CLOSE,
                 Token::TOKEN_BRACE_OPEN,
                 Token::TOKEN_PIPE,
+                Token::TOKEN_PLUS,
                 Token::TOKEN_COMMA,
                 Token::TOKEN_GREATER_THAN,
                 Token::TOKEN_LESS_THAN,

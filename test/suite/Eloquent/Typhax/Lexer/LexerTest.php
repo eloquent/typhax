@@ -109,10 +109,10 @@ class LexerTest extends PHPUnit_Framework_TestCase
         $data[] = array($expected, $source);
 
         // #4: Composite AND type
-        $source = 'type&type';
+        $source = 'type+type';
         $expected = array(
             new Token(Token::TOKEN_STRING, 'type'),
-            new Token(Token::TOKEN_AND, '&'),
+            new Token(Token::TOKEN_PLUS, '+'),
             new Token(Token::TOKEN_STRING, 'type'),
         );
         $data[] = array($expected, $source);
@@ -251,13 +251,13 @@ class LexerTest extends PHPUnit_Framework_TestCase
         $data[] = array($expected, $source);
 
         // #12: Treatment of unsupported tokens containing supported tokens
-        $source = '&= && || ?> %> {$ ${ => >= <> <= -> <?php <? <% <?= <%= |= :: << <<= >> >>= <<<';
+        $source = '+= ++ || ?> %> {$ ${ => >= <> <= -> <?php <? <% <?= <%= |= :: << <<= >> >>= <<<';
         $expected = array(
-            new Token(Token::TOKEN_AND, '&'),
+            new Token(Token::TOKEN_PLUS, '+'),
             new Token(Token::TOKEN_STRING, '='),
             new Token(Token::TOKEN_WHITESPACE, ' '),
-            new Token(Token::TOKEN_AND, '&'),
-            new Token(Token::TOKEN_AND, '&'),
+            new Token(Token::TOKEN_PLUS, '+'),
+            new Token(Token::TOKEN_PLUS, '+'),
             new Token(Token::TOKEN_WHITESPACE, ' '),
             new Token(Token::TOKEN_PIPE, '|'),
             new Token(Token::TOKEN_PIPE, '|'),
