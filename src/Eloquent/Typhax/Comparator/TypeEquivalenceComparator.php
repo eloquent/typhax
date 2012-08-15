@@ -372,13 +372,13 @@ class TypeEquivalenceComparator implements Visitor
                 null === $leftType &&
                 null !== $rightType
             ) {
-                return -100;
+                return -1;
             }
             if (
                 null !== $leftType &&
                 null === $rightType
             ) {
-                return 100;
+                return 1;
             }
 
             $difference = static::compare($leftType, $rightType);
@@ -402,14 +402,14 @@ class TypeEquivalenceComparator implements Visitor
             null === $left &&
             null !== $right
         ) {
-            return -100;
+            return -1;
         }
 
         if (
             null !== $left &&
             null === $right
         ) {
-            return 100;
+            return 1;
         }
 
         return strcmp(
