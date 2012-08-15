@@ -166,11 +166,10 @@ class TypeRenderer implements Visitor
     {
         $attributes = '';
         if (null !== $type->ofType()) {
-            $attributes =
-                ' {ofType: '.
-                var_export($type->ofType(), true).
-                '}'
-            ;
+            $attributes = sprintf(
+                ' {ofType: %s}',
+                var_export($type->ofType(), true)
+            );
         }
 
         return 'resource'.$attributes;
@@ -203,11 +202,10 @@ class TypeRenderer implements Visitor
             }
         }
         if ('' !== $attributes) {
-            $attributes =
-                ' {'.
-                $attributes.
-                '}'
-            ;
+            $attributes = sprintf(
+                ' {%s}',
+                $attributes
+            );
         }
 
         return 'stream'.$attributes;
@@ -240,21 +238,25 @@ class TypeRenderer implements Visitor
      */
     public function visitTraversableType(TraversableType $type)
     {
-        $keyType = '';
+        $primaryType = $type->primaryType()->accept($this);
+
+        $subTypes = array();
         if (!$type->keyType() instanceof MixedType) {
-            $keyType =
-                $type->keyType()->accept($this).
-                ', '
-            ;
+            $subTypes[] = $type->keyType()->accept($this);
+            $subTypes[] = $type->valueType()->accept($this);
+        } elseif (!$type->valueType() instanceof MixedType) {
+            $subTypes[] = $type->valueType()->accept($this);
         }
 
-        return
-            $type->primaryType()->accept($this).
-            '<'.
-            $keyType.
-            $type->valueType()->accept($this).
-            '>'
-        ;
+        if (count($subTypes) < 1) {
+            return $primaryType;
+        }
+
+        return sprintf(
+            '%s<%s>',
+            $primaryType,
+            implode(', ', $subTypes)
+        );
     }
 
     /**
@@ -269,10 +271,9 @@ class TypeRenderer implements Visitor
             $subTypes[] = $subType->accept($this);
         }
 
-        return
-            'tuple<'.
-            implode(', ', $subTypes).
-            '>'
-        ;
+        return sprintf(
+            'tuple<%s>',
+            implode(', ', $subTypes)
+        );
     }
 }
