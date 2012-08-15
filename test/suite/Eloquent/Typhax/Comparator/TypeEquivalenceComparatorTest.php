@@ -45,7 +45,7 @@ class TypeEquivalenceComparatorTest extends PHPUnit_Framework_TestCase
 
         $left = new StringType;
         $right = new StringableType;
-        $expected = -13;
+        $expected = -1;
         $data['Single type non-equivalence'] = array($expected, $left, $right);
 
         $left = new AndType(array(
@@ -70,7 +70,7 @@ class TypeEquivalenceComparatorTest extends PHPUnit_Framework_TestCase
             new NullType,
             new ObjectType,
         ));
-        $expected = 1024;
+        $expected = 1;
         $data['Out-of order AND non-equivalence 1'] = array($expected, $left, $right);
 
         $left = new AndType(array(
@@ -80,7 +80,7 @@ class TypeEquivalenceComparatorTest extends PHPUnit_Framework_TestCase
             new ArrayType,
             new NullType,
         ));
-        $expected = -100;
+        $expected = -1;
         $data['Out-of order AND non-equivalence 2'] = array($expected, $left, $right);
 
         $left = new AndType(array(
@@ -90,7 +90,7 @@ class TypeEquivalenceComparatorTest extends PHPUnit_Framework_TestCase
         $right = new AndType(array(
             new ArrayType,
         ));
-        $expected = 100;
+        $expected = 1;
         $data['Out-of order AND non-equivalence 3'] = array($expected, $left, $right);
 
         $left = new OrType(array(
@@ -151,7 +151,7 @@ class TypeEquivalenceComparatorTest extends PHPUnit_Framework_TestCase
             new StringType,
             new FloatType
         );
-        $expected = -3072;
+        $expected = -1;
         $data['Traversable primary non equivalence'] = array($expected, $left, $right);
 
         $left = new TraversableType(
@@ -164,7 +164,7 @@ class TypeEquivalenceComparatorTest extends PHPUnit_Framework_TestCase
             new IntegerType,
             new FloatType
         );
-        $expected = 2560;
+        $expected = 1;
         $data['Traversable key non equivalence'] = array($expected, $left, $right);
 
         $left = new TraversableType(
@@ -177,7 +177,7 @@ class TypeEquivalenceComparatorTest extends PHPUnit_Framework_TestCase
             new StringType,
             new BooleanType
         );
-        $expected = 1024;
+        $expected = 1;
         $data['Traversable value non equivalence'] = array($expected, $left, $right);
 
         $left = new StringType;
@@ -186,7 +186,7 @@ class TypeEquivalenceComparatorTest extends PHPUnit_Framework_TestCase
             new StringType,
             new FloatType
         );
-        $expected = -256;
+        $expected = -1;
         $data['Traversable and non-traversable non equivalence'] = array($expected, $left, $right);
 
         $left = new TupleType(array(
@@ -212,7 +212,7 @@ class TypeEquivalenceComparatorTest extends PHPUnit_Framework_TestCase
             new FloatType,
             new StringType,
         ));
-        $expected = 3328;
+        $expected = 1;
         $data['Tuple non equivalence'] = array($expected, $left, $right);
 
         $left = new StringType;
@@ -221,7 +221,7 @@ class TypeEquivalenceComparatorTest extends PHPUnit_Framework_TestCase
             new FloatType,
             new StringType,
         ));
-        $expected = -256;
+        $expected = -1;
         $data['Tuple and non-tuple non equivalence'] = array($expected, $left, $right);
 
         $left = new StringType;
@@ -230,7 +230,7 @@ class TypeEquivalenceComparatorTest extends PHPUnit_Framework_TestCase
             new FloatType,
             new StringType,
         ));
-        $expected = 1024;
+        $expected = 1;
         $data['Composite and non-composite non equivalence'] = array($expected, $left, $right);
 
         $left = new StreamType(true);
@@ -245,12 +245,12 @@ class TypeEquivalenceComparatorTest extends PHPUnit_Framework_TestCase
 
         $left = new StreamType(true);
         $right = new StreamType;
-        $expected = 100;
+        $expected = 1;
         $data['Attribute null and non-null non-equivalence 1'] = array($expected, $left, $right);
 
         $left = new StreamType;
         $right = new StreamType(true);
-        $expected = -100;
+        $expected = -1;
         $data['Attribute null and non-null non-equivalence 2'] = array($expected, $left, $right);
 
         return $data;
@@ -261,7 +261,13 @@ class TypeEquivalenceComparatorTest extends PHPUnit_Framework_TestCase
      */
     public function testCompareAndEquivalent($expected, Type $left, Type $right)
     {
-        $this->assertSame($expected, TypeEquivalenceComparator::compare($left, $right));
+        if ($expected > 0) {
+            $this->assertGreaterThan(0, TypeEquivalenceComparator::compare($left, $right));
+        } elseif ($expected < 0) {
+            $this->assertLessThan(0, TypeEquivalenceComparator::compare($left, $right));
+        } else {
+            $this->assertSame(0, TypeEquivalenceComparator::compare($left, $right));
+        }
         $this->assertSame(0 === $expected, TypeEquivalenceComparator::equivalent($left, $right));
     }
 
