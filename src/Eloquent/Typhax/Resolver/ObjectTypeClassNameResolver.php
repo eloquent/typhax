@@ -33,6 +33,9 @@ use Eloquent\Typhax\Type\Visitor;
 
 class ObjectTypeClassNameResolver implements Visitor
 {
+    /**
+     * @param ClassNameResolver $classNameResolver
+     */
     public function __construct(ClassNameResolver $classNameResolver)
     {
         $this->classNameResolver = $classNameResolver;

@@ -11,7 +11,6 @@
 
 namespace Eloquent\Typhax\Type;
 
-use Phake;
 use PHPUnit_Framework_TestCase;
 
 class ResourceTypeTest extends PHPUnit_Framework_TestCase
