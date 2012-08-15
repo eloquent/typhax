@@ -233,8 +233,8 @@ This specification:
     typeA+typeB
 
 represents a type that is both of type `typeA` AND of type `typeB`. A
-real-world example might be `InterfaceA|InterfaceB` to accept either only an
-object that implements both `InterfaceA` AND `InterfaceB`.
+real-world example might be `InterfaceA+InterfaceB` to accept only an object
+that implements both `InterfaceA` AND `InterfaceB`.
 
 ## White space
 
