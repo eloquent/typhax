@@ -87,7 +87,23 @@ class TypeRendererTest extends PHPUnit_Framework_TestCase
             new MixedType
         );
         $expected = 'array';
-        $data['Traversable type with mixed key and value'] = array($expected, $type);
+        $data['Array type with mixed key and value'] = array($expected, $type);
+
+        $type = new TraversableType(
+            new ObjectType('Foo'),
+            new MixedType,
+            new MixedType
+        );
+        $expected = 'Foo<mixed>';
+        $data['Traversable object type with mixed key and value'] = array($expected, $type);
+
+        $type = new TraversableType(
+            new MixedType,
+            new MixedType,
+            new MixedType
+        );
+        $expected = 'mixed<mixed>';
+        $data['Traversable mixed type with mixed key and value'] = array($expected, $type);
 
         $type = new TupleType(array(
             new BooleanType,

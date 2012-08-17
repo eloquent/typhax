@@ -244,7 +244,10 @@ class TypeRenderer implements Visitor
         if (!$type->keyType() instanceof MixedType) {
             $subTypes[] = $type->keyType()->accept($this);
             $subTypes[] = $type->valueType()->accept($this);
-        } elseif (!$type->valueType() instanceof MixedType) {
+        } elseif (
+            !$type->primaryType() instanceof ArrayType ||
+            !$type->valueType() instanceof MixedType
+        ) {
             $subTypes[] = $type->valueType()->accept($this);
         }
 
