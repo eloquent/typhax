@@ -160,10 +160,9 @@ class ParserTest extends PHPUnit_Framework_TestCase
         ));
         $data['Traversable type nested inside composite'] = array($expected, $position, $source);
 
-        $source = ' array | boolean | callable | float | integer | null | numeric | object | string | stringable | mixed ';
-        $position = 103;
+        $source = ' boolean | callable | float | integer | null | numeric | object | string | stringable | mixed ';
+        $position = 95;
         $expected = new OrType(array(
-            new ArrayType,
             new BooleanType,
             new CallableType,
             new FloatType,
@@ -198,6 +197,15 @@ class ParserTest extends PHPUnit_Framework_TestCase
             )),
         ));
         $data['Intrinsic aliases'] = array($expected, $position, $source);
+
+        $source = ' array ';
+        $position = 8;
+        $expected = new TraversableType(
+            new ArrayType,
+            new MixedType,
+            new MixedType
+        );
+        $data['Array'] = array($expected, $position, $source);
 
         $source = ' tuple < foo , bar , baz > ';
         $position = 28;

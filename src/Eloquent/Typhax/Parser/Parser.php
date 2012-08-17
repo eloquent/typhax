@@ -165,6 +165,14 @@ class Parser
             $type = new TraversableType($type, $keyType, $valueType);
         }
 
+        if ($type instanceof ArrayType) {
+            $type = new TraversableType(
+                $type,
+                new MixedType,
+                new MixedType
+            );
+        }
+
         return $type;
     }
 
