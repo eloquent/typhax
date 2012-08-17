@@ -76,7 +76,7 @@ Equivalent to the [is_int()](http://php.net/is_int) function.
 
     mixed
 
-The mixed type accepts any value of any type except null.
+The mixed type accepts any value of any type (including null).
 
 ### Null
 
