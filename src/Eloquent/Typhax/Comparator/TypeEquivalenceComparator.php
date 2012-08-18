@@ -353,33 +353,21 @@ class TypeEquivalenceComparator implements Visitor
 
         $leftTypeCount = count($leftTypes);
         $rightTypeCount = count($rightTypes);
-        $typeCount =
-            $leftTypeCount > $rightTypeCount ?
-            $leftTypeCount :
-            $rightTypeCount
-        ;
+        if ($leftTypeCount < $rightTypeCount) {
+            return -1;
+        }
+        if ($leftTypeCount > $rightTypeCount) {
+            return 1;
+        }
 
         if (!$compareOrder) {
             usort($leftTypes, __NAMESPACE__.'\TypeEquivalenceComparator::compare');
             usort($rightTypes, __NAMESPACE__.'\TypeEquivalenceComparator::compare');
         }
 
-        for ($i = 0; $i < $typeCount; $i ++) {
-            $leftType = array_key_exists($i, $leftTypes) ? $leftTypes[$i] : null;
-            $rightType = array_key_exists($i, $rightTypes) ? $rightTypes[$i] : null;
-
-            if (
-                null === $leftType &&
-                null !== $rightType
-            ) {
-                return -1;
-            }
-            if (
-                null !== $leftType &&
-                null === $rightType
-            ) {
-                return 1;
-            }
+        for ($i = 0; $i < $leftTypeCount; $i ++) {
+            $leftType = $leftTypes[$i];
+            $rightType = $rightTypes[$i];
 
             $difference = static::compare($leftType, $rightType);
             if (0 !== $difference) {

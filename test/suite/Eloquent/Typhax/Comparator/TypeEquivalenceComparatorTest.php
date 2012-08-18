@@ -70,7 +70,7 @@ class TypeEquivalenceComparatorTest extends PHPUnit_Framework_TestCase
             new NullType,
             new ObjectType,
         ));
-        $expected = 1;
+        $expected = -1;
         $data['Out-of order AND non-equivalence 1'] = array($expected, $left, $right);
 
         $left = new AndType(array(
