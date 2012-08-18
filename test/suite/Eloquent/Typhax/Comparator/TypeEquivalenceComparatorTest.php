@@ -32,6 +32,10 @@ use Eloquent\Typhax\Type\Type;
 use Eloquent\Typhax\Type\Visitor;
 use PHPUnit_Framework_TestCase;
 
+/**
+ * @covers Eloquent\Typhax\Comparator\TypeEquivalenceComparator
+ * @covers Eloquent\Typhax\Comparator\TypeEquivalenceComparatorVisitor
+ */
 class TypeEquivalenceComparatorTest extends PHPUnit_Framework_TestCase
 {
     public function compareData()
