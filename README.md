@@ -75,8 +75,15 @@ Equivalent to the [is_int()](http://php.net/is_int) function.
 ### Mixed
 
     mixed
+    mixed<keyType, valueType>
 
 The mixed type accepts any value of any type (including null).
+
+Mixed can be treated as a [traversable type](#traversable-types), as in the
+second example above. When used in this fashion, mixed indicates any type that
+can be traversed, such as an [array](http://php.net/array) or an instance of the
+[Traversable](http://php.net/traversable) interface. This is useful in the case
+that the value must be a collection, but the outer type is not important.
 
 ### Null
 
