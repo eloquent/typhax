@@ -226,6 +226,11 @@ class ParserTest extends PHPUnit_Framework_TestCase
         $expected = new ResourceType('foo');
         $data['Resource type with ofType attribute'] = array($expected, $position, $source);
 
+        $source = ' resource { ofType : stream } ';
+        $position = 31;
+        $expected = new ResourceType('stream');
+        $data['Resource type with ofType attribute of reserved type name'] = array($expected, $position, $source);
+
         $source = ' stream ';
         $position = 9;
         $expected = new StreamType;
@@ -286,7 +291,7 @@ class ParserTest extends PHPUnit_Framework_TestCase
         // #3: Empty attributes
         $source = ' resource { } ';
         $expectedClass = __NAMESPACE__.'\Exception\UnexpectedTokenException';
-        $expectedMessage = 'Unexpected BRACE_CLOSE at position 13. Expected one of STRING, STRING_QUOTED, INTEGER, FLOAT, NULL, BOOLEAN_TRUE, BOOLEAN_FALSE, BRACE_OPEN, SQUARE_BRACKET_OPEN.';
+        $expectedMessage = 'Unexpected BRACE_CLOSE at position 13. Expected one of STRING, STRING_QUOTED, TYPE_NAME, INTEGER, FLOAT, NULL, BOOLEAN_TRUE, BOOLEAN_FALSE, BRACE_OPEN, SQUARE_BRACKET_OPEN.';
         $data[] = array($expectedClass, $expectedMessage, $source);
 
         // #4: Unsupported attributes

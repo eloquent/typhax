@@ -399,6 +399,7 @@ class Parser
         $token = $this->assert($tokens, array(
             Token::TOKEN_STRING,
             Token::TOKEN_STRING_QUOTED,
+            Token::TOKEN_TYPE_NAME,
             Token::TOKEN_INTEGER,
             Token::TOKEN_FLOAT,
             Token::TOKEN_NULL,
