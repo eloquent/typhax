@@ -1,19 +1,146 @@
 {
-    "hash": "ee551f512e7a79d423d7f0db46dbc17d",
+    "hash": "50c82e487211fa4d27c26abdac158e5b",
     "packages": [
         {
-            "package": "eloquent/cosmos",
-            "version": "1.0.1"
+            "name": "eloquent/cosmos",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/eloquent/cosmos.git",
+                "reference": "1.0.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/eloquent/cosmos/zipball/1.0.1",
+                "reference": "1.0.1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "time": "2012-08-05 08:53:24",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "Eloquent\\Cosmos": "src"
+                }
+            },
+            "notification-url": "http://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Erin Millard",
+                    "email": "ezzatron@gmail.com",
+                    "homepage": "http://ezzatron.com/"
+                }
+            ],
+            "description": "A class name resolver for PHP namespaces.",
+            "homepage": "https://github.com/eloquent/cosmos",
+            "keywords": [
+                "php",
+                "class",
+                "resolver",
+                "solver",
+                "namespace",
+                "name",
+                "classname"
+            ]
         },
         {
-            "package": "icecave/visita",
-            "version": "0.1.0"
+            "name": "icecave/visita",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/IcecaveStudios/visita.git",
+                "reference": "0.1.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/IcecaveStudios/visita/zipball/0.1.0",
+                "reference": "0.1.0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phake/phake": "1.*"
+            },
+            "time": "2012-08-04 23:35:23",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "Icecave\\Visita": "lib"
+                }
+            },
+            "notification-url": "http://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "James Harris",
+                    "email": "james.harris@icecave.com.au"
+                }
+            ],
+            "description": "A PHP library for assisting with visitor pattern implementations.",
+            "homepage": "https://github.com/IcecaveStudios/visita",
+            "keywords": [
+                "pattern",
+                "design",
+                "visitor"
+            ]
         }
     ],
     "packages-dev": [
         {
-            "package": "phake/phake",
-            "version": "v1.0.3"
+            "name": "phake/phake",
+            "version": "v1.0.3",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/mlively/Phake.git",
+                "reference": "v1.0.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/mlively/Phake/zipball/v1.0.3",
+                "reference": "v1.0.3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "time": "2012-05-14 08:06:51",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "classmap": [
+                    "src"
+                ]
+            },
+            "notification-url": "http://packagist.org/downloads/",
+            "include-path": [
+                "src"
+            ],
+            "license": [
+                "BSD"
+            ],
+            "authors": [
+                {
+                    "name": "Mike Lively",
+                    "email": "m@digitalsandwich.com"
+                }
+            ],
+            "description": "The Phake mock testing library",
+            "homepage": "https://github.com/mlively/Phake",
+            "keywords": [
+                "testing",
+                "mock"
+            ]
         }
     ],
     "aliases": [
