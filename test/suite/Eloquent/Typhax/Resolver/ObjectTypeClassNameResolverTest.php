@@ -11,6 +11,7 @@
 
 namespace Eloquent\Typhax\Resolver;
 
+use Eloquent\Cosmos\ClassName;
 use Eloquent\Cosmos\ClassNameResolver;
 use Eloquent\Typhax\Type\AndType;
 use Eloquent\Typhax\Type\ArrayType;
@@ -29,7 +30,6 @@ use Eloquent\Typhax\Type\StringType;
 use Eloquent\Typhax\Type\StringableType;
 use Eloquent\Typhax\Type\TraversableType;
 use Eloquent\Typhax\Type\TupleType;
-use Phake;
 use PHPUnit_Framework_TestCase;
 
 class ObjectTypeClassNameResolverTest extends PHPUnit_Framework_TestCase
@@ -39,9 +39,12 @@ class ObjectTypeClassNameResolverTest extends PHPUnit_Framework_TestCase
         parent::setUp();
 
         $this->_classNameResolver = new ClassNameResolver(
-            'Foo\Bar\Baz',
+            ClassName::fromString('\Foo\Bar\Baz'),
             array(
-                'Qux\Doom\Splat' => 'Pip',
+                array(
+                    ClassName::fromString('\Qux\Doom\Splat'),
+                    ClassName::fromString('Pip'),
+                ),
             )
         );
         $this->_resolver = new ObjectTypeClassNameResolver(
@@ -52,32 +55,32 @@ class ObjectTypeClassNameResolverTest extends PHPUnit_Framework_TestCase
     public function testResolveObjectTypeName()
     {
         $type = new TraversableType(
-            new ObjectType('Spam'),
+            new ObjectType(ClassName::fromString('Spam')),
             new OrType(array(
-                new ObjectType('Spam'),
-                new ObjectType('Pip'),
+                new ObjectType(ClassName::fromString('Spam')),
+                new ObjectType(ClassName::fromString('Pip')),
             )),
             new AndType(array(
-                new ObjectType('Spam'),
-                new ObjectType('Pip'),
+                new ObjectType(ClassName::fromString('Spam')),
+                new ObjectType(ClassName::fromString('Pip')),
                 new TupleType(array(
-                    new ObjectType('Spam'),
-                    new ObjectType('Pip'),
+                    new ObjectType(ClassName::fromString('Spam')),
+                    new ObjectType(ClassName::fromString('Pip')),
                 )),
             ))
         );
         $expected = new TraversableType(
-            new ObjectType('Foo\Bar\Baz\Spam'),
+            new ObjectType(ClassName::fromString('\Foo\Bar\Baz\Spam')),
             new OrType(array(
-                new ObjectType('Foo\Bar\Baz\Spam'),
-                new ObjectType('Qux\Doom\Splat'),
+                new ObjectType(ClassName::fromString('\Foo\Bar\Baz\Spam')),
+                new ObjectType(ClassName::fromString('\Qux\Doom\Splat')),
             )),
             new AndType(array(
-                new ObjectType('Foo\Bar\Baz\Spam'),
-                new ObjectType('Qux\Doom\Splat'),
+                new ObjectType(ClassName::fromString('\Foo\Bar\Baz\Spam')),
+                new ObjectType(ClassName::fromString('\Qux\Doom\Splat')),
                 new TupleType(array(
-                    new ObjectType('Foo\Bar\Baz\Spam'),
-                    new ObjectType('Qux\Doom\Splat'),
+                    new ObjectType(ClassName::fromString('\Foo\Bar\Baz\Spam')),
+                    new ObjectType(ClassName::fromString('\Qux\Doom\Splat')),
                 )),
             ))
         );

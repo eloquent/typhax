@@ -9,8 +9,6 @@
  * file that was distributed with this source code.
  */
 
-// @codeCoverageIgnoreStart
-
 namespace Eloquent\Typhax\Type;
 
 use Icecave\Visita\IVisitor;

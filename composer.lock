@@ -1,19 +1,296 @@
 {
-    "hash": "ee551f512e7a79d423d7f0db46dbc17d",
+    "hash": "466ea7ea41e2e2a4c51ecc5ca6c77805",
     "packages": [
         {
-            "package": "eloquent/cosmos",
-            "version": "1.0.1"
+            "name": "eloquent/cosmos",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/eloquent/cosmos.git",
+                "reference": "2.0.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/eloquent/cosmos/archive/2.0.0.zip",
+                "reference": "2.0.0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "eloquent/equality": ">=2.0,<3.0",
+                "icecave/isolator": ">=2.0,<3.0"
+            },
+            "require-dev": {
+                "icecave/testing": ">=1.0,<2.0"
+            },
+            "time": "2013-01-14 12:32:49",
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Eloquent\\Cosmos": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Erin Millard",
+                    "email": "ezzatron@gmail.com",
+                    "homepage": "http://ezzatron.com/"
+                }
+            ],
+            "description": "A class name resolver for PHP namespaces.",
+            "homepage": "https://github.com/eloquent/cosmos",
+            "keywords": [
+                "php",
+                "class",
+                "resolver",
+                "solver",
+                "namespace",
+                "name",
+                "classname"
+            ]
         },
         {
-            "package": "icecave/visita",
-            "version": "0.1.0"
+            "name": "eloquent/equality",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/eloquent/equality.git",
+                "reference": "2.0.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/eloquent/equality/archive/2.0.1.zip",
+                "reference": "2.0.1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "eloquent/asplode": "1.*",
+                "phake/phake": "1.*"
+            },
+            "time": "2012-11-15 09:42:26",
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Eloquent\\Equality": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Erin Millard",
+                    "email": "ezzatron@gmail.com",
+                    "homepage": "http://ezzatron.com/"
+                }
+            ],
+            "description": "A better strict comparison for PHP.",
+            "homepage": "https://github.com/eloquent/equality",
+            "keywords": [
+                "object",
+                "equality",
+                "comparison",
+                "strict",
+                "deep"
+            ]
+        },
+        {
+            "name": "icecave/isolator",
+            "version": "2.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/IcecaveStudios/isolator.git",
+                "reference": "2.1.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/IcecaveStudios/isolator/archive/2.1.1.zip",
+                "reference": "2.1.1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "icecave/testing": "1.*"
+            },
+            "time": "2013-01-14 04:17:36",
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Icecave\\Isolator": "lib"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "James Harris",
+                    "email": "james.harris@icecave.com.au"
+                }
+            ],
+            "description": "Mock out calls to built-in PHP functions.",
+            "homepage": "https://github.com/IcecaveStudios/isolator",
+            "keywords": [
+                "phpunit",
+                "test",
+                "mock",
+                "fake",
+                "unit",
+                "phake"
+            ]
+        },
+        {
+            "name": "icecave/visita",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/IcecaveStudios/visita.git",
+                "reference": "0.1.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/IcecaveStudios/visita/zipball/0.1.0",
+                "reference": "0.1.0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phake/phake": "1.*"
+            },
+            "time": "2012-08-04 20:35:23",
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Icecave\\Visita": "lib"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "James Harris",
+                    "email": "james.harris@icecave.com.au",
+                    "homepage": null,
+                    "role": null
+                }
+            ],
+            "description": "A PHP library for assisting with visitor pattern implementations.",
+            "homepage": "https://github.com/IcecaveStudios/visita",
+            "keywords": [
+                "pattern",
+                "design",
+                "visitor"
+            ]
         }
     ],
     "packages-dev": [
         {
-            "package": "phake/phake",
-            "version": "v1.0.3"
+            "name": "icecave/testing",
+            "version": "1.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/IcecaveStudios/testing.git",
+                "reference": "1.0.6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/IcecaveStudios/testing/archive/1.0.6.zip",
+                "reference": "1.0.6",
+                "shasum": ""
+            },
+            "require": {
+                "phake/phake": "1.*"
+            },
+            "suggest": {
+                "eloquent/asplode": "Use the asplode error handler instead of PHPUnit's internal error handler.",
+                "eloquent/liberator": "Use liberator for circumventing PHP access modifier restrictions inside tests."
+            },
+            "time": "2013-01-14 05:53:31",
+            "bin": [
+                "bin/phpunit",
+                "bin/phpunit-coverage",
+                "bin/update-dotfiles"
+            ],
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "James Harris",
+                    "email": "james.harris@icecave.com.au"
+                }
+            ],
+            "description": "Helper package for testing Icecave projects in a uniform way.",
+            "homepage": "https://github.com/IcecaveStudios/testing",
+            "keywords": [
+                "testing",
+                "phpunit",
+                "test",
+                "unit",
+                "phake",
+                "coverage"
+            ]
+        },
+        {
+            "name": "phake/phake",
+            "version": "v1.0.3",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/mlively/Phake.git",
+                "reference": "v1.0.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/mlively/Phake/zipball/v1.0.3",
+                "reference": "v1.0.3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "time": "2012-05-14 15:06:51",
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src"
+                ]
+            },
+            "include-path": [
+                "src"
+            ],
+            "license": [
+                "BSD"
+            ],
+            "authors": [
+                {
+                    "name": "Mike Lively",
+                    "email": "m@digitalsandwich.com",
+                    "homepage": null,
+                    "role": null
+                }
+            ],
+            "description": "The Phake mock testing library",
+            "homepage": "https://github.com/mlively/Phake",
+            "keywords": [
+                "testing",
+                "mock"
+            ]
         }
     ],
     "aliases": [

@@ -29,7 +29,6 @@ use Eloquent\Typhax\Type\StringableType;
 use Eloquent\Typhax\Type\TraversableType;
 use Eloquent\Typhax\Type\TupleType;
 use Eloquent\Typhax\Type\Type;
-use Eloquent\Typhax\Type\Visitor;
 use PHPUnit_Framework_TestCase;
 
 /**

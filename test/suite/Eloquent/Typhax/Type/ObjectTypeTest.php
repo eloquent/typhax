@@ -11,14 +11,16 @@
 
 namespace Eloquent\Typhax\Type;
 
+use Eloquent\Cosmos\ClassName;
 use PHPUnit_Framework_TestCase;
 
 class ObjectTypeTest extends PHPUnit_Framework_TestCase
 {
     public function testOfType()
     {
-        $type = new ObjectType('foo');
+        $className = ClassName::fromString('foo');
+        $type = new ObjectType($className);
 
-        $this->assertSame('foo', $type->ofType());
+        $this->assertSame($className, $type->ofType());
     }
 }

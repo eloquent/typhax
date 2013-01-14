@@ -30,7 +30,6 @@ class UnexpectedTokenTest extends PHPUnit_Framework_TestCase
         $this->assertSame($position, $exception->position());
         $this->assertSame($previous, $exception->getPrevious());
 
-
         $unexpected = 'foo';
         $position = 666;
         $expected = array('bar', 'baz');

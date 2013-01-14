@@ -21,7 +21,6 @@ class ResourceTypeTest extends PHPUnit_Framework_TestCase
 
         $this->assertNull($type->ofType());
 
-
         $type = new ResourceType('foo');
 
         $this->assertSame('foo', $type->ofType());

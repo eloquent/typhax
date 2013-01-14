@@ -17,8 +17,8 @@ class TraversableType extends Host implements Type
 {
     /**
      * @param TraversablePrimaryType $primaryType
-     * @param Type $keyType
-     * @param Type $valueType
+     * @param Type                   $keyType
+     * @param Type                   $valueType
      */
     public function __construct(
         TraversablePrimaryType $primaryType,

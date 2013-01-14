@@ -13,11 +13,11 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "eloquent/cosmos": ">=1,<2",
-        "icecave/visita": "0.1.*"
+        "eloquent/cosmos": "~2",
+        "icecave/visita": "~0.1"
     },
     "require-dev": {
-        "phake/phake": "1.*"
+        "icecave/testing": "~1"
     },
     "autoload": {
         "psr-0": {

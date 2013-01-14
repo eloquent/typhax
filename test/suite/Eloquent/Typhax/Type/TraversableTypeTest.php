@@ -29,15 +29,18 @@ class TraversableTypeTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testPrimaryType() {
+    public function testPrimaryType()
+    {
         $this->assertSame($this->_primaryType, $this->_type->primaryType());
     }
 
-    public function testKeyType() {
+    public function testKeyType()
+    {
         $this->assertSame($this->_keyType, $this->_type->keyType());
     }
 
-    public function testValueType() {
+    public function testValueType()
+    {
         $this->assertSame($this->_valueType, $this->_type->valueType());
     }
 }

@@ -28,14 +28,16 @@ class StreamType extends Host implements Type
     /**
      * @return boolean|null
      */
-    public function readable() {
+    public function readable()
+    {
         return $this->readable;
     }
 
     /**
      * @return boolean|null
      */
-    public function writable() {
+    public function writable()
+    {
         return $this->writable;
     }
 

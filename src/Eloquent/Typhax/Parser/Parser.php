@@ -12,6 +12,7 @@
 namespace Eloquent\Typhax\Parser;
 
 use Closure;
+use Eloquent\Cosmos\ClassName;
 use Eloquent\Typhax\Lexer\Lexer;
 use Eloquent\Typhax\Lexer\Token;
 use Eloquent\Typhax\Type\AndType;
@@ -116,7 +117,7 @@ class Parser
         );
 
         if (Token::TOKEN_STRING === $token->type()) {
-            $type = new ObjectType($token->content());
+            $type = new ObjectType(ClassName::fromString($token->content()));
             next($tokens);
         } else {
             $type = $this->parseTypeName($tokens);
@@ -140,7 +141,7 @@ class Parser
             $count = 0;
             $types = $this->parseTypeList(
                 $tokens,
-                function() use(&$tokens, &$count) {
+                function() use (&$tokens, &$count) {
                     $count ++;
                     if ($count > 1) {
                         throw new Exception\UnexpectedTokenException(
@@ -355,7 +356,7 @@ class Parser
 
     /**
      * @param array<integer,Token> &$tokens
-     * @param string $typeName
+     * @param string        $typeName
      * @param array<string> $supportedAttributes
      *
      * @return array
@@ -369,7 +370,7 @@ class Parser
 
         $attributes = $this->parseHashContents(
             $tokens,
-            function($attribute) use(&$tokens, $typeName, $supportedAttributes) {
+            function($attribute) use (&$tokens, $typeName, $supportedAttributes) {
                 if (!in_array($attribute, $supportedAttributes)) {
                     throw new Exception\UnsupportedAttributeException(
                         $typeName,
@@ -533,7 +534,7 @@ class Parser
 
     /**
      * @param array<integer,Token> &$tokens
-     * @param Type $types
+     * @param Type    $types
      * @param integer $minimum_precedence
      *
      * @return Type
@@ -564,8 +565,8 @@ class Parser
      * a new composite AST node is created.
      *
      * @param string $operator
-     * @param Type $left
-     * @param Type $right
+     * @param Type   $left
+     * @param Type   $right
      *
      * @return CompositeType
      */
@@ -592,7 +593,8 @@ class Parser
      *
      * @return integer
      */
-    protected function getCompositePrecedence(array &$tokens) {
+    protected function getCompositePrecedence(array &$tokens)
+    {
         $token = current($tokens);
         if ($token) {
             $precedence = array_search(

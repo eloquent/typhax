@@ -11,8 +11,8 @@
 
 namespace Eloquent\Typhax\Parser;
 
+use Eloquent\Cosmos\ClassName;
 use Eloquent\Typhax\Lexer\Lexer;
-use Eloquent\Typhax\Lexer\Token;
 use Eloquent\Typhax\Type\AndType;
 use Eloquent\Typhax\Type\ArrayType;
 use Eloquent\Typhax\Type\BooleanType;
@@ -49,36 +49,36 @@ class ParserTest extends PHPUnit_Framework_TestCase
 
         $source = ' foo ';
         $position = 6;
-        $expected = new ObjectType('foo');
+        $expected = new ObjectType(ClassName::fromString('foo'));
         $data['Basic example'] = array($expected, $position, $source);
 
         $source = ' foo < bar > ';
         $position = 14;
         $expected = new TraversableType(
-            new ObjectType('foo'),
+            new ObjectType(ClassName::fromString('foo')),
             new MixedType,
-            new ObjectType('bar')
+            new ObjectType(ClassName::fromString('bar'))
         );
         $data['Simple traversable 1'] = array($expected, $position, $source);
 
         $source = ' foo < bar , baz > ';
         $position = 20;
         $expected = new TraversableType(
-            new ObjectType('foo'),
-            new ObjectType('bar'),
-            new ObjectType('baz')
+            new ObjectType(ClassName::fromString('foo')),
+            new ObjectType(ClassName::fromString('bar')),
+            new ObjectType(ClassName::fromString('baz'))
         );
         $data['Simple traversable 2'] = array($expected, $position, $source);
 
         $source = ' foo < bar , baz < qux , doom > > ';
         $position = 35;
         $expected = new TraversableType(
-            new ObjectType('foo'),
-            new ObjectType('bar'),
+            new ObjectType(ClassName::fromString('foo')),
+            new ObjectType(ClassName::fromString('bar')),
             new TraversableType(
-                new ObjectType('baz'),
-                new ObjectType('qux'),
-                new ObjectType('doom')
+                new ObjectType(ClassName::fromString('baz')),
+                new ObjectType(ClassName::fromString('qux')),
+                new ObjectType(ClassName::fromString('doom'))
             )
         );
         $data['Nested subtypes'] = array($expected, $position, $source);
@@ -86,35 +86,35 @@ class ParserTest extends PHPUnit_Framework_TestCase
         $source = ' foo | bar ';
         $position = 12;
         $expected = new OrType(array(
-            new ObjectType('foo'),
-            new ObjectType('bar'),
+            new ObjectType(ClassName::fromString('foo')),
+            new ObjectType(ClassName::fromString('bar')),
         ));
         $data['Basic composite OR'] = array($expected, $position, $source);
 
         $source = ' foo + bar ';
         $position = 12;
         $expected = new AndType(array(
-            new ObjectType('foo'),
-            new ObjectType('bar'),
+            new ObjectType(ClassName::fromString('foo')),
+            new ObjectType(ClassName::fromString('bar')),
         ));
         $data['Basic composite AND'] = array($expected, $position, $source);
 
         $source = ' foo + bar + baz ';
         $position = 18;
         $expected = new AndType(array(
-            new ObjectType('foo'),
-            new ObjectType('bar'),
-            new ObjectType('baz'),
+            new ObjectType(ClassName::fromString('foo')),
+            new ObjectType(ClassName::fromString('bar')),
+            new ObjectType(ClassName::fromString('baz')),
         ));
         $data['Chained composite AND'] = array($expected, $position, $source);
 
         $source = ' foo | bar + baz ';
         $position = 18;
         $expected = new OrType(array(
-            new ObjectType('foo'),
+            new ObjectType(ClassName::fromString('foo')),
             new AndType(array(
-                new ObjectType('bar'),
-                new ObjectType('baz'),
+                new ObjectType(ClassName::fromString('bar')),
+                new ObjectType(ClassName::fromString('baz')),
             ))
         ));
         $data['Composite precedence'] = array($expected, $position, $source);
@@ -122,14 +122,14 @@ class ParserTest extends PHPUnit_Framework_TestCase
         $source = ' foo < bar | baz , qux | doom > ';
         $position = 33;
         $expected = new TraversableType(
-            new ObjectType('foo'),
+            new ObjectType(ClassName::fromString('foo')),
             new OrType(array(
-                new ObjectType('bar'),
-                new ObjectType('baz'),
+                new ObjectType(ClassName::fromString('bar')),
+                new ObjectType(ClassName::fromString('baz')),
             )),
             new OrType(array(
-                new ObjectType('qux'),
-                new ObjectType('doom'),
+                new ObjectType(ClassName::fromString('qux')),
+                new ObjectType(ClassName::fromString('doom')),
             ))
         );
         $data['Composite types nested inside traversable'] = array($expected, $position, $source);
@@ -138,12 +138,12 @@ class ParserTest extends PHPUnit_Framework_TestCase
         $position = 35;
         $expected = new TupleType(array(
             new OrType(array(
-                new ObjectType('bar'),
-                new ObjectType('baz'),
+                new ObjectType(ClassName::fromString('bar')),
+                new ObjectType(ClassName::fromString('baz')),
             )),
             new OrType(array(
-                new ObjectType('qux'),
-                new ObjectType('doom'),
+                new ObjectType(ClassName::fromString('qux')),
+                new ObjectType(ClassName::fromString('doom')),
             )),
         ));
         $data['Composite types nested inside tuple'] = array($expected, $position, $source);
@@ -151,11 +151,11 @@ class ParserTest extends PHPUnit_Framework_TestCase
         $source = ' foo | bar < baz , qux > ';
         $position = 25;
         $expected = new OrType(array(
-            new ObjectType('foo'),
+            new ObjectType(ClassName::fromString('foo')),
             new TraversableType(
-                new ObjectType('bar'),
-                new ObjectType('baz'),
-                new ObjectType('qux')
+                new ObjectType(ClassName::fromString('bar')),
+                new ObjectType(ClassName::fromString('baz')),
+                new ObjectType(ClassName::fromString('qux'))
             ),
         ));
         $data['Traversable type nested inside composite'] = array($expected, $position, $source);
@@ -210,9 +210,9 @@ class ParserTest extends PHPUnit_Framework_TestCase
         $source = ' tuple < foo , bar , baz > ';
         $position = 28;
         $expected = new TupleType(array(
-            new ObjectType('foo'),
-            new ObjectType('bar'),
-            new ObjectType('baz'),
+            new ObjectType(ClassName::fromString('foo')),
+            new ObjectType(ClassName::fromString('bar')),
+            new ObjectType(ClassName::fromString('baz')),
         ));
         $data['Tuple type'] = array($expected, $position, $source);
 
@@ -248,7 +248,7 @@ class ParserTest extends PHPUnit_Framework_TestCase
 
         $source = ' foo bar ';
         $position = 6;
-        $expected = new ObjectType('foo');
+        $expected = new ObjectType(ClassName::fromString('foo'));
         $data["Don't parse past end of type"] = array($expected, $position, $source);
 
         return $data;

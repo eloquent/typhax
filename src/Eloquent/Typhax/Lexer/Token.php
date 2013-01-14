@@ -20,7 +20,7 @@ class Token
      *
      * @return Token
      */
-    static public function fromToken($token)
+    public static function fromToken($token)
     {
         if (is_string($token)) {
             return static::fromCharacter($token);
@@ -34,7 +34,7 @@ class Token
      *
      * @return Token
      */
-    static public function fromArray(array $token)
+    public static function fromArray(array $token)
     {
         return new static($token[0], $token[1]);
     }
@@ -44,7 +44,7 @@ class Token
      *
      * @return Token
      */
-    static public function fromCharacter($token)
+    public static function fromCharacter($token)
     {
         return new static($token, $token);
     }
@@ -54,7 +54,7 @@ class Token
      *
      * @return string|null
      */
-    static public function nameByType($type)
+    public static function nameByType($type)
     {
         foreach (static::types() as $name => $value) {
             if ($value === $type) {
@@ -70,7 +70,7 @@ class Token
      *
      * @return array<string|null>
      */
-    static public function typesToNames(array $types)
+    public static function typesToNames(array $types)
     {
         $names = array();
         foreach ($types as $type) {
@@ -82,7 +82,7 @@ class Token
 
     /**
      * @param integer|string $type
-     * @param string $content
+     * @param string         $content
      */
     public function __construct($type, $content)
     {
@@ -149,7 +149,7 @@ class Token
     /**
      * @return array
      */
-    static protected function types()
+    protected static function types()
     {
         if (null !== static::$types) {
             return static::$types;
@@ -190,7 +190,7 @@ class Token
     /**
      * @var array
      */
-    static protected $types;
+    protected static $types;
 
     /**
      * @var integer|string

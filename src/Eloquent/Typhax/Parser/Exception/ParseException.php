@@ -17,8 +17,8 @@ use LogicException;
 abstract class ParseException extends LogicException
 {
     /**
-     * @param string $message
-     * @param integer $position
+     * @param string    $message
+     * @param integer   $position
      * @param Exception $previous
      */
     public function __construct($message, $position, Exception $previous = null)

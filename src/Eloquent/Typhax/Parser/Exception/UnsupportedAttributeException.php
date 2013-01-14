@@ -16,9 +16,9 @@ use Exception;
 final class UnsupportedAttributeException extends ParseException
 {
     /**
-     * @param string $typeName
-     * @param string $attribute
-     * @param integer $position
+     * @param string    $typeName
+     * @param string    $attribute
+     * @param integer   $position
      * @param Exception $previous
      */
     public function __construct($typeName, $attribute, $position, Exception $previous = null)

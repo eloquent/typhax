@@ -22,12 +22,10 @@ class StreamTypeTest extends PHPUnit_Framework_TestCase
         $this->assertNull($type->readable());
         $this->assertNull($type->writable());
 
-
         $type = new StreamType(true, false);
 
         $this->assertTrue($type->readable());
         $this->assertFalse($type->writable());
-
 
         $type = new StreamType(false, true);
 

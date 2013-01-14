@@ -11,7 +11,7 @@
 
 namespace Eloquent\Typhax\Renderer;
 
-use Eloquent\Cosmos\ClassNameResolver;
+use Eloquent\Cosmos\ClassName;
 use Eloquent\Typhax\Type\AndType;
 use Eloquent\Typhax\Type\ArrayType;
 use Eloquent\Typhax\Type\BooleanType;
@@ -30,7 +30,6 @@ use Eloquent\Typhax\Type\StringableType;
 use Eloquent\Typhax\Type\TraversableType;
 use Eloquent\Typhax\Type\TupleType;
 use Eloquent\Typhax\Type\Type;
-use Eloquent\Typhax\Type\Visitor;
 use PHPUnit_Framework_TestCase;
 
 class TypeRendererTest extends PHPUnit_Framework_TestCase
@@ -58,9 +57,9 @@ class TypeRendererTest extends PHPUnit_Framework_TestCase
         $data['Basic types in an OR'] = array($expected, $type);
 
         $type = new AndType(array(
-            new ObjectType('Foo'),
-            new ObjectType('Bar'),
-            new ObjectType('Baz'),
+            new ObjectType(ClassName::fromString('Foo')),
+            new ObjectType(ClassName::fromString('Bar')),
+            new ObjectType(ClassName::fromString('Baz')),
         ));
         $expected = 'Foo+Bar+Baz';
         $data['Objects ofType in an AND'] = array($expected, $type);
@@ -90,7 +89,7 @@ class TypeRendererTest extends PHPUnit_Framework_TestCase
         $data['Array type with mixed key and value'] = array($expected, $type);
 
         $type = new TraversableType(
-            new ObjectType('Foo'),
+            new ObjectType(ClassName::fromString('Foo')),
             new MixedType,
             new MixedType
         );

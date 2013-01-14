@@ -57,7 +57,7 @@ class TokenTest extends PHPUnit_Framework_TestCase
         $this->assertSame(Token::TOKEN_STRING, $token->type());
         $this->assertSame('foo', $token->content());
         $this->assertSame('foo', $token->string());
-        $this->assertSame('foo', (string)$token);
+        $this->assertSame('foo', (string) $token);
     }
 
     public function testAppend()

@@ -16,10 +16,10 @@ use Exception;
 final class UnexpectedTokenException extends ParseException
 {
     /**
-     * @param string $unexpected
-     * @param integer $position
+     * @param string        $unexpected
+     * @param integer       $position
      * @param array<string> $expected
-     * @param Exception $previous
+     * @param Exception     $previous
      */
     public function __construct($unexpected, $position, array $expected, Exception $previous = null)
     {

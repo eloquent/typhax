@@ -26,7 +26,8 @@ class ResourceType extends Host implements Type
     /**
      * @return string|null
      */
-    public function ofType() {
+    public function ofType()
+    {
         return $this->ofType;
     }
 

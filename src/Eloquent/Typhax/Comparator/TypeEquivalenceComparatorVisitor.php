@@ -315,8 +315,8 @@ class TypeEquivalenceComparatorVisitor implements Visitor
 
     /**
      * @param array<Type> $types
-     * @param boolean $compareOrder
-     * @param boolean $unique
+     * @param boolean     $compareOrder
+     * @param boolean     $unique
      *
      * @return integer
      */
@@ -364,17 +364,11 @@ class TypeEquivalenceComparatorVisitor implements Visitor
      */
     protected function compareAttribute($left, $right)
     {
-        if (
-            null === $left &&
-            null !== $right
-        ) {
+        if (null === $left && null !== $right) {
             return -1;
         }
 
-        if (
-            null !== $left &&
-            null === $right
-        ) {
+        if (null !== $left && null === $right) {
             return 1;
         }
 
@@ -389,7 +383,8 @@ class TypeEquivalenceComparatorVisitor implements Visitor
      *
      * @return array<Type>
      */
-    protected function uniqueTypes(array $types) {
+    protected function uniqueTypes(array $types)
+    {
         $unique = array();
         foreach ($types as $type) {
             if (!$this->typeInArray($type, $unique)) {
@@ -401,12 +396,13 @@ class TypeEquivalenceComparatorVisitor implements Visitor
     }
 
     /**
-     * @param Type $type
+     * @param Type        $type
      * @param array<Type> $types
      *
      * @return boolean
      */
-    protected function typeInArray(Type $type, array $types) {
+    protected function typeInArray(Type $type, array $types)
+    {
         foreach ($types as $thisType) {
             if (TypeEquivalenceComparator::equivalent($thisType, $type)) {
                 return true;
