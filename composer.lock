@@ -3,16 +3,16 @@
     "packages": [
         {
             "name": "eloquent/cosmos",
-            "version": "2.2.0",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "git://github.com/eloquent/cosmos.git",
-                "reference": "2.2.0"
+                "reference": "2.3.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/eloquent/cosmos/archive/2.2.0.zip",
-                "reference": "2.2.0",
+                "url": "https://github.com/eloquent/cosmos/archive/2.3.0.zip",
+                "reference": "2.3.0",
                 "shasum": ""
             },
             "require": {
@@ -23,7 +23,7 @@
             "require-dev": {
                 "icecave/testing": ">=1.0,<2.0"
             },
-            "time": "2013-01-18 03:59:21",
+            "time": "2013-01-19 11:33:04",
             "type": "library",
             "autoload": {
                 "psr-0": {
@@ -41,7 +41,7 @@
                     "homepage": "http://ezzatron.com/"
                 }
             ],
-            "description": "A class name resolver for PHP namespaces.",
+            "description": "A library for representing and manipulating PHP class names.",
             "homepage": "https://github.com/eloquent/cosmos",
             "keywords": [
                 "php",
