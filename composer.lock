@@ -3,16 +3,16 @@
     "packages": [
         {
             "name": "eloquent/cosmos",
-            "version": "2.0.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "git://github.com/eloquent/cosmos.git",
-                "reference": "2.0.0"
+                "reference": "2.2.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/eloquent/cosmos/archive/2.0.0.zip",
-                "reference": "2.0.0",
+                "url": "https://github.com/eloquent/cosmos/archive/2.2.0.zip",
+                "reference": "2.2.0",
                 "shasum": ""
             },
             "require": {
@@ -23,7 +23,7 @@
             "require-dev": {
                 "icecave/testing": ">=1.0,<2.0"
             },
-            "time": "2013-01-14 12:32:49",
+            "time": "2013-01-18 03:59:21",
             "type": "library",
             "autoload": {
                 "psr-0": {
@@ -55,26 +55,25 @@
         },
         {
             "name": "eloquent/equality",
-            "version": "2.0.1",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/eloquent/equality.git",
-                "reference": "2.0.1"
+                "reference": "2.1.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/eloquent/equality/archive/2.0.1.zip",
-                "reference": "2.0.1",
+                "url": "https://github.com/eloquent/equality/archive/2.1.0.zip",
+                "reference": "2.1.0",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
             "require-dev": {
-                "eloquent/asplode": "1.*",
-                "phake/phake": "1.*"
+                "icecave/testing": ">=1.0,<2.0"
             },
-            "time": "2012-11-15 09:42:26",
+            "time": "2013-01-18 02:56:20",
             "type": "library",
             "autoload": {
                 "psr-0": {
@@ -170,22 +169,21 @@
             "require-dev": {
                 "phake/phake": "1.*"
             },
-            "time": "2012-08-04 20:35:23",
+            "time": "2012-08-04 23:35:23",
             "type": "library",
             "autoload": {
                 "psr-0": {
                     "Icecave\\Visita": "lib"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "authors": [
                 {
                     "name": "James Harris",
-                    "email": "james.harris@icecave.com.au",
-                    "homepage": null,
-                    "role": null
+                    "email": "james.harris@icecave.com.au"
                 }
             ],
             "description": "A PHP library for assisting with visitor pattern implementations.",
@@ -200,16 +198,16 @@
     "packages-dev": [
         {
             "name": "icecave/testing",
-            "version": "1.0.6",
+            "version": "1.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/IcecaveStudios/testing.git",
-                "reference": "1.0.6"
+                "reference": "1.1.4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/IcecaveStudios/testing/archive/1.0.6.zip",
-                "reference": "1.0.6",
+                "url": "https://github.com/IcecaveStudios/testing/archive/1.1.4.zip",
+                "reference": "1.1.4",
                 "shasum": ""
             },
             "require": {
@@ -219,11 +217,12 @@
                 "eloquent/asplode": "Use the asplode error handler instead of PHPUnit's internal error handler.",
                 "eloquent/liberator": "Use liberator for circumventing PHP access modifier restrictions inside tests."
             },
-            "time": "2013-01-14 05:53:31",
+            "time": "2013-01-18 02:42:39",
             "bin": [
                 "bin/phpunit",
                 "bin/phpunit-coverage",
-                "bin/update-dotfiles"
+                "bin/travis-init",
+                "bin/travis-build"
             ],
             "type": "library",
             "notification-url": "https://packagist.org/downloads/",
@@ -264,13 +263,14 @@
             "require": {
                 "php": ">=5.2.0"
             },
-            "time": "2012-05-14 15:06:51",
+            "time": "2012-05-14 08:06:51",
             "type": "library",
             "autoload": {
                 "classmap": [
                     "src"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "include-path": [
                 "src"
             ],
@@ -280,9 +280,7 @@
             "authors": [
                 {
                     "name": "Mike Lively",
-                    "email": "m@digitalsandwich.com",
-                    "homepage": null,
-                    "role": null
+                    "email": "m@digitalsandwich.com"
                 }
             ],
             "description": "The Phake mock testing library",
