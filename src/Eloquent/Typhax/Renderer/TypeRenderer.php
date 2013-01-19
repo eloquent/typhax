@@ -35,7 +35,7 @@ class TypeRenderer implements Visitor
     /**
      * @param AndType $type
      *
-     * @return mixed
+     * @return string
      */
     public function visitAndType(AndType $type)
     {
@@ -50,7 +50,7 @@ class TypeRenderer implements Visitor
     /**
      * @param ArrayType $type
      *
-     * @return mixed
+     * @return string
      */
     public function visitArrayType(ArrayType $type)
     {
@@ -60,7 +60,7 @@ class TypeRenderer implements Visitor
     /**
      * @param BooleanType $type
      *
-     * @return mixed
+     * @return string
      */
     public function visitBooleanType(BooleanType $type)
     {
@@ -70,7 +70,7 @@ class TypeRenderer implements Visitor
     /**
      * @param CallableType $type
      *
-     * @return mixed
+     * @return string
      */
     public function visitCallableType(CallableType $type)
     {
@@ -80,7 +80,7 @@ class TypeRenderer implements Visitor
     /**
      * @param FloatType $type
      *
-     * @return mixed
+     * @return string
      */
     public function visitFloatType(FloatType $type)
     {
@@ -90,7 +90,7 @@ class TypeRenderer implements Visitor
     /**
      * @param IntegerType $type
      *
-     * @return mixed
+     * @return string
      */
     public function visitIntegerType(IntegerType $type)
     {
@@ -100,7 +100,7 @@ class TypeRenderer implements Visitor
     /**
      * @param MixedType $type
      *
-     * @return mixed
+     * @return string
      */
     public function visitMixedType(MixedType $type)
     {
@@ -110,7 +110,7 @@ class TypeRenderer implements Visitor
     /**
      * @param NullType $type
      *
-     * @return mixed
+     * @return string
      */
     public function visitNullType(NullType $type)
     {
@@ -120,7 +120,7 @@ class TypeRenderer implements Visitor
     /**
      * @param NumericType $type
      *
-     * @return mixed
+     * @return string
      */
     public function visitNumericType(NumericType $type)
     {
@@ -130,12 +130,12 @@ class TypeRenderer implements Visitor
     /**
      * @param ObjectType $type
      *
-     * @return mixed
+     * @return string
      */
     public function visitObjectType(ObjectType $type)
     {
         if (null !== $type->ofType()) {
-            return $type->ofType();
+            return $type->ofType()->toRelative()->string();
         }
 
         return 'object';
@@ -144,7 +144,7 @@ class TypeRenderer implements Visitor
     /**
      * @param OrType $type
      *
-     * @return mixed
+     * @return string
      */
     public function visitOrType(OrType $type)
     {
@@ -159,7 +159,7 @@ class TypeRenderer implements Visitor
     /**
      * @param ResourceType $type
      *
-     * @return mixed
+     * @return string
      */
     public function visitResourceType(ResourceType $type)
     {
@@ -177,7 +177,7 @@ class TypeRenderer implements Visitor
     /**
      * @param StreamType $type
      *
-     * @return mixed
+     * @return string
      */
     public function visitStreamType(StreamType $type)
     {
@@ -213,7 +213,7 @@ class TypeRenderer implements Visitor
     /**
      * @param StringType $type
      *
-     * @return mixed
+     * @return string
      */
     public function visitStringType(StringType $type)
     {
@@ -223,7 +223,7 @@ class TypeRenderer implements Visitor
     /**
      * @param StringableType $type
      *
-     * @return mixed
+     * @return string
      */
     public function visitStringableType(StringableType $type)
     {
@@ -233,7 +233,7 @@ class TypeRenderer implements Visitor
     /**
      * @param TraversableType $type
      *
-     * @return mixed
+     * @return string
      */
     public function visitTraversableType(TraversableType $type)
     {
@@ -264,7 +264,7 @@ class TypeRenderer implements Visitor
     /**
      * @param TupleType $type
      *
-     * @return mixed
+     * @return string
      */
     public function visitTupleType(TupleType $type)
     {

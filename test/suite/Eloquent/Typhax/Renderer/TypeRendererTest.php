@@ -136,6 +136,10 @@ class TypeRendererTest extends PHPUnit_Framework_TestCase
         $expected = 'stream {readable: true, writable: true}';
         $data['Read-write stream'] = array($expected, $type);
 
+        $type = new ObjectType(ClassName::fromString('\foo'));
+        $expected = 'foo';
+        $data['Object type uses relative form when rendered'] = array($expected, $type);
+
         return $data;
     }
 

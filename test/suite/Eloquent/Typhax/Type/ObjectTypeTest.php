@@ -23,4 +23,11 @@ class ObjectTypeTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame($className, $type->ofType());
     }
+
+    public function testOfTypeDefaults()
+    {
+        $type = new ObjectType;
+
+        $this->assertNull($type->ofType());
+    }
 }
