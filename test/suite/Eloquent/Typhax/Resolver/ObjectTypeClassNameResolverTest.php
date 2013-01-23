@@ -17,6 +17,7 @@ use Eloquent\Typhax\Type\AndType;
 use Eloquent\Typhax\Type\ArrayType;
 use Eloquent\Typhax\Type\BooleanType;
 use Eloquent\Typhax\Type\CallableType;
+use Eloquent\Typhax\Type\ExtensionType;
 use Eloquent\Typhax\Type\FloatType;
 use Eloquent\Typhax\Type\IntegerType;
 use Eloquent\Typhax\Type\MixedType;
@@ -57,6 +58,13 @@ class ObjectTypeClassNameResolverTest extends PHPUnit_Framework_TestCase
         $type = new TraversableType(
             new ObjectType(ClassName::fromString('Spam')),
             new OrType(array(
+                new ExtensionType(
+                    ClassName::fromString('Pip'),
+                    array(
+                        new ObjectType(ClassName::fromString('Kazaam'))
+                    ),
+                    array('key' => 'value')
+                ),
                 new ObjectType(ClassName::fromString('Spam')),
                 new ObjectType(ClassName::fromString('Pip')),
             )),
@@ -72,6 +80,13 @@ class ObjectTypeClassNameResolverTest extends PHPUnit_Framework_TestCase
         $expected = new TraversableType(
             new ObjectType(ClassName::fromString('\Foo\Bar\Baz\Spam')),
             new OrType(array(
+                new ExtensionType(
+                    ClassName::fromString('\Qux\Doom\Splat'),
+                    array(
+                        new ObjectType(ClassName::fromString('\Foo\Bar\Baz\Kazaam'))
+                    ),
+                    array('key' => 'value')
+                ),
                 new ObjectType(ClassName::fromString('\Foo\Bar\Baz\Spam')),
                 new ObjectType(ClassName::fromString('\Qux\Doom\Splat')),
             )),

@@ -44,6 +44,13 @@ interface Visitor extends IVisitor
     public function visitCallableType(CallableType $type);
 
     /**
+     * @param ExtensionType $type
+     *
+     * @return mixed
+     */
+    public function visitExtensionType(ExtensionType $type);
+
+    /**
      * @param FloatType $type
      *
      * @return mixed

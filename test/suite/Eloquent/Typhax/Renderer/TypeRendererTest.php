@@ -16,6 +16,7 @@ use Eloquent\Typhax\Type\AndType;
 use Eloquent\Typhax\Type\ArrayType;
 use Eloquent\Typhax\Type\BooleanType;
 use Eloquent\Typhax\Type\CallableType;
+use Eloquent\Typhax\Type\ExtensionType;
 use Eloquent\Typhax\Type\FloatType;
 use Eloquent\Typhax\Type\IntegerType;
 use Eloquent\Typhax\Type\MixedType;
@@ -139,6 +140,38 @@ class TypeRendererTest extends PHPUnit_Framework_TestCase
         $type = new ObjectType(ClassName::fromString('\foo'));
         $expected = 'foo';
         $data['Object type uses relative form when rendered'] = array($expected, $type);
+
+        $type = new ExtensionType(
+            ClassName::fromString('\ext'),
+            array(),
+            array()
+        );
+        $expected = ':ext';
+        $data['Extension type'] = array($expected, $type);
+
+        $type = new ExtensionType(
+            ClassName::fromString('\ext'),
+            array(new IntegerType, new ArrayType),
+            array()
+        );
+        $expected = ':ext<integer, array>';
+        $data['Extension type with types'] = array($expected, $type);
+
+        $type = new ExtensionType(
+            ClassName::fromString('\ext'),
+            array(),
+            array('foo' => 'bar', 'quux' => 'doom')
+        );
+        $expected = ":ext {foo: 'bar', quux: 'doom'}";
+        $data['Extension type with attributes'] = array($expected, $type);
+
+        $type = new ExtensionType(
+            ClassName::fromString('\ext'),
+            array(new IntegerType, new ArrayType),
+            array('foo' => 'bar', 'quux' => 'doom')
+        );
+        $expected = ":ext<integer, array> {foo: 'bar', quux: 'doom'}";
+        $data['Extension type with types and attributes'] = array($expected, $type);
 
         return $data;
     }
