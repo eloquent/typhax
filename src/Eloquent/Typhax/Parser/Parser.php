@@ -20,6 +20,7 @@ use Eloquent\Typhax\Type\ArrayType;
 use Eloquent\Typhax\Type\BooleanType;
 use Eloquent\Typhax\Type\CallableType;
 use Eloquent\Typhax\Type\FloatType;
+use Eloquent\Typhax\Type\ExtensionType;
 use Eloquent\Typhax\Type\IntegerType;
 use Eloquent\Typhax\Type\MixedType;
 use Eloquent\Typhax\Type\NullType;
@@ -113,12 +114,16 @@ class Parser
                 Token::TOKEN_STRING,
                 Token::TOKEN_TYPE_NAME,
                 Token::TOKEN_NULL,
+                Token::TOKEN_COLON,
             )
         );
 
         if (Token::TOKEN_STRING === $token->type()) {
             $type = new ObjectType(ClassName::fromString($token->content()));
             next($tokens);
+        } elseif (Token::TOKEN_COLON === $token->type()) {
+            next($tokens);
+            $type = $this->parseExtensionType($tokens);
         } else {
             $type = $this->parseTypeName($tokens);
         }
@@ -248,6 +253,33 @@ class Parser
     /**
      * array<integer,Token> &$tokens
      *
+     * @return ExtensionType
+     */
+    protected function parseExtensionType(array &$tokens)
+    {
+        $this->consumeWhitespace($tokens);
+
+        $token = $this->assert($tokens, Token::TOKEN_STRING);
+
+        next($tokens);
+
+        $this->consumeWhitespace($tokens);
+
+        if ($this->currentTokenIsType($tokens, Token::TOKEN_BRACE_OPEN)) {
+            $attributes = $this->parseAttributes($tokens, ':' . $token->content());
+        } else {
+            $attributes = array();
+        }
+
+        return new ExtensionType(
+            ClassName::fromString($token->content()),
+            $attributes
+        );
+    }
+
+    /**
+     * array<integer,Token> &$tokens
+     *
      * @return ResourceType
      */
     protected function parseResourceType(array &$tokens)
@@ -356,12 +388,12 @@ class Parser
 
     /**
      * @param array<integer,Token> &$tokens
-     * @param string        $typeName
-     * @param array<string> $supportedAttributes
+     * @param string               $typeName
+     * @param array<string>|null   $supportedAttributes
      *
      * @return array
      */
-    protected function parseAttributes(array &$tokens, $typeName, array $supportedAttributes)
+    protected function parseAttributes(array &$tokens, $typeName, array $supportedAttributes = null)
     {
         $this->consumeWhitespace($tokens);
         $this->assert($tokens, Token::TOKEN_BRACE_OPEN);
@@ -371,7 +403,7 @@ class Parser
         $attributes = $this->parseHashContents(
             $tokens,
             function($attribute) use (&$tokens, $typeName, $supportedAttributes) {
-                if (!in_array($attribute, $supportedAttributes)) {
+                if ($supportedAttributes !== null && !in_array($attribute, $supportedAttributes)) {
                     throw new Exception\UnsupportedAttributeException(
                         $typeName,
                         $attribute,
