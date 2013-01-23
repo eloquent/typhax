@@ -16,6 +16,7 @@ use Eloquent\Typhax\Type\ArrayType;
 use Eloquent\Typhax\Type\BooleanType;
 use Eloquent\Typhax\Type\CallableType;
 use Eloquent\Typhax\Type\CompositeType;
+use Eloquent\Typhax\Type\ExtensionType;
 use Eloquent\Typhax\Type\FloatType;
 use Eloquent\Typhax\Type\IntegerType;
 use Eloquent\Typhax\Type\MixedType;
@@ -89,6 +90,49 @@ class TypeEquivalenceComparatorVisitor implements Visitor
     public function visitCallableType(CallableType $type)
     {
         return $this->compareClass($type);
+    }
+
+    /**
+     * @param ExtensionType $type
+     *
+     * @return mixed
+     */
+    public function visitExtensionType(ExtensionType $type)
+    {
+        $difference = $this->compareClass($type);
+        if (0 !== $difference) {
+            return $difference;
+        }
+
+        $difference = strcmp($this->type()->className(), $type->className());
+        if (0 !== $difference) {
+            return $difference;
+        }
+
+        $difference = $this->compareTypeList($type->types(), true, false);
+        if (0 !== $difference) {
+            return $difference;
+        }
+
+        $left  = $this->type()->attributes();
+        $right = $type->attributes();
+
+        if ($left < $right) {
+            return -1;
+        } elseif ($left > $right) {
+            return 1;
+        }
+
+        $left = array_keys($left);
+        $right = array_keys($right);
+
+        if ($left < $right) {
+            return -1;
+        } elseif ($left > $right) {
+            return 1;
+        }
+
+        return 0;
     }
 
     /**

@@ -15,6 +15,7 @@ use Eloquent\Typhax\Type\AndType;
 use Eloquent\Typhax\Type\ArrayType;
 use Eloquent\Typhax\Type\BooleanType;
 use Eloquent\Typhax\Type\CallableType;
+use Eloquent\Typhax\Type\ExtensionType;
 use Eloquent\Typhax\Type\FloatType;
 use Eloquent\Typhax\Type\IntegerType;
 use Eloquent\Typhax\Type\MixedType;
@@ -75,6 +76,42 @@ class TypeRenderer implements Visitor
     public function visitCallableType(CallableType $type)
     {
         return 'callable';
+    }
+
+    /**
+     * @param ExtensionType $type
+     *
+     * @return mixed
+     */
+    public function visitExtensionType(ExtensionType $type)
+    {
+        $string = ':'.$type->className()->toRelative()->string();
+
+        if (0 !== count($type->types())) {
+            $subTypes = array();
+            foreach ($type->types() as $subType) {
+                $subTypes[] = $subType->accept($this);
+            }
+
+            $string .= sprintf(
+                '<%s>',
+                implode(', ', $subTypes)
+            );
+        }
+
+        if (0 !== count($type->attributes())) {
+            $attributes = array();
+            foreach ($type->attributes() as $key => $value) {
+                $attributes[] = $key.': '.var_export($value, true);
+            }
+
+            $string .= sprintf(
+                ' {%s}',
+                implode(', ', $attributes)
+            );
+        }
+
+        return $string;
     }
 
     /**
