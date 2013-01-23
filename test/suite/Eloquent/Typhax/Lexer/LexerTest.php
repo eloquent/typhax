@@ -382,6 +382,36 @@ class LexerTest extends PHPUnit_Framework_TestCase
         );
         $data[] = array($expected, $source);
 
+        // #17: Basic extension type
+        $source = ':Foo';
+        $expected = array(
+            new Token(Token::TOKEN_COLON, ':'),
+            new Token(Token::TOKEN_STRING, 'Foo'),
+        );
+        $data[] = array($expected, $source);
+
+        // #18: Namespaced extension type
+        $source = ':Foo\Bar\Baz';
+        $expected = array(
+            new Token(Token::TOKEN_COLON, ':'),
+            new Token(Token::TOKEN_STRING, 'Foo\Bar\Baz'),
+        );
+        $data[] = array($expected, $source);
+
+        // #19: Namespaced extension type with attributes
+        $source = ':Foo\Bar\Baz{foo: bar}';
+        $expected = array(
+            new Token(Token::TOKEN_COLON, ':'),
+            new Token(Token::TOKEN_STRING, 'Foo\Bar\Baz'),
+            new Token(Token::TOKEN_BRACE_OPEN, '{'),
+            new Token(Token::TOKEN_STRING, 'foo'),
+            new Token(Token::TOKEN_COLON, ':'),
+            new Token(Token::TOKEN_WHITESPACE, ' '),
+            new Token(Token::TOKEN_STRING, 'bar'),
+            new Token(Token::TOKEN_BRACE_CLOSE, '}'),
+        );
+        $data[] = array($expected, $source);
+
         return $data;
     }
 
