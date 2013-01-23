@@ -17,6 +17,7 @@ use Eloquent\Typhax\Type\AndType;
 use Eloquent\Typhax\Type\ArrayType;
 use Eloquent\Typhax\Type\BooleanType;
 use Eloquent\Typhax\Type\CallableType;
+use Eloquent\Typhax\Type\ExtensionType;
 use Eloquent\Typhax\Type\FloatType;
 use Eloquent\Typhax\Type\IntegerType;
 use Eloquent\Typhax\Type\MixedType;
@@ -251,6 +252,16 @@ class ParserTest extends PHPUnit_Framework_TestCase
         $expected = new ObjectType(ClassName::fromString('foo'));
         $data["Don't parse past end of type"] = array($expected, $position, $source);
 
+        $source = ' : Foo\Bar ';
+        $position = 12;
+        $expected = new ExtensionType(ClassName::fromString('Foo\Bar'), array());
+        $data["Parse extension type"] = array($expected, $position, $source);
+
+        $source = ' : Foo\Bar { foo: bar }';
+        $position = 24;
+        $expected = new ExtensionType(ClassName::fromString('Foo\Bar'), array('foo' => 'bar'));
+        $data["Parse extension type with attributes"] = array($expected, $position, $source);
+
         return $data;
     }
 
@@ -273,19 +284,19 @@ class ParserTest extends PHPUnit_Framework_TestCase
         // #0: Empty string
         $source = '';
         $expectedClass = __NAMESPACE__.'\Exception\UnexpectedTokenException';
-        $expectedMessage = 'Unexpected END at position 0. Expected one of STRING, TYPE_NAME, NULL.';
+        $expectedMessage = 'Unexpected END at position 0. Expected one of STRING, TYPE_NAME, NULL, COLON.';
         $data[] = array($expectedClass, $expectedMessage, $source);
 
         // #1: Whitespace string
         $source = ' ';
         $expectedClass = __NAMESPACE__.'\Exception\UnexpectedTokenException';
-        $expectedMessage = 'Unexpected END at position 2. Expected one of STRING, TYPE_NAME, NULL.';
+        $expectedMessage = 'Unexpected END at position 2. Expected one of STRING, TYPE_NAME, NULL, COLON.';
         $data[] = array($expectedClass, $expectedMessage, $source);
 
         // #2: Empty type list
         $source = ' foo < > ';
         $expectedClass = __NAMESPACE__.'\Exception\UnexpectedTokenException';
-        $expectedMessage = 'Unexpected GREATER_THAN at position 8. Expected one of STRING, TYPE_NAME, NULL.';
+        $expectedMessage = 'Unexpected GREATER_THAN at position 8. Expected one of STRING, TYPE_NAME, NULL, COLON.';
         $data[] = array($expectedClass, $expectedMessage, $source);
 
         // #3: Empty attributes
