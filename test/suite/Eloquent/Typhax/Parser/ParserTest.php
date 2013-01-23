@@ -254,13 +254,30 @@ class ParserTest extends PHPUnit_Framework_TestCase
 
         $source = ' : Foo\Bar ';
         $position = 12;
-        $expected = new ExtensionType(ClassName::fromString('Foo\Bar'), array());
+        $expected = new ExtensionType(
+            ClassName::fromString('Foo\Bar'),
+            array(),
+            array()
+        );
         $data["Parse extension type"] = array($expected, $position, $source);
 
-        $source = ' : Foo\Bar { foo: bar }';
-        $position = 24;
-        $expected = new ExtensionType(ClassName::fromString('Foo\Bar'), array('foo' => 'bar'));
+        $source = ' : Foo\Bar { foo: bar } ';
+        $position = 25;
+        $expected = new ExtensionType(
+            ClassName::fromString('Foo\Bar'),
+            array(),
+            array('foo' => 'bar')
+        );
         $data["Parse extension type with attributes"] = array($expected, $position, $source);
+
+        $source = ' : Foo\Bar < integer > { foo: bar } ';
+        $position = 37;
+        $expected = new ExtensionType(
+            ClassName::fromString('Foo\Bar'),
+            array(new IntegerType),
+            array('foo' => 'bar')
+        );
+        $data["Parse extension type with sub types"] = array($expected, $position, $source);
 
         return $data;
     }

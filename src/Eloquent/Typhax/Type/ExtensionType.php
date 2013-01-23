@@ -18,11 +18,13 @@ class ExtensionType extends Host implements Type
 {
     /**
      * @param ClassName $className
+     * @param array<Type> $subTypes
      * @param array $attributes
      */
-    public function __construct(ClassName $className, array $attributes)
+    public function __construct(ClassName $className, array $subTypes, array $attributes)
     {
         $this->className = $className;
+        $this->subTypes = $subTypes;
         $this->attributes = $attributes;
     }
 
@@ -35,6 +37,14 @@ class ExtensionType extends Host implements Type
     }
 
     /**
+     * @return array<Type>
+     */
+    public function subTypes()
+    {
+        return $this->subTypes;
+    }
+
+    /**
      * @return array
      */
     public function attributes()
@@ -43,5 +53,6 @@ class ExtensionType extends Host implements Type
     }
 
     private $className;
+    private $subTypes;
     private $attributes;
 }

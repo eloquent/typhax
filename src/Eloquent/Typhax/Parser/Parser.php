@@ -263,6 +263,15 @@ class Parser
 
         next($tokens);
 
+
+        $this->consumeWhitespace($tokens);
+
+        if ($this->currentTokenIsType($tokens, Token::TOKEN_LESS_THAN)) {
+            $subTypes = $this->parseTypeList($tokens);
+        } else {
+            $subTypes = array();
+        }
+
         $this->consumeWhitespace($tokens);
 
         if ($this->currentTokenIsType($tokens, Token::TOKEN_BRACE_OPEN)) {
@@ -273,6 +282,7 @@ class Parser
 
         return new ExtensionType(
             ClassName::fromString($token->content()),
+            $subTypes,
             $attributes
         );
     }

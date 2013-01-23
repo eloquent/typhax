@@ -196,15 +196,6 @@ each element of the tuple.
 
 As an example, `array('foo', 1)` satisfies the constraint `tuple<string, integer>`.
 
-### Extension types
-
-    :ClassName
-    :ClassName {...}
-
-Extensions provide a means to expand the capabilies of Typhax with custom logic.
-For an example of how extensions can be utilized, see the
-[Typhoon component](https://github.com/eloquent/typhoon).
-
 ### Legacy types
 
 The following types are also implemented, but are considered deprecated. They
@@ -254,6 +245,16 @@ This specification:
 represents a type that is both of type `typeA` AND of type `typeB`. A
 real-world example might be `InterfaceA+InterfaceB` to accept only an object
 that implements both `InterfaceA` AND `InterfaceB`.
+
+### Extension types
+
+    :ClassName
+    :ClassName {...}
+    :ClassName<typeA, typeB, typeC, ...> {...}
+
+Extensions provide a means to expand the capabilies of Typhax with custom logic.
+For an example of how extensions can be utilized, see the
+[Typhoon component](https://github.com/eloquent/typhoon).
 
 ## White space
 
