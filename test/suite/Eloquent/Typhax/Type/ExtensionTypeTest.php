@@ -18,11 +18,13 @@ class ExtensionTypeTest extends PHPUnit_Framework_TestCase
 {
     public function testExtensionType()
     {
+        $baseType = new MixedType;
         $className = ClassName::fromString('foo');
         $attributes = array('foo' => 'bar');
 
-        $type = new ExtensionType($className, $attributes);
+        $type = new ExtensionType($baseType, $className, $attributes);
 
+        $this->assertSame($baseType, $type->baseType());
         $this->assertSame($className, $type->className());
         $this->assertSame($attributes, $type->attributes());
     }

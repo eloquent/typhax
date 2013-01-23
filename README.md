@@ -200,6 +200,8 @@ As an example, `array('foo', 1)` satisfies the constraint `tuple<string, integer
 
     :ClassName
     :ClassName {...}
+    baseType:ClassName
+    baseType:ClassName {...}
 
 Extensions provide a means to expand the capabilies of Typhax with custom logic.
 For an example of how extensions can be utilized, see the

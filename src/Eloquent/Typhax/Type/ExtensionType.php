@@ -17,13 +17,23 @@ use Icecave\Visita\Host;
 class ExtensionType extends Host implements Type
 {
     /**
+     * @param Type $baseType
      * @param ClassName $className
      * @param array $attributes
      */
-    public function __construct(ClassName $className, array $attributes)
+    public function __construct(Type $baseType, ClassName $className, array $attributes)
     {
+        $this->baseType = $baseType;
         $this->className = $className;
         $this->attributes = $attributes;
+    }
+
+    /**
+     * @return Type
+     */
+    public function baseType()
+    {
+        return $this->baseType;
     }
 
     /**
@@ -42,6 +52,7 @@ class ExtensionType extends Host implements Type
         return $this->attributes;
     }
 
+    private $baseType;
     private $className;
     private $attributes;
 }

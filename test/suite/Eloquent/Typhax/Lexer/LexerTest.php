@@ -412,6 +412,39 @@ class LexerTest extends PHPUnit_Framework_TestCase
         );
         $data[] = array($expected, $source);
 
+        // #20: Extension type with explicit base type
+        $source = 'string:Foo\Bar\Baz';
+        $expected = array(
+            new Token(Token::TOKEN_TYPE_NAME, 'string'),
+            new Token(Token::TOKEN_COLON, ':'),
+            new Token(Token::TOKEN_STRING, 'Foo\Bar\Baz'),
+        );
+        $data[] = array($expected, $source);
+
+        // #21: Extension type with explicit base type of object
+        $source = 'Baz:Foo\Bar\Baz';
+        $expected = array(
+            new Token(Token::TOKEN_STRING, 'Baz'),
+            new Token(Token::TOKEN_COLON, ':'),
+            new Token(Token::TOKEN_STRING, 'Foo\Bar\Baz'),
+        );
+        $data[] = array($expected, $source);
+
+        // #22: Extension type with explicit base type and attributes
+        $source = 'string:Foo\Bar\Baz{foo: bar}';
+        $expected = array(
+            new Token(Token::TOKEN_TYPE_NAME, 'string'),
+            new Token(Token::TOKEN_COLON, ':'),
+            new Token(Token::TOKEN_STRING, 'Foo\Bar\Baz'),
+            new Token(Token::TOKEN_BRACE_OPEN, '{'),
+            new Token(Token::TOKEN_STRING, 'foo'),
+            new Token(Token::TOKEN_COLON, ':'),
+            new Token(Token::TOKEN_WHITESPACE, ' '),
+            new Token(Token::TOKEN_STRING, 'bar'),
+            new Token(Token::TOKEN_BRACE_CLOSE, '}'),
+        );
+        $data[] = array($expected, $source);
+
         return $data;
     }
 

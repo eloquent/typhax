@@ -179,6 +179,11 @@ class Parser
             );
         }
 
+        if ($this->currentTokenIsType($tokens, Token::TOKEN_COLON)) {
+            next($tokens);
+            $type = $this->parseExtensionType($tokens, $type);
+        }
+
         return $type;
     }
 
@@ -255,7 +260,7 @@ class Parser
      *
      * @return ExtensionType
      */
-    protected function parseExtensionType(array &$tokens)
+    protected function parseExtensionType(array &$tokens, Type $baseType = null)
     {
         $this->consumeWhitespace($tokens);
 
@@ -271,7 +276,12 @@ class Parser
             $attributes = array();
         }
 
+        if (null === $baseType) {
+            $baseType = new MixedType;
+        }
+
         return new ExtensionType(
+            $baseType,
             ClassName::fromString($token->content()),
             $attributes
         );
