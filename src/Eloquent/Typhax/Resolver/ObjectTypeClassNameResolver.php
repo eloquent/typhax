@@ -16,6 +16,7 @@ use Eloquent\Typhax\Type\AndType;
 use Eloquent\Typhax\Type\ArrayType;
 use Eloquent\Typhax\Type\BooleanType;
 use Eloquent\Typhax\Type\CallableType;
+use Eloquent\Typhax\Type\ExtensionType;
 use Eloquent\Typhax\Type\FloatType;
 use Eloquent\Typhax\Type\IntegerType;
 use Eloquent\Typhax\Type\MixedType;
@@ -92,6 +93,27 @@ class ObjectTypeClassNameResolver implements Visitor
     public function visitCallableType(CallableType $type)
     {
         return $type;
+    }
+
+    /**
+     * @param ExtensionType $type
+     *
+     * @return mixed
+     */
+    public function visitExtensionType(ExtensionType $type)
+    {
+        $types = array();
+        foreach ($type->types() as $subType) {
+            $types[] = $subType->accept($this);
+        }
+
+        return new ExtensionType(
+            $this->classNameResolver()->resolve(
+                $type->className()
+            ),
+            $types,
+            $type->attributes()
+        );
     }
 
     /**

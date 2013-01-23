@@ -11,10 +11,12 @@
 
 namespace Eloquent\Typhax\Comparator;
 
+use Eloquent\Cosmos\ClassName;
 use Eloquent\Typhax\Type\AndType;
 use Eloquent\Typhax\Type\ArrayType;
 use Eloquent\Typhax\Type\BooleanType;
 use Eloquent\Typhax\Type\CallableType;
+use Eloquent\Typhax\Type\ExtensionType;
 use Eloquent\Typhax\Type\FloatType;
 use Eloquent\Typhax\Type\IntegerType;
 use Eloquent\Typhax\Type\MixedType;
@@ -255,6 +257,46 @@ class TypeEquivalenceComparatorTest extends PHPUnit_Framework_TestCase
         $right = new StreamType(true);
         $expected = -1;
         $data['Attribute null and non-null non-equivalence 2'] = array($expected, $left, $right);
+
+        $left = new ExtensionType(ClassName::fromString('Foo\Bar'), array(new IntegerType), array('foo' => 'bar'));
+        $right = new ExtensionType(ClassName::fromString('Foo\Bar'), array(new IntegerType), array('foo' => 'bar'));
+        $expected = 0;
+        $data['Extension type equivalence'] = array($expected, $left, $right);
+
+        $left = new StreamType;
+        $right = new ExtensionType(ClassName::fromString('Foo\Bar'), array(new IntegerType), array('foo' => 'bar'));
+        $expected = 1;
+        $data['Extension type non-equivalence (different type)'] = array($expected, $left, $right);
+
+        $left = new ExtensionType(ClassName::fromString('Foo\Bar'), array(new IntegerType), array('foo' => 'bar'));
+        $right = new ExtensionType(ClassName::fromString('This\is\Not\Equivalent'), array(new IntegerType), array('foo' => 'bar'));
+        $expected = -1;
+        $data['Extension type non-equivalence (different class name)'] = array($expected, $left, $right);
+
+        $left = new ExtensionType(ClassName::fromString('Foo\Bar'), array(new IntegerType), array('foo' => 'bar'));
+        $right = new ExtensionType(ClassName::fromString('Foo\Bar'), array(new StringType), array('foo' => 'bar'));
+        $expected = -1;
+        $data['Extension type non-equivalence (different types)'] = array($expected, $left, $right);
+
+        $left = new ExtensionType(ClassName::fromString('Foo\Bar'), array(new IntegerType), array('foo' => 'A'));
+        $right = new ExtensionType(ClassName::fromString('Foo\Bar'), array(new IntegerType), array('foo' => 'B'));
+        $expected = -1;
+        $data['Extension type non-equivalence (< attribute values)'] = array($expected, $left, $right);
+
+        $left = new ExtensionType(ClassName::fromString('Foo\Bar'), array(new IntegerType), array('foo' => 'B'));
+        $right = new ExtensionType(ClassName::fromString('Foo\Bar'), array(new IntegerType), array('foo' => 'A'));
+        $expected = 1;
+        $data['Extension type non-equivalence (> attribute values)'] = array($expected, $left, $right);
+
+        $left = new ExtensionType(ClassName::fromString('Foo\Bar'), array(new IntegerType), array('A' => 'bar'));
+        $right = new ExtensionType(ClassName::fromString('Foo\Bar'), array(new IntegerType), array('B' => 'bar'));
+        $expected = -1;
+        $data['Extension type non-equivalence (< attribute keys)'] = array($expected, $left, $right);
+
+        $left = new ExtensionType(ClassName::fromString('Foo\Bar'), array(new IntegerType), array('B' => 'bar'));
+        $right = new ExtensionType(ClassName::fromString('Foo\Bar'), array(new IntegerType), array('A' => 'bar'));
+        $expected = 1;
+        $data['Extension type non-equivalence (> attribute keys)'] = array($expected, $left, $right);
 
         return $data;
     }

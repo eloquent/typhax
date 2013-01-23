@@ -275,7 +275,7 @@ class Parser
         $this->consumeWhitespace($tokens);
 
         if ($this->currentTokenIsType($tokens, Token::TOKEN_BRACE_OPEN)) {
-            $attributes = $this->parseAttributes($tokens, ':' . $token->content());
+            $attributes = $this->parseAttributes($tokens, ':'.$token->content());
         } else {
             $attributes = array();
         }
