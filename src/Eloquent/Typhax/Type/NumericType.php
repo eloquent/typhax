@@ -1,4 +1,4 @@
-<?php // @codeCoverageIgnoreStart
+<?php
 
 /*
  * This file is part of the Typhax package.
@@ -11,8 +11,15 @@
 
 namespace Eloquent\Typhax\Type;
 
-use Icecave\Visita\Host;
-
-class NumericType extends Host implements Type
+class NumericType implements Type
 {
+    /**
+     * @param Visitor $visitor
+     *
+     * @return mixed
+     */
+    public function accept(Visitor $visitor)
+    {
+        return $visitor->visitNumericType($this);
+    }
 }

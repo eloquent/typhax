@@ -11,9 +11,7 @@
 
 namespace Eloquent\Typhax\Type;
 
-use Icecave\Visita\Host;
-
-class ResourceType extends Host implements Type
+class ResourceType implements Type
 {
     /**
      * @param string|null $ofType
@@ -29,6 +27,16 @@ class ResourceType extends Host implements Type
     public function ofType()
     {
         return $this->ofType;
+    }
+
+    /**
+     * @param Visitor $visitor
+     *
+     * @return mixed
+     */
+    public function accept(Visitor $visitor)
+    {
+        return $visitor->visitResourceType($this);
     }
 
     private $ofType;

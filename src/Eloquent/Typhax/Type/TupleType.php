@@ -11,9 +11,7 @@
 
 namespace Eloquent\Typhax\Type;
 
-use Icecave\Visita\Host;
-
-class TupleType extends Host implements Type
+class TupleType implements Type
 {
     /**
      * @param array<Type> $types
@@ -29,6 +27,16 @@ class TupleType extends Host implements Type
     public function types()
     {
         return $this->types;
+    }
+
+    /**
+     * @param Visitor $visitor
+     *
+     * @return mixed
+     */
+    public function accept(Visitor $visitor)
+    {
+        return $visitor->visitTupleType($this);
     }
 
     private $types;

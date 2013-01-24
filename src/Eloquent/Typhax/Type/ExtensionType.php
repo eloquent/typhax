@@ -12,14 +12,13 @@
 namespace Eloquent\Typhax\Type;
 
 use Eloquent\Cosmos\ClassName;
-use Icecave\Visita\Host;
 
-class ExtensionType extends Host implements Type
+class ExtensionType implements Type
 {
     /**
-     * @param ClassName $className
+     * @param ClassName   $className
      * @param array<Type> $types
-     * @param array $attributes
+     * @param array       $attributes
      */
     public function __construct(ClassName $className, array $types, array $attributes)
     {
@@ -50,6 +49,16 @@ class ExtensionType extends Host implements Type
     public function attributes()
     {
         return $this->attributes;
+    }
+
+    /**
+     * @param Visitor $visitor
+     *
+     * @return mixed
+     */
+    public function accept(Visitor $visitor)
+    {
+        return $visitor->visitExtensionType($this);
     }
 
     private $className;

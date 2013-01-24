@@ -11,9 +11,7 @@
 
 namespace Eloquent\Typhax\Type;
 
-use Icecave\Visita\Host;
-
-class StreamType extends Host implements Type
+class StreamType implements Type
 {
     /**
      * @param boolean|null $readable
@@ -39,6 +37,16 @@ class StreamType extends Host implements Type
     public function writable()
     {
         return $this->writable;
+    }
+
+    /**
+     * @param Visitor $visitor
+     *
+     * @return mixed
+     */
+    public function accept(Visitor $visitor)
+    {
+        return $visitor->visitStreamType($this);
     }
 
     private $readable;
