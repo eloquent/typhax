@@ -11,9 +11,7 @@
 
 namespace Eloquent\Typhax\Type;
 
-use Icecave\Visita\Host;
-
-class TraversableType extends Host implements Type
+class TraversableType implements Type
 {
     /**
      * @param TraversablePrimaryType $primaryType
@@ -52,6 +50,16 @@ class TraversableType extends Host implements Type
     public function valueType()
     {
         return $this->valueType;
+    }
+
+    /**
+     * @param Visitor $visitor
+     *
+     * @return mixed
+     */
+    public function accept(Visitor $visitor)
+    {
+        return $visitor->visitTraversableType($this);
     }
 
     private $primaryType;
