@@ -1,4 +1,4 @@
-<?php // @codeCoverageIgnoreStart
+<?php
 
 /*
  * This file is part of the Typhax package.
@@ -11,8 +11,15 @@
 
 namespace Eloquent\Typhax\Type;
 
-use Icecave\Visita\Host;
-
-class ArrayType extends Host implements TraversablePrimaryType
+class ArrayType implements TraversablePrimaryType
 {
+    /**
+     * @param Visitor $visitor
+     *
+     * @return mixed
+     */
+    public function accept(Visitor $visitor)
+    {
+        return $visitor->visitArrayType($this);
+    }
 }

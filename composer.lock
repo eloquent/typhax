@@ -1,5 +1,5 @@
 {
-    "hash": "7c11beb498e8a38606c861e59df22181",
+    "hash": "86ca4bc3baffc03d45a4348f9819d196",
     "packages": [
         {
             "name": "eloquent/cosmos",
@@ -147,51 +147,6 @@
                 "fake",
                 "unit",
                 "phake"
-            ]
-        },
-        {
-            "name": "icecave/visita",
-            "version": "0.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/IcecaveStudios/visita.git",
-                "reference": "0.1.0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/IcecaveStudios/visita/zipball/0.1.0",
-                "reference": "0.1.0",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "phake/phake": "1.*"
-            },
-            "time": "2012-08-04 23:35:23",
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Icecave\\Visita": "lib"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "James Harris",
-                    "email": "james.harris@icecave.com.au"
-                }
-            ],
-            "description": "A PHP library for assisting with visitor pattern implementations.",
-            "homepage": "https://github.com/IcecaveStudios/visita",
-            "keywords": [
-                "pattern",
-                "design",
-                "visitor"
             ]
         }
     ],
