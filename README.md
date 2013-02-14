@@ -2,8 +2,13 @@
 
 *A flexible PHP type hinting syntax.*
 
-[![Build status](https://secure.travis-ci.org/eloquent/typhax.png)](http://travis-ci.org/eloquent/typhax)
-[![Test coverage](http://eloquent.github.com/typhax/coverage-report/coverage.png)](http://eloquent.github.com/typhax/coverage-report/index.html)
+[![Build status](https://raw.github.com/eloquent/typhax/gh-pages/artifacts/images/icecave/regular/build-status.png)](http://travis-ci.org/eloquent/typhax)
+[![Test coverage](https://raw.github.com/eloquent/typhax/gh-pages/artifacts/images/icecave/regular/coverage.png)](http://eloquent.github.com/typhax/artifacts/tests/coverage)
+
+## Installation
+
+Available as [Composer](http://getcomposer.org/) package
+[eloquent/typhax](https://packagist.org/packages/eloquent/typhax).
 
 ## What is Typhax?
 

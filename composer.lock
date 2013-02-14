@@ -1,5 +1,5 @@
 {
-    "hash": "86ca4bc3baffc03d45a4348f9819d196",
+    "hash": "d6ccb5deafbca0d976d725bddd072b3a",
     "packages": [
         {
             "name": "eloquent/cosmos",
@@ -152,53 +152,63 @@
     ],
     "packages-dev": [
         {
-            "name": "icecave/testing",
-            "version": "1.1.4",
+            "name": "icecave/archer",
+            "version": "dev-release/0.1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/IcecaveStudios/testing.git",
-                "reference": "1.1.4"
+                "url": "https://github.com/IcecaveStudios/archer.git",
+                "reference": "a36860347655a975f39986d5efe004f7d91d368f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/IcecaveStudios/testing/archive/1.1.4.zip",
-                "reference": "1.1.4",
+                "url": "https://api.github.com/repos/IcecaveStudios/archer/zipball/a36860347655a975f39986d5efe004f7d91d368f",
+                "reference": "a36860347655a975f39986d5efe004f7d91d368f",
                 "shasum": ""
             },
             "require": {
-                "phake/phake": "1.*"
+                "phake/phake": ">=1.0,<2.0",
+                "symfony/console": ">=2.0,<3.0",
+                "symfony/process": ">=2.0,<3.0"
             },
             "suggest": {
-                "eloquent/asplode": "Use the asplode error handler instead of PHPUnit's internal error handler.",
-                "eloquent/liberator": "Use liberator for circumventing PHP access modifier restrictions inside tests."
+                "ext-openssl": "OpenSSL is required to encrypt GitHub OAuth tokens for artifact publication."
             },
-            "time": "2013-01-18 02:42:39",
+            "time": "2013-02-14 06:33:09",
             "bin": [
-                "bin/phpunit",
-                "bin/phpunit-coverage",
-                "bin/travis-init",
-                "bin/travis-build"
+                "bin/archer",
+                "bin/woodhouse"
             ],
             "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Icecave\\Archer": "lib"
+                }
+            },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "authors": [
                 {
+                    "name": "Erin Millard",
+                    "email": "ezzatron@gmail.com",
+                    "homepage": "http://ezzatron.com/"
+                },
+                {
                     "name": "James Harris",
                     "email": "james.harris@icecave.com.au"
                 }
             ],
-            "description": "Helper package for testing Icecave projects in a uniform way.",
-            "homepage": "https://github.com/IcecaveStudios/testing",
+            "description": "PHP testing and continuous integration by convention.",
+            "homepage": "https://github.com/IcecaveStudios/archer",
             "keywords": [
                 "testing",
                 "phpunit",
                 "test",
                 "unit",
                 "phake",
-                "coverage"
+                "coverage",
+                "artifacts"
             ]
         },
         {
@@ -244,13 +254,97 @@
                 "testing",
                 "mock"
             ]
+        },
+        {
+            "name": "symfony/console",
+            "version": "v2.1.7",
+            "target-dir": "Symfony/Component/Console",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Console",
+                "reference": "v2.1.7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/v2.1.7",
+                "reference": "v2.1.7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "time": "2013-01-17 15:20:05",
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\Console": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Console Component",
+            "homepage": "http://symfony.com"
+        },
+        {
+            "name": "symfony/process",
+            "version": "v2.1.7",
+            "target-dir": "Symfony/Component/Process",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Process",
+                "reference": "v2.1.7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Process/zipball/v2.1.7",
+                "reference": "v2.1.7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "time": "2013-01-16 09:27:54",
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\Process": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Process Component",
+            "homepage": "http://symfony.com"
         }
     ],
     "aliases": [
 
     ],
     "minimum-stability": "stable",
-    "stability-flags": [
-
-    ]
+    "stability-flags": {
+        "icecave/archer": 20
+    }
 }
