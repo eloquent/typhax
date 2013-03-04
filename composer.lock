@@ -1,29 +1,28 @@
 {
-    "hash": "d6ccb5deafbca0d976d725bddd072b3a",
+    "hash": "a933fa43b477856ffda3441a2706ec35",
     "packages": [
         {
             "name": "eloquent/cosmos",
-            "version": "2.3.0",
+            "version": "2.3.1",
             "source": {
                 "type": "git",
-                "url": "git://github.com/eloquent/cosmos.git",
-                "reference": "2.3.0"
+                "url": "https://github.com/eloquent/cosmos.git",
+                "reference": "2.3.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/eloquent/cosmos/archive/2.3.0.zip",
-                "reference": "2.3.0",
+                "url": "https://api.github.com/repos/eloquent/cosmos/zipball/2.3.1",
+                "reference": "2.3.1",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0",
                 "eloquent/equality": ">=2.0,<3.0",
-                "icecave/isolator": ">=2.0,<3.0"
+                "icecave/isolator": ">=2.0,<3.0",
+                "php": ">=5.3.0"
             },
             "require-dev": {
-                "icecave/testing": ">=1.0,<2.0"
+                "icecave/archer": ">=0.2,<1.0"
             },
-            "time": "2013-01-19 11:33:04",
             "type": "library",
             "autoload": {
                 "psr-0": {
@@ -44,36 +43,36 @@
             "description": "A library for representing and manipulating PHP class names.",
             "homepage": "https://github.com/eloquent/cosmos",
             "keywords": [
-                "php",
                 "class",
-                "resolver",
-                "solver",
-                "namespace",
+                "classname",
                 "name",
-                "classname"
-            ]
+                "namespace",
+                "php",
+                "resolver",
+                "solver"
+            ],
+            "time": "2013-03-04 09:26:13"
         },
         {
             "name": "eloquent/equality",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/eloquent/equality.git",
-                "reference": "2.1.0"
+                "reference": "2.1.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/eloquent/equality/archive/2.1.0.zip",
-                "reference": "2.1.0",
+                "url": "https://api.github.com/repos/eloquent/equality/zipball/2.1.1",
+                "reference": "2.1.1",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
             "require-dev": {
-                "icecave/testing": ">=1.0,<2.0"
+                "icecave/archer": ">=0.2,<1.0"
             },
-            "time": "2013-01-18 02:56:20",
             "type": "library",
             "autoload": {
                 "psr-0": {
@@ -94,12 +93,13 @@
             "description": "A better strict comparison for PHP.",
             "homepage": "https://github.com/eloquent/equality",
             "keywords": [
-                "object",
-                "equality",
                 "comparison",
-                "strict",
-                "deep"
-            ]
+                "deep",
+                "equality",
+                "object",
+                "strict"
+            ],
+            "time": "2013-03-04 09:38:33"
         },
         {
             "name": "icecave/isolator",
@@ -121,7 +121,6 @@
             "require-dev": {
                 "icecave/testing": "1.*"
             },
-            "time": "2013-01-14 04:17:36",
             "type": "library",
             "autoload": {
                 "psr-0": {
@@ -141,39 +140,40 @@
             "description": "Mock out calls to built-in PHP functions.",
             "homepage": "https://github.com/IcecaveStudios/isolator",
             "keywords": [
+                "fake",
+                "mock",
+                "phake",
                 "phpunit",
                 "test",
-                "mock",
-                "fake",
-                "unit",
-                "phake"
-            ]
+                "unit"
+            ],
+            "time": "2013-01-14 04:17:36"
         }
     ],
     "packages-dev": [
         {
             "name": "icecave/archer",
-            "version": "dev-release/0.1.0",
+            "version": "0.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/IcecaveStudios/archer.git",
-                "reference": "a36860347655a975f39986d5efe004f7d91d368f"
+                "reference": "0.2.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/IcecaveStudios/archer/zipball/a36860347655a975f39986d5efe004f7d91d368f",
-                "reference": "a36860347655a975f39986d5efe004f7d91d368f",
+                "url": "https://api.github.com/repos/IcecaveStudios/archer/zipball/0.2.1",
+                "reference": "0.2.1",
                 "shasum": ""
             },
             "require": {
                 "phake/phake": ">=1.0,<2.0",
+                "php": ">=5.3",
                 "symfony/console": ">=2.0,<3.0",
                 "symfony/process": ">=2.0,<3.0"
             },
             "suggest": {
                 "ext-openssl": "OpenSSL is required to encrypt GitHub OAuth tokens for artifact publication."
             },
-            "time": "2013-02-14 06:33:09",
             "bin": [
                 "bin/archer",
                 "bin/woodhouse"
@@ -202,14 +202,15 @@
             "description": "PHP testing and continuous integration by convention.",
             "homepage": "https://github.com/IcecaveStudios/archer",
             "keywords": [
-                "testing",
+                "artifacts",
+                "coverage",
+                "phake",
                 "phpunit",
                 "test",
-                "unit",
-                "phake",
-                "coverage",
-                "artifacts"
-            ]
+                "testing",
+                "unit"
+            ],
+            "time": "2013-02-27 04:42:20"
         },
         {
             "name": "phake/phake",
@@ -228,7 +229,6 @@
             "require": {
                 "php": ">=5.2.0"
             },
-            "time": "2012-05-14 08:06:51",
             "type": "library",
             "autoload": {
                 "classmap": [
@@ -251,33 +251,38 @@
             "description": "The Phake mock testing library",
             "homepage": "https://github.com/mlively/Phake",
             "keywords": [
-                "testing",
-                "mock"
-            ]
+                "mock",
+                "testing"
+            ],
+            "time": "2012-05-14 08:06:51"
         },
         {
             "name": "symfony/console",
-            "version": "v2.1.7",
+            "version": "v2.2.0",
             "target-dir": "Symfony/Component/Console",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/Console",
-                "reference": "v2.1.7"
+                "url": "https://github.com/symfony/Console.git",
+                "reference": "v2.2.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/v2.1.7",
-                "reference": "v2.1.7",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/v2.2.0",
+                "reference": "v2.2.0",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
-            "time": "2013-01-17 15:20:05",
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2-dev"
+                }
+            },
             "autoload": {
                 "psr-0": {
-                    "Symfony\\Component\\Console": ""
+                    "Symfony\\Component\\Console\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -295,31 +300,36 @@
                 }
             ],
             "description": "Symfony Console Component",
-            "homepage": "http://symfony.com"
+            "homepage": "http://symfony.com",
+            "time": "2013-03-01 06:43:14"
         },
         {
             "name": "symfony/process",
-            "version": "v2.1.7",
+            "version": "v2.2.0",
             "target-dir": "Symfony/Component/Process",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/Process",
-                "reference": "v2.1.7"
+                "url": "https://github.com/symfony/Process.git",
+                "reference": "v2.2.0-RC3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Process/zipball/v2.1.7",
-                "reference": "v2.1.7",
+                "url": "https://api.github.com/repos/symfony/Process/zipball/v2.2.0-RC3",
+                "reference": "v2.2.0-RC3",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
-            "time": "2013-01-16 09:27:54",
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2-dev"
+                }
+            },
             "autoload": {
                 "psr-0": {
-                    "Symfony\\Component\\Process": ""
+                    "Symfony\\Component\\Process\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -337,14 +347,15 @@
                 }
             ],
             "description": "Symfony Process Component",
-            "homepage": "http://symfony.com"
+            "homepage": "http://symfony.com",
+            "time": "2013-02-18 21:28:10"
         }
     ],
     "aliases": [
 
     ],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "icecave/archer": 20
-    }
+    "stability-flags": [
+
+    ]
 }

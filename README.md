@@ -2,8 +2,8 @@
 
 *A flexible PHP type hinting syntax.*
 
-[![Build status](https://raw.github.com/eloquent/typhax/gh-pages/artifacts/images/icecave/regular/build-status.png)](http://travis-ci.org/eloquent/typhax)
-[![Test coverage](https://raw.github.com/eloquent/typhax/gh-pages/artifacts/images/icecave/regular/coverage.png)](http://eloquent.github.com/typhax/artifacts/tests/coverage)
+[![Build Status]](http://travis-ci.org/eloquent/typhax)
+[![Test Coverage]](http://eloquent-software.com/typhax/artifacts/tests/coverage/)
 
 ## Installation
 
@@ -266,3 +266,7 @@ For an example of how extensions can be utilized, see the
 In general, Typhax does not care whether white space is used in type
 specifications. However, the above documentation should serve as a recommended
 style guide.
+
+<!-- references -->
+[Build Status]: https://raw.github.com/eloquent/typhax/gh-pages/artifacts/images/icecave/regular/build-status.png
+[Test Coverage]: https://raw.github.com/eloquent/typhax/gh-pages/artifacts/images/icecave/regular/coverage.png
