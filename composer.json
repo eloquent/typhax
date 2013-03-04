@@ -17,7 +17,7 @@
         "eloquent/cosmos": "~2"
     },
     "require-dev": {
-        "icecave/archer": "dev-release/0.1.0"
+        "icecave/archer": "~0.2"
     },
     "autoload": {
         "psr-0": {
