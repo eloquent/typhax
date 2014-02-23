@@ -11,7 +11,7 @@
 
 namespace Eloquent\Typhax\Parser;
 
-use Eloquent\Cosmos\ClassName;
+use Eloquent\Cosmos\ClassName\ClassName;
 use Eloquent\Typhax\Lexer\Lexer;
 use Eloquent\Typhax\Type\AndType;
 use Eloquent\Typhax\Type\ArrayType;

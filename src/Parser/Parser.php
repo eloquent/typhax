@@ -12,15 +12,15 @@
 namespace Eloquent\Typhax\Parser;
 
 use Closure;
-use Eloquent\Cosmos\ClassName;
+use Eloquent\Cosmos\ClassName\ClassName;
 use Eloquent\Typhax\Lexer\Lexer;
 use Eloquent\Typhax\Lexer\Token;
 use Eloquent\Typhax\Type\AndType;
 use Eloquent\Typhax\Type\ArrayType;
 use Eloquent\Typhax\Type\BooleanType;
 use Eloquent\Typhax\Type\CallableType;
-use Eloquent\Typhax\Type\FloatType;
 use Eloquent\Typhax\Type\ExtensionType;
+use Eloquent\Typhax\Type\FloatType;
 use Eloquent\Typhax\Type\IntegerType;
 use Eloquent\Typhax\Type\MixedType;
 use Eloquent\Typhax\Type\NullType;

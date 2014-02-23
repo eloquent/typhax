@@ -11,7 +11,7 @@
 
 namespace Eloquent\Typhax\Renderer;
 
-use Eloquent\Cosmos\ClassName;
+use Eloquent\Cosmos\ClassName\ClassName;
 use Eloquent\Typhax\Type\AndType;
 use Eloquent\Typhax\Type\ArrayType;
 use Eloquent\Typhax\Type\BooleanType;

@@ -11,20 +11,20 @@
 
 namespace Eloquent\Typhax\Type;
 
-use Eloquent\Cosmos\ClassName;
+use Eloquent\Cosmos\ClassName\ClassNameInterface;
 
 class ObjectType implements TraversablePrimaryType
 {
     /**
-     * @param ClassName|null $ofType
+     * @param ClassNameInterface|null $ofType
      */
-    public function __construct(ClassName $ofType = null)
+    public function __construct(ClassNameInterface $ofType = null)
     {
         $this->ofType = $ofType;
     }
 
     /**
-     * @return ClassName|null
+     * @return ClassNameInterface|null
      */
     public function ofType()
     {

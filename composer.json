@@ -14,7 +14,7 @@
     "require": {
         "php": ">=5.3",
         "ext-mbstring": "*",
-        "eloquent/cosmos": "~2"
+        "eloquent/cosmos": "dev-feature/pathogen-based"
     },
     "require-dev": {
         "icecave/archer": "~1"

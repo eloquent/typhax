@@ -3,34 +3,35 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "c20b33113aeb0954a8fb7544e7042a31",
+    "hash": "bbadfe29781e6bf52dfc5a386eed412c",
     "packages": [
         {
             "name": "eloquent/cosmos",
-            "version": "2.3.1",
+            "version": "dev-feature/pathogen-based",
             "source": {
                 "type": "git",
                 "url": "https://github.com/eloquent/cosmos.git",
-                "reference": "0226b7aa39c629cdbb41bde759adff59d932d16d"
+                "reference": "e5228793e1c1e267faebbafe456f3181926f6cec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/eloquent/cosmos/zipball/0226b7aa39c629cdbb41bde759adff59d932d16d",
-                "reference": "0226b7aa39c629cdbb41bde759adff59d932d16d",
+                "url": "https://api.github.com/repos/eloquent/cosmos/zipball/e5228793e1c1e267faebbafe456f3181926f6cec",
+                "reference": "e5228793e1c1e267faebbafe456f3181926f6cec",
                 "shasum": ""
             },
             "require": {
-                "eloquent/equality": "~2",
+                "eloquent/pathogen": "~0.6.0",
                 "icecave/isolator": "~2",
-                "php": ">=5.3.0"
+                "php": ">=5.3"
             },
             "require-dev": {
-                "icecave/archer": "~0.2"
+                "eloquent/liberator": "~2",
+                "icecave/archer": "~1"
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "Eloquent\\Cosmos": "src"
+                "psr-4": {
+                    "Eloquent\\Cosmos\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -55,32 +56,35 @@
                 "resolver",
                 "solver"
             ],
-            "time": "2013-03-04 09:26:13"
+            "time": "2014-02-23 09:54:54"
         },
         {
-            "name": "eloquent/equality",
-            "version": "2.1.2",
+            "name": "eloquent/pathogen",
+            "version": "0.6.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/eloquent/equality.git",
-                "reference": "20cb01843d44dc74b89a9f179868bb8bbafdc938"
+                "url": "https://github.com/eloquent/pathogen.git",
+                "reference": "45c84b1707ca0ddcadfae99f62cca142baafb9e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/eloquent/equality/zipball/20cb01843d44dc74b89a9f179868bb8bbafdc938",
-                "reference": "20cb01843d44dc74b89a9f179868bb8bbafdc938",
+                "url": "https://api.github.com/repos/eloquent/pathogen/zipball/45c84b1707ca0ddcadfae99f62cca142baafb9e4",
+                "reference": "45c84b1707ca0ddcadfae99f62cca142baafb9e4",
                 "shasum": ""
             },
             "require": {
+                "ext-mbstring": "*",
+                "icecave/isolator": "~2",
                 "php": ">=5.3"
             },
             "require-dev": {
+                "eloquent/liberator": "~2",
                 "icecave/archer": "~1"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Eloquent\\Equality\\": "src"
+                    "Eloquent\\Pathogen\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -92,18 +96,22 @@
                     "name": "Erin Millard",
                     "email": "ezzatron@gmail.com",
                     "homepage": "http://ezzatron.com/"
+                },
+                {
+                    "name": "Darian Brown",
+                    "email": "darianbr@gmail.com",
+                    "homepage": "http://www.darian-brown.com/"
                 }
             ],
-            "description": "A better strict comparison for PHP.",
-            "homepage": "https://github.com/eloquent/equality",
+            "description": "General-purpose path library for PHP.",
+            "homepage": "https://github.com/eloquent/pathogen",
             "keywords": [
-                "comparison",
-                "deep",
-                "equality",
-                "object",
-                "strict"
+                "file",
+                "filesystem",
+                "manipulation",
+                "path"
             ],
-            "time": "2014-02-11 11:33:58"
+            "time": "2014-02-19 03:09:40"
         },
         {
             "name": "icecave/isolator",
@@ -1148,9 +1156,9 @@
 
     ],
     "minimum-stability": "stable",
-    "stability-flags": [
-
-    ],
+    "stability-flags": {
+        "eloquent/cosmos": 20
+    },
     "platform": {
         "php": ">=5.3",
         "ext-mbstring": "*"

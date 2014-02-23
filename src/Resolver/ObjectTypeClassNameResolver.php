@@ -11,7 +11,9 @@
 
 namespace Eloquent\Typhax\Resolver;
 
-use Eloquent\Cosmos\ClassNameResolver;
+use Eloquent\Cosmos\Resolution\ClassNameResolver;
+use Eloquent\Cosmos\Resolution\ClassNameResolverInterface;
+use Eloquent\Cosmos\Resolution\ResolutionContextInterface;
 use Eloquent\Typhax\Type\AndType;
 use Eloquent\Typhax\Type\ArrayType;
 use Eloquent\Typhax\Type\BooleanType;
@@ -35,15 +37,31 @@ use Eloquent\Typhax\Type\Visitor;
 class ObjectTypeClassNameResolver implements Visitor
 {
     /**
-     * @param ClassNameResolver $classNameResolver
+     * @param ResolutionContextInterface      $resolutionContext
+     * @param ClassNameResolverInterface|null $classNameResolver
      */
-    public function __construct(ClassNameResolver $classNameResolver)
-    {
+    public function __construct(
+        ResolutionContextInterface $resolutionContext,
+        ClassNameResolverInterface $classNameResolver = null
+    ) {
+        if (null === $classNameResolver) {
+            $classNameResolver = ClassNameResolver::instance();
+        }
+
+        $this->resolutionContext = $resolutionContext;
         $this->classNameResolver = $classNameResolver;
     }
 
     /**
-     * @return ClassNameResolver
+     * @return ResolutionContextInterface
+     */
+    public function resolutionContext()
+    {
+        return $this->resolutionContext;
+    }
+
+    /**
+     * @return ClassNameResolverInterface
      */
     public function classNameResolver()
     {
@@ -108,7 +126,8 @@ class ObjectTypeClassNameResolver implements Visitor
         }
 
         return new ExtensionType(
-            $this->classNameResolver()->resolve(
+            $this->classNameResolver()->resolveAgainstContext(
+                $this->resolutionContext(),
                 $type->className()
             ),
             $types,
@@ -178,7 +197,8 @@ class ObjectTypeClassNameResolver implements Visitor
         }
 
         return new ObjectType(
-            $this->classNameResolver()->resolve(
+            $this->classNameResolver()->resolveAgainstContext(
+                $this->resolutionContext(),
                 $type->ofType()
             )
         );

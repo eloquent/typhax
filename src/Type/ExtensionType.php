@@ -11,16 +11,16 @@
 
 namespace Eloquent\Typhax\Type;
 
-use Eloquent\Cosmos\ClassName;
+use Eloquent\Cosmos\ClassName\ClassNameInterface;
 
 class ExtensionType implements Type
 {
     /**
-     * @param ClassName   $className
-     * @param array<Type> $types
-     * @param array       $attributes
+     * @param ClassNameInterface $className
+     * @param array<Type>        $types
+     * @param array              $attributes
      */
-    public function __construct(ClassName $className, array $types, array $attributes)
+    public function __construct(ClassNameInterface $className, array $types, array $attributes)
     {
         $this->className = $className;
         $this->types = $types;
@@ -28,7 +28,7 @@ class ExtensionType implements Type
     }
 
     /**
-     * @return ClassName
+     * @return ClassNameInterface
      */
     public function className()
     {

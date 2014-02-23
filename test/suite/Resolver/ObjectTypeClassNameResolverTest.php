@@ -11,8 +11,10 @@
 
 namespace Eloquent\Typhax\Resolver;
 
-use Eloquent\Cosmos\ClassName;
-use Eloquent\Cosmos\ClassNameResolver;
+use Eloquent\Cosmos\ClassName\ClassName;
+use Eloquent\Cosmos\Resolution\ClassNameResolver;
+use Eloquent\Cosmos\Resolution\ResolutionContext;
+use Eloquent\Cosmos\UseStatement\UseStatement;
 use Eloquent\Typhax\Type\AndType;
 use Eloquent\Typhax\Type\ArrayType;
 use Eloquent\Typhax\Type\BooleanType;
@@ -39,18 +41,27 @@ class ObjectTypeClassNameResolverTest extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->classNameResolver = new ClassNameResolver(
+        $this->resolutionContext = new ResolutionContext(
             ClassName::fromString('\Foo\Bar\Baz'),
             array(
-                array(
-                    ClassName::fromString('\Qux\Doom\Splat'),
-                    ClassName::fromString('Pip'),
-                ),
+                new UseStatement(ClassName::fromString('\Qux\Doom\Splat'), ClassName::fromString('Pip')),
             )
         );
-        $this->resolver = new ObjectTypeClassNameResolver(
-            $this->classNameResolver
-        );
+        $this->classNameResolver = new ClassNameResolver;
+        $this->resolver = new ObjectTypeClassNameResolver($this->resolutionContext, $this->classNameResolver);
+    }
+
+    public function testConstructor()
+    {
+        $this->assertSame($this->resolutionContext, $this->resolver->resolutionContext());
+        $this->assertSame($this->classNameResolver, $this->resolver->classNameResolver());
+    }
+
+    public function testConstructorDefaults()
+    {
+        $this->resolver = new ObjectTypeClassNameResolver($this->resolutionContext);
+
+        $this->assertSame(ClassNameResolver::instance(), $this->resolver->classNameResolver());
     }
 
     public function testResolveObjectTypeName()

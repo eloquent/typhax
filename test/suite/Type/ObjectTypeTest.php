@@ -11,7 +11,7 @@
 
 namespace Eloquent\Typhax\Type;
 
-use Eloquent\Cosmos\ClassName;
+use Eloquent\Cosmos\ClassName\ClassName;
 use PHPUnit_Framework_TestCase;
 
 class ObjectTypeTest extends PHPUnit_Framework_TestCase
