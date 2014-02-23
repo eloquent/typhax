@@ -29,7 +29,7 @@ compound types that use boolean logic (e.g. integer|float).
 ### Array
 
     array
-    array<keyType, valueType>
+    array<keyType,valueType>
 
 An [array]. The key type and value type can optionally be specified. See the
 section on [traversable types] below.
@@ -58,6 +58,7 @@ A callable can be any of the following:
 - An array with an object at index 0 and the method name at index 1.
 - An array with a class name at index 0 and the method name at index 1.
 - A [closure].
+- An object with an [__invoke()] method.
 - The result of a [create_function()] call.
 
 Equivalent to the [is_callable()] function.
@@ -83,7 +84,7 @@ Equivalent to the [is_int()] function.
 ### Mixed
 
     mixed
-    mixed<keyType, valueType>
+    mixed<keyType,valueType>
 
 The mixed type accepts any value of any type (including null).
 
@@ -105,7 +106,7 @@ Equivalent to `=== null`.
 
     object
     ClassName
-    ClassName<keyType, valueType>
+    ClassName<keyType,valueType>
 
 The first form, `object`, indicates a value that is an [object] of *any* class.
 This is equivalent to the [is_object()] function.
@@ -115,7 +116,7 @@ The second form, `ClassName`, indicates a value that is an [object] of class
 class extends from `ClassName`, and instances of objects that implement the
 `ClassName` interface. This is equivalent to the [instanceof] operator.
 
-The third form, `ClassName<keyType, valueType>`, follows the same rules as the
+The third form, `ClassName<keyType,valueType>`, follows the same rules as the
 second form, with the additional requirement that the object must implement the
 [Traversable] interface. The key type and value type can optionally be
 specified. See the section on [traversable types] below.
@@ -126,31 +127,31 @@ Namespace resolution should follow the same rules as PHP source code. That is;
 if the class name is in the current namespace, or has a relevant use statement,
 it's okay to use the short version.
 
-The [Cosmos component] can be used to aid in resolving class names at runtime.
+[Cosmos] can be used to aid in resolving class names at runtime.
 
 ### Resource
 
     resource
-    resource {ofType: resourceType}
+    resource{ofType:resourceType}
 
 The first form, `resource`, indicates a value that is a [resource] of *any*
 type. This is equivalent to the [is_resource()] function.
 
-The second form, `resource {ofType: resourceType}`, indicates a value that is a
+The second form, `resource{ofType:resourceType}`, indicates a value that is a
 [resource] that returns a string equal to 'resourceType' when passed to
 [get_resource_type()].
 
 ### Stream
 
     stream
-    stream {readable: true, writable: true}
-    stream {readable: true, writable: false}
-    stream {readable: false, writable: true}
+    stream{readable:true,writable:true}
+    stream{readable:true,writable:false}
+    stream{readable:false,writable:true}
 
 Represents a [stream] resource. The **readable** and **writable** attributes
 determine the requirements for the **mode** of the stream.
 
-The stream type is equvalent to the Typhax type `resource {ofType: stream}`.
+The stream type is equvalent to the Typhax type `resource{ofType:stream}`.
 
 See the PHP documentation for [fopen()] for more information about stream modes.
 
@@ -176,23 +177,21 @@ method do not qualify as 'stringable'.
 
 ### Tuple
 
-    tuple<typeA, typeB, typeC, ...>
+    tuple<typeA,typeB,typeC,...>
 
 A [tuple] is an array value of a fixed size, with each element being of a
 specific type.
 
 Tuples are generally referred to as an *n*-tuple, where *n* is the number of
-elements.
-
-For example, a 2-tuple definition where the first element is a string, and the
-second element is an integer, looks like `tuple<string, integer>`.
+elements. For example, a 2-tuple definition where the first element is a string,
+and the second element is an integer, looks like `tuple<string,integer>`.
 
 Tuple arrays must be sequential. That is, the keys of the array must be
 integers, with the first key being 0, and subsequent keys incrementing by 1 for
 each element of the tuple.
 
 As an example, `array('foo', 1)` satisfies the constraint
-`tuple<string, integer>`.
+`tuple<string,integer>`.
 
 ### Legacy types
 
@@ -217,7 +216,7 @@ Typhax supports the specification of key and value types for arrays and
 
 The specification for key and value types is as follows:
 
-    primaryType<keyType, valueType>
+    primaryType<keyType,valueType>
 
 This specification represents a value of type `primaryType` which, when iterated
 over, produces keys of type `keyType` and values of type `valueType`.
@@ -248,10 +247,10 @@ that implements both `InterfaceA` AND `InterfaceB`.
 
     :ClassName
     :ClassName {...}
-    :ClassName<typeA, typeB, typeC, ...> {...}
+    :ClassName<typeA,typeB,typeC,...> {...}
 
 Extensions provide a means to expand the capabilies of Typhax with custom logic.
-For an example of how extensions can be utilized, see the [Typhoon component].
+For an example of how extensions can be utilized, see [Typhoon].
 
 ## White space
 
@@ -261,12 +260,13 @@ style guide.
 
 <!-- References -->
 
-[@param tag]: http://manual.phpdoc.org/HTMLSmartyConverter/HandS/phpDocumentor/tutorial_tags.param.pkg.html
+[@param tag]: http://www.phpdoc.org/docs/latest/references/phpdoc/tags/param.html
+[__invoke()]: http://php.net/manual/en/language.oop5.magic.php#object.invoke
 [array]: http://php.net/array
 [boolean]: http://php.net/boolean
 [callable]: http://php.net/manual/en/language.types.callable.php
 [closure]: http://php.net/manual/en/functions.anonymous.php
-[Cosmos component]: https://github.com/eloquent/cosmos
+[Cosmos]: https://github.com/eloquent/cosmos
 [create_function()]: http://php.net/create_function
 [floating-point number]: http://php.net/float
 [fopen()]: http://php.net/fopen
@@ -292,7 +292,7 @@ style guide.
 [traversable types]: #traversable-types
 [Traversable]: http://php.net/traversable
 [tuple]: http://en.wikipedia.org/wiki/Tuple
-[Typhoon component]: https://github.com/eloquent/typhoon
+[Typhoon]: https://github.com/eloquent/typhoon
 
 [API documentation]: http://lqnt.co/typhax/artifacts/documentation/api/
 [Composer]: http://getcomposer.org/
