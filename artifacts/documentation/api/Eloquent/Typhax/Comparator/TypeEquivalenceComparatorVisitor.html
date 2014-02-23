@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Eloquent\Typhax\Comparator\TypeEquivalenceComparatorVisitor | eloquent/typhax API</title>
+                    <link rel="stylesheet" type="text/css" href="../../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../../classes.html">Classes</a></li>
+                            <li><a href="../../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title">eloquent/typhax API</div>
+
+            <div class="type">Class</div>
+    <h1><a href="../../../Eloquent/Typhax/Comparator.html">Eloquent\Typhax\Comparator</a>\TypeEquivalenceComparatorVisitor</h1>
+    </div>
+        <div class="content">
+                <p>class    <strong>TypeEquivalenceComparatorVisitor</strong>        implements
+        <a href="../../../Eloquent/Typhax/Type/Visitor.html"><abbr title="Eloquent\Typhax\Type\Visitor">Visitor</abbr></a></p>
+
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>(<a href="../../../Eloquent/Typhax/Type/Type.html"><abbr title="Eloquent\Typhax\Type\Type">Type</abbr></a> $type)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Eloquent/Typhax/Type/Type.html"><abbr title="Eloquent\Typhax\Type\Type">Type</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_type">type</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    integer
+                </td>
+                <td class="last">
+                    <a href="#method_visitAndType">visitAndType</a>(<a href="../../../Eloquent/Typhax/Type/AndType.html"><abbr title="Eloquent\Typhax\Type\AndType">AndType</abbr></a> $type)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    integer
+                </td>
+                <td class="last">
+                    <a href="#method_visitArrayType">visitArrayType</a>(<a href="../../../Eloquent/Typhax/Type/ArrayType.html"><abbr title="Eloquent\Typhax\Type\ArrayType">ArrayType</abbr></a> $type)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    integer
+                </td>
+                <td class="last">
+                    <a href="#method_visitBooleanType">visitBooleanType</a>(<a href="../../../Eloquent/Typhax/Type/BooleanType.html"><abbr title="Eloquent\Typhax\Type\BooleanType">BooleanType</abbr></a> $type)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    integer
+                </td>
+                <td class="last">
+                    <a href="#method_visitCallableType">visitCallableType</a>(<a href="../../../Eloquent/Typhax/Type/CallableType.html"><abbr title="Eloquent\Typhax\Type\CallableType">CallableType</abbr></a> $type)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    mixed
+                </td>
+                <td class="last">
+                    <a href="#method_visitExtensionType">visitExtensionType</a>(<a href="../../../Eloquent/Typhax/Type/ExtensionType.html"><abbr title="Eloquent\Typhax\Type\ExtensionType">ExtensionType</abbr></a> $type)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    integer
+                </td>
+                <td class="last">
+                    <a href="#method_visitFloatType">visitFloatType</a>(<a href="../../../Eloquent/Typhax/Type/FloatType.html"><abbr title="Eloquent\Typhax\Type\FloatType">FloatType</abbr></a> $type)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    integer
+                </td>
+                <td class="last">
+                    <a href="#method_visitIntegerType">visitIntegerType</a>(<a href="../../../Eloquent/Typhax/Type/IntegerType.html"><abbr title="Eloquent\Typhax\Type\IntegerType">IntegerType</abbr></a> $type)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    integer
+                </td>
+                <td class="last">
+                    <a href="#method_visitMixedType">visitMixedType</a>(<a href="../../../Eloquent/Typhax/Type/MixedType.html"><abbr title="Eloquent\Typhax\Type\MixedType">MixedType</abbr></a> $type)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    integer
+                </td>
+                <td class="last">
+                    <a href="#method_visitNullType">visitNullType</a>(<a href="../../../Eloquent/Typhax/Type/NullType.html"><abbr title="Eloquent\Typhax\Type\NullType">NullType</abbr></a> $type)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    integer
+                </td>
+                <td class="last">
+                    <a href="#method_visitNumericType">visitNumericType</a>(<a href="../../../Eloquent/Typhax/Type/NumericType.html"><abbr title="Eloquent\Typhax\Type\NumericType">NumericType</abbr></a> $type)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    integer
+                </td>
+                <td class="last">
+                    <a href="#method_visitObjectType">visitObjectType</a>(<a href="../../../Eloquent/Typhax/Type/ObjectType.html"><abbr title="Eloquent\Typhax\Type\ObjectType">ObjectType</abbr></a> $type)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    integer
+                </td>
+                <td class="last">
+                    <a href="#method_visitOrType">visitOrType</a>(<a href="../../../Eloquent/Typhax/Type/OrType.html"><abbr title="Eloquent\Typhax\Type\OrType">OrType</abbr></a> $type)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    integer
+                </td>
+                <td class="last">
+                    <a href="#method_visitResourceType">visitResourceType</a>(<a href="../../../Eloquent/Typhax/Type/ResourceType.html"><abbr title="Eloquent\Typhax\Type\ResourceType">ResourceType</abbr></a> $type)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    integer
+                </td>
+                <td class="last">
+                    <a href="#method_visitStreamType">visitStreamType</a>(<a href="../../../Eloquent/Typhax/Type/StreamType.html"><abbr title="Eloquent\Typhax\Type\StreamType">StreamType</abbr></a> $type)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    integer
+                </td>
+                <td class="last">
+                    <a href="#method_visitStringType">visitStringType</a>(<a href="../../../Eloquent/Typhax/Type/StringType.html"><abbr title="Eloquent\Typhax\Type\StringType">StringType</abbr></a> $type)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    integer
+                </td>
+                <td class="last">
+                    <a href="#method_visitStringableType">visitStringableType</a>(<a href="../../../Eloquent/Typhax/Type/StringableType.html"><abbr title="Eloquent\Typhax\Type\StringableType">StringableType</abbr></a> $type)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    integer
+                </td>
+                <td class="last">
+                    <a href="#method_visitTraversableType">visitTraversableType</a>(<a href="../../../Eloquent/Typhax/Type/TraversableType.html"><abbr title="Eloquent\Typhax\Type\TraversableType">TraversableType</abbr></a> $type)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    integer
+                </td>
+                <td class="last">
+                    <a href="#method_visitTupleType">visitTupleType</a>(<a href="../../../Eloquent/Typhax/Type/TupleType.html"><abbr title="Eloquent\Typhax\Type\TupleType">TupleType</abbr></a> $type)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method___construct">
+        <div class="location">at line 42</div>
+        <code>            public            
+    <strong>__construct</strong>(<a href="../../../Eloquent/Typhax/Type/Type.html"><abbr title="Eloquent\Typhax\Type\Type">Type</abbr></a> $type)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Eloquent/Typhax/Type/Type.html"><abbr title="Eloquent\Typhax\Type\Type">Type</abbr></a></td>
+                <td>$type</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_type">
+        <div class="location">at line 50</div>
+        <code>            public            <a href="../../../Eloquent/Typhax/Type/Type.html"><abbr title="Eloquent\Typhax\Type\Type">Type</abbr></a>
+    <strong>type</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Eloquent/Typhax/Type/Type.html"><abbr title="Eloquent\Typhax\Type\Type">Type</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitAndType">
+        <div class="location">at line 60</div>
+        <code>            public            integer
+    <strong>visitAndType</strong>(<a href="../../../Eloquent/Typhax/Type/AndType.html"><abbr title="Eloquent\Typhax\Type\AndType">AndType</abbr></a> $type)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Eloquent/Typhax/Type/AndType.html"><abbr title="Eloquent\Typhax\Type\AndType">AndType</abbr></a></td>
+                <td>$type</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>integer</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitArrayType">
+        <div class="location">at line 70</div>
+        <code>            public            integer
+    <strong>visitArrayType</strong>(<a href="../../../Eloquent/Typhax/Type/ArrayType.html"><abbr title="Eloquent\Typhax\Type\ArrayType">ArrayType</abbr></a> $type)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Eloquent/Typhax/Type/ArrayType.html"><abbr title="Eloquent\Typhax\Type\ArrayType">ArrayType</abbr></a></td>
+                <td>$type</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>integer</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitBooleanType">
+        <div class="location">at line 80</div>
+        <code>            public            integer
+    <strong>visitBooleanType</strong>(<a href="../../../Eloquent/Typhax/Type/BooleanType.html"><abbr title="Eloquent\Typhax\Type\BooleanType">BooleanType</abbr></a> $type)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Eloquent/Typhax/Type/BooleanType.html"><abbr title="Eloquent\Typhax\Type\BooleanType">BooleanType</abbr></a></td>
+                <td>$type</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>integer</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitCallableType">
+        <div class="location">at line 90</div>
+        <code>            public            integer
+    <strong>visitCallableType</strong>(<a href="../../../Eloquent/Typhax/Type/CallableType.html"><abbr title="Eloquent\Typhax\Type\CallableType">CallableType</abbr></a> $type)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Eloquent/Typhax/Type/CallableType.html"><abbr title="Eloquent\Typhax\Type\CallableType">CallableType</abbr></a></td>
+                <td>$type</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>integer</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitExtensionType">
+        <div class="location">at line 100</div>
+        <code>            public            mixed
+    <strong>visitExtensionType</strong>(<a href="../../../Eloquent/Typhax/Type/ExtensionType.html"><abbr title="Eloquent\Typhax\Type\ExtensionType">ExtensionType</abbr></a> $type)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Eloquent/Typhax/Type/ExtensionType.html"><abbr title="Eloquent\Typhax\Type\ExtensionType">ExtensionType</abbr></a></td>
+                <td>$type</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitFloatType">
+        <div class="location">at line 143</div>
+        <code>            public            integer
+    <strong>visitFloatType</strong>(<a href="../../../Eloquent/Typhax/Type/FloatType.html"><abbr title="Eloquent\Typhax\Type\FloatType">FloatType</abbr></a> $type)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Eloquent/Typhax/Type/FloatType.html"><abbr title="Eloquent\Typhax\Type\FloatType">FloatType</abbr></a></td>
+                <td>$type</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>integer</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitIntegerType">
+        <div class="location">at line 153</div>
+        <code>            public            integer
+    <strong>visitIntegerType</strong>(<a href="../../../Eloquent/Typhax/Type/IntegerType.html"><abbr title="Eloquent\Typhax\Type\IntegerType">IntegerType</abbr></a> $type)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Eloquent/Typhax/Type/IntegerType.html"><abbr title="Eloquent\Typhax\Type\IntegerType">IntegerType</abbr></a></td>
+                <td>$type</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>integer</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitMixedType">
+        <div class="location">at line 163</div>
+        <code>            public            integer
+    <strong>visitMixedType</strong>(<a href="../../../Eloquent/Typhax/Type/MixedType.html"><abbr title="Eloquent\Typhax\Type\MixedType">MixedType</abbr></a> $type)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Eloquent/Typhax/Type/MixedType.html"><abbr title="Eloquent\Typhax\Type\MixedType">MixedType</abbr></a></td>
+                <td>$type</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>integer</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitNullType">
+        <div class="location">at line 173</div>
+        <code>            public            integer
+    <strong>visitNullType</strong>(<a href="../../../Eloquent/Typhax/Type/NullType.html"><abbr title="Eloquent\Typhax\Type\NullType">NullType</abbr></a> $type)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Eloquent/Typhax/Type/NullType.html"><abbr title="Eloquent\Typhax\Type\NullType">NullType</abbr></a></td>
+                <td>$type</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>integer</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitNumericType">
+        <div class="location">at line 183</div>
+        <code>            public            integer
+    <strong>visitNumericType</strong>(<a href="../../../Eloquent/Typhax/Type/NumericType.html"><abbr title="Eloquent\Typhax\Type\NumericType">NumericType</abbr></a> $type)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Eloquent/Typhax/Type/NumericType.html"><abbr title="Eloquent\Typhax\Type\NumericType">NumericType</abbr></a></td>
+                <td>$type</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>integer</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitObjectType">
+        <div class="location">at line 193</div>
+        <code>            public            integer
+    <strong>visitObjectType</strong>(<a href="../../../Eloquent/Typhax/Type/ObjectType.html"><abbr title="Eloquent\Typhax\Type\ObjectType">ObjectType</abbr></a> $type)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Eloquent/Typhax/Type/ObjectType.html"><abbr title="Eloquent\Typhax\Type\ObjectType">ObjectType</abbr></a></td>
+                <td>$type</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>integer</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitOrType">
+        <div class="location">at line 211</div>
+        <code>            public            integer
+    <strong>visitOrType</strong>(<a href="../../../Eloquent/Typhax/Type/OrType.html"><abbr title="Eloquent\Typhax\Type\OrType">OrType</abbr></a> $type)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Eloquent/Typhax/Type/OrType.html"><abbr title="Eloquent\Typhax\Type\OrType">OrType</abbr></a></td>
+                <td>$type</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>integer</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitResourceType">
+        <div class="location">at line 221</div>
+        <code>            public            integer
+    <strong>visitResourceType</strong>(<a href="../../../Eloquent/Typhax/Type/ResourceType.html"><abbr title="Eloquent\Typhax\Type\ResourceType">ResourceType</abbr></a> $type)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Eloquent/Typhax/Type/ResourceType.html"><abbr title="Eloquent\Typhax\Type\ResourceType">ResourceType</abbr></a></td>
+                <td>$type</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>integer</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitStreamType">
+        <div class="location">at line 239</div>
+        <code>            public            integer
+    <strong>visitStreamType</strong>(<a href="../../../Eloquent/Typhax/Type/StreamType.html"><abbr title="Eloquent\Typhax\Type\StreamType">StreamType</abbr></a> $type)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Eloquent/Typhax/Type/StreamType.html"><abbr title="Eloquent\Typhax\Type\StreamType">StreamType</abbr></a></td>
+                <td>$type</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>integer</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitStringType">
+        <div class="location">at line 265</div>
+        <code>            public            integer
+    <strong>visitStringType</strong>(<a href="../../../Eloquent/Typhax/Type/StringType.html"><abbr title="Eloquent\Typhax\Type\StringType">StringType</abbr></a> $type)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Eloquent/Typhax/Type/StringType.html"><abbr title="Eloquent\Typhax\Type\StringType">StringType</abbr></a></td>
+                <td>$type</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>integer</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitStringableType">
+        <div class="location">at line 275</div>
+        <code>            public            integer
+    <strong>visitStringableType</strong>(<a href="../../../Eloquent/Typhax/Type/StringableType.html"><abbr title="Eloquent\Typhax\Type\StringableType">StringableType</abbr></a> $type)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Eloquent/Typhax/Type/StringableType.html"><abbr title="Eloquent\Typhax\Type\StringableType">StringableType</abbr></a></td>
+                <td>$type</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>integer</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitTraversableType">
+        <div class="location">at line 285</div>
+        <code>            public            integer
+    <strong>visitTraversableType</strong>(<a href="../../../Eloquent/Typhax/Type/TraversableType.html"><abbr title="Eloquent\Typhax\Type\TraversableType">TraversableType</abbr></a> $type)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Eloquent/Typhax/Type/TraversableType.html"><abbr title="Eloquent\Typhax\Type\TraversableType">TraversableType</abbr></a></td>
+                <td>$type</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>integer</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitTupleType">
+        <div class="location">at line 319</div>
+        <code>            public            integer
+    <strong>visitTupleType</strong>(<a href="../../../Eloquent/Typhax/Type/TupleType.html"><abbr title="Eloquent\Typhax\Type\TupleType">TupleType</abbr></a> $type)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Eloquent/Typhax/Type/TupleType.html"><abbr title="Eloquent\Typhax\Type\TupleType">TupleType</abbr></a></td>
+                <td>$type</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>integer</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>
