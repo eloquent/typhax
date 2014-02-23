@@ -98,7 +98,7 @@ important.
 
     null
 
-A [null].
+A [null] value.
 
 Equivalent to `=== null`.
 
@@ -300,6 +300,6 @@ style guide.
 [Current build status]: https://travis-ci.org/eloquent/typhax
 [coverage-image]: http://img.shields.io/coveralls/eloquent/typhax/develop.svg "Current test coverage for the develop branch"
 [Current coverage status]: https://coveralls.io/r/eloquent/typhax
-[eloquent/lcs]: https://packagist.org/packages/eloquent/lcs
+[eloquent/typhax]: https://packagist.org/packages/eloquent/typhax
 [Semantic versioning]: http://semver.org/
 [version-image]: http://img.shields.io/:semver-0.9.1-yellow.svg "This project uses semantic versioning"
