@@ -1,7 +1,7 @@
 {
     "name": "eloquent/typhax",
     "description": "A flexible PHP type hinting syntax.",
-    "keywords": ["type","hint","hinting","check","checking","syntax","parser"],
+    "keywords": ["type", "hint", "hinting", "check", "checking", "syntax", "parser"],
     "homepage": "https://github.com/eloquent/typhax",
     "license": "MIT",
     "authors": [
@@ -12,16 +12,16 @@
         }
     ],
     "require": {
-        "php": ">=5.3.0",
+        "php": ">=5.3",
         "ext-mbstring": "*",
         "eloquent/cosmos": "~2"
     },
     "require-dev": {
-        "icecave/archer": "~0.2"
+        "icecave/archer": "~1"
     },
     "autoload": {
-        "psr-0": {
-            "Eloquent\\Typhax": "src"
+        "psr-4": {
+            "Eloquent\\Typhax\\": "src"
         }
     }
 }

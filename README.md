@@ -2,13 +2,14 @@
 
 *A flexible PHP type hinting syntax.*
 
-[![Build Status]](http://travis-ci.org/eloquent/typhax)
-[![Test Coverage]](http://eloquent-software.com/typhax/artifacts/tests/coverage/)
+[![The most recent stable version is 0.9.1][version-image]][Semantic versioning]
+[![Current build status image][build-image]][Current build status]
+[![Current coverage status image][coverage-image]][Current coverage status]
 
-## Installation
+## Installation and documentation
 
-Available as [Composer](http://getcomposer.org/) package
-[eloquent/typhax](https://packagist.org/packages/eloquent/typhax).
+* Available as [Composer] package [eloquent/typhax].
+* [API documentation] available.
 
 ## What is Typhax?
 
@@ -16,8 +17,8 @@ Typhax is a standard for the specification of PHP types in parameter type hints,
 and anywhere a type needs to be described in a human-readable form.
 
 It expands on the capabilities of existing conventions for specifying type
-requirements, such as those used in the [PHP documentation](http://php.net/manual/en/language.types.php)
-and PHPDoc's [@param tag](http://manual.phpdoc.org/HTMLSmartyConverter/HandS/phpDocumentor/tutorial_tags.param.pkg.html).
+requirements, such as those used in the [PHP documentation] and PHPDoc's [@param
+tag].
 
 In addition to scalar and class type hints, Typhax allows powerful features,
 including the specification of key and value types for arrays, as well as
@@ -30,55 +31,54 @@ compound types that use boolean logic (e.g. integer|float).
     array
     array<keyType, valueType>
 
-An [array](http://php.net/array). The key type and value type can optionally
-be specified. See the section on [traversable types](#traversable-types) below.
+An [array]. The key type and value type can optionally be specified. See the
+section on [traversable types] below.
 
-Equivalent to the [is_array()](http://php.net/is_array) function.
+Equivalent to the [is_array()] function.
 
 ### Boolean
 
     boolean
 
-A [boolean](http://php.net/boolean) true or false value. The value must be an
-actual boolean, and not an equivalent integer.
+A [boolean] true or false value. The value must be an actual boolean, and not an
+equivalent integer.
 
-Equivalent to the [is_bool()](http://php.net/is_bool) function.
+Equivalent to the [is_bool()] function.
 
 ### Callable
 
     callable
 
-A user-defined callback function. This is exactly equivalent to the
-[callable](http://php.net/manual/en/language.types.callable.php) type hint
-introduced in PHP 5.4.
+A user-defined callback function. This is exactly equivalent to the [callable]
+type hint introduced in PHP 5.4.
 
 A callable can be any of the following:
 
- * A string containing the name of a function or static class method.
- * An array with an object at index 0 and the method name at index 1.
- * An array with a class name at index 0 and the method name at index 1.
- * A [closure](http://php.net/manual/en/functions.anonymous.php).
- * The result of a [create_function()](http://php.net/create_function) call.
+- A string containing the name of a function or static class method.
+- An array with an object at index 0 and the method name at index 1.
+- An array with a class name at index 0 and the method name at index 1.
+- A [closure].
+- The result of a [create_function()] call.
 
-Equivalent to the [is_callable()](http://php.net/is_callable) function.
+Equivalent to the [is_callable()] function.
 
 ### Float
 
     float
 
-A [floating-point number](http://php.net/float). The value must be a true
-floating point number, and not an equivalent string or integer.
+A [floating-point number]. The value must be a true floating point number, and
+not an equivalent string or integer.
 
-Equivalent to the [is_float()](http://php.net/is_float) function.
+Equivalent to the [is_float()] function.
 
 ### Integer
 
     integer
 
-An [integer](http://php.net/integer). The value must be a true integer, and not
-an equivalent string, boolean, or any other kind of value.
+An [integer]. The value must be a true integer, and not an equivalent string,
+boolean, or any other kind of value.
 
-Equivalent to the [is_int()](http://php.net/is_int) function.
+Equivalent to the [is_int()] function.
 
 ### Mixed
 
@@ -87,17 +87,17 @@ Equivalent to the [is_int()](http://php.net/is_int) function.
 
 The mixed type accepts any value of any type (including null).
 
-Mixed can be treated as a [traversable type](#traversable-types), as in the
-second example above. When used in this fashion, mixed indicates any type that
-can be traversed, such as an [array](http://php.net/array) or an instance of the
-[Traversable](http://php.net/traversable) interface. This is useful in the case
-that the value must be a collection, but the outer type is not important.
+Mixed can be treated as a [traversable type], as in the second example above.
+When used in this fashion, mixed indicates any type that can be traversed, such
+as an [array] or an instance of the [Traversable] interface. This is useful in
+the case that the value must be a collection, but the outer type is not
+important.
 
 ### Null
 
     null
 
-A [null](http://php.net/manual/en/language.types.null.php).
+A [null].
 
 Equivalent to `=== null`.
 
@@ -107,22 +107,18 @@ Equivalent to `=== null`.
     ClassName
     ClassName<keyType, valueType>
 
-The first form, `object`, indicates a value that is an
-[object](http://www.php.net/manual/en/language.oop5.php) of *any* class. This is
-equivalent to the [is_object()](http://php.net/is_object) function.
+The first form, `object`, indicates a value that is an [object] of *any* class.
+This is equivalent to the [is_object()] function.
 
-The second form, `ClassName`, indicates a value that is an
-[object](http://www.php.net/manual/en/language.oop5.php) of class `ClassName`.
-This includes instances of `ClassName`, instances of objects whose class extends
-from `ClassName`, and instances of objects that implement the `ClassName`
-interface. This is equivalent to the
-[instanceof](http://php.net/manual/en/language.operators.type.php) operator.
+The second form, `ClassName`, indicates a value that is an [object] of class
+`ClassName`. This includes instances of `ClassName`, instances of objects whose
+class extends from `ClassName`, and instances of objects that implement the
+`ClassName` interface. This is equivalent to the [instanceof] operator.
 
 The third form, `ClassName<keyType, valueType>`, follows the same rules as the
 second form, with the additional requirement that the object must implement the
-[Traversable](http://php.net/traversable) interface. The key type and value type
-can optionally be specified. See the section on
-[traversable types](#traversable-types) below.
+[Traversable] interface. The key type and value type can optionally be
+specified. See the section on [traversable types] below.
 
 #### Regarding namespaces
 
@@ -130,21 +126,19 @@ Namespace resolution should follow the same rules as PHP source code. That is;
 if the class name is in the current namespace, or has a relevant use statement,
 it's okay to use the short version.
 
-The [Cosmos component](https://github.com/eloquent/cosmos) can be used to aid in
-resolving class names at runtime.
+The [Cosmos component] can be used to aid in resolving class names at runtime.
 
 ### Resource
 
     resource
     resource {ofType: resourceType}
 
-The first form, `resource`, indicates a value that is a
-[resource](http://php.net/resource) of *any* type. This is equivalent to the
-[is_resource()](http://php.net/is_resource) function.
+The first form, `resource`, indicates a value that is a [resource] of *any*
+type. This is equivalent to the [is_resource()] function.
 
 The second form, `resource {ofType: resourceType}`, indicates a value that is a
-[resource](http://php.net/resource) that returns a string equal to
-'resourceType' when passed to [get_resource_type()](http://php.net/get_resource_type).
+[resource] that returns a string equal to 'resourceType' when passed to
+[get_resource_type()].
 
 ### Stream
 
@@ -153,23 +147,21 @@ The second form, `resource {ofType: resourceType}`, indicates a value that is a
     stream {readable: true, writable: false}
     stream {readable: false, writable: true}
 
-Represents a [stream](http://php.net/stream) resource. The **readable** and
-**writable** attributes determine the requirements for the **mode** of the
-stream.
+Represents a [stream] resource. The **readable** and **writable** attributes
+determine the requirements for the **mode** of the stream.
 
 The stream type is equvalent to the Typhax type `resource {ofType: stream}`.
 
-See the PHP documentation for [fopen()](http://php.net/fopen) for more
-information about stream modes.
+See the PHP documentation for [fopen()] for more information about stream modes.
 
 ### String
 
     string
 
-A [string](http://php.net/string). The value must be a true string, and not
-any other type that can be converted to a string.
+A [string]. The value must be a true string, and not any other type that can be
+converted to a string.
 
-Equivalent to the [is_string()](http://php.net/is_string) function.
+Equivalent to the [is_string()] function.
 
 ### Stringable
 
@@ -179,15 +171,15 @@ Represents a value of any type that can be converted to a *useful* string
 representation. This includes strings, integers, floats, and objects that have a
 `__toString()` method.
 
-Arrays, booleans, nulls, resources, and objects *without* a `__toString()` method
-do not qualify as 'stringable'.
+Arrays, booleans, nulls, resources, and objects *without* a `__toString()`
+method do not qualify as 'stringable'.
 
 ### Tuple
 
     tuple<typeA, typeB, typeC, ...>
 
-A [tuple](http://en.wikipedia.org/wiki/Tuple) is an array value of a fixed size,
-with each element being of a specific type.
+A [tuple] is an array value of a fixed size, with each element being of a
+specific type.
 
 Tuples are generally referred to as an *n*-tuple, where *n* is the number of
 elements.
@@ -199,7 +191,8 @@ Tuple arrays must be sequential. That is, the keys of the array must be
 integers, with the first key being 0, and subsequent keys incrementing by 1 for
 each element of the tuple.
 
-As an example, `array('foo', 1)` satisfies the constraint `tuple<string, integer>`.
+As an example, `array('foo', 1)` satisfies the constraint
+`tuple<string, integer>`.
 
 ### Legacy types
 
@@ -207,20 +200,20 @@ The following types are also implemented, but are considered deprecated. They
 exist primarily for compatibility with types and pseudo-types used in the PHP
 manual, and an effort should be made to avoid their use:
 
- * `bool` = `boolean`
- * `callback` = `callable`
- * `double` = `float`
- * `int` = `integer`
- * `long` = `integer`
- * `number` = `integer|float`
- * `numeric` = equivalent to [is_numeric()](http://php.net/is_numeric)
- * `real` = `float`
- * `scalar` = `integer|float|string|boolean`
+- `bool` = `boolean`
+- `callback` = `callable`
+- `double` = `float`
+- `int` = `integer`
+- `long` = `integer`
+- `number` = `integer|float`
+- `numeric` = equivalent to [is_numeric()]
+- `real` = `float`
+- `scalar` = `integer|float|string|boolean`
 
 ## Traversable types
 
 Typhax supports the specification of key and value types for arrays and
-[Traversable](http://php.net/traversable) objects.
+[Traversable] objects.
 
 The specification for key and value types is as follows:
 
@@ -258,8 +251,7 @@ that implements both `InterfaceA` AND `InterfaceB`.
     :ClassName<typeA, typeB, typeC, ...> {...}
 
 Extensions provide a means to expand the capabilies of Typhax with custom logic.
-For an example of how extensions can be utilized, see the
-[Typhoon component](https://github.com/eloquent/typhoon).
+For an example of how extensions can be utilized, see the [Typhoon component].
 
 ## White space
 
@@ -267,6 +259,47 @@ In general, Typhax does not care whether white space is used in type
 specifications. However, the above documentation should serve as a recommended
 style guide.
 
-<!-- references -->
-[Build Status]: https://raw.github.com/eloquent/typhax/gh-pages/artifacts/images/icecave/regular/build-status.png
-[Test Coverage]: https://raw.github.com/eloquent/typhax/gh-pages/artifacts/images/icecave/regular/coverage.png
+<!-- References -->
+
+[@param tag]: http://manual.phpdoc.org/HTMLSmartyConverter/HandS/phpDocumentor/tutorial_tags.param.pkg.html
+[array]: http://php.net/array
+[boolean]: http://php.net/boolean
+[callable]: http://php.net/manual/en/language.types.callable.php
+[closure]: http://php.net/manual/en/functions.anonymous.php
+[Cosmos component]: https://github.com/eloquent/cosmos
+[create_function()]: http://php.net/create_function
+[floating-point number]: http://php.net/float
+[fopen()]: http://php.net/fopen
+[get_resource_type()]: http://php.net/get_resource_type
+[instanceof]: http://php.net/manual/en/language.operators.type.php
+[integer]: http://php.net/integer
+[is_array()]: http://php.net/is_array
+[is_bool()]: http://php.net/is_bool
+[is_callable()]: http://php.net/is_callable
+[is_float()]: http://php.net/is_float
+[is_int()]: http://php.net/is_int
+[is_numeric()]: http://php.net/is_numeric
+[is_object()]: http://php.net/is_object
+[is_resource()]: http://php.net/is_resource
+[is_string()]: http://php.net/is_string
+[null]: http://php.net/manual/en/language.types.null.php
+[object]: http://www.php.net/manual/en/language.oop5.php
+[PHP documentation]: http://php.net/manual/en/language.types.php
+[resource]: http://php.net/resource
+[stream]: http://php.net/stream
+[string]: http://php.net/string
+[traversable type]: #traversable-types
+[traversable types]: #traversable-types
+[Traversable]: http://php.net/traversable
+[tuple]: http://en.wikipedia.org/wiki/Tuple
+[Typhoon component]: https://github.com/eloquent/typhoon
+
+[API documentation]: http://lqnt.co/typhax/artifacts/documentation/api/
+[Composer]: http://getcomposer.org/
+[build-image]: http://img.shields.io/travis/eloquent/typhax/develop.svg "Current build status for the develop branch"
+[Current build status]: https://travis-ci.org/eloquent/typhax
+[coverage-image]: http://img.shields.io/coveralls/eloquent/typhax/develop.svg "Current test coverage for the develop branch"
+[Current coverage status]: https://coveralls.io/r/eloquent/typhax
+[eloquent/lcs]: https://packagist.org/packages/eloquent/lcs
+[Semantic versioning]: http://semver.org/
+[version-image]: http://img.shields.io/:semver-0.9.1-yellow.svg "This project uses semantic versioning"
