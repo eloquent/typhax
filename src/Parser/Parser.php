@@ -31,10 +31,10 @@ use Eloquent\Typhax\Type\ResourceType;
 use Eloquent\Typhax\Type\StreamType;
 use Eloquent\Typhax\Type\StringType;
 use Eloquent\Typhax\Type\StringableType;
-use Eloquent\Typhax\Type\TraversablePrimaryType;
+use Eloquent\Typhax\Type\TraversablePrimaryTypeInterface;
 use Eloquent\Typhax\Type\TraversableType;
 use Eloquent\Typhax\Type\TupleType;
-use Eloquent\Typhax\Type\Type;
+use Eloquent\Typhax\Type\TypeInterface;
 
 class Parser
 {
@@ -67,7 +67,7 @@ class Parser
      * @param integer &$position
      * @param Lexer   $lexer
      *
-     * @return Type
+     * @return TypeInterface
      */
     public function parse($source, &$position = 0, Lexer $lexer = null)
     {
@@ -85,7 +85,7 @@ class Parser
     /**
      * @param array<integer,Token> &$tokens
      *
-     * @return Type
+     * @return TypeInterface
      */
     public function parseTokens(array &$tokens)
     {
@@ -102,7 +102,7 @@ class Parser
     /**
      * @param array<integer,Token> &$tokens
      *
-     * @return Type
+     * @return TypeInterface
      */
     protected function parseType(array &$tokens)
     {
@@ -131,15 +131,17 @@ class Parser
         $this->consumeWhitespace($tokens);
 
         if ($this->currentTokenIsType($tokens, Token::TOKEN_LESS_THAN)) {
-            if (!$type instanceof TraversablePrimaryType) {
+            if (!$type instanceof TraversablePrimaryTypeInterface) {
                 throw new Exception\UnexpectedTokenException(
-                    current($tokens)->name()
-                    , $this->position($tokens)
-                    , Token::typesToNames(array(
-                        Token::TOKEN_BRACE_OPEN,
-                        Token::TOKEN_PLUS,
-                        Token::TOKEN_PIPE,
-                    ))
+                    current($tokens)->name(),
+                    $this->position($tokens),
+                    Token::typesToNames(
+                        array(
+                            Token::TOKEN_BRACE_OPEN,
+                            Token::TOKEN_PLUS,
+                            Token::TOKEN_PIPE,
+                        )
+                    )
                 );
             }
 
@@ -150,11 +152,11 @@ class Parser
                     $count ++;
                     if ($count > 1) {
                         throw new Exception\UnexpectedTokenException(
-                            Token::nameByType(Token::TOKEN_COMMA)
-                            , Parser::position($tokens)
-                            , Token::typesToNames(array(
-                                Token::TOKEN_GREATER_THAN,
-                            ))
+                            Token::nameByType(Token::TOKEN_COMMA),
+                            Parser::position($tokens),
+                            Token::typesToNames(
+                                array(Token::TOKEN_GREATER_THAN)
+                            )
                         );
                     }
                 }
@@ -168,15 +170,11 @@ class Parser
                 list($keyType, $valueType) = $types;
             }
 
-            $type = new TraversableType($type, $keyType, $valueType);
+            $type = new TraversableType($type, $valueType, $keyType);
         }
 
         if ($type instanceof ArrayType) {
-            $type = new TraversableType(
-                $type,
-                new MixedType,
-                new MixedType
-            );
+            $type = new TraversableType($type);
         }
 
         return $type;
@@ -185,14 +183,17 @@ class Parser
     /**
      * @param array<integer,Token> &$tokens
      *
-     * @return Type
+     * @return TypeInterface
      */
     protected function parseTypeName(array &$tokens)
     {
-        $token = $this->assert($tokens, array(
-            Token::TOKEN_TYPE_NAME,
-            Token::TOKEN_NULL,
-        ));
+        $token = $this->assert(
+            $tokens,
+            array(
+                Token::TOKEN_TYPE_NAME,
+                Token::TOKEN_NULL,
+            )
+        );
 
         if ('resource' === $token->content()) {
             return $this->parseResourceType($tokens);
@@ -226,21 +227,20 @@ class Parser
             case 'null':
                 return new NullType;
             case 'number':
-                return new OrType(array(
-                    new IntegerType,
-                    new FloatType,
-                ));
+                return new OrType(array(new IntegerType, new FloatType));
             case 'numeric':
                 return new NumericType;
             case 'object':
                 return new ObjectType;
             case 'scalar':
-                return new OrType(array(
-                    new IntegerType,
-                    new FloatType,
-                    new StringType,
-                    new BooleanType,
-                ));
+                return new OrType(
+                    array(
+                        new IntegerType,
+                        new FloatType,
+                        new StringType,
+                        new BooleanType,
+                    )
+                );
             case 'string':
                 return new StringType;
             case 'stringable':
@@ -274,7 +274,9 @@ class Parser
         $this->consumeWhitespace($tokens);
 
         if ($this->currentTokenIsType($tokens, Token::TOKEN_BRACE_OPEN)) {
-            $attributes = $this->parseAttributes($tokens, ':'.$token->content());
+            $attributes = $this->parseAttributes(
+                $tokens, ':' . $token->content()
+            );
         } else {
             $attributes = array();
         }
@@ -365,17 +367,17 @@ class Parser
      * @param array<integer,Token> &$tokens
      * @param Closure|null         $commaCallback
      *
-     * @return Type
+     * @return TypeInterface
      */
-    protected function parseTypeList(array &$tokens, Closure $commaCallback = null)
-    {
+    protected function parseTypeList(
+        array &$tokens,
+        Closure $commaCallback = null
+    ) {
         $this->consumeWhitespace($tokens);
         $this->assert($tokens, Token::TOKEN_LESS_THAN);
         next($tokens);
 
-        $types = array(
-            $this->parseTokens($tokens)
-        );
+        $types = array($this->parseTokens($tokens));
 
         $this->consumeWhitespace($tokens);
 
@@ -412,11 +414,15 @@ class Parser
         $attributes = $this->parseHashContents(
             $tokens,
             function ($attribute) use (&$tokens, $typeName, $supportedAttributes) {
-                if ($supportedAttributes !== null && !in_array($attribute, $supportedAttributes)) {
+                if (
+                    $supportedAttributes !== null &&
+                    !in_array($attribute, $supportedAttributes)
+                ) {
                     throw new Exception\UnsupportedAttributeException(
                         $typeName,
                         $attribute,
-                        Parser::position($tokens) - mb_strlen($attribute, 'UTF-8')
+                        Parser::position($tokens) -
+                            mb_strlen($attribute, 'UTF-8')
                     );
                 }
             }
@@ -438,18 +444,21 @@ class Parser
     {
         $this->consumeWhitespace($tokens);
 
-        $token = $this->assert($tokens, array(
-            Token::TOKEN_STRING,
-            Token::TOKEN_STRING_QUOTED,
-            Token::TOKEN_TYPE_NAME,
-            Token::TOKEN_INTEGER,
-            Token::TOKEN_FLOAT,
-            Token::TOKEN_NULL,
-            Token::TOKEN_BOOLEAN_TRUE,
-            Token::TOKEN_BOOLEAN_FALSE,
-            Token::TOKEN_BRACE_OPEN,
-            Token::TOKEN_SQUARE_BRACKET_OPEN,
-        ));
+        $token = $this->assert(
+            $tokens,
+            array(
+                Token::TOKEN_STRING,
+                Token::TOKEN_STRING_QUOTED,
+                Token::TOKEN_TYPE_NAME,
+                Token::TOKEN_INTEGER,
+                Token::TOKEN_FLOAT,
+                Token::TOKEN_NULL,
+                Token::TOKEN_BOOLEAN_TRUE,
+                Token::TOKEN_BOOLEAN_FALSE,
+                Token::TOKEN_BRACE_OPEN,
+                Token::TOKEN_SQUARE_BRACKET_OPEN,
+            )
+        );
 
         if (Token::TOKEN_BRACE_OPEN === $token->type()) {
             return $this->parseHash($tokens);
@@ -512,8 +521,10 @@ class Parser
      *
      * @return array
      */
-    protected function parseHashContents(array &$tokens, Closure $keyCallback = null)
-    {
+    protected function parseHashContents(
+        array &$tokens,
+        Closure $keyCallback = null
+    ) {
         $hash = array();
         while (true) {
             $key = $this->parseValue($tokens);
@@ -549,7 +560,12 @@ class Parser
         next($tokens);
         $this->consumeWhitespace($tokens);
 
-        if ($this->currentTokenIsType($tokens, Token::TOKEN_SQUARE_BRACKET_CLOSE)) {
+        if (
+            $this->currentTokenIsType(
+                $tokens,
+                Token::TOKEN_SQUARE_BRACKET_CLOSE
+            )
+        ) {
             next($tokens);
 
             return array();
@@ -575,14 +591,20 @@ class Parser
 
     /**
      * @param array<integer,Token> &$tokens
-     * @param Type                 $types
+     * @param TypeInterface        $types
      * @param integer              $minimum_precedence
      *
-     * @return Type
+     * @return TypeInterface
      */
-    protected function parseComposite(array &$tokens, Type $left, $minimum_precedence = 0)
-    {
-        while ($minimum_precedence <= ($precedence = $this->getCompositePrecedence($tokens))) {
+    protected function parseComposite(
+        array &$tokens,
+        TypeInterface $left,
+        $minimum_precedence = 0
+    ) {
+        while (
+            $minimum_precedence <=
+            ($precedence = $this->getCompositePrecedence($tokens))
+        ) {
             $operator = current($tokens)->content();
 
             next($tokens);
@@ -590,7 +612,11 @@ class Parser
             $right = $this->parseType($tokens);
 
             if ($precedence < $this->getCompositePrecedence($tokens)) {
-                $right = $this->parseComposite($tokens, $right, $precedence + 1);
+                $right = $this->parseComposite(
+                    $tokens,
+                    $right,
+                    $precedence + 1
+                );
             }
 
             $left = $this->makeComposite($operator, $left, $right);
@@ -605,14 +631,17 @@ class Parser
      * Re-uses an existing left-hand-side composite if the operator matches, otherwise
      * a new composite AST node is created.
      *
-     * @param string $operator
-     * @param Type   $left
-     * @param Type   $right
+     * @param string        $operator
+     * @param TypeInterface $left
+     * @param TypeInterface $right
      *
      * @return CompositeType
      */
-    protected function makeComposite($operator, Type $left, Type $right)
-    {
+    protected function makeComposite(
+        $operator,
+        TypeInterface $left,
+        TypeInterface $right
+    ) {
         if (Token::TOKEN_PLUS === $operator) {
             $compositeType = 'Eloquent\Typhax\Type\AndType';
         } else {
@@ -639,9 +668,9 @@ class Parser
         $token = current($tokens);
         if ($token) {
             $precedence = array_search(
-                $token->type()
-                , $this->compositePrecedence
-                , true
+                $token->type(),
+                $this->compositePrecedence,
+                true
             );
             if (false === $precedence) {
                 $precedence = -1;
@@ -679,9 +708,9 @@ class Parser
         }
 
         throw new Exception\UnexpectedTokenException(
-            $tokenName
-            , $this->position($tokens)
-            , Token::typesToNames($types)
+            $tokenName,
+            $this->position($tokens),
+            Token::typesToNames($types)
         );
     }
 
@@ -713,10 +742,8 @@ class Parser
      */
     protected function currentTokenIsType(&$tokens, $type)
     {
-        return
-            !$this->endReached($tokens)
-            && current($tokens)->type() === $type
-        ;
+        return !$this->endReached($tokens) &&
+            current($tokens)->type() === $type;
     }
 
     /**

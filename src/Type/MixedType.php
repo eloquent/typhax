@@ -11,14 +11,19 @@
 
 namespace Eloquent\Typhax\Type;
 
-class MixedType implements TraversablePrimaryType
+/**
+ * Represents a mixed type.
+ */
+class MixedType implements TraversablePrimaryTypeInterface
 {
     /**
-     * @param Visitor $visitor
+     * Accept a visitor.
      *
-     * @return mixed
+     * @param VisitorInterface $visitor The visitor.
+     *
+     * @return mixed The result of visitation.
      */
-    public function accept(Visitor $visitor)
+    public function accept(VisitorInterface $visitor)
     {
         return $visitor->visitMixedType($this);
     }

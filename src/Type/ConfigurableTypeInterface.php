@@ -1,4 +1,4 @@
-<?php // @codeCoverageIgnoreStart
+<?php
 
 /*
  * This file is part of the Typhax package.
@@ -11,12 +11,15 @@
 
 namespace Eloquent\Typhax\Type;
 
-interface Type
+/**
+ * The interface implemented by configurable types.
+ */
+interface ConfigurableTypeInterface extends TypeInterface
 {
     /**
-     * @param Visitor $visitor
+     * Get the attributes.
      *
-     * @return mixed
+     * @return array<string,mixed> The attributes.
      */
-    public function accept(Visitor $visitor);
+    public function attributes();
 }

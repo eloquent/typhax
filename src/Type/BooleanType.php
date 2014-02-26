@@ -11,14 +11,19 @@
 
 namespace Eloquent\Typhax\Type;
 
-class BooleanType implements Type
+/**
+ * Represents a boolean type.
+ */
+class BooleanType implements TypeInterface
 {
     /**
-     * @param Visitor $visitor
+     * Accept a visitor.
      *
-     * @return mixed
+     * @param VisitorInterface $visitor The visitor.
+     *
+     * @return mixed The result of visitation.
      */
-    public function accept(Visitor $visitor)
+    public function accept(VisitorInterface $visitor)
     {
         return $visitor->visitBooleanType($this);
     }

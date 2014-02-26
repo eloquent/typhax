@@ -19,8 +19,8 @@ class TupleTypeTest extends PHPUnit_Framework_TestCase
     public function testTypes()
     {
         $types = array(
-            Phake::mock(__NAMESPACE__.'\Type'),
-            Phake::mock(__NAMESPACE__.'\Type'),
+            Phake::mock(__NAMESPACE__.'\TypeInterface'),
+            Phake::mock(__NAMESPACE__.'\TypeInterface'),
         );
         $type = Phake::partialMock(__NAMESPACE__.'\TupleType', $types);
 

@@ -12,9 +12,8 @@
 namespace Eloquent\Typhax\Parser\Exception;
 
 use Exception;
-use LogicException;
 
-abstract class ParseException extends LogicException
+abstract class ParseException extends Exception
 {
     /**
      * @param string    $message

@@ -11,14 +11,19 @@
 
 namespace Eloquent\Typhax\Type;
 
-class CallableType implements Type
+/**
+ * Represents a callable type.
+ */
+class CallableType implements TypeInterface
 {
     /**
-     * @param Visitor $visitor
+     * Accept a visitor.
      *
-     * @return mixed
+     * @param VisitorInterface $visitor The visitor.
+     *
+     * @return mixed The result of visitation.
      */
-    public function accept(Visitor $visitor)
+    public function accept(VisitorInterface $visitor)
     {
         return $visitor->visitCallableType($this);
     }

@@ -15,7 +15,7 @@ use Eloquent\Typhax\Type\AndType;
 use Eloquent\Typhax\Type\ArrayType;
 use Eloquent\Typhax\Type\BooleanType;
 use Eloquent\Typhax\Type\CallableType;
-use Eloquent\Typhax\Type\CompositeType;
+use Eloquent\Typhax\Type\CompositeTypeInterface;
 use Eloquent\Typhax\Type\ExtensionType;
 use Eloquent\Typhax\Type\FloatType;
 use Eloquent\Typhax\Type\IntegerType;
@@ -30,22 +30,22 @@ use Eloquent\Typhax\Type\StringType;
 use Eloquent\Typhax\Type\StringableType;
 use Eloquent\Typhax\Type\TraversableType;
 use Eloquent\Typhax\Type\TupleType;
-use Eloquent\Typhax\Type\Type;
-use Eloquent\Typhax\Type\Visitor;
+use Eloquent\Typhax\Type\TypeInterface;
+use Eloquent\Typhax\Type\VisitorInterface;
 use ReflectionObject;
 
-class TypeEquivalenceComparatorVisitor implements Visitor
+class TypeEquivalenceComparatorVisitor implements VisitorInterface
 {
     /**
-     * @param Type $type
+     * @param TypeInterface $type
      */
-    public function __construct(Type $type)
+    public function __construct(TypeInterface $type)
     {
         $this->type = $type;
     }
 
     /**
-     * @return Type
+     * @return TypeInterface
      */
     public function type()
     {
@@ -327,27 +327,24 @@ class TypeEquivalenceComparatorVisitor implements Visitor
     }
 
     /**
-     * @param Type $type
+     * @param TypeInterface $type
      *
      * @return integer
      */
-    protected function compareClass(Type $type)
+    protected function compareClass(TypeInterface $type)
     {
         $leftReflector = new ReflectionObject($this->type());
         $rightReflector = new ReflectionObject($type);
 
-        return strcmp(
-            $leftReflector->getName(),
-            $rightReflector->getName()
-        );
+        return strcmp($leftReflector->getName(), $rightReflector->getName());
     }
 
     /**
-     * @param Type $type
+     * @param CompositeTypeInterface $type
      *
      * @return integer
      */
-    protected function compareComposite(CompositeType $type)
+    protected function compareComposite(CompositeTypeInterface $type)
     {
         $difference = $this->compareClass($type);
         if (0 !== $difference) {
@@ -358,14 +355,17 @@ class TypeEquivalenceComparatorVisitor implements Visitor
     }
 
     /**
-     * @param array<Type> $types
-     * @param boolean     $compareOrder
-     * @param boolean     $unique
+     * @param array<TypeInterface> $types
+     * @param boolean              $compareOrder
+     * @param boolean              $unique
      *
      * @return integer
      */
-    protected function compareTypeList(array $rightTypes, $compareOrder, $unique)
-    {
+    protected function compareTypeList(
+        array $rightTypes,
+        $compareOrder,
+        $unique
+    ) {
         $leftTypes = $this->type()->types();
 
         if ($unique) {
@@ -383,15 +383,24 @@ class TypeEquivalenceComparatorVisitor implements Visitor
         }
 
         if (!$compareOrder) {
-            usort($leftTypes, __NAMESPACE__.'\TypeEquivalenceComparator::compare');
-            usort($rightTypes, __NAMESPACE__.'\TypeEquivalenceComparator::compare');
+            usort(
+                $leftTypes,
+                __NAMESPACE__ . '\TypeEquivalenceComparator::compare'
+            );
+            usort(
+                $rightTypes,
+                __NAMESPACE__ . '\TypeEquivalenceComparator::compare'
+            );
         }
 
         for ($i = 0; $i < $leftTypeCount; $i ++) {
             $leftType = $leftTypes[$i];
             $rightType = $rightTypes[$i];
 
-            $difference = TypeEquivalenceComparator::compare($leftType, $rightType);
+            $difference = TypeEquivalenceComparator::compare(
+                $leftType,
+                $rightType
+            );
             if (0 !== $difference) {
                 return $difference;
             }
@@ -416,16 +425,13 @@ class TypeEquivalenceComparatorVisitor implements Visitor
             return 1;
         }
 
-        return strcmp(
-            strval($left),
-            strval($right)
-        );
+        return strcmp(strval($left), strval($right));
     }
 
     /**
-     * @param array<Type> $types
+     * @param array<TypeInterface> $types
      *
-     * @return array<Type>
+     * @return array<TypeInterface>
      */
     protected function uniqueTypes(array $types)
     {
@@ -440,12 +446,12 @@ class TypeEquivalenceComparatorVisitor implements Visitor
     }
 
     /**
-     * @param Type        $type
-     * @param array<Type> $types
+     * @param TypeInterface        $type
+     * @param array<TypeInterface> $types
      *
      * @return boolean
      */
-    protected function typeInArray(Type $type, array $types)
+    protected function typeInArray(TypeInterface $type, array $types)
     {
         foreach ($types as $thisType) {
             if (TypeEquivalenceComparator::equivalent($thisType, $type)) {

@@ -12,9 +12,9 @@
 namespace Eloquent\Typhax\Type;
 
 /**
- * Represents an and type.
+ * The interface implemented by types.
  */
-class AndType extends AbstractCompositeType
+interface TypeInterface
 {
     /**
      * Accept a visitor.
@@ -23,8 +23,5 @@ class AndType extends AbstractCompositeType
      *
      * @return mixed The result of visitation.
      */
-    public function accept(VisitorInterface $visitor)
-    {
-        return $visitor->visitAndType($this);
-    }
+    public function accept(VisitorInterface $visitor);
 }

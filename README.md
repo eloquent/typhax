@@ -246,8 +246,8 @@ that implements both `InterfaceA` AND `InterfaceB`.
 ### Extension types
 
     :ClassName
-    :ClassName {...}
-    :ClassName<typeA,typeB,typeC,...> {...}
+    :ClassName{...}
+    :ClassName<typeA,typeB,typeC,...>{...}
 
 Extensions provide a means to expand the capabilies of Typhax with custom logic.
 For an example of how extensions can be utilized, see [Typhoon].

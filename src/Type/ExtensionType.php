@@ -13,22 +13,38 @@ namespace Eloquent\Typhax\Type;
 
 use Eloquent\Cosmos\ClassName\ClassNameInterface;
 
-class ExtensionType implements Type
+/**
+ * Represents an extension type.
+ */
+class ExtensionType extends AbstractCompositeType implements
+    ConfigurableTypeInterface
 {
     /**
-     * @param ClassNameInterface $className
-     * @param array<Type>        $types
-     * @param array              $attributes
+     * Construct a new extension type.
+     *
+     * @param ClassNameInterface                $className  The extension class name.
+     * @param array<integer,TypeInterface>|null $types      The sub-types.
+     * @param array<string,mixed>|null          $attributes The attributes.
      */
-    public function __construct(ClassNameInterface $className, array $types, array $attributes)
-    {
+    public function __construct(
+        ClassNameInterface $className,
+        array $types = null,
+        array $attributes = null
+    ) {
+        if (null === $attributes) {
+            $attributes = array();
+        }
+
+        parent::__construct($types);
+
         $this->className = $className;
-        $this->types = $types;
         $this->attributes = $attributes;
     }
 
     /**
-     * @return ClassNameInterface
+     * Get the extension class name.
+     *
+     * @return ClassNameInterface The extension class name.
      */
     public function className()
     {
@@ -36,15 +52,9 @@ class ExtensionType implements Type
     }
 
     /**
-     * @return array<Type>
-     */
-    public function types()
-    {
-        return $this->types;
-    }
-
-    /**
-     * @return array
+     * Get the attributes.
+     *
+     * @return array<string,mixed> The attributes.
      */
     public function attributes()
     {
@@ -52,16 +62,17 @@ class ExtensionType implements Type
     }
 
     /**
-     * @param Visitor $visitor
+     * Accept a visitor.
      *
-     * @return mixed
+     * @param VisitorInterface $visitor The visitor.
+     *
+     * @return mixed The result of visitation.
      */
-    public function accept(Visitor $visitor)
+    public function accept(VisitorInterface $visitor)
     {
         return $visitor->visitExtensionType($this);
     }
 
     private $className;
-    private $types;
     private $attributes;
 }

@@ -11,11 +11,16 @@
 
 namespace Eloquent\Typhax\Type;
 
-class StreamType implements Type
+/**
+ * Represents a stream type.
+ */
+class StreamType implements ConfigurableTypeInterface
 {
     /**
-     * @param boolean|null $readable
-     * @param boolean|null $writable
+     * Construct a new stream type.
+     *
+     * @param boolean|null $readable The required readability status, or null if readability is irrelevant.
+     * @param boolean|null $writable The required writability status, or null if writability is irrelevant.
      */
     public function __construct($readable = null, $writable = null)
     {
@@ -24,7 +29,9 @@ class StreamType implements Type
     }
 
     /**
-     * @return boolean|null
+     * Get the required readability status.
+     *
+     * @return boolean|null The required readability status, or null if readability is irrelevant.
      */
     public function readable()
     {
@@ -32,7 +39,9 @@ class StreamType implements Type
     }
 
     /**
-     * @return boolean|null
+     * Get the required writability status.
+     *
+     * @return boolean|null The required writability status, or null if writability is irrelevant.
      */
     public function writable()
     {
@@ -40,11 +49,31 @@ class StreamType implements Type
     }
 
     /**
-     * @param Visitor $visitor
+     * Get the attributes.
      *
-     * @return mixed
+     * @return array<string,mixed> The attributes.
      */
-    public function accept(Visitor $visitor)
+    public function attributes()
+    {
+        $attributes = array();
+        if (null !== $this->readable()) {
+            $attributes['readable'] = $this->readable();
+        }
+        if (null !== $this->writable()) {
+            $attributes['writable'] = $this->writable();
+        }
+
+        return $attributes;
+    }
+
+    /**
+     * Accept a visitor.
+     *
+     * @param VisitorInterface $visitor The visitor.
+     *
+     * @return mixed The result of visitation.
+     */
+    public function accept(VisitorInterface $visitor)
     {
         return $visitor->visitStreamType($this);
     }

@@ -11,14 +11,19 @@
 
 namespace Eloquent\Typhax\Type;
 
-class ArrayType implements TraversablePrimaryType
+/**
+ * Represents an array type.
+ */
+class ArrayType implements TraversablePrimaryTypeInterface
 {
     /**
-     * @param Visitor $visitor
+     * Accept a visitor.
      *
-     * @return mixed
+     * @param VisitorInterface $visitor The visitor.
+     *
+     * @return mixed The result of visitation.
      */
-    public function accept(Visitor $visitor)
+    public function accept(VisitorInterface $visitor)
     {
         return $visitor->visitArrayType($this);
     }

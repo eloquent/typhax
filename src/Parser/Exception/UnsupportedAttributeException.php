@@ -21,22 +21,26 @@ final class UnsupportedAttributeException extends ParseException
      * @param integer   $position
      * @param Exception $previous
      */
-    public function __construct($typeName, $attribute, $position, Exception $previous = null)
-    {
+    public function __construct(
+        $typeName,
+        $attribute,
+        $position,
+        Exception $previous = null
+    ) {
         $this->typeName = $typeName;
         $this->attribute = $attribute;
 
-        $message =
-            'Unsupported attribute at position '.
-            $position.
-            ". Type '".
-            $typeName.
-            "' does not support attribute '".
-            $attribute.
-            "'."
-        ;
-
-        parent::__construct($message, $position, $previous);
+        parent::__construct(
+            sprintf(
+                'Unsupported attribute at position %d. ' .
+                    'Type %s does not support attribute %s.',
+                $position,
+                var_export($typeName, true),
+                var_export($attribute, true)
+            ),
+            $position,
+            $previous
+        );
     }
 
     /**

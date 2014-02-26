@@ -18,14 +18,14 @@ class TraversableTypeTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->primaryType = Phake::mock(__NAMESPACE__.'\TraversablePrimaryType');
-        $this->keyType = Phake::mock(__NAMESPACE__.'\Type');
-        $this->valueType = Phake::mock(__NAMESPACE__.'\Type');
+        $this->primaryType = Phake::mock(__NAMESPACE__.'\TraversablePrimaryTypeInterface');
+        $this->keyType = Phake::mock(__NAMESPACE__.'\TypeInterface');
+        $this->valueType = Phake::mock(__NAMESPACE__.'\TypeInterface');
 
         $this->type = new TraversableType(
             $this->primaryType,
-            $this->keyType,
-            $this->valueType
+            $this->valueType,
+            $this->keyType
         );
     }
 

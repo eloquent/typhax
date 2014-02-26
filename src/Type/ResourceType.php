@@ -11,10 +11,15 @@
 
 namespace Eloquent\Typhax\Type;
 
-class ResourceType implements Type
+/**
+ * Represents a resource type.
+ */
+class ResourceType implements ConfigurableTypeInterface
 {
     /**
-     * @param string|null $ofType
+     * Construct a new resource type.
+     *
+     * @param string|null $ofType The resource type, or null if the resource can be any type.
      */
     public function __construct($ofType = null)
     {
@@ -22,7 +27,9 @@ class ResourceType implements Type
     }
 
     /**
-     * @return string|null
+     * Get the resource type.
+     *
+     * @return string|null The resource type, or null if the resource can be any type.
      */
     public function ofType()
     {
@@ -30,11 +37,27 @@ class ResourceType implements Type
     }
 
     /**
-     * @param Visitor $visitor
+     * Get the attributes.
      *
-     * @return mixed
+     * @return array<string,mixed> The attributes.
      */
-    public function accept(Visitor $visitor)
+    public function attributes()
+    {
+        if (null === $this->type()) {
+            return array();
+        }
+
+        return array('type' => $this->type());
+    }
+
+    /**
+     * Accept a visitor.
+     *
+     * @param VisitorInterface $visitor The visitor.
+     *
+     * @return mixed The result of visitation.
+     */
+    public function accept(VisitorInterface $visitor)
     {
         return $visitor->visitResourceType($this);
     }

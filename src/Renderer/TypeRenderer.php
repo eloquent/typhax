@@ -29,9 +29,9 @@ use Eloquent\Typhax\Type\StringType;
 use Eloquent\Typhax\Type\StringableType;
 use Eloquent\Typhax\Type\TraversableType;
 use Eloquent\Typhax\Type\TupleType;
-use Eloquent\Typhax\Type\Visitor;
+use Eloquent\Typhax\Type\VisitorInterface;
 
-class TypeRenderer implements Visitor
+class TypeRenderer implements VisitorInterface
 {
     /**
      * @param AndType $type
@@ -85,7 +85,7 @@ class TypeRenderer implements Visitor
      */
     public function visitExtensionType(ExtensionType $type)
     {
-        $string = ':'.$type->className()->toRelative()->string();
+        $string = ':' . $type->className()->toRelative()->string();
 
         if (0 !== count($type->types())) {
             $subTypes = array();
@@ -93,22 +93,16 @@ class TypeRenderer implements Visitor
                 $subTypes[] = $subType->accept($this);
             }
 
-            $string .= sprintf(
-                '<%s>',
-                implode(', ', $subTypes)
-            );
+            $string .= sprintf('<%s>', implode(',', $subTypes));
         }
 
         if (0 !== count($type->attributes())) {
             $attributes = array();
             foreach ($type->attributes() as $key => $value) {
-                $attributes[] = $key.': '.var_export($value, true);
+                $attributes[] = $key . ':' . var_export($value, true);
             }
 
-            $string .= sprintf(
-                ' {%s}',
-                implode(', ', $attributes)
-            );
+            $string .= sprintf('{%s}', implode(',', $attributes));
         }
 
         return $string;
@@ -203,12 +197,12 @@ class TypeRenderer implements Visitor
         $attributes = '';
         if (null !== $type->ofType()) {
             $attributes = sprintf(
-                ' {ofType: %s}',
+                '{ofType:%s}',
                 var_export($type->ofType(), true)
             );
         }
 
-        return 'resource'.$attributes;
+        return 'resource' . $attributes;
     }
 
     /**
@@ -221,30 +215,27 @@ class TypeRenderer implements Visitor
         $attributes = '';
         if (null !== $type->readable()) {
             if ($type->readable()) {
-                $attributes = 'readable: true';
+                $attributes = 'readable:true';
             } else {
-                $attributes = 'readable: false';
+                $attributes = 'readable:false';
             }
         }
         if (null !== $type->writable()) {
             if ('' !== $attributes) {
-                $attributes .= ', ';
+                $attributes .= ',';
             }
 
             if ($type->writable()) {
-                $attributes .= 'writable: true';
+                $attributes .= 'writable:true';
             } else {
-                $attributes .= 'writable: false';
+                $attributes .= 'writable:false';
             }
         }
         if ('' !== $attributes) {
-            $attributes = sprintf(
-                ' {%s}',
-                $attributes
-            );
+            $attributes = sprintf('{%s}', $attributes);
         }
 
-        return 'stream'.$attributes;
+        return 'stream' . $attributes;
     }
 
     /**
@@ -291,11 +282,7 @@ class TypeRenderer implements Visitor
             return $primaryType;
         }
 
-        return sprintf(
-            '%s<%s>',
-            $primaryType,
-            implode(', ', $subTypes)
-        );
+        return sprintf('%s<%s>', $primaryType, implode(',', $subTypes));
     }
 
     /**
@@ -310,9 +297,6 @@ class TypeRenderer implements Visitor
             $subTypes[] = $subType->accept($this);
         }
 
-        return sprintf(
-            'tuple<%s>',
-            implode(', ', $subTypes)
-        );
+        return sprintf('tuple<%s>', implode(',', $subTypes));
     }
 }

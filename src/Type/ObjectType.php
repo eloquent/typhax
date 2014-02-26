@@ -13,10 +13,15 @@ namespace Eloquent\Typhax\Type;
 
 use Eloquent\Cosmos\ClassName\ClassNameInterface;
 
-class ObjectType implements TraversablePrimaryType
+/**
+ * Represents an object type.
+ */
+class ObjectType implements TraversablePrimaryTypeInterface
 {
     /**
-     * @param ClassNameInterface|null $ofType
+     * Construct a new object type.
+     *
+     * @param ClassNameInterface|null $ofType The class name, or null if the object can be any type.
      */
     public function __construct(ClassNameInterface $ofType = null)
     {
@@ -24,7 +29,9 @@ class ObjectType implements TraversablePrimaryType
     }
 
     /**
-     * @return ClassNameInterface|null
+     * Get the class name.
+     *
+     * @return ClassNameInterface|null The class name, or null if the object can be any type.
      */
     public function ofType()
     {
@@ -32,11 +39,13 @@ class ObjectType implements TraversablePrimaryType
     }
 
     /**
-     * @param Visitor $visitor
+     * Accept a visitor.
      *
-     * @return mixed
+     * @param VisitorInterface $visitor The visitor.
+     *
+     * @return mixed The result of visitation.
      */
-    public function accept(Visitor $visitor)
+    public function accept(VisitorInterface $visitor)
     {
         return $visitor->visitObjectType($this);
     }

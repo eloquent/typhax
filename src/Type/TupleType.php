@@ -11,33 +11,20 @@
 
 namespace Eloquent\Typhax\Type;
 
-class TupleType implements Type
+/**
+ * Represents a tuple type.
+ */
+class TupleType extends AbstractCompositeType
 {
     /**
-     * @param array<Type> $types
-     */
-    public function __construct(array $types)
-    {
-        $this->types = $types;
-    }
-
-    /**
-     * @return array<Type>
-     */
-    public function types()
-    {
-        return $this->types;
-    }
-
-    /**
-     * @param Visitor $visitor
+     * Accept a visitor.
      *
-     * @return mixed
+     * @param VisitorInterface $visitor The visitor.
+     *
+     * @return mixed The result of visitation.
      */
-    public function accept(Visitor $visitor)
+    public function accept(VisitorInterface $visitor)
     {
         return $visitor->visitTupleType($this);
     }
-
-    private $types;
 }

@@ -11,14 +11,19 @@
 
 namespace Eloquent\Typhax\Type;
 
-class NullType implements Type
+/**
+ * Represents a null type.
+ */
+class NullType implements TypeInterface
 {
     /**
-     * @param Visitor $visitor
+     * Accept a visitor.
      *
-     * @return mixed
+     * @param VisitorInterface $visitor The visitor.
+     *
+     * @return mixed The result of visitation.
      */
-    public function accept(Visitor $visitor)
+    public function accept(VisitorInterface $visitor)
     {
         return $visitor->visitNullType($this);
     }

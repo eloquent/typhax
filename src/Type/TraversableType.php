@@ -11,25 +11,42 @@
 
 namespace Eloquent\Typhax\Type;
 
-class TraversableType implements Type
+/**
+ * Represents a traversable type.
+ */
+class TraversableType implements TraversableTypeInterface
 {
     /**
-     * @param TraversablePrimaryType $primaryType
-     * @param Type                   $keyType
-     * @param Type                   $valueType
+     * Construct a new traversable type.
+     *
+     * @param TraversablePrimaryTypeInterface|null $primaryType The primary type.
+     * @param TypeInterface|null                   $keyType     The key type.
+     * @param TypeInterface|null                   $valueType   The value type.
      */
     public function __construct(
-        TraversablePrimaryType $primaryType,
-        Type $keyType,
-        Type $valueType
+        TraversablePrimaryTypeInterface $primaryType = null,
+        TypeInterface $valueType = null,
+        TypeInterface $keyType = null
     ) {
+        if (null === $primaryType) {
+            $primaryType = new MixedType;
+        }
+        if (null === $valueType) {
+            $valueType = new MixedType;
+        }
+        if (null === $keyType) {
+            $keyType = new MixedType;
+        }
+
         $this->primaryType = $primaryType;
-        $this->keyType = $keyType;
         $this->valueType = $valueType;
+        $this->keyType = $keyType;
     }
 
     /**
-     * @return TraversablePrimaryType
+     * Get the primary type.
+     *
+     * @return TraversablePrimaryTypeInterface The primary type.
      */
     public function primaryType()
     {
@@ -37,15 +54,9 @@ class TraversableType implements Type
     }
 
     /**
-     * @return Type
-     */
-    public function keyType()
-    {
-        return $this->keyType;
-    }
-
-    /**
-     * @return Type
+     * Get the value type.
+     *
+     * @return TypeInterface The value type.
      */
     public function valueType()
     {
@@ -53,16 +64,38 @@ class TraversableType implements Type
     }
 
     /**
-     * @param Visitor $visitor
+     * Get the key type.
      *
-     * @return mixed
+     * @return TypeInterface The key type.
      */
-    public function accept(Visitor $visitor)
+    public function keyType()
+    {
+        return $this->keyType;
+    }
+
+    /**
+     * Get the sub-types.
+     *
+     * @return array<integer,TypeInterface> The sub-types.
+     */
+    public function types()
+    {
+        return array($this->keyType(), $this->valueType());
+    }
+
+    /**
+     * Accept a visitor.
+     *
+     * @param VisitorInterface $visitor The visitor.
+     *
+     * @return mixed The result of visitation.
+     */
+    public function accept(VisitorInterface $visitor)
     {
         return $visitor->visitTraversableType($this);
     }
 
     private $primaryType;
-    private $keyType;
     private $valueType;
+    private $keyType;
 }

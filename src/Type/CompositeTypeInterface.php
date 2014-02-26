@@ -1,4 +1,4 @@
-<?php // @codeCoverageIgnoreStart
+<?php
 
 /*
  * This file is part of the Typhax package.
@@ -11,6 +11,15 @@
 
 namespace Eloquent\Typhax\Type;
 
-interface TraversablePrimaryType extends Type
+/**
+ * The interface implemented by composite types.
+ */
+interface CompositeTypeInterface extends TypeInterface
 {
+    /**
+     * Get the sub-types.
+     *
+     * @return array<integer,TypeInterface> The sub-types.
+     */
+    public function types();
 }

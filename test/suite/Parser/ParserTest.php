@@ -31,7 +31,6 @@ use Eloquent\Typhax\Type\StringType;
 use Eloquent\Typhax\Type\StringableType;
 use Eloquent\Typhax\Type\TraversableType;
 use Eloquent\Typhax\Type\TupleType;
-use Eloquent\Typhax\Type\Type;
 use PHPUnit_Framework_TestCase;
 use ReflectionObject;
 
@@ -57,7 +56,6 @@ class ParserTest extends PHPUnit_Framework_TestCase
         $position = 14;
         $expected = new TraversableType(
             new ObjectType(ClassName::fromString('foo')),
-            new MixedType,
             new ObjectType(ClassName::fromString('bar'))
         );
         $data['Simple traversable 1'] = array($expected, $position, $source);
@@ -66,8 +64,8 @@ class ParserTest extends PHPUnit_Framework_TestCase
         $position = 20;
         $expected = new TraversableType(
             new ObjectType(ClassName::fromString('foo')),
-            new ObjectType(ClassName::fromString('bar')),
-            new ObjectType(ClassName::fromString('baz'))
+            new ObjectType(ClassName::fromString('baz')),
+            new ObjectType(ClassName::fromString('bar'))
         );
         $data['Simple traversable 2'] = array($expected, $position, $source);
 
@@ -75,12 +73,12 @@ class ParserTest extends PHPUnit_Framework_TestCase
         $position = 35;
         $expected = new TraversableType(
             new ObjectType(ClassName::fromString('foo')),
-            new ObjectType(ClassName::fromString('bar')),
             new TraversableType(
                 new ObjectType(ClassName::fromString('baz')),
-                new ObjectType(ClassName::fromString('qux')),
-                new ObjectType(ClassName::fromString('doom'))
-            )
+                new ObjectType(ClassName::fromString('doom')),
+                new ObjectType(ClassName::fromString('qux'))
+            ),
+            new ObjectType(ClassName::fromString('bar'))
         );
         $data['Nested subtypes'] = array($expected, $position, $source);
 
@@ -125,12 +123,12 @@ class ParserTest extends PHPUnit_Framework_TestCase
         $expected = new TraversableType(
             new ObjectType(ClassName::fromString('foo')),
             new OrType(array(
-                new ObjectType(ClassName::fromString('bar')),
-                new ObjectType(ClassName::fromString('baz')),
-            )),
-            new OrType(array(
                 new ObjectType(ClassName::fromString('qux')),
                 new ObjectType(ClassName::fromString('doom')),
+            )),
+            new OrType(array(
+                new ObjectType(ClassName::fromString('bar')),
+                new ObjectType(ClassName::fromString('baz')),
             ))
         );
         $data['Composite types nested inside traversable'] = array($expected, $position, $source);
@@ -155,8 +153,8 @@ class ParserTest extends PHPUnit_Framework_TestCase
             new ObjectType(ClassName::fromString('foo')),
             new TraversableType(
                 new ObjectType(ClassName::fromString('bar')),
-                new ObjectType(ClassName::fromString('baz')),
-                new ObjectType(ClassName::fromString('qux'))
+                new ObjectType(ClassName::fromString('qux')),
+                new ObjectType(ClassName::fromString('baz'))
             ),
         ));
         $data['Traversable type nested inside composite'] = array($expected, $position, $source);
@@ -202,9 +200,7 @@ class ParserTest extends PHPUnit_Framework_TestCase
         $source = ' array ';
         $position = 8;
         $expected = new TraversableType(
-            new ArrayType,
-            new MixedType,
-            new MixedType
+            new ArrayType
         );
         $data['Array'] = array($expected, $position, $source);
 
@@ -285,7 +281,7 @@ class ParserTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider parserData
      */
-    public function testParser(Type $expected, $position, $source)
+    public function testParser($expected, $position, $source)
     {
         $tokens = $this->lexer->tokens($source);
         $parser = new Parser;
@@ -406,7 +402,7 @@ class ParserTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider hashData
      */
-    public function testParseHash(array $expected, $source)
+    public function testParseHash($expected, $source)
     {
         $tokens = $this->lexer->tokens($source);
         $parser = new Parser;

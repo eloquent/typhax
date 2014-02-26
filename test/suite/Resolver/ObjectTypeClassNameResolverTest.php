@@ -68,6 +68,14 @@ class ObjectTypeClassNameResolverTest extends PHPUnit_Framework_TestCase
     {
         $type = new TraversableType(
             new ObjectType(ClassName::fromString('Spam')),
+            new AndType(array(
+                new ObjectType(ClassName::fromString('Spam')),
+                new ObjectType(ClassName::fromString('Pip')),
+                new TupleType(array(
+                    new ObjectType(ClassName::fromString('Spam')),
+                    new ObjectType(ClassName::fromString('Pip')),
+                )),
+            )),
             new OrType(array(
                 new ExtensionType(
                     ClassName::fromString('Pip'),
@@ -78,18 +86,18 @@ class ObjectTypeClassNameResolverTest extends PHPUnit_Framework_TestCase
                 ),
                 new ObjectType(ClassName::fromString('Spam')),
                 new ObjectType(ClassName::fromString('Pip')),
-            )),
-            new AndType(array(
-                new ObjectType(ClassName::fromString('Spam')),
-                new ObjectType(ClassName::fromString('Pip')),
-                new TupleType(array(
-                    new ObjectType(ClassName::fromString('Spam')),
-                    new ObjectType(ClassName::fromString('Pip')),
-                )),
             ))
         );
         $expected = new TraversableType(
             new ObjectType(ClassName::fromString('\Foo\Bar\Baz\Spam')),
+            new AndType(array(
+                new ObjectType(ClassName::fromString('\Foo\Bar\Baz\Spam')),
+                new ObjectType(ClassName::fromString('\Qux\Doom\Splat')),
+                new TupleType(array(
+                    new ObjectType(ClassName::fromString('\Foo\Bar\Baz\Spam')),
+                    new ObjectType(ClassName::fromString('\Qux\Doom\Splat')),
+                )),
+            )),
             new OrType(array(
                 new ExtensionType(
                     ClassName::fromString('\Qux\Doom\Splat'),
@@ -100,14 +108,6 @@ class ObjectTypeClassNameResolverTest extends PHPUnit_Framework_TestCase
                 ),
                 new ObjectType(ClassName::fromString('\Foo\Bar\Baz\Spam')),
                 new ObjectType(ClassName::fromString('\Qux\Doom\Splat')),
-            )),
-            new AndType(array(
-                new ObjectType(ClassName::fromString('\Foo\Bar\Baz\Spam')),
-                new ObjectType(ClassName::fromString('\Qux\Doom\Splat')),
-                new TupleType(array(
-                    new ObjectType(ClassName::fromString('\Foo\Bar\Baz\Spam')),
-                    new ObjectType(ClassName::fromString('\Qux\Doom\Splat')),
-                )),
             ))
         );
 
@@ -118,11 +118,6 @@ class ObjectTypeClassNameResolverTest extends PHPUnit_Framework_TestCase
     {
         $type = new TraversableType(
             new ArrayType,
-            new OrType(array(
-                new BooleanType,
-                new CallableType,
-                new FloatType,
-            )),
             new AndType(array(
                 new IntegerType,
                 new MixedType,
@@ -135,6 +130,11 @@ class ObjectTypeClassNameResolverTest extends PHPUnit_Framework_TestCase
                     new StringType,
                     new StringableType,
                 )),
+            )),
+            new OrType(array(
+                new BooleanType,
+                new CallableType,
+                new FloatType,
             ))
         );
 

@@ -38,7 +38,7 @@ class VisitorAcceptTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->visitor = Phake::mock(__NAMESPACE__ . '\Visitor');
+        $this->visitor = Phake::mock(__NAMESPACE__ . '\VisitorInterface');
     }
 
     /**

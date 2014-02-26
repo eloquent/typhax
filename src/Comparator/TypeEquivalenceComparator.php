@@ -11,28 +11,28 @@
 
 namespace Eloquent\Typhax\Comparator;
 
-use Eloquent\Typhax\Type\Type;
+use Eloquent\Typhax\Type\TypeInterface;
 
 class TypeEquivalenceComparator
 {
     /**
-     * @param Type $left
-     * @param Type $right
+     * @param TypeInterface $left
+     * @param TypeInterface $right
      *
      * @return integer
      */
-    public static function compare(Type $left, Type $right)
+    public static function compare(TypeInterface $left, TypeInterface $right)
     {
         return $right->accept(new TypeEquivalenceComparatorVisitor($left));
     }
 
     /**
-     * @param Type $left
-     * @param Type $right
+     * @param TypeInterface $left
+     * @param TypeInterface $right
      *
      * @return boolean
      */
-    public static function equivalent(Type $left, Type $right)
+    public static function equivalent(TypeInterface $left, TypeInterface $right)
     {
         return 0 === static::compare($left, $right);
     }

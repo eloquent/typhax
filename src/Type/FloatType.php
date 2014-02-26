@@ -11,14 +11,19 @@
 
 namespace Eloquent\Typhax\Type;
 
-class FloatType implements Type
+/**
+ * Represents a float type.
+ */
+class FloatType implements TypeInterface
 {
     /**
-     * @param Visitor $visitor
+     * Accept a visitor.
      *
-     * @return mixed
+     * @param VisitorInterface $visitor The visitor.
+     *
+     * @return mixed The result of visitation.
      */
-    public function accept(Visitor $visitor)
+    public function accept(VisitorInterface $visitor)
     {
         return $visitor->visitFloatType($this);
     }

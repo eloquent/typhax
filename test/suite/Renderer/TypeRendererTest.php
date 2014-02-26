@@ -67,41 +67,32 @@ class TypeRendererTest extends PHPUnit_Framework_TestCase
 
         $type = new TraversableType(
             new ArrayType,
-            new IntegerType,
-            new StringType
+            new StringType,
+            new IntegerType
         );
-        $expected = 'array<integer, string>';
+        $expected = 'array<integer,string>';
         $data['Traversable type'] = array($expected, $type);
 
         $type = new TraversableType(
             new ArrayType,
-            new MixedType,
             new StringType
         );
         $expected = 'array<string>';
         $data['Traversable type with mixed key'] = array($expected, $type);
 
         $type = new TraversableType(
-            new ArrayType,
-            new MixedType,
-            new MixedType
+            new ArrayType
         );
         $expected = 'array';
         $data['Array type with mixed key and value'] = array($expected, $type);
 
         $type = new TraversableType(
-            new ObjectType(ClassName::fromString('Foo')),
-            new MixedType,
-            new MixedType
+            new ObjectType(ClassName::fromString('Foo'))
         );
         $expected = 'Foo<mixed>';
         $data['Traversable object type with mixed key and value'] = array($expected, $type);
 
-        $type = new TraversableType(
-            new MixedType,
-            new MixedType,
-            new MixedType
-        );
+        $type = new TraversableType;
         $expected = 'mixed<mixed>';
         $data['Traversable mixed type with mixed key and value'] = array($expected, $type);
 
@@ -110,31 +101,31 @@ class TypeRendererTest extends PHPUnit_Framework_TestCase
             new CallableType,
             new FloatType,
         ));
-        $expected = 'tuple<boolean, callable, float>';
+        $expected = 'tuple<boolean,callable,float>';
         $data['Tuple type'] = array($expected, $type);
 
         $type = new ResourceType('foo');
-        $expected = "resource {ofType: 'foo'}";
+        $expected = "resource{ofType:'foo'}";
         $data['Resource ofType'] = array($expected, $type);
 
         $type = new StreamType(true);
-        $expected = 'stream {readable: true}';
+        $expected = 'stream{readable:true}';
         $data['Readable stream'] = array($expected, $type);
 
         $type = new StreamType(false);
-        $expected = 'stream {readable: false}';
+        $expected = 'stream{readable:false}';
         $data['Non-readable stream'] = array($expected, $type);
 
         $type = new StreamType(null, true);
-        $expected = 'stream {writable: true}';
+        $expected = 'stream{writable:true}';
         $data['Writable stream'] = array($expected, $type);
 
         $type = new StreamType(null, false);
-        $expected = 'stream {writable: false}';
+        $expected = 'stream{writable:false}';
         $data['Non-writable stream'] = array($expected, $type);
 
         $type = new StreamType(true, true);
-        $expected = 'stream {readable: true, writable: true}';
+        $expected = 'stream{readable:true,writable:true}';
         $data['Read-write stream'] = array($expected, $type);
 
         $type = new ObjectType(ClassName::fromString('\foo'));
@@ -154,7 +145,7 @@ class TypeRendererTest extends PHPUnit_Framework_TestCase
             array(new IntegerType, new ArrayType),
             array()
         );
-        $expected = ':ext<integer, array>';
+        $expected = ':ext<integer,array>';
         $data['Extension type with types'] = array($expected, $type);
 
         $type = new ExtensionType(
@@ -162,7 +153,7 @@ class TypeRendererTest extends PHPUnit_Framework_TestCase
             array(),
             array('foo' => 'bar', 'quux' => 'doom')
         );
-        $expected = ":ext {foo: 'bar', quux: 'doom'}";
+        $expected = ":ext{foo:'bar',quux:'doom'}";
         $data['Extension type with attributes'] = array($expected, $type);
 
         $type = new ExtensionType(
@@ -170,7 +161,7 @@ class TypeRendererTest extends PHPUnit_Framework_TestCase
             array(new IntegerType, new ArrayType),
             array('foo' => 'bar', 'quux' => 'doom')
         );
-        $expected = ":ext<integer, array> {foo: 'bar', quux: 'doom'}";
+        $expected = ":ext<integer,array>{foo:'bar',quux:'doom'}";
         $data['Extension type with types and attributes'] = array($expected, $type);
 
         return $data;
@@ -179,7 +170,7 @@ class TypeRendererTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider rendererData
      */
-    public function testRenderer($expected, Type $type)
+    public function testRenderer($expected, $type)
     {
         $renderer = new TypeRenderer;
 

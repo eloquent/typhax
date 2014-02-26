@@ -34,7 +34,7 @@ class Lexer
     {
         $tokens = array();
 
-        $rawTokens = token_get_all('<?php '.$source);
+        $rawTokens = token_get_all('<?php ' . $source);
         array_shift($rawTokens);
 
         foreach ($rawTokens as $token) {
@@ -65,7 +65,10 @@ class Lexer
         $tokenContentLowercase = strtolower($token->content());
         $customTokens = $this->customTokens();
         if (array_key_exists($tokenContentLowercase, $customTokens)) {
-            $token = new Token($customTokens[$tokenContentLowercase], $token->content());
+            $token = new Token(
+                $customTokens[$tokenContentLowercase],
+                $token->content()
+            );
         }
 
         // split unsupported PHP tokens that contain supported Typhax tokens
@@ -85,22 +88,48 @@ class Lexer
 
             foreach ($candidates as $candidate) {
                 $candidateLength = strlen($candidate);
-                $candidatePosition = strpos($token->content(), $candidate);
+                $candidatePosition = strpos(
+                    $token->content(),
+                    $candidate
+                );
 
                 if (false !== $candidatePosition) {
                     $normalized = array();
 
                     if ($candidatePosition > 0) {
-                        $preSource = substr($token->content(), 0, $candidatePosition);
-                        $normalized = array_merge($normalized, $this->sourceTokens($preSource));
+                        $preSource = substr(
+                            $token->content(),
+                            0,
+                            $candidatePosition
+                        );
+                        $normalized = array_merge(
+                            $normalized,
+                            $this->sourceTokens($preSource)
+                        );
                     }
 
-                    $candidateSource = substr($token->content(), $candidatePosition, $candidateLength);
-                    $normalized = array_merge($normalized, $this->sourceTokens($candidateSource));
+                    $candidateSource = substr(
+                        $token->content(),
+                        $candidatePosition,
+                        $candidateLength
+                    );
+                    $normalized = array_merge(
+                        $normalized,
+                        $this->sourceTokens($candidateSource)
+                    );
 
-                    if ($candidatePosition < strlen($token->content()) + $candidateLength - 2) {
-                        $postSource = substr($token->content(), $candidatePosition + $candidateLength);
-                        $normalized = array_merge($normalized, $this->sourceTokens($postSource));
+                    if (
+                        $candidatePosition <
+                        strlen($token->content()) + $candidateLength - 2
+                    ) {
+                        $postSource = substr(
+                            $token->content(),
+                            $candidatePosition + $candidateLength
+                        );
+                        $normalized = array_merge(
+                            $normalized,
+                            $this->sourceTokens($postSource)
+                        );
                     }
 
                     return $normalized;
@@ -133,7 +162,10 @@ class Lexer
                 continue;
             } elseif ('"' == $token->content()) {
                 $inQuotes = true;
-                $collapsed[] = new Token(Token::TOKEN_STRING_QUOTED, $token->content());
+                $collapsed[] = new Token(
+                    Token::TOKEN_STRING_QUOTED,
+                    $token->content()
+                );
                 $numTokens ++;
 
                 continue;
@@ -158,9 +190,9 @@ class Lexer
 
         foreach ($tokens as $token) {
             if (
-                Token::TOKEN_STRING === $token->type()
-                && array_key_exists($numTokens - 1, $collapsed)
-                && Token::TOKEN_STRING === $collapsed[$numTokens - 1]->type()
+                Token::TOKEN_STRING === $token->type() &&
+                array_key_exists($numTokens - 1, $collapsed) &&
+                Token::TOKEN_STRING === $collapsed[$numTokens - 1]->type()
             ) {
                 $collapsed[$numTokens - 1]->append($token->content());
 

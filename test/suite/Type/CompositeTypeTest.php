@@ -19,10 +19,10 @@ class CompositeTypeTest extends PHPUnit_Framework_TestCase
     public function testTypes()
     {
         $types = array(
-            Phake::mock(__NAMESPACE__.'\Type'),
-            Phake::mock(__NAMESPACE__.'\Type'),
+            Phake::mock(__NAMESPACE__.'\TypeInterface'),
+            Phake::mock(__NAMESPACE__.'\TypeInterface'),
         );
-        $type = Phake::partialMock(__NAMESPACE__.'\CompositeType', $types);
+        $type = Phake::partialMock(__NAMESPACE__.'\AbstractCompositeType', $types);
 
         $this->assertSame($types, $type->types());
     }

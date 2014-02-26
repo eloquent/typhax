@@ -32,9 +32,9 @@ use Eloquent\Typhax\Type\StringType;
 use Eloquent\Typhax\Type\StringableType;
 use Eloquent\Typhax\Type\TraversableType;
 use Eloquent\Typhax\Type\TupleType;
-use Eloquent\Typhax\Type\Visitor;
+use Eloquent\Typhax\Type\VisitorInterface;
 
-class ObjectTypeClassNameResolver implements Visitor
+class ObjectTypeClassNameResolver implements VisitorInterface
 {
     /**
      * @param ResolutionContextInterface      $resolutionContext
@@ -71,7 +71,7 @@ class ObjectTypeClassNameResolver implements Visitor
     /**
      * @param AndType $type
      *
-     * @return Type
+     * @return TypeInterface
      */
     public function visitAndType(AndType $type)
     {
@@ -86,7 +86,7 @@ class ObjectTypeClassNameResolver implements Visitor
     /**
      * @param ArrayType $type
      *
-     * @return Type
+     * @return TypeInterface
      */
     public function visitArrayType(ArrayType $type)
     {
@@ -96,7 +96,7 @@ class ObjectTypeClassNameResolver implements Visitor
     /**
      * @param BooleanType $type
      *
-     * @return Type
+     * @return TypeInterface
      */
     public function visitBooleanType(BooleanType $type)
     {
@@ -106,7 +106,7 @@ class ObjectTypeClassNameResolver implements Visitor
     /**
      * @param CallableType $type
      *
-     * @return Type
+     * @return TypeInterface
      */
     public function visitCallableType(CallableType $type)
     {
@@ -138,7 +138,7 @@ class ObjectTypeClassNameResolver implements Visitor
     /**
      * @param FloatType $type
      *
-     * @return Type
+     * @return TypeInterface
      */
     public function visitFloatType(FloatType $type)
     {
@@ -148,7 +148,7 @@ class ObjectTypeClassNameResolver implements Visitor
     /**
      * @param IntegerType $type
      *
-     * @return Type
+     * @return TypeInterface
      */
     public function visitIntegerType(IntegerType $type)
     {
@@ -158,7 +158,7 @@ class ObjectTypeClassNameResolver implements Visitor
     /**
      * @param MixedType $type
      *
-     * @return Type
+     * @return TypeInterface
      */
     public function visitMixedType(MixedType $type)
     {
@@ -168,7 +168,7 @@ class ObjectTypeClassNameResolver implements Visitor
     /**
      * @param NullType $type
      *
-     * @return Type
+     * @return TypeInterface
      */
     public function visitNullType(NullType $type)
     {
@@ -178,7 +178,7 @@ class ObjectTypeClassNameResolver implements Visitor
     /**
      * @param NumericType $type
      *
-     * @return Type
+     * @return TypeInterface
      */
     public function visitNumericType(NumericType $type)
     {
@@ -188,7 +188,7 @@ class ObjectTypeClassNameResolver implements Visitor
     /**
      * @param ObjectType $type
      *
-     * @return Type
+     * @return TypeInterface
      */
     public function visitObjectType(ObjectType $type)
     {
@@ -207,7 +207,7 @@ class ObjectTypeClassNameResolver implements Visitor
     /**
      * @param OrType $type
      *
-     * @return Type
+     * @return TypeInterface
      */
     public function visitOrType(OrType $type)
     {
@@ -222,7 +222,7 @@ class ObjectTypeClassNameResolver implements Visitor
     /**
      * @param ResourceType $type
      *
-     * @return Type
+     * @return TypeInterface
      */
     public function visitResourceType(ResourceType $type)
     {
@@ -232,7 +232,7 @@ class ObjectTypeClassNameResolver implements Visitor
     /**
      * @param StreamType $type
      *
-     * @return Type
+     * @return TypeInterface
      */
     public function visitStreamType(StreamType $type)
     {
@@ -242,7 +242,7 @@ class ObjectTypeClassNameResolver implements Visitor
     /**
      * @param StringType $type
      *
-     * @return Type
+     * @return TypeInterface
      */
     public function visitStringType(StringType $type)
     {
@@ -252,7 +252,7 @@ class ObjectTypeClassNameResolver implements Visitor
     /**
      * @param StringableType $type
      *
-     * @return Type
+     * @return TypeInterface
      */
     public function visitStringableType(StringableType $type)
     {
@@ -262,21 +262,21 @@ class ObjectTypeClassNameResolver implements Visitor
     /**
      * @param TraversableType $type
      *
-     * @return Type
+     * @return TypeInterface
      */
     public function visitTraversableType(TraversableType $type)
     {
         return new TraversableType(
             $type->primaryType()->accept($this),
-            $type->keyType()->accept($this),
-            $type->valueType()->accept($this)
+            $type->valueType()->accept($this),
+            $type->keyType()->accept($this)
         );
     }
 
     /**
      * @param TupleType $type
      *
-     * @return Type
+     * @return TypeInterface
      */
     public function visitTupleType(TupleType $type)
     {

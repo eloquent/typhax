@@ -21,28 +21,31 @@ final class UnexpectedTokenException extends ParseException
      * @param array<string> $expected
      * @param Exception     $previous
      */
-    public function __construct($unexpected, $position, array $expected, Exception $previous = null)
-    {
+    public function __construct(
+        $unexpected,
+        $position,
+        array $expected,
+        Exception $previous = null
+    ) {
         $this->unexpected = $unexpected;
         $this->expected = $expected;
 
         if (count($expected) > 1) {
-            $expected = 'one of '.implode(', ', $expected);
+            $expected = 'one of ' . implode(', ', $expected);
         } else {
             $expected = array_pop($expected);
         }
 
-        $message =
-            'Unexpected '.
-            $unexpected.
-            ' at position '.
-            $position.
-            '. Expected '.
-            $expected.
-            '.'
-        ;
-
-        parent::__construct($message, $position, $previous);
+        parent::__construct(
+            sprintf(
+                'Unexpected %s at position %d. Expected %s.',
+                $unexpected,
+                $position,
+                $expected
+            ),
+            $position,
+            $previous
+        );
     }
 
     /**
