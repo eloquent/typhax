@@ -1,6 +1,6 @@
 # Typhax changelog
 
-## Next release
+## 0.10.0 (2015-11-12)
 
 - **[BC BREAK]** Major overhaul of all classes.
 - **[BC BREAK]** Updated the specification with regards to how omitting the key

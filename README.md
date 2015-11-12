@@ -2,7 +2,7 @@
 
 *A flexible PHP type hinting syntax.*
 
-[![The most recent stable version is 0.9.1][version-image]][semantic versioning]
+[![The most recent stable version is 0.10.0][version-image]][semantic versioning]
 [![Current build status image][build-image]][current build status]
 [![Current coverage status image][coverage-image]][current coverage status]
 
@@ -11,7 +11,7 @@
 [current build status]: https://travis-ci.org/eloquent/typhax
 [current coverage status]: https://codecov.io/github/eloquent/typhax
 [semantic versioning]: http://semver.org/
-[version-image]: http://img.shields.io/:semver-0.9.1-yellow.svg?style=flat-square "This project uses semantic versioning"
+[version-image]: http://img.shields.io/:semver-0.10.0-yellow.svg?style=flat-square "This project uses semantic versioning"
 
 ## Installation and documentation
 
