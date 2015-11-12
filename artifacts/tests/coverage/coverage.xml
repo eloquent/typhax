@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1447315682">
-  <project timestamp="1447315682">
+<coverage generated="1447316265">
+  <project timestamp="1447316265">
     <package name="Eloquent\Typhax\Comparator">
       <file name="/home/travis/build/eloquent/typhax/src/Comparator/TypeEquivalenceComparator.php">
         <class name="TypeEquivalenceComparator" namespace="Eloquent\Typhax\Comparator">
