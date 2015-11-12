@@ -12,12 +12,13 @@
         }
     ],
     "require": {
-        "php": ">=5.3",
-        "ext-mbstring": "*",
-        "eloquent/cosmos": "~2"
+        "php": ">=5.3"
     },
     "require-dev": {
-        "icecave/archer": "~1"
+        "eloquent/phony": "^0.5",
+        "icecave/archer": "dev-develop",
+        "phpunit/phpunit": "^4",
+        "sami/sami": "^3"
     },
     "autoload": {
         "psr-4": {

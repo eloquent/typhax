@@ -3,7 +3,7 @@
 /*
  * This file is part of the Typhax package.
  *
- * Copyright © 2014 Erin Millard
+ * Copyright © 2015 Erin Millard
  *
  * For the full copyright and license information, please view the LICENSE file
  * that was distributed with this source code.
@@ -11,16 +11,23 @@
 
 namespace Eloquent\Typhax\Type;
 
+/**
+ * Represents a traversable type.
+ *
+ * @api
+ */
 class TraversableType implements Type
 {
     /**
-     * @param TraversablePrimaryType $primaryType
-     * @param Type                   $keyType
-     * @param Type                   $valueType
+     * Construct a new traversable type.
+     *
+     * @param TraversablePrimaryType $primaryType The primary type.
+     * @param Type|null              $keyType     The key type, or null if the key type was omitted.
+     * @param Type                   $valueType   The value type.
      */
     public function __construct(
         TraversablePrimaryType $primaryType,
-        Type $keyType,
+        Type $keyType = null,
         Type $valueType
     ) {
         $this->primaryType = $primaryType;
@@ -29,7 +36,11 @@ class TraversableType implements Type
     }
 
     /**
-     * @return TraversablePrimaryType
+     * Get the primary type.
+     *
+     * @api
+     *
+     * @return TraversablePrimaryType The primary type.
      */
     public function primaryType()
     {
@@ -37,7 +48,11 @@ class TraversableType implements Type
     }
 
     /**
-     * @return Type
+     * Get the key type.
+     *
+     * @api
+     *
+     * @return Type|null The key type.
      */
     public function keyType()
     {
@@ -45,7 +60,11 @@ class TraversableType implements Type
     }
 
     /**
-     * @return Type
+     * Get the value type.
+     *
+     * @api
+     *
+     * @return Type The value type.
      */
     public function valueType()
     {
@@ -53,11 +72,15 @@ class TraversableType implements Type
     }
 
     /**
-     * @param Visitor $visitor
+     * Accept a visitor.
      *
-     * @return mixed
+     * @api
+     *
+     * @param TypeVisitor $visitor The visitor.
+     *
+     * @return mixed The result of visitation.
      */
-    public function accept(Visitor $visitor)
+    public function accept(TypeVisitor $visitor)
     {
         return $visitor->visitTraversableType($this);
     }

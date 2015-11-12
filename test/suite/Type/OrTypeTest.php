@@ -15,9 +15,9 @@ use Eloquent\Phony\Phpunit\Phony;
 use PHPUnit_Framework_TestCase;
 
 /**
- * @covers \Eloquent\Typhax\Type\TupleType
+ * @covers \Eloquent\Typhax\Type\OrType
  */
-class TupleTypeTest extends PHPUnit_Framework_TestCase
+class OrTypeTest extends PHPUnit_Framework_TestCase
 {
     public function testTypes()
     {
@@ -25,7 +25,7 @@ class TupleTypeTest extends PHPUnit_Framework_TestCase
             Phony::mock(__NAMESPACE__ . '\Type')->mock(),
             Phony::mock(__NAMESPACE__ . '\Type')->mock(),
         );
-        $type = new TupleType($types);
+        $type = new OrType($types);
 
         $this->assertSame($types, $type->types());
     }

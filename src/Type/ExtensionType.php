@@ -3,7 +3,7 @@
 /*
  * This file is part of the Typhax package.
  *
- * Copyright © 2014 Erin Millard
+ * Copyright © 2015 Erin Millard
  *
  * For the full copyright and license information, please view the LICENSE file
  * that was distributed with this source code.
@@ -11,16 +11,21 @@
 
 namespace Eloquent\Typhax\Type;
 
-use Eloquent\Cosmos\ClassName;
-
+/**
+ * Represents an extension type.
+ *
+ * @api
+ */
 class ExtensionType implements Type
 {
     /**
-     * @param ClassName   $className
-     * @param array<Type> $types
-     * @param array       $attributes
+     * Construct a new extension type.
+     *
+     * @param string      $className  The class name.
+     * @param array<Type> $types      The sub-types.
+     * @param array       $attributes The attributes.
      */
-    public function __construct(ClassName $className, array $types, array $attributes)
+    public function __construct($className, array $types, array $attributes)
     {
         $this->className = $className;
         $this->types = $types;
@@ -28,7 +33,11 @@ class ExtensionType implements Type
     }
 
     /**
-     * @return ClassName
+     * Get the class name.
+     *
+     * @api
+     *
+     * @return string The class name.
      */
     public function className()
     {
@@ -36,7 +45,11 @@ class ExtensionType implements Type
     }
 
     /**
-     * @return array<Type>
+     * Get the sub-types.
+     *
+     * @api
+     *
+     * @return array<Type> The sub-types.
      */
     public function types()
     {
@@ -44,7 +57,11 @@ class ExtensionType implements Type
     }
 
     /**
-     * @return array
+     * Get the attributes.
+     *
+     * @api
+     *
+     * @return array The attributes.
      */
     public function attributes()
     {
@@ -52,11 +69,15 @@ class ExtensionType implements Type
     }
 
     /**
-     * @param Visitor $visitor
+     * Accept a visitor.
      *
-     * @return mixed
+     * @api
+     *
+     * @param TypeVisitor $visitor The visitor.
+     *
+     * @return mixed The result of visitation.
      */
-    public function accept(Visitor $visitor)
+    public function accept(TypeVisitor $visitor)
     {
         return $visitor->visitExtensionType($this);
     }

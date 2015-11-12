@@ -3,7 +3,7 @@
 /*
  * This file is part of the Typhax package.
  *
- * Copyright © 2014 Erin Millard
+ * Copyright © 2015 Erin Millard
  *
  * For the full copyright and license information, please view the LICENSE file
  * that was distributed with this source code.
@@ -13,40 +13,46 @@ namespace Eloquent\Typhax\Parser\Exception;
 
 use Exception;
 
-final class UnexpectedTokenException extends ParseException
+/**
+ * An unexpected token was encountered.
+ */
+final class UnexpectedTokenException extends AbstractParseException
 {
     /**
-     * @param string        $unexpected
-     * @param integer       $position
-     * @param array<string> $expected
-     * @param Exception     $previous
+     * Construct a new unexpected token exception.
+     *
+     * @param string        $unexpected The unexpected token name.
+     * @param integer       $offset     The offset.
+     * @param array<string> $expected   The list of expected token names.
+     * @param Exception     $cause      The cause, if available.
      */
-    public function __construct($unexpected, $position, array $expected, Exception $previous = null)
+    public function __construct($unexpected, $offset, array $expected, Exception $cause = null)
     {
         $this->unexpected = $unexpected;
         $this->expected = $expected;
 
         if (count($expected) > 1) {
-            $expected = 'one of '.implode(', ', $expected);
+            $expected = 'one of ' . implode(', ', $expected);
         } else {
             $expected = array_pop($expected);
         }
 
         $message =
-            'Unexpected '.
-            $unexpected.
-            ' at position '.
-            $position.
-            '. Expected '.
-            $expected.
-            '.'
-        ;
+            'Unexpected ' .
+            $unexpected .
+            ' at offset ' .
+            $offset .
+            '. Expected ' .
+            $expected .
+            '.';
 
-        parent::__construct($message, $position, $previous);
+        parent::__construct($message, $offset, $cause);
     }
 
     /**
-     * @return string
+     * Get the unexpected token name.
+     *
+     * @return string The unexpected token name.
      */
     public function unexpected()
     {
@@ -54,7 +60,9 @@ final class UnexpectedTokenException extends ParseException
     }
 
     /**
-     * @return array<string>
+     * Get the expected token names.
+     *
+     * @return array<string> The expected token names.
      */
     public function expected()
     {

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Typhax package.
  *
- * Copyright © 2014 Erin Millard
+ * Copyright © 2015 Erin Millard
  *
  * For the full copyright and license information, please view the LICENSE file
  * that was distributed with this source code.
@@ -13,11 +13,14 @@ namespace Eloquent\Typhax\Type;
 
 use PHPUnit_Framework_TestCase;
 
+/**
+ * @covers \Eloquent\Typhax\Type\StreamType
+ */
 class StreamTypeTest extends PHPUnit_Framework_TestCase
 {
     public function testStreamType()
     {
-        $type = new StreamType;
+        $type = new StreamType();
 
         $this->assertNull($type->readable());
         $this->assertNull($type->writable());

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Typhax package.
  *
- * Copyright © 2014 Erin Millard
+ * Copyright © 2015 Erin Millard
  *
  * For the full copyright and license information, please view the LICENSE file
  * that was distributed with this source code.
@@ -11,10 +11,17 @@
 
 namespace Eloquent\Typhax\Type;
 
+/**
+ * Represents a tuple type.
+ *
+ * @api
+ */
 class TupleType implements Type
 {
     /**
-     * @param array<Type> $types
+     * Construct a tuple type.
+     *
+     * @param array<Type> $types The sub-types.
      */
     public function __construct(array $types)
     {
@@ -22,7 +29,11 @@ class TupleType implements Type
     }
 
     /**
-     * @return array<Type>
+     * Get the sub-types.
+     *
+     * @api
+     *
+     * @return array<Type> The sub-types.
      */
     public function types()
     {
@@ -30,11 +41,15 @@ class TupleType implements Type
     }
 
     /**
-     * @param Visitor $visitor
+     * Accept a visitor.
      *
-     * @return mixed
+     * @api
+     *
+     * @param TypeVisitor $visitor The visitor.
+     *
+     * @return mixed The result of visitation.
      */
-    public function accept(Visitor $visitor)
+    public function accept(TypeVisitor $visitor)
     {
         return $visitor->visitTupleType($this);
     }

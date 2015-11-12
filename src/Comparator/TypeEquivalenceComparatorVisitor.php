@@ -3,7 +3,7 @@
 /*
  * This file is part of the Typhax package.
  *
- * Copyright © 2014 Erin Millard
+ * Copyright © 2015 Erin Millard
  *
  * For the full copyright and license information, please view the LICENSE file
  * that was distributed with this source code.
@@ -15,7 +15,6 @@ use Eloquent\Typhax\Type\AndType;
 use Eloquent\Typhax\Type\ArrayType;
 use Eloquent\Typhax\Type\BooleanType;
 use Eloquent\Typhax\Type\CallableType;
-use Eloquent\Typhax\Type\CompositeType;
 use Eloquent\Typhax\Type\ExtensionType;
 use Eloquent\Typhax\Type\FloatType;
 use Eloquent\Typhax\Type\IntegerType;
@@ -26,36 +25,40 @@ use Eloquent\Typhax\Type\ObjectType;
 use Eloquent\Typhax\Type\OrType;
 use Eloquent\Typhax\Type\ResourceType;
 use Eloquent\Typhax\Type\StreamType;
-use Eloquent\Typhax\Type\StringType;
 use Eloquent\Typhax\Type\StringableType;
+use Eloquent\Typhax\Type\StringType;
 use Eloquent\Typhax\Type\TraversableType;
 use Eloquent\Typhax\Type\TupleType;
 use Eloquent\Typhax\Type\Type;
-use Eloquent\Typhax\Type\Visitor;
-use ReflectionObject;
+use Eloquent\Typhax\Type\TypeVisitor;
 
-class TypeEquivalenceComparatorVisitor implements Visitor
+/**
+ * A visitor that compares types for equivalence.
+ */
+class TypeEquivalenceComparatorVisitor implements TypeVisitor
 {
     /**
-     * @param Type $type
-     */
-    public function __construct(Type $type)
-    {
-        $this->type = $type;
-    }
-
-    /**
-     * @return Type
-     */
-    public function type()
-    {
-        return $this->type;
-    }
-
-    /**
-     * @param AndType $type
+     * Construct a new type equivalence comparator visitor.
      *
-     * @return integer
+     * @param TypeEquivalenceComparator $comparator The comparator.
+     * @param Type                      $type       The type.
+     */
+    public function __construct(
+        TypeEquivalenceComparator $comparator,
+        Type $type
+    ) {
+        $this->comparator = $comparator;
+        $this->type = $type;
+        $this->class = get_class($type);
+        $this->isMixed = $type instanceof MixedType;
+    }
+
+    /**
+     * Visit an and type.
+     *
+     * @param AndType $type The type.
+     *
+     * @return mixed The result of visitation.
      */
     public function visitAndType(AndType $type)
     {
@@ -63,58 +66,69 @@ class TypeEquivalenceComparatorVisitor implements Visitor
     }
 
     /**
-     * @param ArrayType $type
+     * Visit an array type.
      *
-     * @return integer
+     * @param ArrayType $type The type.
+     *
+     * @return mixed The result of visitation.
      */
     public function visitArrayType(ArrayType $type)
     {
-        return $this->compareClass($type);
+        return $this->comparePrimaryType($type);
     }
 
     /**
-     * @param BooleanType $type
+     * Visit a boolean type.
      *
-     * @return integer
+     * @param BooleanType $type The type.
+     *
+     * @return mixed The result of visitation.
      */
     public function visitBooleanType(BooleanType $type)
     {
-        return $this->compareClass($type);
+        return $this->comparePrimaryType($type);
     }
 
     /**
-     * @param CallableType $type
+     * Visit a callable type.
      *
-     * @return integer
+     * @param CallableType $type The type.
+     *
+     * @return mixed The result of visitation.
      */
     public function visitCallableType(CallableType $type)
     {
-        return $this->compareClass($type);
+        return $this->comparePrimaryType($type);
     }
 
     /**
-     * @param ExtensionType $type
+     * Visit an extension type.
      *
-     * @return mixed
+     * @param ExtensionType $type The type.
+     *
+     * @return mixed The result of visitation.
      */
     public function visitExtensionType(ExtensionType $type)
     {
-        $difference = $this->compareClass($type);
+        $difference = $this->comparePrimaryType($type);
+
         if (0 !== $difference) {
             return $difference;
         }
 
-        $difference = strcmp($this->type()->className(), $type->className());
+        $difference = strcmp($this->type->className(), $type->className());
+
         if (0 !== $difference) {
             return $difference;
         }
 
         $difference = $this->compareTypeList($type->types(), true, false);
+
         if (0 !== $difference) {
             return $difference;
         }
 
-        $left  = $this->type()->attributes();
+        $left = $this->type->attributes();
         $right = $type->attributes();
 
         if ($left < $right) {
@@ -136,77 +150,93 @@ class TypeEquivalenceComparatorVisitor implements Visitor
     }
 
     /**
-     * @param FloatType $type
+     * Visit a float type.
      *
-     * @return integer
+     * @param FloatType $type The type.
+     *
+     * @return mixed The result of visitation.
      */
     public function visitFloatType(FloatType $type)
     {
-        return $this->compareClass($type);
+        return $this->comparePrimaryType($type);
     }
 
     /**
-     * @param IntegerType $type
+     * Visit an integer type.
      *
-     * @return integer
+     * @param IntegerType $type The type.
+     *
+     * @return mixed The result of visitation.
      */
     public function visitIntegerType(IntegerType $type)
     {
-        return $this->compareClass($type);
+        return $this->comparePrimaryType($type);
     }
 
     /**
-     * @param MixedType $type
+     * Visit a mixed type.
      *
-     * @return integer
+     * @param MixedType $type The type.
+     *
+     * @return mixed The result of visitation.
      */
     public function visitMixedType(MixedType $type)
     {
-        return $this->compareClass($type);
+        if ($this->isMixed) {
+            return 0;
+        }
+
+        return 1;
     }
 
     /**
-     * @param NullType $type
+     * Visit a null type.
      *
-     * @return integer
+     * @param NullType $type The type.
+     *
+     * @return mixed The result of visitation.
      */
     public function visitNullType(NullType $type)
     {
-        return $this->compareClass($type);
+        return $this->comparePrimaryType($type);
     }
 
     /**
-     * @param NumericType $type
+     * Visit a numeric type.
      *
-     * @return integer
+     * @param NumericType $type The type.
+     *
+     * @return mixed The result of visitation.
      */
     public function visitNumericType(NumericType $type)
     {
-        return $this->compareClass($type);
+        return $this->comparePrimaryType($type);
     }
 
     /**
-     * @param ObjectType $type
+     * Visit an object type.
      *
-     * @return integer
+     * @param ObjectType $type The type.
+     *
+     * @return mixed The result of visitation.
      */
     public function visitObjectType(ObjectType $type)
     {
-        $difference = $this->compareClass($type);
+        $difference = $this->comparePrimaryType($type);
+
         if (0 !== $difference) {
             return $difference;
         }
 
-        return $this->compareAttribute(
-            $this->type()->ofType(),
-            $type->ofType()
-        );
+        return $this->compareAttribute($this->type->ofType(), $type->ofType());
     }
 
     /**
-     * @param OrType $type
+     * Visit an or type.
      *
-     * @return integer
+     * @param OrType $type The type.
+     *
+     * @return mixed The result of visitation.
      */
     public function visitOrType(OrType $type)
     {
@@ -214,111 +244,128 @@ class TypeEquivalenceComparatorVisitor implements Visitor
     }
 
     /**
-     * @param ResourceType $type
+     * Visit a resource type.
      *
-     * @return integer
+     * @param ResourceType $type The type.
+     *
+     * @return mixed The result of visitation.
      */
     public function visitResourceType(ResourceType $type)
     {
-        $difference = $this->compareClass($type);
+        $difference = $this->comparePrimaryType($type);
+
         if (0 !== $difference) {
             return $difference;
         }
 
-        return $this->compareAttribute(
-            $this->type()->ofType(),
-            $type->ofType()
-        );
+        return $this->compareAttribute($this->type->ofType(), $type->ofType());
     }
 
     /**
-     * @param StreamType $type
+     * Visit a stream type.
      *
-     * @return integer
+     * @param StreamType $type The type.
+     *
+     * @return mixed The result of visitation.
      */
     public function visitStreamType(StreamType $type)
     {
-        $difference = $this->compareClass($type);
+        $difference = $this->comparePrimaryType($type);
+
         if (0 !== $difference) {
             return $difference;
         }
 
-        $difference = $this->compareAttribute(
-            $this->type()->readable(),
-            $type->readable()
-        );
+        $difference =
+            $this->compareAttribute($this->type->readable(), $type->readable());
+
         if (0 !== $difference) {
             return $difference;
         }
 
-        return $this->compareAttribute(
-            $this->type()->writable(),
-            $type->writable()
-        );
+        return
+            $this->compareAttribute($this->type->writable(), $type->writable());
     }
 
     /**
-     * @param StringType $type
+     * Visit a string type.
      *
-     * @return integer
+     * @param StringType $type The type.
+     *
+     * @return mixed The result of visitation.
      */
     public function visitStringType(StringType $type)
     {
-        return $this->compareClass($type);
+        return $this->comparePrimaryType($type);
     }
 
     /**
-     * @param StringableType $type
+     * Visit a stringable type.
      *
-     * @return integer
+     * @param StringableType $type The type.
+     *
+     * @return mixed The result of visitation.
      */
     public function visitStringableType(StringableType $type)
     {
-        return $this->compareClass($type);
+        return $this->comparePrimaryType($type);
     }
 
     /**
-     * @param TraversableType $type
+     * Visit a traversable type.
      *
-     * @return integer
+     * @param TraversableType $type The type.
+     *
+     * @return mixed The result of visitation.
      */
     public function visitTraversableType(TraversableType $type)
     {
-        $difference = $this->compareClass($type);
+        $difference = $this->comparePrimaryType($type);
+
         if (0 !== $difference) {
             return $difference;
         }
 
-        $difference = TypeEquivalenceComparator::compare(
-            $this->type()->primaryType(),
-            $type->primaryType()
-        );
+        $difference = $this->comparator
+            ->compare($this->type->primaryType(), $type->primaryType());
+
         if (0 !== $difference) {
             return $difference;
         }
 
-        $difference = TypeEquivalenceComparator::compare(
-            $this->type()->keyType(),
-            $type->keyType()
-        );
-        if (0 !== $difference) {
-            return $difference;
+        $leftKeyType = $this->type->keyType();
+        $rightKeyType = $type->keyType();
+
+        if ($leftKeyType) {
+            if ($rightKeyType) {
+                $difference =
+                    $this->comparator->compare($leftKeyType, $rightKeyType);
+
+                if (0 !== $difference) {
+                    return $difference;
+                }
+            } else {
+                return 1;
+            }
+        } elseif ($rightKeyType) {
+            return -1;
         }
 
-        return TypeEquivalenceComparator::compare(
-            $this->type()->valueType(),
-            $type->valueType()
-        );
+        return $this->comparator
+            ->compare($this->type->valueType(), $type->valueType());
     }
 
     /**
-     * @param TupleType $type
+     * Visit a tuple type.
      *
-     * @return integer
+     * @param TupleType $type The type.
+     *
+     * @return mixed The result of visitation.
      */
     public function visitTupleType(TupleType $type)
     {
-        $difference = $this->compareClass($type);
+        $difference = $this->comparePrimaryType($type);
+
         if (0 !== $difference) {
             return $difference;
         }
@@ -326,30 +373,19 @@ class TypeEquivalenceComparatorVisitor implements Visitor
         return $this->compareTypeList($type->types(), true, false);
     }
 
-    /**
-     * @param Type $type
-     *
-     * @return integer
-     */
-    protected function compareClass(Type $type)
+    private function comparePrimaryType($type)
     {
-        $leftReflector = new ReflectionObject($this->type());
-        $rightReflector = new ReflectionObject($type);
+        if ($this->isMixed) {
+            return -1;
+        }
 
-        return strcmp(
-            $leftReflector->getName(),
-            $rightReflector->getName()
-        );
+        return strcmp($this->class, get_class($type));
     }
 
-    /**
-     * @param Type $type
-     *
-     * @return integer
-     */
-    protected function compareComposite(CompositeType $type)
+    private function compareComposite($type)
     {
-        $difference = $this->compareClass($type);
+        $difference = $this->comparePrimaryType($type);
+
         if (0 !== $difference) {
             return $difference;
         }
@@ -357,16 +393,9 @@ class TypeEquivalenceComparatorVisitor implements Visitor
         return $this->compareTypeList($type->types(), false, true);
     }
 
-    /**
-     * @param array<Type> $types
-     * @param boolean     $compareOrder
-     * @param boolean     $unique
-     *
-     * @return integer
-     */
-    protected function compareTypeList(array $rightTypes, $compareOrder, $unique)
+    private function compareTypeList($rightTypes, $compareOrder, $unique)
     {
-        $leftTypes = $this->type()->types();
+        $leftTypes = $this->type->types();
 
         if ($unique) {
             $leftTypes = $this->uniqueTypes($leftTypes);
@@ -375,23 +404,26 @@ class TypeEquivalenceComparatorVisitor implements Visitor
 
         $leftTypeCount = count($leftTypes);
         $rightTypeCount = count($rightTypes);
+
         if ($leftTypeCount < $rightTypeCount) {
             return -1;
         }
+
         if ($leftTypeCount > $rightTypeCount) {
             return 1;
         }
 
         if (!$compareOrder) {
-            usort($leftTypes, __NAMESPACE__.'\TypeEquivalenceComparator::compare');
-            usort($rightTypes, __NAMESPACE__.'\TypeEquivalenceComparator::compare');
+            usort($leftTypes, array($this->comparator, 'compare'));
+            usort($rightTypes, array($this->comparator, 'compare'));
         }
 
-        for ($i = 0; $i < $leftTypeCount; $i ++) {
+        for ($i = 0; $i < $leftTypeCount; ++$i) {
             $leftType = $leftTypes[$i];
             $rightType = $rightTypes[$i];
 
-            $difference = TypeEquivalenceComparator::compare($leftType, $rightType);
+            $difference = $this->comparator->compare($leftType, $rightType);
+
             if (0 !== $difference) {
                 return $difference;
             }
@@ -400,13 +432,7 @@ class TypeEquivalenceComparatorVisitor implements Visitor
         return 0;
     }
 
-    /**
-     * @param mixed|null $left
-     * @param mixed|null $right
-     *
-     * @return integer
-     */
-    protected function compareAttribute($left, $right)
+    private function compareAttribute($left, $right)
     {
         if (null === $left && null !== $right) {
             return -1;
@@ -416,20 +442,13 @@ class TypeEquivalenceComparatorVisitor implements Visitor
             return 1;
         }
 
-        return strcmp(
-            strval($left),
-            strval($right)
-        );
+        return strcmp(strval($left), strval($right));
     }
 
-    /**
-     * @param array<Type> $types
-     *
-     * @return array<Type>
-     */
-    protected function uniqueTypes(array $types)
+    private function uniqueTypes(array $types)
     {
         $unique = array();
+
         foreach ($types as $type) {
             if (!$this->typeInArray($type, $unique)) {
                 $unique[] = $type;
@@ -439,16 +458,10 @@ class TypeEquivalenceComparatorVisitor implements Visitor
         return $unique;
     }
 
-    /**
-     * @param Type        $type
-     * @param array<Type> $types
-     *
-     * @return boolean
-     */
-    protected function typeInArray(Type $type, array $types)
+    private function typeInArray(Type $type, array $types)
     {
         foreach ($types as $thisType) {
-            if (TypeEquivalenceComparator::equivalent($thisType, $type)) {
+            if ($this->comparator->isEquivalent($thisType, $type)) {
                 return true;
             }
         }
@@ -456,5 +469,8 @@ class TypeEquivalenceComparatorVisitor implements Visitor
         return false;
     }
 
+    private $comparator;
     private $type;
+    private $class;
+    private $isMixed;
 }
