@@ -1,0 +1,64 @@
+
+
+Code Coverage Report:       
+  2015-11-12 07:54:12       
+                            
+ Summary:                   
+  Classes: 100.00% (27/27)  
+  Methods: 100.00% (133/133)
+  Lines:   100.00% (796/796)
+
+\Eloquent\Typhax\Comparator::TypeEquivalenceComparator
+  Methods: 100.00% ( 3/ 3)   Lines: 100.00% (  3/  3)
+\Eloquent\Typhax\Comparator::TypeEquivalenceComparatorVisitor
+  Methods: 100.00% (25/25)   Lines: 100.00% (122/122)
+\Eloquent\Typhax\Parser::TypeLexer
+  Methods: 100.00% ( 4/ 4)   Lines: 100.00% ( 95/ 95)
+\Eloquent\Typhax\Parser::TypeParser
+  Methods: 100.00% (25/25)   Lines: 100.00% (369/369)
+\Eloquent\Typhax\Parser::TypeToken
+  Methods: 100.00% ( 9/ 9)   Lines: 100.00% ( 38/ 38)
+\Eloquent\Typhax\Parser\Exception::AbstractParseException
+  Methods: 100.00% ( 2/ 2)   Lines: 100.00% (  4/  4)
+\Eloquent\Typhax\Parser\Exception::UnexpectedTokenException
+  Methods: 100.00% ( 3/ 3)   Lines: 100.00% ( 16/ 16)
+\Eloquent\Typhax\Parser\Exception::UnsupportedAttributeException
+  Methods: 100.00% ( 3/ 3)   Lines: 100.00% ( 12/ 12)
+\Eloquent\Typhax\Renderer::CondensedTypeRenderer
+  Methods: 100.00% (20/20)   Lines: 100.00% ( 79/ 79)
+\Eloquent\Typhax\Type::AndType
+  Methods: 100.00% ( 3/ 3)   Lines: 100.00% (  4/  4)
+\Eloquent\Typhax\Type::ArrayType
+  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (  1/  1)
+\Eloquent\Typhax\Type::BooleanType
+  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (  1/  1)
+\Eloquent\Typhax\Type::CallableType
+  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (  1/  1)
+\Eloquent\Typhax\Type::ExtensionType
+  Methods: 100.00% ( 5/ 5)   Lines: 100.00% (  8/  8)
+\Eloquent\Typhax\Type::FloatType
+  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (  1/  1)
+\Eloquent\Typhax\Type::IntegerType
+  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (  1/  1)
+\Eloquent\Typhax\Type::MixedType
+  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (  1/  1)
+\Eloquent\Typhax\Type::NullType
+  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (  1/  1)
+\Eloquent\Typhax\Type::NumericType
+  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (  1/  1)
+\Eloquent\Typhax\Type::ObjectType
+  Methods: 100.00% ( 3/ 3)   Lines: 100.00% (  4/  4)
+\Eloquent\Typhax\Type::OrType
+  Methods: 100.00% ( 3/ 3)   Lines: 100.00% (  4/  4)
+\Eloquent\Typhax\Type::ResourceType
+  Methods: 100.00% ( 3/ 3)   Lines: 100.00% (  4/  4)
+\Eloquent\Typhax\Type::StreamType
+  Methods: 100.00% ( 4/ 4)   Lines: 100.00% (  6/  6)
+\Eloquent\Typhax\Type::StringType
+  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (  1/  1)
+\Eloquent\Typhax\Type::StringableType
+  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (  1/  1)
+\Eloquent\Typhax\Type::TraversableType
+  Methods: 100.00% ( 5/ 5)   Lines: 100.00% (  8/  8)
+\Eloquent\Typhax\Type::TupleType
+  Methods: 100.00% ( 3/ 3)   Lines: 100.00% (  4/  4)

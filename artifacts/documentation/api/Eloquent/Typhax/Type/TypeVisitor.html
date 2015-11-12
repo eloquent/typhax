@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>Eloquent\Typhax\Type\TypeVisitor | Typhax API</title>
+
+            <link rel="stylesheet" type="text/css" href="../../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../css/sami.css">
+        <script src="../../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../../js/bootstrap.min.js"></script>
+        <script src="../../../js/typeahead.min.js"></script>
+        <script src="../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    
+    
+    </head>
+
+    <body id="class" data-name="class:Eloquent_Typhax_Type_TypeVisitor" data-root-path="../../../">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <form id="search-form" action="../../../search.html" method="GET">
+            <span class="glyphicon glyphicon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
+    </div>
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../../index.html">Typhax API</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../../classes.html">Classes</a></li>
+                                            <li><a href="../../../namespaces.html">Namespaces</a></li>
+                                        <li><a href="../../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../../traits.html">Traits</a></li>
+                    <li><a href="../../../doc-index.html">Index</a></li>
+                    <li><a href="../../../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">interface</span></li>
+                                                            <li><a href="../../../Eloquent.html">Eloquent</a></li>
+                                        <li><a href="../../../Eloquent/Typhax.html">Typhax</a></li>
+                                        <li><a href="../../../Eloquent/Typhax/Type.html">Type</a></li>
+    
+                <li>TypeVisitor</li>
+            </ol>
+        </div>
+                <div id="page-content">
+                
+    <div class="page-header">
+        <h1>TypeVisitor</h1>
+    </div>
+
+    <p>    interface
+    <strong>TypeVisitor</strong>
+</p>
+
+            <div class="description">
+            <p>The interface implemented by type visitors.</p>                    </div>
+    
+    
+    
+    
+            <h2>Methods</h2>
+
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_visitAndType">visitAndType</a>(
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\AndType">AndType</abbr> $type)
+                                            <p>Visit an and type.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_visitArrayType">visitArrayType</a>(
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\ArrayType">ArrayType</abbr> $type)
+                                            <p>Visit an array type.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_visitBooleanType">visitBooleanType</a>(
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\BooleanType">BooleanType</abbr> $type)
+                                            <p>Visit a boolean type.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_visitCallableType">visitCallableType</a>(
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\CallableType">CallableType</abbr> $type)
+                                            <p>Visit a callable type.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_visitExtensionType">visitExtensionType</a>(
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\ExtensionType">ExtensionType</abbr> $type)
+                                            <p>Visit an extension type.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_visitFloatType">visitFloatType</a>(
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\FloatType">FloatType</abbr> $type)
+                                            <p>Visit a float type.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_visitIntegerType">visitIntegerType</a>(
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\IntegerType">IntegerType</abbr> $type)
+                                            <p>Visit an integer type.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_visitMixedType">visitMixedType</a>(
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\MixedType">MixedType</abbr> $type)
+                                            <p>Visit a mixed type.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_visitNullType">visitNullType</a>(
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\NullType">NullType</abbr> $type)
+                                            <p>Visit a null type.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_visitNumericType">visitNumericType</a>(
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\NumericType">NumericType</abbr> $type)
+                                            <p>Visit a numeric type.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_visitObjectType">visitObjectType</a>(
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\ObjectType">ObjectType</abbr> $type)
+                                            <p>Visit an object type.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_visitOrType">visitOrType</a>(
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\OrType">OrType</abbr> $type)
+                                            <p>Visit an or type.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_visitResourceType">visitResourceType</a>(
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\ResourceType">ResourceType</abbr> $type)
+                                            <p>Visit a resource type.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_visitStreamType">visitStreamType</a>(
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\StreamType">StreamType</abbr> $type)
+                                            <p>Visit a stream type.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_visitStringType">visitStringType</a>(
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\StringType">StringType</abbr> $type)
+                                            <p>Visit a string type.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_visitStringableType">visitStringableType</a>(
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\StringableType">StringableType</abbr> $type)
+                                            <p>Visit a stringable type.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_visitTraversableType">visitTraversableType</a>(
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\TraversableType">TraversableType</abbr> $type)
+                                            <p>Visit a traversable type.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_visitTupleType">visitTupleType</a>(
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\TupleType">TupleType</abbr> $type)
+                                            <p>Visit a tuple type.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
+
+
+        <h2>Details</h2>
+
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method_visitAndType">
+        <div class="location">at line 30</div>
+        <code>                    
+    mixed
+    <strong>visitAndType</strong>(
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\AndType">AndType</abbr> $type)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Visit an and type.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\AndType">AndType</abbr></td>
+                <td>$type</td>
+                <td>The type.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>
+    mixed</td>
+            <td>The result of visitation.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_visitArrayType">
+        <div class="location">at line 41</div>
+        <code>                    
+    mixed
+    <strong>visitArrayType</strong>(
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\ArrayType">ArrayType</abbr> $type)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Visit an array type.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\ArrayType">ArrayType</abbr></td>
+                <td>$type</td>
+                <td>The type.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>
+    mixed</td>
+            <td>The result of visitation.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_visitBooleanType">
+        <div class="location">at line 52</div>
+        <code>                    
+    mixed
+    <strong>visitBooleanType</strong>(
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\BooleanType">BooleanType</abbr> $type)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Visit a boolean type.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\BooleanType">BooleanType</abbr></td>
+                <td>$type</td>
+                <td>The type.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>
+    mixed</td>
+            <td>The result of visitation.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_visitCallableType">
+        <div class="location">at line 63</div>
+        <code>                    
+    mixed
+    <strong>visitCallableType</strong>(
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\CallableType">CallableType</abbr> $type)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Visit a callable type.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\CallableType">CallableType</abbr></td>
+                <td>$type</td>
+                <td>The type.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>
+    mixed</td>
+            <td>The result of visitation.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_visitExtensionType">
+        <div class="location">at line 74</div>
+        <code>                    
+    mixed
+    <strong>visitExtensionType</strong>(
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\ExtensionType">ExtensionType</abbr> $type)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Visit an extension type.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\ExtensionType">ExtensionType</abbr></td>
+                <td>$type</td>
+                <td>The type.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>
+    mixed</td>
+            <td>The result of visitation.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_visitFloatType">
+        <div class="location">at line 85</div>
+        <code>                    
+    mixed
+    <strong>visitFloatType</strong>(
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\FloatType">FloatType</abbr> $type)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Visit a float type.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\FloatType">FloatType</abbr></td>
+                <td>$type</td>
+                <td>The type.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>
+    mixed</td>
+            <td>The result of visitation.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_visitIntegerType">
+        <div class="location">at line 96</div>
+        <code>                    
+    mixed
+    <strong>visitIntegerType</strong>(
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\IntegerType">IntegerType</abbr> $type)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Visit an integer type.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\IntegerType">IntegerType</abbr></td>
+                <td>$type</td>
+                <td>The type.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>
+    mixed</td>
+            <td>The result of visitation.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_visitMixedType">
+        <div class="location">at line 107</div>
+        <code>                    
+    mixed
+    <strong>visitMixedType</strong>(
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\MixedType">MixedType</abbr> $type)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Visit a mixed type.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\MixedType">MixedType</abbr></td>
+                <td>$type</td>
+                <td>The type.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>
+    mixed</td>
+            <td>The result of visitation.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_visitNullType">
+        <div class="location">at line 118</div>
+        <code>                    
+    mixed
+    <strong>visitNullType</strong>(
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\NullType">NullType</abbr> $type)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Visit a null type.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\NullType">NullType</abbr></td>
+                <td>$type</td>
+                <td>The type.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>
+    mixed</td>
+            <td>The result of visitation.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_visitNumericType">
+        <div class="location">at line 129</div>
+        <code>                    
+    mixed
+    <strong>visitNumericType</strong>(
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\NumericType">NumericType</abbr> $type)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Visit a numeric type.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\NumericType">NumericType</abbr></td>
+                <td>$type</td>
+                <td>The type.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>
+    mixed</td>
+            <td>The result of visitation.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_visitObjectType">
+        <div class="location">at line 140</div>
+        <code>                    
+    mixed
+    <strong>visitObjectType</strong>(
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\ObjectType">ObjectType</abbr> $type)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Visit an object type.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\ObjectType">ObjectType</abbr></td>
+                <td>$type</td>
+                <td>The type.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>
+    mixed</td>
+            <td>The result of visitation.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_visitOrType">
+        <div class="location">at line 151</div>
+        <code>                    
+    mixed
+    <strong>visitOrType</strong>(
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\OrType">OrType</abbr> $type)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Visit an or type.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\OrType">OrType</abbr></td>
+                <td>$type</td>
+                <td>The type.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>
+    mixed</td>
+            <td>The result of visitation.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_visitResourceType">
+        <div class="location">at line 162</div>
+        <code>                    
+    mixed
+    <strong>visitResourceType</strong>(
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\ResourceType">ResourceType</abbr> $type)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Visit a resource type.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\ResourceType">ResourceType</abbr></td>
+                <td>$type</td>
+                <td>The type.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>
+    mixed</td>
+            <td>The result of visitation.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_visitStreamType">
+        <div class="location">at line 173</div>
+        <code>                    
+    mixed
+    <strong>visitStreamType</strong>(
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\StreamType">StreamType</abbr> $type)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Visit a stream type.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\StreamType">StreamType</abbr></td>
+                <td>$type</td>
+                <td>The type.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>
+    mixed</td>
+            <td>The result of visitation.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_visitStringType">
+        <div class="location">at line 184</div>
+        <code>                    
+    mixed
+    <strong>visitStringType</strong>(
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\StringType">StringType</abbr> $type)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Visit a string type.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\StringType">StringType</abbr></td>
+                <td>$type</td>
+                <td>The type.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>
+    mixed</td>
+            <td>The result of visitation.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_visitStringableType">
+        <div class="location">at line 195</div>
+        <code>                    
+    mixed
+    <strong>visitStringableType</strong>(
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\StringableType">StringableType</abbr> $type)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Visit a stringable type.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\StringableType">StringableType</abbr></td>
+                <td>$type</td>
+                <td>The type.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>
+    mixed</td>
+            <td>The result of visitation.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_visitTraversableType">
+        <div class="location">at line 206</div>
+        <code>                    
+    mixed
+    <strong>visitTraversableType</strong>(
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\TraversableType">TraversableType</abbr> $type)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Visit a traversable type.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\TraversableType">TraversableType</abbr></td>
+                <td>$type</td>
+                <td>The type.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>
+    mixed</td>
+            <td>The result of visitation.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_visitTupleType">
+        <div class="location">at line 217</div>
+        <code>                    
+    mixed
+    <strong>visitTupleType</strong>(
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\TupleType">TupleType</abbr> $type)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Visit a tuple type.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>
+    <abbr title="Eloquent\Typhax\Type\Eloquent\Typhax\Type\TupleType">TupleType</abbr></td>
+                <td>$type</td>
+                <td>The type.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>
+    mixed</td>
+            <td>The result of visitation.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+            </div>
+
+    
+            </div>
+                <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/">Sami, the API Documentation Generator</a>.
+    </div>
+
+        </div>
+    </div>
+    </body>
+
+</html>
