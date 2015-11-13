@@ -1,253 +1,253 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="" tests="195" assertions="329" failures="0" errors="0" time="3.994041">
-    <testsuite name="Eloquent\Typhax\Comparator\TypeEquivalenceComparatorTest" file="/home/travis/build/eloquent/typhax/test/suite/Comparator/TypeEquivalenceComparatorTest.php" tests="31" assertions="61" failures="0" errors="0" time="0.343772">
-      <testsuite name="Eloquent\Typhax\Comparator\TypeEquivalenceComparatorTest::testCompareAndEquivalent" tests="30" assertions="60" failures="0" errors="0" time="0.323737">
-        <testcase name="testCompareAndEquivalent with data set &quot;Single type equivalence&quot;" assertions="2" time="0.011386"/>
-        <testcase name="testCompareAndEquivalent with data set &quot;Single type non-equivalence&quot;" assertions="2" time="0.006813"/>
-        <testcase name="testCompareAndEquivalent with data set &quot;Out-of order with duplicates AND equivalence&quot;" assertions="2" time="0.010642"/>
-        <testcase name="testCompareAndEquivalent with data set &quot;Out-of order AND non-equivalence 1&quot;" assertions="2" time="0.009073"/>
-        <testcase name="testCompareAndEquivalent with data set &quot;Out-of order AND non-equivalence 2&quot;" assertions="2" time="0.007388"/>
-        <testcase name="testCompareAndEquivalent with data set &quot;Out-of order AND non-equivalence 3&quot;" assertions="2" time="0.008071"/>
-        <testcase name="testCompareAndEquivalent with data set &quot;Out-of order with duplicates OR equivalence&quot;" assertions="2" time="0.107923"/>
-        <testcase name="testCompareAndEquivalent with data set &quot;Traversable equivalence&quot;" assertions="2" time="0.007967"/>
-        <testcase name="testCompareAndEquivalent with data set &quot;Traversable primary non equivalence&quot;" assertions="2" time="0.006919"/>
-        <testcase name="testCompareAndEquivalent with data set &quot;Traversable key non equivalence&quot;" assertions="2" time="0.007543"/>
-        <testcase name="testCompareAndEquivalent with data set &quot;Traversable key non equivalence (left omitted)&quot;" assertions="2" time="0.007056"/>
-        <testcase name="testCompareAndEquivalent with data set &quot;Traversable key non equivalence (right omitted)&quot;" assertions="2" time="0.007133"/>
-        <testcase name="testCompareAndEquivalent with data set &quot;Traversable value non equivalence&quot;" assertions="2" time="0.008085"/>
-        <testcase name="testCompareAndEquivalent with data set &quot;Traversable and non-traversable non equivalence&quot;" assertions="2" time="0.006336"/>
-        <testcase name="testCompareAndEquivalent with data set &quot;Tuple equivalence&quot;" assertions="2" time="0.007856"/>
-        <testcase name="testCompareAndEquivalent with data set &quot;Tuple non equivalence&quot;" assertions="2" time="0.007490"/>
-        <testcase name="testCompareAndEquivalent with data set &quot;Tuple and non-tuple non equivalence&quot;" assertions="2" time="0.006344"/>
-        <testcase name="testCompareAndEquivalent with data set &quot;Composite and non-composite non equivalence&quot;" assertions="2" time="0.006394"/>
-        <testcase name="testCompareAndEquivalent with data set &quot;Stream type readable non-equivalence&quot;" assertions="2" time="0.006619"/>
-        <testcase name="testCompareAndEquivalent with data set &quot;Stream type writable non-equivalence&quot;" assertions="2" time="0.006867"/>
-        <testcase name="testCompareAndEquivalent with data set &quot;Attribute null and non-null non-equivalence 1&quot;" assertions="2" time="0.006623"/>
-        <testcase name="testCompareAndEquivalent with data set &quot;Attribute null and non-null non-equivalence 2&quot;" assertions="2" time="0.006578"/>
-        <testcase name="testCompareAndEquivalent with data set &quot;Extension type equivalence&quot;" assertions="2" time="0.007296"/>
-        <testcase name="testCompareAndEquivalent with data set &quot;Extension type non-equivalence (different type)&quot;" assertions="2" time="0.006306"/>
-        <testcase name="testCompareAndEquivalent with data set &quot;Extension type non-equivalence (different class name)&quot;" assertions="2" time="0.006473"/>
-        <testcase name="testCompareAndEquivalent with data set &quot;Extension type non-equivalence (different types)&quot;" assertions="2" time="0.007084"/>
-        <testcase name="testCompareAndEquivalent with data set &quot;Extension type non-equivalence (&lt; attribute values)&quot;" assertions="2" time="0.007303"/>
-        <testcase name="testCompareAndEquivalent with data set &quot;Extension type non-equivalence (&gt; attribute values)&quot;" assertions="2" time="0.007351"/>
-        <testcase name="testCompareAndEquivalent with data set &quot;Extension type non-equivalence (&lt; attribute keys)&quot;" assertions="2" time="0.007368"/>
-        <testcase name="testCompareAndEquivalent with data set &quot;Extension type non-equivalence (&gt; attribute keys)&quot;" assertions="2" time="0.007450"/>
+  <testsuite name="" tests="195" assertions="329" failures="0" errors="0" time="3.862424">
+    <testsuite name="Eloquent\Typhax\Comparator\TypeEquivalenceComparatorTest" file="/home/travis/build/eloquent/typhax/test/suite/Comparator/TypeEquivalenceComparatorTest.php" tests="31" assertions="61" failures="0" errors="0" time="0.329860">
+      <testsuite name="Eloquent\Typhax\Comparator\TypeEquivalenceComparatorTest::testCompareAndEquivalent" tests="30" assertions="60" failures="0" errors="0" time="0.310381">
+        <testcase name="testCompareAndEquivalent with data set &quot;Single type equivalence&quot;" assertions="2" time="0.010869"/>
+        <testcase name="testCompareAndEquivalent with data set &quot;Single type non-equivalence&quot;" assertions="2" time="0.006758"/>
+        <testcase name="testCompareAndEquivalent with data set &quot;Out-of order with duplicates AND equivalence&quot;" assertions="2" time="0.010584"/>
+        <testcase name="testCompareAndEquivalent with data set &quot;Out-of order AND non-equivalence 1&quot;" assertions="2" time="0.008683"/>
+        <testcase name="testCompareAndEquivalent with data set &quot;Out-of order AND non-equivalence 2&quot;" assertions="2" time="0.007114"/>
+        <testcase name="testCompareAndEquivalent with data set &quot;Out-of order AND non-equivalence 3&quot;" assertions="2" time="0.007651"/>
+        <testcase name="testCompareAndEquivalent with data set &quot;Out-of order with duplicates OR equivalence&quot;" assertions="2" time="0.105827"/>
+        <testcase name="testCompareAndEquivalent with data set &quot;Traversable equivalence&quot;" assertions="2" time="0.007602"/>
+        <testcase name="testCompareAndEquivalent with data set &quot;Traversable primary non equivalence&quot;" assertions="2" time="0.006407"/>
+        <testcase name="testCompareAndEquivalent with data set &quot;Traversable key non equivalence&quot;" assertions="2" time="0.007430"/>
+        <testcase name="testCompareAndEquivalent with data set &quot;Traversable key non equivalence (left omitted)&quot;" assertions="2" time="0.006978"/>
+        <testcase name="testCompareAndEquivalent with data set &quot;Traversable key non equivalence (right omitted)&quot;" assertions="2" time="0.006850"/>
+        <testcase name="testCompareAndEquivalent with data set &quot;Traversable value non equivalence&quot;" assertions="2" time="0.007565"/>
+        <testcase name="testCompareAndEquivalent with data set &quot;Traversable and non-traversable non equivalence&quot;" assertions="2" time="0.005947"/>
+        <testcase name="testCompareAndEquivalent with data set &quot;Tuple equivalence&quot;" assertions="2" time="0.007265"/>
+        <testcase name="testCompareAndEquivalent with data set &quot;Tuple non equivalence&quot;" assertions="2" time="0.006924"/>
+        <testcase name="testCompareAndEquivalent with data set &quot;Tuple and non-tuple non equivalence&quot;" assertions="2" time="0.005930"/>
+        <testcase name="testCompareAndEquivalent with data set &quot;Composite and non-composite non equivalence&quot;" assertions="2" time="0.006008"/>
+        <testcase name="testCompareAndEquivalent with data set &quot;Stream type readable non-equivalence&quot;" assertions="2" time="0.006156"/>
+        <testcase name="testCompareAndEquivalent with data set &quot;Stream type writable non-equivalence&quot;" assertions="2" time="0.006387"/>
+        <testcase name="testCompareAndEquivalent with data set &quot;Attribute null and non-null non-equivalence 1&quot;" assertions="2" time="0.006189"/>
+        <testcase name="testCompareAndEquivalent with data set &quot;Attribute null and non-null non-equivalence 2&quot;" assertions="2" time="0.006127"/>
+        <testcase name="testCompareAndEquivalent with data set &quot;Extension type equivalence&quot;" assertions="2" time="0.006837"/>
+        <testcase name="testCompareAndEquivalent with data set &quot;Extension type non-equivalence (different type)&quot;" assertions="2" time="0.005948"/>
+        <testcase name="testCompareAndEquivalent with data set &quot;Extension type non-equivalence (different class name)&quot;" assertions="2" time="0.006246"/>
+        <testcase name="testCompareAndEquivalent with data set &quot;Extension type non-equivalence (different types)&quot;" assertions="2" time="0.006684"/>
+        <testcase name="testCompareAndEquivalent with data set &quot;Extension type non-equivalence (&lt; attribute values)&quot;" assertions="2" time="0.006825"/>
+        <testcase name="testCompareAndEquivalent with data set &quot;Extension type non-equivalence (&gt; attribute values)&quot;" assertions="2" time="0.006833"/>
+        <testcase name="testCompareAndEquivalent with data set &quot;Extension type non-equivalence (&lt; attribute keys)&quot;" assertions="2" time="0.006855"/>
+        <testcase name="testCompareAndEquivalent with data set &quot;Extension type non-equivalence (&gt; attribute keys)&quot;" assertions="2" time="0.006902"/>
       </testsuite>
-      <testcase name="testSort" class="Eloquent\Typhax\Comparator\TypeEquivalenceComparatorTest" file="/home/travis/build/eloquent/typhax/test/suite/Comparator/TypeEquivalenceComparatorTest.php" line="350" assertions="1" time="0.020035"/>
+      <testcase name="testSort" class="Eloquent\Typhax\Comparator\TypeEquivalenceComparatorTest" file="/home/travis/build/eloquent/typhax/test/suite/Comparator/TypeEquivalenceComparatorTest.php" line="350" assertions="1" time="0.019479"/>
     </testsuite>
-    <testsuite name="Eloquent\Typhax\DocumentationTest" file="/home/travis/build/eloquent/typhax/test/suite/DocumentationTest.php" tests="2" assertions="3" failures="0" errors="0" time="0.044834">
-      <testcase name="testParserUsage" class="Eloquent\Typhax\DocumentationTest" file="/home/travis/build/eloquent/typhax/test/suite/DocumentationTest.php" line="24" assertions="2" time="0.019732"/>
-      <testcase name="testComparatorUsage" class="Eloquent\Typhax\DocumentationTest" file="/home/travis/build/eloquent/typhax/test/suite/DocumentationTest.php" line="36" assertions="1" time="0.025102"/>
+    <testsuite name="Eloquent\Typhax\DocumentationTest" file="/home/travis/build/eloquent/typhax/test/suite/DocumentationTest.php" tests="2" assertions="3" failures="0" errors="0" time="0.042570">
+      <testcase name="testParserUsage" class="Eloquent\Typhax\DocumentationTest" file="/home/travis/build/eloquent/typhax/test/suite/DocumentationTest.php" line="24" assertions="2" time="0.018584"/>
+      <testcase name="testComparatorUsage" class="Eloquent\Typhax\DocumentationTest" file="/home/travis/build/eloquent/typhax/test/suite/DocumentationTest.php" line="36" assertions="1" time="0.023986"/>
     </testsuite>
-    <testsuite name="Eloquent\Typhax\Parser\Exception\UnexpectedTokenExceptionTest" file="/home/travis/build/eloquent/typhax/test/suite/Parser/Exception/UnexpectedTokenExceptionTest.php" tests="1" assertions="10" failures="0" errors="0" time="0.009935">
-      <testcase name="testException" class="Eloquent\Typhax\Parser\Exception\UnexpectedTokenExceptionTest" file="/home/travis/build/eloquent/typhax/test/suite/Parser/Exception/UnexpectedTokenExceptionTest.php" line="23" assertions="10" time="0.009935"/>
+    <testsuite name="Eloquent\Typhax\Parser\Exception\UnexpectedTokenExceptionTest" file="/home/travis/build/eloquent/typhax/test/suite/Parser/Exception/UnexpectedTokenExceptionTest.php" tests="1" assertions="10" failures="0" errors="0" time="0.009663">
+      <testcase name="testException" class="Eloquent\Typhax\Parser\Exception\UnexpectedTokenExceptionTest" file="/home/travis/build/eloquent/typhax/test/suite/Parser/Exception/UnexpectedTokenExceptionTest.php" line="23" assertions="10" time="0.009663"/>
     </testsuite>
-    <testsuite name="Eloquent\Typhax\Parser\Exception\UnsupportedAttributeExceptionTest" file="/home/travis/build/eloquent/typhax/test/suite/Parser/Exception/UnsupportedAttributeExceptionTest.php" tests="1" assertions="5" failures="0" errors="0" time="0.007625">
-      <testcase name="testException" class="Eloquent\Typhax\Parser\Exception\UnsupportedAttributeExceptionTest" file="/home/travis/build/eloquent/typhax/test/suite/Parser/Exception/UnsupportedAttributeExceptionTest.php" line="23" assertions="5" time="0.007625"/>
+    <testsuite name="Eloquent\Typhax\Parser\Exception\UnsupportedAttributeExceptionTest" file="/home/travis/build/eloquent/typhax/test/suite/Parser/Exception/UnsupportedAttributeExceptionTest.php" tests="1" assertions="5" failures="0" errors="0" time="0.007376">
+      <testcase name="testException" class="Eloquent\Typhax\Parser\Exception\UnsupportedAttributeExceptionTest" file="/home/travis/build/eloquent/typhax/test/suite/Parser/Exception/UnsupportedAttributeExceptionTest.php" line="23" assertions="5" time="0.007376"/>
     </testsuite>
-    <testsuite name="Eloquent\Typhax\Parser\TypeLexerTest" file="/home/travis/build/eloquent/typhax/test/suite/Parser/TypeLexerTest.php" tests="43" assertions="43" failures="0" errors="0" time="1.402892">
-      <testsuite name="Eloquent\Typhax\Parser\TypeLexerTest::testIntrinsicTypesNames" tests="21" assertions="21" failures="0" errors="0" time="0.225085">
-        <testcase name="testIntrinsicTypesNames with data set #0" assertions="1" time="0.018409"/>
-        <testcase name="testIntrinsicTypesNames with data set #1" assertions="1" time="0.010326"/>
-        <testcase name="testIntrinsicTypesNames with data set #2" assertions="1" time="0.010406"/>
-        <testcase name="testIntrinsicTypesNames with data set #3" assertions="1" time="0.010329"/>
-        <testcase name="testIntrinsicTypesNames with data set #4" assertions="1" time="0.010365"/>
-        <testcase name="testIntrinsicTypesNames with data set #5" assertions="1" time="0.010420"/>
-        <testcase name="testIntrinsicTypesNames with data set #6" assertions="1" time="0.010320"/>
-        <testcase name="testIntrinsicTypesNames with data set #7" assertions="1" time="0.010330"/>
-        <testcase name="testIntrinsicTypesNames with data set #8" assertions="1" time="0.010333"/>
-        <testcase name="testIntrinsicTypesNames with data set #9" assertions="1" time="0.010358"/>
-        <testcase name="testIntrinsicTypesNames with data set #10" assertions="1" time="0.010294"/>
-        <testcase name="testIntrinsicTypesNames with data set #11" assertions="1" time="0.010290"/>
-        <testcase name="testIntrinsicTypesNames with data set #12" assertions="1" time="0.010346"/>
-        <testcase name="testIntrinsicTypesNames with data set #13" assertions="1" time="0.010336"/>
-        <testcase name="testIntrinsicTypesNames with data set #14" assertions="1" time="0.010363"/>
-        <testcase name="testIntrinsicTypesNames with data set #15" assertions="1" time="0.010113"/>
-        <testcase name="testIntrinsicTypesNames with data set #16" assertions="1" time="0.010442"/>
-        <testcase name="testIntrinsicTypesNames with data set #17" assertions="1" time="0.010374"/>
-        <testcase name="testIntrinsicTypesNames with data set #18" assertions="1" time="0.010266"/>
-        <testcase name="testIntrinsicTypesNames with data set #19" assertions="1" time="0.010387"/>
-        <testcase name="testIntrinsicTypesNames with data set #20" assertions="1" time="0.010278"/>
+    <testsuite name="Eloquent\Typhax\Parser\TypeLexerTest" file="/home/travis/build/eloquent/typhax/test/suite/Parser/TypeLexerTest.php" tests="43" assertions="43" failures="0" errors="0" time="1.356076">
+      <testsuite name="Eloquent\Typhax\Parser\TypeLexerTest::testIntrinsicTypesNames" tests="21" assertions="21" failures="0" errors="0" time="0.208858">
+        <testcase name="testIntrinsicTypesNames with data set #0" assertions="1" time="0.017385"/>
+        <testcase name="testIntrinsicTypesNames with data set #1" assertions="1" time="0.009586"/>
+        <testcase name="testIntrinsicTypesNames with data set #2" assertions="1" time="0.009585"/>
+        <testcase name="testIntrinsicTypesNames with data set #3" assertions="1" time="0.009510"/>
+        <testcase name="testIntrinsicTypesNames with data set #4" assertions="1" time="0.009491"/>
+        <testcase name="testIntrinsicTypesNames with data set #5" assertions="1" time="0.009706"/>
+        <testcase name="testIntrinsicTypesNames with data set #6" assertions="1" time="0.009536"/>
+        <testcase name="testIntrinsicTypesNames with data set #7" assertions="1" time="0.009600"/>
+        <testcase name="testIntrinsicTypesNames with data set #8" assertions="1" time="0.009521"/>
+        <testcase name="testIntrinsicTypesNames with data set #9" assertions="1" time="0.009519"/>
+        <testcase name="testIntrinsicTypesNames with data set #10" assertions="1" time="0.009552"/>
+        <testcase name="testIntrinsicTypesNames with data set #11" assertions="1" time="0.009529"/>
+        <testcase name="testIntrinsicTypesNames with data set #12" assertions="1" time="0.009524"/>
+        <testcase name="testIntrinsicTypesNames with data set #13" assertions="1" time="0.009576"/>
+        <testcase name="testIntrinsicTypesNames with data set #14" assertions="1" time="0.009598"/>
+        <testcase name="testIntrinsicTypesNames with data set #15" assertions="1" time="0.009583"/>
+        <testcase name="testIntrinsicTypesNames with data set #16" assertions="1" time="0.009620"/>
+        <testcase name="testIntrinsicTypesNames with data set #17" assertions="1" time="0.009689"/>
+        <testcase name="testIntrinsicTypesNames with data set #18" assertions="1" time="0.009576"/>
+        <testcase name="testIntrinsicTypesNames with data set #19" assertions="1" time="0.009588"/>
+        <testcase name="testIntrinsicTypesNames with data set #20" assertions="1" time="0.009584"/>
       </testsuite>
-      <testsuite name="Eloquent\Typhax\Parser\TypeLexerTest::testTokens" tests="21" assertions="21" failures="0" errors="0" time="1.134178">
-        <testcase name="testTokens with data set &quot;Basic type&quot;" assertions="1" time="0.010826"/>
-        <testcase name="testTokens with data set &quot;Type with sub-type&quot;" assertions="1" time="0.021534"/>
-        <testcase name="testTokens with data set &quot;Type with multiple sub-types&quot;" assertions="1" time="0.042807"/>
-        <testcase name="testTokens with data set &quot;Composite OR type&quot;" assertions="1" time="0.017901"/>
-        <testcase name="testTokens with data set &quot;Composite AND type&quot;" assertions="1" time="0.017999"/>
-        <testcase name="testTokens with data set &quot;Treatment of unsupported tokens as strings&quot;" assertions="1" time="0.012575"/>
-        <testcase name="testTokens with data set &quot;Dynamic type with basic attributes and quoted strings&quot;" assertions="1" time="0.052558"/>
-        <testcase name="testTokens with data set &quot;Dynamic type with array attributes&quot;" assertions="1" time="0.109407"/>
-        <testcase name="testTokens with data set &quot;Nested array&quot;" assertions="1" time="0.045758"/>
-        <testcase name="testTokens with data set &quot;Nested hash&quot;" assertions="1" time="0.077934"/>
-        <testcase name="testTokens with data set &quot;Treatment of numbers&quot;" assertions="1" time="0.020533"/>
-        <testcase name="testTokens with data set &quot;Treatment of booleans and nulls&quot;" assertions="1" time="0.051617"/>
-        <testcase name="testTokens with data set &quot;Treatment of unsupported tokens containing supported tokens&quot;" assertions="1" time="0.304180"/>
-        <testcase name="testTokens with data set &quot;Treatment of quoted strings containing variables etc.&quot;" assertions="1" time="0.092740"/>
-        <testcase name="testTokens with data set &quot;Nested sub-types&quot;" assertions="1" time="0.055024"/>
-        <testcase name="testTokens with data set &quot;Type with attributes and subtypes&quot;" assertions="1" time="0.053591"/>
-        <testcase name="testTokens with data set &quot;Namespaced type name&quot;" assertions="1" time="0.014563"/>
-        <testcase name="testTokens with data set &quot;Basic extension type&quot;" assertions="1" time="0.014229"/>
-        <testcase name="testTokens with data set &quot;Namespaced extension type&quot;" assertions="1" time="0.018024"/>
-        <testcase name="testTokens with data set &quot;Namespaced extension type with attributes&quot;" assertions="1" time="0.039478"/>
-        <testcase name="testTokens with data set &quot;Namespaced extension type with subtypes and attributes&quot;" assertions="1" time="0.060899"/>
+      <testsuite name="Eloquent\Typhax\Parser\TypeLexerTest::testTokens" tests="21" assertions="21" failures="0" errors="0" time="1.105068">
+        <testcase name="testTokens with data set &quot;Basic type&quot;" assertions="1" time="0.010076"/>
+        <testcase name="testTokens with data set &quot;Type with sub-type&quot;" assertions="1" time="0.020523"/>
+        <testcase name="testTokens with data set &quot;Type with multiple sub-types&quot;" assertions="1" time="0.041310"/>
+        <testcase name="testTokens with data set &quot;Composite OR type&quot;" assertions="1" time="0.017254"/>
+        <testcase name="testTokens with data set &quot;Composite AND type&quot;" assertions="1" time="0.017494"/>
+        <testcase name="testTokens with data set &quot;Treatment of unsupported tokens as strings&quot;" assertions="1" time="0.012064"/>
+        <testcase name="testTokens with data set &quot;Dynamic type with basic attributes and quoted strings&quot;" assertions="1" time="0.051150"/>
+        <testcase name="testTokens with data set &quot;Dynamic type with array attributes&quot;" assertions="1" time="0.107041"/>
+        <testcase name="testTokens with data set &quot;Nested array&quot;" assertions="1" time="0.044826"/>
+        <testcase name="testTokens with data set &quot;Nested hash&quot;" assertions="1" time="0.076230"/>
+        <testcase name="testTokens with data set &quot;Treatment of numbers&quot;" assertions="1" time="0.019782"/>
+        <testcase name="testTokens with data set &quot;Treatment of booleans and nulls&quot;" assertions="1" time="0.050311"/>
+        <testcase name="testTokens with data set &quot;Treatment of unsupported tokens containing supported tokens&quot;" assertions="1" time="0.297480"/>
+        <testcase name="testTokens with data set &quot;Treatment of quoted strings containing variables etc.&quot;" assertions="1" time="0.090178"/>
+        <testcase name="testTokens with data set &quot;Nested sub-types&quot;" assertions="1" time="0.053807"/>
+        <testcase name="testTokens with data set &quot;Type with attributes and subtypes&quot;" assertions="1" time="0.052399"/>
+        <testcase name="testTokens with data set &quot;Namespaced type name&quot;" assertions="1" time="0.013992"/>
+        <testcase name="testTokens with data set &quot;Basic extension type&quot;" assertions="1" time="0.013391"/>
+        <testcase name="testTokens with data set &quot;Namespaced extension type&quot;" assertions="1" time="0.017829"/>
+        <testcase name="testTokens with data set &quot;Namespaced extension type with attributes&quot;" assertions="1" time="0.038398"/>
+        <testcase name="testTokens with data set &quot;Namespaced extension type with subtypes and attributes&quot;" assertions="1" time="0.059533"/>
       </testsuite>
-      <testcase name="testTokensWithNonZeroOffset" class="Eloquent\Typhax\Parser\TypeLexerTest" file="/home/travis/build/eloquent/typhax/test/suite/Parser/TypeLexerTest.php" line="426" assertions="1" time="0.043630"/>
+      <testcase name="testTokensWithNonZeroOffset" class="Eloquent\Typhax\Parser\TypeLexerTest" file="/home/travis/build/eloquent/typhax/test/suite/Parser/TypeLexerTest.php" line="426" assertions="1" time="0.042149"/>
     </testsuite>
-    <testsuite name="Eloquent\Typhax\Parser\TypeParserTest" file="/home/travis/build/eloquent/typhax/test/suite/Parser/TypeParserTest.php" tests="38" assertions="75" failures="0" errors="0" time="0.948074">
-      <testsuite name="Eloquent\Typhax\Parser\TypeParserTest::testParser" tests="26" assertions="52" failures="0" errors="0" time="0.688261">
-        <testcase name="testParser with data set &quot;Basic example&quot;" assertions="2" time="0.012827"/>
-        <testcase name="testParser with data set &quot;Simple traversable 1&quot;" assertions="2" time="0.021815"/>
-        <testcase name="testParser with data set &quot;Simple traversable 2&quot;" assertions="2" time="0.026316"/>
-        <testcase name="testParser with data set &quot;Nested subtypes&quot;" assertions="2" time="0.039957"/>
-        <testcase name="testParser with data set &quot;Basic composite OR&quot;" assertions="2" time="0.019686"/>
-        <testcase name="testParser with data set &quot;Basic composite AND&quot;" assertions="2" time="0.019808"/>
-        <testcase name="testParser with data set &quot;Chained composite AND&quot;" assertions="2" time="0.025102"/>
-        <testcase name="testParser with data set &quot;Composite precedence&quot;" assertions="2" time="0.027146"/>
-        <testcase name="testParser with data set &quot;Composite precedence at end&quot;" assertions="2" time="0.025636"/>
-        <testcase name="testParser with data set &quot;Composite types nested inside traversable&quot;" assertions="2" time="0.040320"/>
-        <testcase name="testParser with data set &quot;Composite types nested inside tuple&quot;" assertions="2" time="0.040000"/>
-        <testcase name="testParser with data set &quot;Traversable type nested inside composite&quot;" assertions="2" time="0.033241"/>
-        <testcase name="testParser with data set &quot;Instrinsic types&quot;" assertions="2" time="0.053461"/>
-        <testcase name="testParser with data set &quot;Intrinsic aliases&quot;" assertions="2" time="0.050758"/>
-        <testcase name="testParser with data set &quot;Array&quot;" assertions="2" time="0.014433"/>
-        <testcase name="testParser with data set &quot;Tuple type&quot;" assertions="2" time="0.030998"/>
-        <testcase name="testParser with data set &quot;Resource type&quot;" assertions="2" time="0.013193"/>
-        <testcase name="testParser with data set &quot;Resource type with ofType attribute&quot;" assertions="2" time="0.021248"/>
-        <testcase name="testParser with data set &quot;Resource type with ofType attribute of reserved type name&quot;" assertions="2" time="0.020928"/>
-        <testcase name="testParser with data set &quot;Stream type&quot;" assertions="2" time="0.014205"/>
-        <testcase name="testParser with data set &quot;Stream type with attributes&quot;" assertions="2" time="0.026271"/>
-        <testcase name="testParser with data set &quot;Stream type with only writable attribute&quot;" assertions="2" time="0.021405"/>
-        <testcase name="testParser with data set &quot;Don't parse past end of type&quot;" assertions="2" time="0.012639"/>
-        <testcase name="testParser with data set &quot;Parse extension type&quot;" assertions="2" time="0.017787"/>
-        <testcase name="testParser with data set &quot;Parse extension type with attributes&quot;" assertions="2" time="0.026458"/>
-        <testcase name="testParser with data set &quot;Parse extension type with sub types&quot;" assertions="2" time="0.032623"/>
+    <testsuite name="Eloquent\Typhax\Parser\TypeParserTest" file="/home/travis/build/eloquent/typhax/test/suite/Parser/TypeParserTest.php" tests="38" assertions="75" failures="0" errors="0" time="0.918488">
+      <testsuite name="Eloquent\Typhax\Parser\TypeParserTest::testParser" tests="26" assertions="52" failures="0" errors="0" time="0.664103">
+        <testcase name="testParser with data set &quot;Basic example&quot;" assertions="2" time="0.011958"/>
+        <testcase name="testParser with data set &quot;Simple traversable 1&quot;" assertions="2" time="0.020608"/>
+        <testcase name="testParser with data set &quot;Simple traversable 2&quot;" assertions="2" time="0.025106"/>
+        <testcase name="testParser with data set &quot;Nested subtypes&quot;" assertions="2" time="0.038513"/>
+        <testcase name="testParser with data set &quot;Basic composite OR&quot;" assertions="2" time="0.018736"/>
+        <testcase name="testParser with data set &quot;Basic composite AND&quot;" assertions="2" time="0.018664"/>
+        <testcase name="testParser with data set &quot;Chained composite AND&quot;" assertions="2" time="0.023935"/>
+        <testcase name="testParser with data set &quot;Composite precedence&quot;" assertions="2" time="0.025732"/>
+        <testcase name="testParser with data set &quot;Composite precedence at end&quot;" assertions="2" time="0.024324"/>
+        <testcase name="testParser with data set &quot;Composite types nested inside traversable&quot;" assertions="2" time="0.038973"/>
+        <testcase name="testParser with data set &quot;Composite types nested inside tuple&quot;" assertions="2" time="0.038366"/>
+        <testcase name="testParser with data set &quot;Traversable type nested inside composite&quot;" assertions="2" time="0.032550"/>
+        <testcase name="testParser with data set &quot;Instrinsic types&quot;" assertions="2" time="0.051772"/>
+        <testcase name="testParser with data set &quot;Intrinsic aliases&quot;" assertions="2" time="0.049268"/>
+        <testcase name="testParser with data set &quot;Array&quot;" assertions="2" time="0.013798"/>
+        <testcase name="testParser with data set &quot;Tuple type&quot;" assertions="2" time="0.030351"/>
+        <testcase name="testParser with data set &quot;Resource type&quot;" assertions="2" time="0.012550"/>
+        <testcase name="testParser with data set &quot;Resource type with ofType attribute&quot;" assertions="2" time="0.020367"/>
+        <testcase name="testParser with data set &quot;Resource type with ofType attribute of reserved type name&quot;" assertions="2" time="0.019971"/>
+        <testcase name="testParser with data set &quot;Stream type&quot;" assertions="2" time="0.013623"/>
+        <testcase name="testParser with data set &quot;Stream type with attributes&quot;" assertions="2" time="0.025946"/>
+        <testcase name="testParser with data set &quot;Stream type with only writable attribute&quot;" assertions="2" time="0.020987"/>
+        <testcase name="testParser with data set &quot;Don't parse past end of type&quot;" assertions="2" time="0.012386"/>
+        <testcase name="testParser with data set &quot;Parse extension type&quot;" assertions="2" time="0.017665"/>
+        <testcase name="testParser with data set &quot;Parse extension type with attributes&quot;" assertions="2" time="0.026205"/>
+        <testcase name="testParser with data set &quot;Parse extension type with sub types&quot;" assertions="2" time="0.031748"/>
       </testsuite>
-      <testcase name="testParseOffsetHandling" class="Eloquent\Typhax\Parser\TypeParserTest" file="/home/travis/build/eloquent/typhax/test/suite/Parser/TypeParserTest.php" line="304" assertions="4" time="0.047566"/>
-      <testsuite name="Eloquent\Typhax\Parser\TypeParserTest::testParserFailure" tests="8" assertions="16" failures="0" errors="0" time="0.111655">
-        <testcase name="testParserFailure with data set &quot;Empty string&quot;" assertions="2" time="0.008366"/>
-        <testcase name="testParserFailure with data set &quot;Whitespace string&quot;" assertions="2" time="0.007812"/>
-        <testcase name="testParserFailure with data set &quot;Empty type list&quot;" assertions="2" time="0.012376"/>
-        <testcase name="testParserFailure with data set &quot;Empty attributes&quot;" assertions="2" time="0.013169"/>
-        <testcase name="testParserFailure with data set &quot;Unsupported attributes&quot;" assertions="2" time="0.016249"/>
-        <testcase name="testParserFailure with data set &quot;Unsupported attributes offset calculation check&quot;" assertions="2" time="0.016337"/>
-        <testcase name="testParserFailure with data set &quot;Non-traversable as primary in a traversable&quot;" assertions="2" time="0.012779"/>
-        <testcase name="testParserFailure with data set &quot;Traversable with too many types in type list&quot;" assertions="2" time="0.024567"/>
+      <testcase name="testParseOffsetHandling" class="Eloquent\Typhax\Parser\TypeParserTest" file="/home/travis/build/eloquent/typhax/test/suite/Parser/TypeParserTest.php" line="304" assertions="4" time="0.047060"/>
+      <testsuite name="Eloquent\Typhax\Parser\TypeParserTest::testParserFailure" tests="8" assertions="16" failures="0" errors="0" time="0.108092">
+        <testcase name="testParserFailure with data set &quot;Empty string&quot;" assertions="2" time="0.008570"/>
+        <testcase name="testParserFailure with data set &quot;Whitespace string&quot;" assertions="2" time="0.007736"/>
+        <testcase name="testParserFailure with data set &quot;Empty type list&quot;" assertions="2" time="0.012302"/>
+        <testcase name="testParserFailure with data set &quot;Empty attributes&quot;" assertions="2" time="0.012887"/>
+        <testcase name="testParserFailure with data set &quot;Unsupported attributes&quot;" assertions="2" time="0.015469"/>
+        <testcase name="testParserFailure with data set &quot;Unsupported attributes offset calculation check&quot;" assertions="2" time="0.015417"/>
+        <testcase name="testParserFailure with data set &quot;Non-traversable as primary in a traversable&quot;" assertions="2" time="0.012159"/>
+        <testcase name="testParserFailure with data set &quot;Traversable with too many types in type list&quot;" assertions="2" time="0.023552"/>
       </testsuite>
-      <testsuite name="Eloquent\Typhax\Parser\TypeParserTest::testParseHash" tests="3" assertions="3" failures="0" errors="0" time="0.100592">
-        <testcase name="testParseHash with data set #0" assertions="1" time="0.040294"/>
-        <testcase name="testParseHash with data set #1" assertions="1" time="0.038354"/>
-        <testcase name="testParseHash with data set #2" assertions="1" time="0.021944"/>
-      </testsuite>
-    </testsuite>
-    <testsuite name="Eloquent\Typhax\Parser\TypeTokenTest" file="/home/travis/build/eloquent/typhax/test/suite/Parser/TypeTokenTest.php" tests="26" assertions="71" failures="0" errors="0" time="0.173755">
-      <testsuite name="Eloquent\Typhax\Parser\TypeTokenTest::testFromToken" tests="2" assertions="2" failures="0" errors="0" time="0.017620">
-        <testcase name="testFromToken with data set &quot;Array token&quot;" assertions="1" time="0.008891"/>
-        <testcase name="testFromToken with data set &quot;Character token&quot;" assertions="1" time="0.008729"/>
-      </testsuite>
-      <testcase name="testToken" class="Eloquent\Typhax\Parser\TypeTokenTest" file="/home/travis/build/eloquent/typhax/test/suite/Parser/TypeTokenTest.php" line="45" assertions="2" time="0.006053"/>
-      <testcase name="testAppend" class="Eloquent\Typhax\Parser\TypeTokenTest" file="/home/travis/build/eloquent/typhax/test/suite/Parser/TypeTokenTest.php" line="53" assertions="3" time="0.006496"/>
-      <testsuite name="Eloquent\Typhax\Parser\TypeTokenTest::testNameAndSupported" tests="21" assertions="63" failures="0" errors="0" time="0.137675">
-        <testcase name="testNameAndSupported with data set #0" assertions="3" time="0.006618"/>
-        <testcase name="testNameAndSupported with data set #1" assertions="3" time="0.006520"/>
-        <testcase name="testNameAndSupported with data set #2" assertions="3" time="0.006599"/>
-        <testcase name="testNameAndSupported with data set #3" assertions="3" time="0.006616"/>
-        <testcase name="testNameAndSupported with data set #4" assertions="3" time="0.006497"/>
-        <testcase name="testNameAndSupported with data set #5" assertions="3" time="0.006610"/>
-        <testcase name="testNameAndSupported with data set #6" assertions="3" time="0.006599"/>
-        <testcase name="testNameAndSupported with data set #7" assertions="3" time="0.006576"/>
-        <testcase name="testNameAndSupported with data set #8" assertions="3" time="0.006649"/>
-        <testcase name="testNameAndSupported with data set #9" assertions="3" time="0.006684"/>
-        <testcase name="testNameAndSupported with data set #10" assertions="3" time="0.006602"/>
-        <testcase name="testNameAndSupported with data set #11" assertions="3" time="0.006518"/>
-        <testcase name="testNameAndSupported with data set #12" assertions="3" time="0.006648"/>
-        <testcase name="testNameAndSupported with data set #13" assertions="3" time="0.006679"/>
-        <testcase name="testNameAndSupported with data set #14" assertions="3" time="0.006557"/>
-        <testcase name="testNameAndSupported with data set #15" assertions="3" time="0.006650"/>
-        <testcase name="testNameAndSupported with data set #16" assertions="3" time="0.006613"/>
-        <testcase name="testNameAndSupported with data set #17" assertions="3" time="0.006333"/>
-        <testcase name="testNameAndSupported with data set #18" assertions="3" time="0.006313"/>
-        <testcase name="testNameAndSupported with data set #19" assertions="3" time="0.006348"/>
-        <testcase name="testNameAndSupported with data set #20" assertions="3" time="0.006445"/>
-      </testsuite>
-      <testcase name="testNamesByType" class="Eloquent\Typhax\Parser\TypeTokenTest" file="/home/travis/build/eloquent/typhax/test/suite/Parser/TypeTokenTest.php" line="114" assertions="1" time="0.005911"/>
-    </testsuite>
-    <testsuite name="Eloquent\Typhax\Renderer\CondensedTypeRendererTest" file="/home/travis/build/eloquent/typhax/test/suite/Renderer/CondensedTypeRendererTest.php" tests="23" assertions="23" failures="0" errors="0" time="0.142838">
-      <testsuite name="Eloquent\Typhax\Renderer\CondensedTypeRendererTest::testRender" tests="23" assertions="23" failures="0" errors="0" time="0.142838">
-        <testcase name="testRender with data set &quot;Basic types in an OR&quot;" assertions="1" time="0.007371"/>
-        <testcase name="testRender with data set &quot;Objects ofType in an AND&quot;" assertions="1" time="0.006372"/>
-        <testcase name="testRender with data set &quot;Traversable type&quot;" assertions="1" time="0.006225"/>
-        <testcase name="testRender with data set &quot;Traversable type with omitted key&quot;" assertions="1" time="0.006370"/>
-        <testcase name="testRender with data set &quot;Array type with omitted key and mixed value&quot;" assertions="1" time="0.006125"/>
-        <testcase name="testRender with data set &quot;Traversable object type with omitted key and mixed value&quot;" assertions="1" time="0.006204"/>
-        <testcase name="testRender with data set &quot;Traversable mixed type with omitted key and mixed value&quot;" assertions="1" time="0.006274"/>
-        <testcase name="testRender with data set &quot;Traversable type with mixed key&quot;" assertions="1" time="0.006258"/>
-        <testcase name="testRender with data set &quot;Array type with mixed key and mixed value&quot;" assertions="1" time="0.006274"/>
-        <testcase name="testRender with data set &quot;Traversable object type with mixed key and value&quot;" assertions="1" time="0.006369"/>
-        <testcase name="testRender with data set &quot;Traversable mixed type with mixed key and value&quot;" assertions="1" time="0.006321"/>
-        <testcase name="testRender with data set &quot;Tuple type&quot;" assertions="1" time="0.006238"/>
-        <testcase name="testRender with data set &quot;Resource ofType&quot;" assertions="1" time="0.005930"/>
-        <testcase name="testRender with data set &quot;Readable stream&quot;" assertions="1" time="0.006157"/>
-        <testcase name="testRender with data set &quot;Non-readable stream&quot;" assertions="1" time="0.005946"/>
-        <testcase name="testRender with data set &quot;Writable stream&quot;" assertions="1" time="0.005946"/>
-        <testcase name="testRender with data set &quot;Non-writable stream&quot;" assertions="1" time="0.005949"/>
-        <testcase name="testRender with data set &quot;Read-write stream&quot;" assertions="1" time="0.006006"/>
-        <testcase name="testRender with data set &quot;Absolute class name&quot;" assertions="1" time="0.005937"/>
-        <testcase name="testRender with data set &quot;Extension type&quot;" assertions="1" time="0.006043"/>
-        <testcase name="testRender with data set &quot;Extension type with types&quot;" assertions="1" time="0.006207"/>
-        <testcase name="testRender with data set &quot;Extension type with attributes&quot;" assertions="1" time="0.005972"/>
-        <testcase name="testRender with data set &quot;Extension type with types and attributes&quot;" assertions="1" time="0.006344"/>
+      <testsuite name="Eloquent\Typhax\Parser\TypeParserTest::testParseHash" tests="3" assertions="3" failures="0" errors="0" time="0.099233">
+        <testcase name="testParseHash with data set #0" assertions="1" time="0.039702"/>
+        <testcase name="testParseHash with data set #1" assertions="1" time="0.037888"/>
+        <testcase name="testParseHash with data set #2" assertions="1" time="0.021643"/>
       </testsuite>
     </testsuite>
-    <testsuite name="Eloquent\Typhax\Type\AndTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/AndTypeTest.php" tests="1" assertions="1" failures="0" errors="0" time="0.084160">
-      <testcase name="testTypes" class="Eloquent\Typhax\Type\AndTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/AndTypeTest.php" line="22" assertions="1" time="0.084160"/>
+    <testsuite name="Eloquent\Typhax\Parser\TypeTokenTest" file="/home/travis/build/eloquent/typhax/test/suite/Parser/TypeTokenTest.php" tests="26" assertions="71" failures="0" errors="0" time="0.167301">
+      <testsuite name="Eloquent\Typhax\Parser\TypeTokenTest::testFromToken" tests="2" assertions="2" failures="0" errors="0" time="0.017412">
+        <testcase name="testFromToken with data set &quot;Array token&quot;" assertions="1" time="0.008924"/>
+        <testcase name="testFromToken with data set &quot;Character token&quot;" assertions="1" time="0.008488"/>
+      </testsuite>
+      <testcase name="testToken" class="Eloquent\Typhax\Parser\TypeTokenTest" file="/home/travis/build/eloquent/typhax/test/suite/Parser/TypeTokenTest.php" line="45" assertions="2" time="0.006214"/>
+      <testcase name="testAppend" class="Eloquent\Typhax\Parser\TypeTokenTest" file="/home/travis/build/eloquent/typhax/test/suite/Parser/TypeTokenTest.php" line="53" assertions="3" time="0.006860"/>
+      <testsuite name="Eloquent\Typhax\Parser\TypeTokenTest::testNameAndSupported" tests="21" assertions="63" failures="0" errors="0" time="0.131292">
+        <testcase name="testNameAndSupported with data set #0" assertions="3" time="0.006990"/>
+        <testcase name="testNameAndSupported with data set #1" assertions="3" time="0.006325"/>
+        <testcase name="testNameAndSupported with data set #2" assertions="3" time="0.006383"/>
+        <testcase name="testNameAndSupported with data set #3" assertions="3" time="0.006188"/>
+        <testcase name="testNameAndSupported with data set #4" assertions="3" time="0.006137"/>
+        <testcase name="testNameAndSupported with data set #5" assertions="3" time="0.006139"/>
+        <testcase name="testNameAndSupported with data set #6" assertions="3" time="0.006178"/>
+        <testcase name="testNameAndSupported with data set #7" assertions="3" time="0.006130"/>
+        <testcase name="testNameAndSupported with data set #8" assertions="3" time="0.006178"/>
+        <testcase name="testNameAndSupported with data set #9" assertions="3" time="0.006170"/>
+        <testcase name="testNameAndSupported with data set #10" assertions="3" time="0.006224"/>
+        <testcase name="testNameAndSupported with data set #11" assertions="3" time="0.006162"/>
+        <testcase name="testNameAndSupported with data set #12" assertions="3" time="0.006185"/>
+        <testcase name="testNameAndSupported with data set #13" assertions="3" time="0.006183"/>
+        <testcase name="testNameAndSupported with data set #14" assertions="3" time="0.006197"/>
+        <testcase name="testNameAndSupported with data set #15" assertions="3" time="0.006176"/>
+        <testcase name="testNameAndSupported with data set #16" assertions="3" time="0.006331"/>
+        <testcase name="testNameAndSupported with data set #17" assertions="3" time="0.006310"/>
+        <testcase name="testNameAndSupported with data set #18" assertions="3" time="0.006260"/>
+        <testcase name="testNameAndSupported with data set #19" assertions="3" time="0.006245"/>
+        <testcase name="testNameAndSupported with data set #20" assertions="3" time="0.006201"/>
+      </testsuite>
+      <testcase name="testNamesByType" class="Eloquent\Typhax\Parser\TypeTokenTest" file="/home/travis/build/eloquent/typhax/test/suite/Parser/TypeTokenTest.php" line="114" assertions="1" time="0.005523"/>
     </testsuite>
-    <testsuite name="Eloquent\Typhax\Type\ExtensionTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/ExtensionTypeTest.php" tests="1" assertions="3" failures="0" errors="0" time="0.007066">
-      <testcase name="testExtensionType" class="Eloquent\Typhax\Type\ExtensionTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/ExtensionTypeTest.php" line="21" assertions="3" time="0.007066"/>
+    <testsuite name="Eloquent\Typhax\Renderer\CondensedTypeRendererTest" file="/home/travis/build/eloquent/typhax/test/suite/Renderer/CondensedTypeRendererTest.php" tests="23" assertions="23" failures="0" errors="0" time="0.138872">
+      <testsuite name="Eloquent\Typhax\Renderer\CondensedTypeRendererTest::testRender" tests="23" assertions="23" failures="0" errors="0" time="0.138872">
+        <testcase name="testRender with data set &quot;Basic types in an OR&quot;" assertions="1" time="0.007222"/>
+        <testcase name="testRender with data set &quot;Objects ofType in an AND&quot;" assertions="1" time="0.006625"/>
+        <testcase name="testRender with data set &quot;Traversable type&quot;" assertions="1" time="0.006488"/>
+        <testcase name="testRender with data set &quot;Traversable type with omitted key&quot;" assertions="1" time="0.006442"/>
+        <testcase name="testRender with data set &quot;Array type with omitted key and mixed value&quot;" assertions="1" time="0.006056"/>
+        <testcase name="testRender with data set &quot;Traversable object type with omitted key and mixed value&quot;" assertions="1" time="0.006310"/>
+        <testcase name="testRender with data set &quot;Traversable mixed type with omitted key and mixed value&quot;" assertions="1" time="0.006185"/>
+        <testcase name="testRender with data set &quot;Traversable type with mixed key&quot;" assertions="1" time="0.006241"/>
+        <testcase name="testRender with data set &quot;Array type with mixed key and mixed value&quot;" assertions="1" time="0.006009"/>
+        <testcase name="testRender with data set &quot;Traversable object type with mixed key and value&quot;" assertions="1" time="0.006116"/>
+        <testcase name="testRender with data set &quot;Traversable mixed type with mixed key and value&quot;" assertions="1" time="0.006045"/>
+        <testcase name="testRender with data set &quot;Tuple type&quot;" assertions="1" time="0.005965"/>
+        <testcase name="testRender with data set &quot;Resource ofType&quot;" assertions="1" time="0.005713"/>
+        <testcase name="testRender with data set &quot;Readable stream&quot;" assertions="1" time="0.005648"/>
+        <testcase name="testRender with data set &quot;Non-readable stream&quot;" assertions="1" time="0.005661"/>
+        <testcase name="testRender with data set &quot;Writable stream&quot;" assertions="1" time="0.005826"/>
+        <testcase name="testRender with data set &quot;Non-writable stream&quot;" assertions="1" time="0.005681"/>
+        <testcase name="testRender with data set &quot;Read-write stream&quot;" assertions="1" time="0.005686"/>
+        <testcase name="testRender with data set &quot;Absolute class name&quot;" assertions="1" time="0.005670"/>
+        <testcase name="testRender with data set &quot;Extension type&quot;" assertions="1" time="0.005681"/>
+        <testcase name="testRender with data set &quot;Extension type with types&quot;" assertions="1" time="0.005928"/>
+        <testcase name="testRender with data set &quot;Extension type with attributes&quot;" assertions="1" time="0.005720"/>
+        <testcase name="testRender with data set &quot;Extension type with types and attributes&quot;" assertions="1" time="0.005954"/>
+      </testsuite>
     </testsuite>
-    <testsuite name="Eloquent\Typhax\Type\ObjectTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/ObjectTypeTest.php" tests="2" assertions="2" failures="0" errors="0" time="0.013208">
-      <testcase name="testOfType" class="Eloquent\Typhax\Type\ObjectTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/ObjectTypeTest.php" line="21" assertions="1" time="0.006301"/>
-      <testcase name="testOfTypeDefaults" class="Eloquent\Typhax\Type\ObjectTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/ObjectTypeTest.php" line="29" assertions="1" time="0.006907"/>
+    <testsuite name="Eloquent\Typhax\Type\AndTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/AndTypeTest.php" tests="1" assertions="1" failures="0" errors="0" time="0.082325">
+      <testcase name="testTypes" class="Eloquent\Typhax\Type\AndTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/AndTypeTest.php" line="22" assertions="1" time="0.082325"/>
     </testsuite>
-    <testsuite name="Eloquent\Typhax\Type\OrTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/OrTypeTest.php" tests="1" assertions="1" failures="0" errors="0" time="0.011213">
-      <testcase name="testTypes" class="Eloquent\Typhax\Type\OrTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/OrTypeTest.php" line="22" assertions="1" time="0.011213"/>
+    <testsuite name="Eloquent\Typhax\Type\ExtensionTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/ExtensionTypeTest.php" tests="1" assertions="3" failures="0" errors="0" time="0.006925">
+      <testcase name="testExtensionType" class="Eloquent\Typhax\Type\ExtensionTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/ExtensionTypeTest.php" line="21" assertions="3" time="0.006925"/>
     </testsuite>
-    <testsuite name="Eloquent\Typhax\Type\ResourceTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/ResourceTypeTest.php" tests="1" assertions="2" failures="0" errors="0" time="0.006805">
-      <testcase name="testResourceType" class="Eloquent\Typhax\Type\ResourceTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/ResourceTypeTest.php" line="21" assertions="2" time="0.006805"/>
+    <testsuite name="Eloquent\Typhax\Type\ObjectTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/ObjectTypeTest.php" tests="2" assertions="2" failures="0" errors="0" time="0.012546">
+      <testcase name="testOfType" class="Eloquent\Typhax\Type\ObjectTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/ObjectTypeTest.php" line="21" assertions="1" time="0.006019"/>
+      <testcase name="testOfTypeDefaults" class="Eloquent\Typhax\Type\ObjectTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/ObjectTypeTest.php" line="29" assertions="1" time="0.006527"/>
     </testsuite>
-    <testsuite name="Eloquent\Typhax\Type\StreamTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/StreamTypeTest.php" tests="1" assertions="6" failures="0" errors="0" time="0.009169">
-      <testcase name="testStreamType" class="Eloquent\Typhax\Type\StreamTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/StreamTypeTest.php" line="21" assertions="6" time="0.009169"/>
+    <testsuite name="Eloquent\Typhax\Type\OrTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/OrTypeTest.php" tests="1" assertions="1" failures="0" errors="0" time="0.010878">
+      <testcase name="testTypes" class="Eloquent\Typhax\Type\OrTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/OrTypeTest.php" line="22" assertions="1" time="0.010878"/>
     </testsuite>
-    <testsuite name="Eloquent\Typhax\Type\TraversableTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/TraversableTypeTest.php" tests="4" assertions="4" failures="0" errors="0" time="0.059282">
-      <testcase name="testPrimaryType" class="Eloquent\Typhax\Type\TraversableTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/TraversableTypeTest.php" line="31" assertions="1" time="0.017991"/>
-      <testcase name="testKeyType" class="Eloquent\Typhax\Type\TraversableTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/TraversableTypeTest.php" line="36" assertions="1" time="0.013736"/>
-      <testcase name="testNullKeyType" class="Eloquent\Typhax\Type\TraversableTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/TraversableTypeTest.php" line="41" assertions="1" time="0.013772"/>
-      <testcase name="testValueType" class="Eloquent\Typhax\Type\TraversableTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/TraversableTypeTest.php" line="48" assertions="1" time="0.013783"/>
+    <testsuite name="Eloquent\Typhax\Type\ResourceTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/ResourceTypeTest.php" tests="1" assertions="2" failures="0" errors="0" time="0.006494">
+      <testcase name="testResourceType" class="Eloquent\Typhax\Type\ResourceTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/ResourceTypeTest.php" line="21" assertions="2" time="0.006494"/>
     </testsuite>
-    <testsuite name="Eloquent\Typhax\Type\TupleTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/TupleTypeTest.php" tests="1" assertions="1" failures="0" errors="0" time="0.011212">
-      <testcase name="testTypes" class="Eloquent\Typhax\Type\TupleTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/TupleTypeTest.php" line="22" assertions="1" time="0.011212"/>
+    <testsuite name="Eloquent\Typhax\Type\StreamTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/StreamTypeTest.php" tests="1" assertions="6" failures="0" errors="0" time="0.008901">
+      <testcase name="testStreamType" class="Eloquent\Typhax\Type\StreamTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/StreamTypeTest.php" line="21" assertions="6" time="0.008901"/>
     </testsuite>
-    <testsuite name="Eloquent\Typhax\Type\VisitorAcceptTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/VisitorAcceptTest.php" tests="18" assertions="18" failures="0" errors="0" time="0.718200">
-      <testsuite name="Eloquent\Typhax\Type\VisitorAcceptTest::testAccept" tests="18" assertions="18" failures="0" errors="0" time="0.718200">
-        <testcase name="testAccept with data set #0" assertions="1" time="0.075364"/>
-        <testcase name="testAccept with data set #1" assertions="1" time="0.033341"/>
-        <testcase name="testAccept with data set #2" assertions="1" time="0.033644"/>
-        <testcase name="testAccept with data set #3" assertions="1" time="0.033961"/>
-        <testcase name="testAccept with data set #4" assertions="1" time="0.036153"/>
-        <testcase name="testAccept with data set #5" assertions="1" time="0.034842"/>
-        <testcase name="testAccept with data set #6" assertions="1" time="0.035410"/>
-        <testcase name="testAccept with data set #7" assertions="1" time="0.046498"/>
-        <testcase name="testAccept with data set #8" assertions="1" time="0.036403"/>
-        <testcase name="testAccept with data set #9" assertions="1" time="0.036882"/>
-        <testcase name="testAccept with data set #10" assertions="1" time="0.037935"/>
-        <testcase name="testAccept with data set #11" assertions="1" time="0.038353"/>
-        <testcase name="testAccept with data set #12" assertions="1" time="0.038750"/>
-        <testcase name="testAccept with data set #13" assertions="1" time="0.039809"/>
-        <testcase name="testAccept with data set #14" assertions="1" time="0.038898"/>
-        <testcase name="testAccept with data set #15" assertions="1" time="0.039435"/>
-        <testcase name="testAccept with data set #16" assertions="1" time="0.041494"/>
-        <testcase name="testAccept with data set #17" assertions="1" time="0.041029"/>
+    <testsuite name="Eloquent\Typhax\Type\TraversableTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/TraversableTypeTest.php" tests="4" assertions="4" failures="0" errors="0" time="0.057588">
+      <testcase name="testPrimaryType" class="Eloquent\Typhax\Type\TraversableTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/TraversableTypeTest.php" line="31" assertions="1" time="0.017533"/>
+      <testcase name="testKeyType" class="Eloquent\Typhax\Type\TraversableTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/TraversableTypeTest.php" line="36" assertions="1" time="0.013377"/>
+      <testcase name="testNullKeyType" class="Eloquent\Typhax\Type\TraversableTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/TraversableTypeTest.php" line="41" assertions="1" time="0.013369"/>
+      <testcase name="testValueType" class="Eloquent\Typhax\Type\TraversableTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/TraversableTypeTest.php" line="48" assertions="1" time="0.013309"/>
+    </testsuite>
+    <testsuite name="Eloquent\Typhax\Type\TupleTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/TupleTypeTest.php" tests="1" assertions="1" failures="0" errors="0" time="0.010813">
+      <testcase name="testTypes" class="Eloquent\Typhax\Type\TupleTypeTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/TupleTypeTest.php" line="22" assertions="1" time="0.010813"/>
+    </testsuite>
+    <testsuite name="Eloquent\Typhax\Type\VisitorAcceptTest" file="/home/travis/build/eloquent/typhax/test/suite/Type/VisitorAcceptTest.php" tests="18" assertions="18" failures="0" errors="0" time="0.695748">
+      <testsuite name="Eloquent\Typhax\Type\VisitorAcceptTest::testAccept" tests="18" assertions="18" failures="0" errors="0" time="0.695748">
+        <testcase name="testAccept with data set #0" assertions="1" time="0.074660"/>
+        <testcase name="testAccept with data set #1" assertions="1" time="0.032664"/>
+        <testcase name="testAccept with data set #2" assertions="1" time="0.033206"/>
+        <testcase name="testAccept with data set #3" assertions="1" time="0.033494"/>
+        <testcase name="testAccept with data set #4" assertions="1" time="0.035708"/>
+        <testcase name="testAccept with data set #5" assertions="1" time="0.034135"/>
+        <testcase name="testAccept with data set #6" assertions="1" time="0.034492"/>
+        <testcase name="testAccept with data set #7" assertions="1" time="0.035286"/>
+        <testcase name="testAccept with data set #8" assertions="1" time="0.035858"/>
+        <testcase name="testAccept with data set #9" assertions="1" time="0.036043"/>
+        <testcase name="testAccept with data set #10" assertions="1" time="0.036899"/>
+        <testcase name="testAccept with data set #11" assertions="1" time="0.037499"/>
+        <testcase name="testAccept with data set #12" assertions="1" time="0.037960"/>
+        <testcase name="testAccept with data set #13" assertions="1" time="0.039675"/>
+        <testcase name="testAccept with data set #14" assertions="1" time="0.038506"/>
+        <testcase name="testAccept with data set #15" assertions="1" time="0.038662"/>
+        <testcase name="testAccept with data set #16" assertions="1" time="0.041241"/>
+        <testcase name="testAccept with data set #17" assertions="1" time="0.039760"/>
       </testsuite>
     </testsuite>
   </testsuite>
