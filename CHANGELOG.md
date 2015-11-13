@@ -1,6 +1,6 @@
 # Typhax changelog
 
-## Next release
+## 0.10.1 (2015-11-13)
 
 - **[FIXED]** Fixed specification with regards to array types where no
   traversable details are supplied.
