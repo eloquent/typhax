@@ -213,7 +213,7 @@ class TypeParserTest extends PHPUnit_Framework_TestCase
         $offset = 6;
         $expected = new TraversableType(
             new ArrayType(),
-            null,
+            new MixedType(),
             new MixedType()
         );
         $data['Array'] = array($expected, $offset, $source);

@@ -2,7 +2,7 @@
 
 *A flexible PHP type hinting syntax.*
 
-[![The most recent stable version is 0.10.0][version-image]][semantic versioning]
+[![Current version image][version-image]][current version]
 [![Current build status image][build-image]][current build status]
 [![Current coverage status image][coverage-image]][current coverage status]
 
@@ -10,8 +10,8 @@
 [coverage-image]: https://img.shields.io/codecov/c/github/eloquent/typhax/develop.svg?style=flat-square "Current test coverage for the develop branch"
 [current build status]: https://travis-ci.org/eloquent/typhax
 [current coverage status]: https://codecov.io/github/eloquent/typhax
-[semantic versioning]: http://semver.org/
-[version-image]: http://img.shields.io/:semver-0.10.0-yellow.svg?style=flat-square "This project uses semantic versioning"
+[current version]: https://packagist.org/packages/eloquent/typhax
+[version-image]: https://img.shields.io/packagist/v/eloquent/typhax.svg?style=flat-square "This project uses semantic versioning"
 
 ## Installation and documentation
 
@@ -281,6 +281,18 @@ The `keyType` may be omitted:
 This specification represents a value of type `primaryType` which, when iterated
 over, produces **sequential integer keys starting with 0**, and values of type
 `valueType`.
+
+### Using `array` without specifying key and value types
+
+For `array`, both the key, and value types can be omitted:
+
+    array
+
+This specification is equivalent to:
+
+    array<mixed,mixed>
+
+Meaning that the keys and values can be of any type.
 
 ### Using `mixed` as the primary type in a traversable type
 

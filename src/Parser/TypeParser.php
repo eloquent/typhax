@@ -197,7 +197,11 @@ class TypeParser
         }
 
         if ($type instanceof ArrayType) {
-            $type = new TraversableType($type, null, new MixedType());
+            $type = new TraversableType(
+                $type,
+                new MixedType(),
+                new MixedType()
+            );
         }
 
         return $type;
