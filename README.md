@@ -282,6 +282,18 @@ This specification represents a value of type `primaryType` which, when iterated
 over, produces **sequential integer keys starting with 0**, and values of type
 `valueType`.
 
+### Using `array` without specifying key and value types
+
+For `array`, both the key, and value types can be omitted:
+
+    array
+
+This specification is equivalent to:
+
+    array<mixed,mixed>
+
+Meaning that the keys and values can be of any type.
+
 ### Using `mixed` as the primary type in a traversable type
 
 A traversable type may specify `mixed` as the primary type:
